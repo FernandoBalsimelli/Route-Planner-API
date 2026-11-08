@@ -146,8 +146,8 @@ app.post('/v1/routes/plan', { config: { rateLimit: { max: 10, timeWindow: '1 min
     }));
     const summary = route.summary || {};
     return { ok: true, route: {
-      distanceMeters: summary.distance || 0, durationSeconds: summary.duration || 0, polyline: route.geometry, sections, notices: [],
-      waypoints: locations.map((point, index) => ({ ...point, type: index === 0 ? 'origin' : index === locations.length - 1 ? 'destination' : 'stop' })),
+      distanceMeters: summary.distance || 0, durationSeconds: summary.duration || 0, polyline: route.geometry, sections, notices: [], optimized,
+      waypoints: routeLocations.map((point, index) => ({ ...point, type: index === 0 ? 'origin' : index === routeLocations.length - 1 ? 'destination' : 'stop' })),
     }, provider: 'openrouteservice' };
   } catch (error) {
     const message = error instanceof Error ? error.message : 'UNKNOWN_ERROR';
