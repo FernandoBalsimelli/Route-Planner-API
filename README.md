@@ -15,7 +15,7 @@ API Fastify para geocodificar direcciones y calcular recorridos con OpenRouteSer
 
 ## Errores del proveedor
 
-La API distingue errores de acceso de HeiGIT (`ORS_ACCESS_DENIED`), restricciones del nivel de clave (`ORS_PLAN_RESTRICTION`), límites de solicitudes (`ORS_RATE_LIMIT`) y tiempos de espera (`ORS_TIMEOUT`). Estos códigos permiten mostrar mensajes útiles sin exponer la clave ni los detalles internos del proveedor.
+La API distingue errores de autenticación (`ORS_AUTH_FAILED`), denegaciones de acceso o cuota diaria (`ORS_ACCESS_OR_DAILY_LIMIT`), restricciones del nivel de clave (`ORS_PLAN_RESTRICTION`), límites por minuto (`ORS_RATE_LIMIT`) y tiempos de espera (`ORS_TIMEOUT`). Estos códigos permiten mostrar mensajes útiles sin exponer la clave ni los detalles internos del proveedor.
 
 ## Optimización de paradas
 
