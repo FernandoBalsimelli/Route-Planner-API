@@ -1,19 +1,28 @@
 # Route Planner API
 
-API Fastify para validar rutas y calcular recorridos con HERE Routing API v8.
+API Fastify para geocodificar direcciones y calcular recorridos con OpenRouteService (HeiGIT).
 
-## Variables
-- `HERE_API_KEY`: clave secreta de HERE. Nunca se expone al navegador.
-- `SUPABASE_URL` y `SUPABASE_PUBLISHABLE_KEY`: validación de sesiones de usuarios.
-- `ALLOWED_ORIGINS`: orígenes web permitidos separados por coma.
+## Variables de entorno
+- ORS_API_KEY: clave gratuita de HeiGIT/OpenRouteService. Solo en el backend de Vercel; nunca usar prefijo NEXT_PUBLIC_.
+- SUPABASE_URL y SUPABASE_PUBLISHABLE_KEY: validación de sesiones.
+- ALLOWED_ORIGINS: orígenes web permitidos separados por coma.
 
 ## Endpoints
-- `GET /health` — salud y disponibilidad de HERE (sin revelar secretos).
-- `GET /v1` — capacidades y estado.
-- `POST /v1/routes/validate` — valida payload.
-- `POST /v1/routes/plan` — requiere `Authorization: Bearer <session>`; geocodifica los puntos y calcula la ruta con HERE. Límite: 10 solicitudes por minuto.
+- GET /health — salud y disponibilidad de OpenRouteService (sin revelar secretos).
+- GET /v1 — capacidades y estado.
+- POST /v1/routes/validate — valida payload.
+- POST /v1/routes/plan — requiere Authorization: Bearer <session>; geocodifica y calcula. Límite: 10 solicitudes por minuto por IP.
+
+## Perfiles
+- Reparto: driving-car.
+- Transporte pesado: driving-hgv, vehicle_type hgv y restricciones de altura, ancho, largo, peso bruto y carga por eje en metros/toneladas.
+
+Las restricciones solo se aplican donde la cartografía contiene los datos correspondientes. La cobertura en México puede ser incompleta: el resultado no garantiza que una vía sea legal o físicamente transitable para el camión. Verifica señalización y normativa local antes de circular.
+
+## API alojada
+Host vigente: https://api.heigit.org
+- Geocodificación: /pelias/v1/search
+- Rutas: /openrouteservice/v2/directions/{profile}/json
 
 ## Desarrollo
-`npm install && npm run dev`
-
-Para camiones se envían dimensiones y pesos a HERE en centímetros y kilogramos. El motor aplica las restricciones que existan en la cartografía de HERE; no sustituye señalización ni revisión normativa local.
+npm install && npm run dev
