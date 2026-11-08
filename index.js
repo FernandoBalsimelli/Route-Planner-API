@@ -5,6 +5,7 @@ import { z } from 'zod';
 import { createClient } from '@supabase/supabase-js';
 import { decode, encode, isFull, isShort, isValid, recoverNearest } from '@erikmichelson/open-location-code-ts';
 import { providerError, routingFailure } from './lib/routing-errors.js';
+import { searchFocus, nearbyResults } from './lib/nearby.js';
 
 const app = Fastify({ logger: { serializers: { req: request => ({ method: request.method, url: request.url?.split('?')[0], host: request.host, remoteAddress: request.ip }) } }, bodyLimit: 64 * 1024, trustProxy: true });
 const supabaseAuth = process.env.SUPABASE_URL && process.env.SUPABASE_PUBLISHABLE_KEY
@@ -43,16 +44,18 @@ function peliasPoint(feature, fallback = '') {
   const lat = Number(coordinates[1]), lng = Number(coordinates[0]);
   if (!Number.isFinite(lat) || !Number.isFinite(lng)) return null;
   const p = feature.properties || {};
-  const label = p.layer === 'locality' && p.name
+  let label = p.layer === 'locality' && p.name
     ? [p.name, p.region || p.region_a, p.country].filter(Boolean).join(', ')
     : p.label || p.name || fallback || (lat + ', ' + lng);
-  return { lat, lng, label, plusCode: encode(lat, lng), kind: p.layer };
+  if (p.layer === 'venue' && p.street && !label.toLowerCase().includes(p.street.toLowerCase())) label = [p.name, [p.housenumber, p.street].filter(Boolean).join(' '), p.neighbourhood, p.locality, p.region, p.country].filter(Boolean).join(', ');
+  return { lat, lng, label: label.slice(0, 180), plusCode: encode(lat, lng), kind: p.layer };
 }
-async function peliasSearch(value, apiKey, autocomplete = false, size = 6) {
+async function peliasSearch(value, apiKey, autocomplete = false, size = 6, focus = null) {
   const url = new URL(ORS_BASE_URL + '/pelias/v1/' + (autocomplete ? 'autocomplete' : 'search'));
   url.searchParams.set('text', value);
   url.searchParams.set('size', String(size));
   url.searchParams.set('lang', 'es');
+  if (focus) { url.searchParams.set('focus.point.lat', String(focus.lat)); url.searchParams.set('focus.point.lon', String(focus.lng)); }
   // Regional centroids can be many kilometres from roads and must not be
   // mistaken for a city with the same name (for example, Chihuahua).
   url.searchParams.set('layers', 'venue,address,street,neighbourhood,borough,locality');
@@ -60,11 +63,12 @@ async function peliasSearch(value, apiKey, autocomplete = false, size = 6) {
   if (!response.ok) { const error = new Error('ORS_GEOCODING_FAILED'); error.status = response.status; throw error; }
   return response.json();
 }
-async function photonSearch(value, size = 6) {
+async function photonSearch(value, size = 6, focus = null) {
   const url = new URL('https://photon.komoot.io/api/');
   // The public Photon instance does not support lang=es. Its default keeps
   // local names instead of rejecting the fallback request with HTTP 400.
   url.searchParams.set('q', value); url.searchParams.set('limit', String(Math.max(size, 6)));
+  if (focus) { url.searchParams.set('lat', String(focus.lat)); url.searchParams.set('lon', String(focus.lng)); url.searchParams.set('zoom', '12'); url.searchParams.set('location_bias_scale', '0.1'); }
   const response = await fetch(url, { headers: { Accept: 'application/json' }, signal: AbortSignal.timeout(10000) });
   if (!response.ok) throw new Error('PHOTON_GEOCODING_FAILED');
   const payload = await response.json();
@@ -76,22 +80,40 @@ async function photonSearch(value, size = 6) {
     const street = p.housenumber && p.street ? p.housenumber + ' ' + p.street : p.street;
     const city = p.city || p.district;
     const label = [p.name, street, city !== p.name ? city : null, p.state, p.country].filter(Boolean).join(', ');
-    return { lat, lng, label: label || value, plusCode: encode(lat, lng), source: 'openstreetmap', kind: p.type === 'city' ? 'locality' : p.type };
+    return { lat, lng, label: (label || value).slice(0, 180), plusCode: encode(lat, lng), source: 'openstreetmap', kind: p.osm_key === 'shop' || p.osm_key === 'amenity' ? 'venue' : p.type === 'city' ? 'locality' : p.type };
   }).filter(Boolean).slice(0, size);
 }
-async function searchLocations(value, apiKey, autocomplete = false, size = 6) {
-  if (!apiKey) return photonSearch(value, size);
+async function searchLocations(value, apiKey, autocomplete = false, size = 6, focus = null) {
+  if (!apiKey) return nearbyResults(await photonSearch(value, size, focus), focus, size);
   try {
-    const payload = await peliasSearch(value, apiKey, autocomplete, size);
+    const payload = await peliasSearch(value, apiKey, autocomplete, size, focus);
     const results = (payload.features || [])
       .filter(feature => !['country', 'region', 'macroregion', 'county', 'macrocounty', 'localadmin', 'continent'].includes(feature.properties?.layer))
       .map(feature => peliasPoint(feature, value)).filter(Boolean);
-    if (results.length) return results;
+    if (results.length) {
+      const ranked = nearbyResults(results, focus, size);
+      // If the first index has only distant matches, consult the compatible
+      // OSM index as well. An unavailable fallback never discards good results.
+      if (focus && ranked[0].distanceMeters > 50000) {
+        try { return nearbyResults([...results, ...await photonSearch(value, size, focus)], focus, size); } catch { return ranked; }
+      }
+      return ranked;
+    }
   } catch (error) {
     if (![401, 402, 403, 404, 429].includes(error?.status) && !(error?.status >= 500) && error?.name !== 'TimeoutError' && error?.name !== 'AbortError' && error?.name !== 'TypeError') throw error;
     app.log.warn({ status: error?.status, message: error?.message }, 'HeiGIT geocoding unavailable; falling back to Photon');
   }
-  return photonSearch(value, size);
+  return nearbyResults(await photonSearch(value, size, focus), focus, size);
+}
+const suggestionCache = new Map();
+async function cachedSuggestions(query, apiKey, focus) {
+  const key = JSON.stringify([query.toLocaleLowerCase('es'), focus?.lat, focus?.lng]);
+  const cached = suggestionCache.get(key);
+  if (cached && cached.expires > Date.now()) return cached.value;
+  const value = await searchLocations(query, apiKey, true, 8, focus);
+  if (suggestionCache.size >= 200) suggestionCache.delete(suggestionCache.keys().next().value);
+  suggestionCache.set(key, { value, expires: Date.now() + 60000 });
+  return value;
 }
 async function reverseLocation(point, apiKey) {
   const location = { ...point, label: `${point.lat}, ${point.lng}`, plusCode: encode(point.lat, point.lng) };
@@ -166,6 +188,7 @@ app.get('/v1/locations/suggest', { config: { rateLimit: { max: 30, timeWindow: '
   if (query.length < 2 || query.length > 180) return reply.code(400).send({ ok: false, message: 'Escribe al menos 2 caracteres para buscar.' });
   const apiKey = process.env.ORS_API_KEY;
   try {
+    const focus = searchFocus(query, request.query?.lat, request.query?.lng);
     const point = coordinate(query);
     if (point) {
       const { location, warning } = await reverseLocation(point, apiKey);
@@ -173,9 +196,10 @@ app.get('/v1/locations/suggest', { config: { rateLimit: { max: 30, timeWindow: '
     }
     const plusCode = await resolvePlusCode(query, apiKey);
     if (plusCode) return { ok: true, suggestions: [{ ...plusCode, source: 'plus_code' }] };
-    const suggestions = (await searchLocations(query, apiKey, true, 6)).map(point => ({ ...point, source: point.source || 'address' }));
-    return { ok: true, suggestions };
+    const suggestions = (await cachedSuggestions(query, apiKey, focus)).map(point => ({ ...point, source: point.source || 'address' }));
+    return { ok: true, suggestions, nearby: Boolean(focus), ...(focus && (!suggestions.length || suggestions[0].distanceMeters > 50000) ? { warning: 'NO_NEARBY_MATCHES' } : {}) };
   } catch (error) {
+    if (error?.message === 'INVALID_SEARCH_FOCUS') return reply.code(400).send({ ok: false, code: 'INVALID_SEARCH_FOCUS', message: 'La ubicación de referencia no es válida.' });
     request.log.warn({ err: error?.message, providerStatus: error?.status }, 'Location suggestions failed');
     if (error?.message === 'PLUS_CODE_NEEDS_LOCALITY') return reply.code(422).send({ ok: false, code: 'PLUS_CODE_NEEDS_LOCALITY', message: 'Este es un Plus Code corto. Añade la ciudad o localidad después del código, o utiliza el código global completo.' });
     if (error?.status === 401) return reply.code(502).send({ ok: false, code: 'ORS_AUTH_FAILED', message: 'HeiGIT no reconoció la clave de geocodificación.' });
