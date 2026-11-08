@@ -53,3 +53,13 @@ interceptación asíncrona de `listen()` durante el inicio de la función.
 - Los Plus Codes se decodifican con la implementación TypeScript del estándar Open Location Code; no se requiere una API de Google ni una clave de Google Maps.
 
 La búsqueda sugiere resultados basados en OpenStreetMap/Pelias; su cobertura y nombres pueden diferir de Google Maps.
+
+Las búsquedas de puntos excluyen estados, países y otras regiones extensas para
+evitar enrutar hacia su centro geográfico. Las ciudades incluyen su estado en la
+etiqueta. Photon sirve de respaldo sin forzar idiomas no soportados.
+
+Si el proveedor no encuentra una vía transitable cerca de un punto, la API devuelve
+`ORS_POINT_NOT_ROUTABLE`, `waypointIndex` (origen = 0, después las paradas y el
+destino) y el punto afectado. Debe corregirse ese acceso; la API conserva las
+coordenadas confirmadas y las restricciones del vehículo. También distingue
+`ORS_ROUTE_TOO_LONG`, `ORS_NO_ROUTE` y `ORS_ROUTING_UNAVAILABLE`.

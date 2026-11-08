@@ -4,6 +4,7 @@ import rateLimit from '@fastify/rate-limit';
 import { z } from 'zod';
 import { createClient } from '@supabase/supabase-js';
 import { decode, encode, isFull, isShort, isValid, recoverNearest } from '@erikmichelson/open-location-code-ts';
+import { providerError, routingFailure } from './lib/routing-errors.js';
 
 const app = Fastify({ logger: true, bodyLimit: 64 * 1024, trustProxy: true });
 const supabaseAuth = process.env.SUPABASE_URL && process.env.SUPABASE_PUBLISHABLE_KEY
@@ -41,40 +42,53 @@ function peliasPoint(feature, fallback = '') {
   if (!Array.isArray(coordinates) || coordinates.length < 2) return null;
   const lat = Number(coordinates[1]), lng = Number(coordinates[0]);
   if (!Number.isFinite(lat) || !Number.isFinite(lng)) return null;
-  return { lat, lng, label: feature.properties?.label || feature.properties?.name || fallback || (lat + ', ' + lng), plusCode: encode(lat, lng) };
+  const p = feature.properties || {};
+  const label = p.layer === 'locality' && p.name
+    ? [p.name, p.region || p.region_a, p.country].filter(Boolean).join(', ')
+    : p.label || p.name || fallback || (lat + ', ' + lng);
+  return { lat, lng, label, plusCode: encode(lat, lng), kind: p.layer };
 }
 async function peliasSearch(value, apiKey, autocomplete = false, size = 6) {
   const url = new URL(ORS_BASE_URL + '/pelias/v1/' + (autocomplete ? 'autocomplete' : 'search'));
   url.searchParams.set('text', value);
   url.searchParams.set('size', String(size));
   url.searchParams.set('lang', 'es');
+  // Regional centroids can be many kilometres from roads and must not be
+  // mistaken for a city with the same name (for example, Chihuahua).
+  url.searchParams.set('layers', 'venue,address,street,neighbourhood,borough,locality');
   const response = await fetch(url, { headers: { Authorization: apiKey, Accept: 'application/json' }, signal: AbortSignal.timeout(10000) });
   if (!response.ok) { const error = new Error('ORS_GEOCODING_FAILED'); error.status = response.status; throw error; }
   return response.json();
 }
 async function photonSearch(value, size = 6) {
   const url = new URL('https://photon.komoot.io/api/');
-  url.searchParams.set('q', value); url.searchParams.set('limit', String(size)); url.searchParams.set('lang', 'es');
+  // The public Photon instance does not support lang=es. Its default keeps
+  // local names instead of rejecting the fallback request with HTTP 400.
+  url.searchParams.set('q', value); url.searchParams.set('limit', String(Math.max(size, 6)));
   const response = await fetch(url, { headers: { Accept: 'application/json' }, signal: AbortSignal.timeout(10000) });
   if (!response.ok) throw new Error('PHOTON_GEOCODING_FAILED');
   const payload = await response.json();
   return (payload.features || []).map(feature => {
     const p = feature.properties || {}, coords = feature.geometry?.coordinates || [];
+    if (['state', 'country', 'county'].includes(p.type)) return null;
     const lat = Number(coords[1]), lng = Number(coords[0]);
     if (!Number.isFinite(lat) || !Number.isFinite(lng)) return null;
     const street = p.housenumber && p.street ? p.housenumber + ' ' + p.street : p.street;
-    const label = [p.name, street, p.city || p.district, p.state, p.country].filter(Boolean).filter((v, i, arr) => arr.indexOf(v) === i).join(', ');
-    return { lat, lng, label: label || value, plusCode: encode(lat, lng), source: 'openstreetmap' };
-  }).filter(Boolean);
+    const city = p.city || p.district;
+    const label = [p.name, street, city !== p.name ? city : null, p.state, p.country].filter(Boolean).join(', ');
+    return { lat, lng, label: label || value, plusCode: encode(lat, lng), source: 'openstreetmap', kind: p.type === 'city' ? 'locality' : p.type };
+  }).filter(Boolean).slice(0, size);
 }
 async function searchLocations(value, apiKey, autocomplete = false, size = 6) {
   if (!apiKey) return photonSearch(value, size);
   try {
     const payload = await peliasSearch(value, apiKey, autocomplete, size);
-    const results = (payload.features || []).map(feature => peliasPoint(feature, value)).filter(Boolean);
+    const results = (payload.features || [])
+      .filter(feature => !['country', 'region', 'macroregion', 'county', 'macrocounty', 'localadmin', 'continent'].includes(feature.properties?.layer))
+      .map(feature => peliasPoint(feature, value)).filter(Boolean);
     if (results.length) return results;
   } catch (error) {
-    if (![401, 402, 403, 404, 429].includes(error?.status) && error?.name !== 'TimeoutError' && error?.name !== 'AbortError') throw error;
+    if (![401, 402, 403, 404, 429].includes(error?.status) && !(error?.status >= 500) && error?.name !== 'TimeoutError' && error?.name !== 'AbortError' && error?.name !== 'TypeError') throw error;
     app.log.warn({ status: error?.status, message: error?.message }, 'HeiGIT geocoding unavailable; falling back to Photon');
   }
   return photonSearch(value, size);
@@ -218,12 +232,13 @@ app.post('/v1/routes/plan', { config: { rateLimit: { max: 10, timeWindow: '1 min
       });
       if (!optimizationResponse.ok) {
         let providerMessage = '';
-        try { providerMessage = (await optimizationResponse.json()).error?.message || ''; } catch {}
+        try { providerMessage = providerError(await optimizationResponse.json()).message; } catch {}
         request.log.warn({ status: optimizationResponse.status, providerMessage }, 'HeiGIT optimization request failed');
         if (optimizationResponse.status === 401) return reply.code(502).send({ ok: false, code: 'ORS_AUTH_FAILED', message: 'HeiGIT no reconoció la clave para optimizar paradas. Comprueba la configuración de la credencial.' });
         if (optimizationResponse.status === 403) return reply.code(502).send({ ok: false, code: 'ORS_ACCESS_OR_DAILY_LIMIT', message: 'HeiGIT denegó la optimización por permisos o por alcanzar la cuota diaria. Revisa el panel de tu clave.' });
         if (optimizationResponse.status === 402) return reply.code(503).send({ ok: false, code: 'ORS_OPTIMIZATION_PLAN_RESTRICTION', message: 'El nivel actual de tu clave no permite optimizar el orden de las paradas.' });
         if (optimizationResponse.status === 429) return reply.code(429).send({ ok: false, code: 'ORS_OPTIMIZATION_RATE_LIMIT', message: 'Se alcanzó el límite temporal de optimización de HeiGIT. Intenta más tarde.' });
+        if (optimizationResponse.status >= 500) return reply.code(503).send({ ok: false, code: 'ORS_OPTIMIZATION_UNAVAILABLE', message: 'El servicio de optimización está temporalmente fuera de servicio. Puedes calcular con el orden actual desactivando la optimización.' });
         return reply.code(422).send({ ok: false, code: 'ORS_OPTIMIZATION_FAILED', message: 'No se pudo optimizar el orden de las paradas. Desactiva la optimización o inténtalo más tarde.' });
       }
       const optimization = await optimizationResponse.json();
@@ -246,14 +261,15 @@ app.post('/v1/routes/plan', { config: { rateLimit: { max: 10, timeWindow: '1 min
       body: JSON.stringify(body), signal: AbortSignal.timeout(25000),
     });
     if (!response.ok) {
-      let providerMessage = '';
-      try { providerMessage = (await response.json()).error?.message || ''; } catch {}
-      request.log.warn({ status: response.status, providerMessage }, 'OpenRouteService directions request failed');
+      let failure = { message: '' };
+      try { failure = providerError(await response.json()); } catch {}
+      request.log.warn({ status: response.status, providerCode: failure.code, providerMessage: failure.message }, 'OpenRouteService directions request failed');
       if (response.status === 401) return reply.code(502).send({ ok: false, code: 'ORS_AUTH_FAILED', message: 'HeiGIT no reconoció la clave. Comprueba que la credencial esté configurada correctamente.' });
       if (response.status === 403) return reply.code(502).send({ ok: false, code: 'ORS_ACCESS_OR_DAILY_LIMIT', message: 'HeiGIT denegó la solicitud por permisos o por alcanzar la cuota diaria. Revisa el panel de tu clave.' });
       if (response.status === 402) return reply.code(503).send({ ok: false, code: 'ORS_PLAN_RESTRICTION', message: 'El nivel actual de la clave no permite esta solicitud. Comprueba los permisos y límites de tu plan de HeiGIT.' });
       if (response.status === 429) return reply.code(429).send({ ok: false, code: 'ORS_RATE_LIMIT', message: 'Se alcanzó temporalmente el límite de solicitudes de HeiGIT. Intenta más tarde.' });
-      return reply.code(422).send({ ok: false, code: 'ORS_ROUTING_FAILED', message: 'OpenRouteService no pudo calcular esta ruta. Revisa los puntos, las restricciones del vehículo o inténtalo con otro recorrido.' });
+      const { status, ...problem } = routingFailure(response.status, failure, routeLocations, locations);
+      return reply.code(status).send(problem);
     }
     const data = await response.json(), route = data.routes?.[0];
     if (!route) return reply.code(422).send({ ok: false, message: 'OpenRouteService no encontró una ruta para esos puntos y ese vehículo.' });
