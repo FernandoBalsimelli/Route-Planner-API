@@ -17,6 +17,7 @@ const routeSchema = z.object({
   origin: locationSchema, destination: locationSchema,
   stops: z.array(locationSchema).max(8).optional().default([]),
   mode: z.enum(['delivery', 'truck']).default('delivery'),
+  optimize: z.boolean().default(false),
   vehicle: z.object({
     heightM: z.number().positive().max(10).optional(),
     widthM: z.number().positive().max(5).optional(),
@@ -56,7 +57,7 @@ function buildRestrictions(vehicle = {}) {
 
 app.get('/', async () => ({ name: 'Route Planner API', version: 'v1', status: process.env.ORS_API_KEY ? 'ready' : 'awaiting_ors_key' }));
 app.get('/health', async () => ({ ok: true, service: 'route-planner-api', version: '0.2.0', routingProvider: 'openrouteservice', orsConfigured: Boolean(process.env.ORS_API_KEY) }));
-app.get('/v1', async () => ({ name: 'Route Planner API', version: 'v1', capabilities: ['route-validation', 'openrouteservice-geocoding', 'openrouteservice-routing', 'truck-restrictions'], status: process.env.ORS_API_KEY ? 'ready' : 'awaiting_ors_key' }));
+app.get('/v1', async () => ({ name: 'Route Planner API', version: 'v1', capabilities: ['route-validation', 'openrouteservice-geocoding', 'openrouteservice-routing', 'route-optimization', 'truck-restrictions'], status: process.env.ORS_API_KEY ? 'ready' : 'awaiting_ors_key' }));
 
 app.post('/v1/routes/validate', async (request, reply) => {
   const parsed = routeSchema.safeParse(request.body);
