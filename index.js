@@ -105,7 +105,8 @@ app.post('/v1/routes/plan', { config: { rateLimit: { max: 10, timeWindow: '1 min
         let providerMessage = '';
         try { providerMessage = (await optimizationResponse.json()).error?.message || ''; } catch {}
         request.log.warn({ status: optimizationResponse.status, providerMessage }, 'HeiGIT optimization request failed');
-        if (optimizationResponse.status === 401 || optimizationResponse.status === 403) return reply.code(502).send({ ok: false, code: 'ORS_OPTIMIZATION_ACCESS_DENIED', message: 'HeiGIT no autorizó la optimización de paradas. Comprueba el nivel y los límites de tu clave.' });
+        if (optimizationResponse.status === 401) return reply.code(502).send({ ok: false, code: 'ORS_AUTH_FAILED', message: 'HeiGIT no reconoció la clave para optimizar paradas. Comprueba la configuración de la credencial.' });
+        if (optimizationResponse.status === 403) return reply.code(502).send({ ok: false, code: 'ORS_ACCESS_OR_DAILY_LIMIT', message: 'HeiGIT denegó la optimización por permisos o por alcanzar la cuota diaria. Revisa el panel de tu clave.' });
         if (optimizationResponse.status === 402) return reply.code(503).send({ ok: false, code: 'ORS_OPTIMIZATION_PLAN_RESTRICTION', message: 'El nivel actual de tu clave no permite optimizar el orden de las paradas.' });
         if (optimizationResponse.status === 429) return reply.code(429).send({ ok: false, code: 'ORS_OPTIMIZATION_RATE_LIMIT', message: 'Se alcanzó el límite temporal de optimización de HeiGIT. Intenta más tarde.' });
         return reply.code(422).send({ ok: false, code: 'ORS_OPTIMIZATION_FAILED', message: 'No se pudo optimizar el orden de las paradas. Desactiva la optimización o inténtalo más tarde.' });
@@ -133,7 +134,8 @@ app.post('/v1/routes/plan', { config: { rateLimit: { max: 10, timeWindow: '1 min
       let providerMessage = '';
       try { providerMessage = (await response.json()).error?.message || ''; } catch {}
       request.log.warn({ status: response.status, providerMessage }, 'OpenRouteService directions request failed');
-      if (response.status === 401 || response.status === 403) return reply.code(502).send({ ok: false, code: 'ORS_ACCESS_DENIED', message: 'HeiGIT rechazó la clave o el acceso a este perfil. Comprueba el estado de tu clave y de la solicitud de upgrade.' });
+      if (response.status === 401) return reply.code(502).send({ ok: false, code: 'ORS_AUTH_FAILED', message: 'HeiGIT no reconoció la clave. Comprueba que la credencial esté configurada correctamente.' });
+      if (response.status === 403) return reply.code(502).send({ ok: false, code: 'ORS_ACCESS_OR_DAILY_LIMIT', message: 'HeiGIT denegó la solicitud por permisos o por alcanzar la cuota diaria. Revisa el panel de tu clave.' });
       if (response.status === 402) return reply.code(503).send({ ok: false, code: 'ORS_PLAN_RESTRICTION', message: 'El nivel actual de la clave no permite esta solicitud. Comprueba los permisos y límites de tu plan de HeiGIT.' });
       if (response.status === 429) return reply.code(429).send({ ok: false, code: 'ORS_RATE_LIMIT', message: 'Se alcanzó temporalmente el límite de solicitudes de HeiGIT. Intenta más tarde.' });
       return reply.code(422).send({ ok: false, code: 'ORS_ROUTING_FAILED', message: 'OpenRouteService no pudo calcular esta ruta. Revisa los puntos, las restricciones del vehículo o inténtalo con otro recorrido.' });
@@ -153,7 +155,8 @@ app.post('/v1/routes/plan', { config: { rateLimit: { max: 10, timeWindow: '1 min
     const message = error instanceof Error ? error.message : 'UNKNOWN_ERROR';
     request.log.error({ err: message, providerStatus: error?.status }, 'Route planning failed');
     if (message.startsWith('LOCATION_NOT_FOUND:')) return reply.code(422).send({ ok: false, code: 'LOCATION_NOT_FOUND', message: 'No se encontró esta ubicación: ' + message.slice(19) });
-    if (error?.status === 401 || error?.status === 403) return reply.code(502).send({ ok: false, code: 'ORS_ACCESS_DENIED', message: 'HeiGIT rechazó la clave o el acceso a la geocodificación. Comprueba el estado de tu clave y de la solicitud de upgrade.' });
+    if (error?.status === 401) return reply.code(502).send({ ok: false, code: 'ORS_AUTH_FAILED', message: 'HeiGIT no reconoció la clave para geocodificar. Comprueba que la credencial esté configurada correctamente.' });
+    if (error?.status === 403) return reply.code(502).send({ ok: false, code: 'ORS_ACCESS_OR_DAILY_LIMIT', message: 'HeiGIT denegó la geocodificación por permisos o por alcanzar la cuota diaria. Revisa el panel de tu clave.' });
     if (error?.status === 402) return reply.code(503).send({ ok: false, code: 'ORS_PLAN_RESTRICTION', message: 'El nivel actual de la clave no permite esta solicitud. Comprueba los permisos y límites de tu plan de HeiGIT.' });
     if (error?.status === 429) return reply.code(429).send({ ok: false, code: 'ORS_RATE_LIMIT', message: 'Se alcanzó temporalmente el límite de solicitudes de HeiGIT. Intenta más tarde.' });
     if (message === 'ORS_GEOCODING_FAILED') return reply.code(502).send({ ok: false, code: 'ORS_GEOCODING_FAILED', message: 'No se pudo localizar una de las direcciones con OpenRouteService.' });
