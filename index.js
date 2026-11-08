@@ -54,7 +54,7 @@ function hereVehicleParams(search, vehicle = {}) {
   set('weightPerAxle', vehicle.axleWeightT ? Math.round(vehicle.axleWeightT * 1000) : undefined);
 }
 
-app.get('/health', async () => ({ ok: true, service: 'route-planner-api', version: '0.1.0', hereConfigured: Boolean(process.env.HERE_API_KEY) }));
+app.get('/', async () => ({ name: 'Route Planner API', version: 'v1', status: process.env.HERE_API_KEY ? 'ready' : 'awaiting_here_key' }));\napp.get('/health', async () => ({ ok: true, service: 'route-planner-api', version: '0.1.0', hereConfigured: Boolean(process.env.HERE_API_KEY) }));
 app.get('/v1', async () => ({ name: 'Route Planner API', version: 'v1', capabilities: ['route-validation', 'here-geocoding', 'here-routing'], status: process.env.HERE_API_KEY ? 'ready' : 'awaiting_here_key' }));
 app.post('/v1/routes/validate', async (request, reply) => {
   const parsed = routeSchema.safeParse(request.body);
