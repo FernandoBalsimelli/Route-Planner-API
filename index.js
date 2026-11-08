@@ -31,7 +31,7 @@ const routeSchema = z.object({
 });
 
 function coordinate(value) {
-  const match = value.match(/^\\s*\\(?\\s*(-?\\d{1,2}(?:\\.\\d+)?)\\s*[,\\s]+\\s*(-?\\d{1,3}(?:\\.\\d+)?)\\s*\\)?\\s*$/);
+  const match = value.match(/^(-?\d{1,2}(?:\.\d+)?)[, ]+(-?\d{1,3}(?:\.\d+)?)$/);
   if (!match) return null;
   const lat = Number(match[1]), lng = Number(match[2]);
   return Math.abs(lat) <= 90 && Math.abs(lng) <= 180 ? { lat, lng } : null;
