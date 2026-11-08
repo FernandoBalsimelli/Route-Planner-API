@@ -102,7 +102,19 @@ app.get('/v1/locations/suggest', { config: { rateLimit: { max: 30, timeWindow: '
   if (!apiKey) return reply.code(503).send({ ok: false, code: 'ORS_API_KEY_MISSING', message: 'El buscador de direcciones no está disponible: falta la clave de HeiGIT.' });
   try {
     const point = coordinate(query);
-    if (point) return { ok: true, suggestions: [{ ...point, label: query, plusCode: encode(point.lat, point.lng), source: 'coordinates' }] };
+    if (point) {
+      let label = query;
+      try {
+        const reverseUrl = new URL(ORS_BASE_URL + '/pelias/v1/reverse');
+        reverseUrl.searchParams.set('point.lat', String(point.lat)); reverseUrl.searchParams.set('point.lon', String(point.lng)); reverseUrl.searchParams.set('size', '1'); reverseUrl.searchParams.set('lang', 'es');
+        const reverseResponse = await fetch(reverseUrl, { headers: { Authorization: apiKey, Accept: 'application/json' }, signal: AbortSignal.timeout(8000) });
+        if (reverseResponse.ok) {
+          const reversePayload = await reverseResponse.json();
+          label = reversePayload.features?.[0]?.properties?.label || query;
+        }
+      } catch {}
+      return { ok: true, suggestions: [{ ...point, label, plusCode: encode(point.lat, point.lng), source: 'coordinates' }] };
+    }
     const plusCode = await resolvePlusCode(query, apiKey);
     if (plusCode) return { ok: true, suggestions: [{ ...plusCode, source: 'plus_code' }] };
     const payload = await peliasSearch(query, apiKey, true, 6);
