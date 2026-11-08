@@ -52,6 +52,32 @@ async function peliasSearch(value, apiKey, autocomplete = false, size = 6) {
   if (!response.ok) { const error = new Error('ORS_GEOCODING_FAILED'); error.status = response.status; throw error; }
   return response.json();
 }
+async function photonSearch(value, size = 6) {
+  const url = new URL('https://photon.komoot.io/api/');
+  url.searchParams.set('q', value); url.searchParams.set('limit', String(size)); url.searchParams.set('lang', 'es');
+  const response = await fetch(url, { headers: { Accept: 'application/json' }, signal: AbortSignal.timeout(10000) });
+  if (!response.ok) throw new Error('PHOTON_GEOCODING_FAILED');
+  const payload = await response.json();
+  return (payload.features || []).map(feature => {
+    const p = feature.properties || {}, coords = feature.geometry?.coordinates || [];
+    const lat = Number(coords[1]), lng = Number(coords[0]);
+    if (!Number.isFinite(lat) || !Number.isFinite(lng)) return null;
+    const street = p.housenumber && p.street ? p.housenumber + ' ' + p.street : p.street;
+    const label = [p.name, street, p.city || p.district, p.state, p.country].filter(Boolean).filter((v, i, arr) => arr.indexOf(v) === i).join(', ');
+    return { lat, lng, label: label || value, plusCode: encode(lat, lng), source: 'openstreetmap' };
+  }).filter(Boolean);
+}
+async function searchLocations(value, apiKey, autocomplete = false, size = 6) {
+  try {
+    const payload = await peliasSearch(value, apiKey, autocomplete, size);
+    const results = (payload.features || []).map(feature => peliasPoint(feature, value)).filter(Boolean);
+    if (results.length) return results;
+  } catch (error) {
+    if (![401, 402, 403, 404, 429].includes(error?.status) && error?.name !== 'TimeoutError' && error?.name !== 'AbortError') throw error;
+    app.log.warn({ status: error?.status, message: error?.message }, 'HeiGIT geocoding unavailable; falling back to Photon');
+  }
+  return photonSearch(value, size);
+}
 async function resolvePlusCode(value, apiKey) {
   const match = value.match(/([23456789CFGHJMPQRVWX]{2,8}\+[23456789CFGHJMPQRVWX]{2,7})/i);
   if (!match) return null;
@@ -61,8 +87,7 @@ async function resolvePlusCode(value, apiKey) {
   if (!isFull(code)) {
     const locality = value.replace(match[1], '').replace(/^[,\s]+|[,\s]+$/g, '');
     if (!locality || !isShort(code)) throw new Error('PLUS_CODE_NEEDS_LOCALITY');
-    const localityResult = await peliasSearch(locality, apiKey, false, 1);
-    const reference = peliasPoint(localityResult.features?.[0], locality);
+    const reference = (await searchLocations(locality, apiKey, false, 1))[0];
     if (!reference) throw new Error('LOCATION_NOT_FOUND:' + locality);
     fullCode = recoverNearest(code, reference.lat, reference.lng);
   }
@@ -76,8 +101,7 @@ async function geocode(value, apiKey) {
   if (point) return { ...point, label: text, plusCode: encode(point.lat, point.lng) };
   const plusCode = await resolvePlusCode(text, apiKey);
   if (plusCode) return plusCode;
-  const payload = await peliasSearch(text, apiKey, false, 1);
-  const result = peliasPoint(payload.features?.[0], text);
+  const result = (await searchLocations(text, apiKey, false, 1))[0];
   if (!result) throw new Error('LOCATION_NOT_FOUND:' + text);
   return result;
 }
@@ -117,8 +141,7 @@ app.get('/v1/locations/suggest', { config: { rateLimit: { max: 30, timeWindow: '
     }
     const plusCode = await resolvePlusCode(query, apiKey);
     if (plusCode) return { ok: true, suggestions: [{ ...plusCode, source: 'plus_code' }] };
-    const payload = await peliasSearch(query, apiKey, true, 6);
-    const suggestions = (payload.features || []).map(feature => peliasPoint(feature, query)).filter(Boolean).map(point => ({ ...point, source: 'address' }));
+    const suggestions = (await searchLocations(query, apiKey, true, 6)).map(point => ({ ...point, source: point.source || 'address' }));
     return { ok: true, suggestions };
   } catch (error) {
     request.log.warn({ err: error?.message, providerStatus: error?.status }, 'Location suggestions failed');
