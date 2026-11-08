@@ -32,8 +32,15 @@ Host vigente: https://api.heigit.org
 - Geocodificación: /pelias/v1/search
 - Rutas: /openrouteservice/v2/directions/{profile}/json
 
-## Desarrollo
-npm install && npm run dev
+## Desarrollo y despliegue
+
+`npm ci` y `npm run dev` inician el servidor local mediante `server.js`.
+`npm test` verifica el handler HTTP real, solicitudes concurrentes, cuerpos JSON y autenticación.
+
+En Vercel, `index.js` exporta directamente un handler Node `(request, response)`
+que espera `app.ready()` y entrega la solicitud a Fastify. Importar el módulo no
+abre un puerto: el arranque local queda separado para evitar depender de la
+interceptación asíncrona de `listen()` durante el inicio de la función.
 
 
 ## Búsqueda y selección de ubicaciones

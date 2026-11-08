@@ -285,8 +285,11 @@ app.setErrorHandler((error, request, reply) => {
   request.log.error(error);
   reply.code(error.statusCode && error.statusCode < 500 ? error.statusCode : 500).send({ ok: false, message: 'Error interno del servicio.' });
 });
-// Vercel's Fastify runtime expects the app to start listening on the assigned port.
-const port = Number(process.env.PORT || 3000);
-// Let Vercel's zero-config Fastify adapter capture listen() during startup.
-app.listen({ port });
-export default app;
+// Export an HTTP handler explicitly. Fastify starts listening asynchronously, so
+// relying on the runtime to intercept listen() can miss the server at cold start.
+// Local development opens a port in server.js instead.
+export { app };
+export default async function handler(request, response) {
+  await app.ready();
+  app.server.emit('request', request, response);
+}
