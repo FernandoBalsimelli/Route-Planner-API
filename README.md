@@ -13,6 +13,10 @@ API Fastify para geocodificar direcciones y calcular recorridos con OpenRouteSer
 - POST /v1/routes/validate — valida payload.
 - POST /v1/routes/plan — requiere Authorization: Bearer <session>; geocodifica y calcula. Límite: 10 solicitudes por minuto por IP.
 
+## Errores del proveedor
+
+La API distingue errores de acceso de HeiGIT (`ORS_ACCESS_DENIED`), restricciones del nivel de clave (`ORS_PLAN_RESTRICTION`), límites de solicitudes (`ORS_RATE_LIMIT`) y tiempos de espera (`ORS_TIMEOUT`). Estos códigos permiten mostrar mensajes útiles sin exponer la clave ni los detalles internos del proveedor.
+
 ## Perfiles
 - Reparto: driving-car.
 - Transporte pesado: driving-hgv, vehicle_type hgv y restricciones de altura, ancho, largo, peso bruto y carga por eje en metros/toneladas.
