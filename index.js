@@ -80,8 +80,48 @@ app.post('/v1/routes/plan', { config: { rateLimit: { max: 10, timeWindow: '1 min
     const input = parsed.data;
     const locations = await Promise.all([input.origin, ...input.stops, input.destination].map(value => geocode(value, apiKey)));
     const profile = input.mode === 'truck' ? 'driving-hgv' : 'driving-car';
+    let routeLocations = locations;
+    let optimized = false;
+
+    // VROOM does not expose the HGV dimension and weight restrictions used by Directions.
+    // Keep optimization opt-in and limited to delivery vehicles until that can be validated.
+    if (input.optimize && input.stops.length > 1 && input.mode === 'delivery') {
+      const jobs = locations.slice(1, -1).map((point, index) => ({ id: index + 1, location: [point.lng, point.lat] }));
+      const optimizationResponse = await fetch(ORS_BASE_URL + '/vroom/v0', {
+        method: 'POST',
+        headers: { Authorization: apiKey, 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          jobs,
+          vehicles: [{
+            id: 1,
+            profile: 'driving-car',
+            start: [locations[0].lng, locations[0].lat],
+            end: [locations[locations.length - 1].lng, locations[locations.length - 1].lat],
+          }],
+        }),
+        signal: AbortSignal.timeout(20000),
+      });
+      if (!optimizationResponse.ok) {
+        let providerMessage = '';
+        try { providerMessage = (await optimizationResponse.json()).error?.message || ''; } catch {}
+        request.log.warn({ status: optimizationResponse.status, providerMessage }, 'HeiGIT optimization request failed');
+        if (optimizationResponse.status === 401 || optimizationResponse.status === 403) return reply.code(502).send({ ok: false, code: 'ORS_OPTIMIZATION_ACCESS_DENIED', message: 'HeiGIT no autorizó la optimización de paradas. Comprueba el nivel y los límites de tu clave.' });
+        if (optimizationResponse.status === 402) return reply.code(503).send({ ok: false, code: 'ORS_OPTIMIZATION_PLAN_RESTRICTION', message: 'El nivel actual de tu clave no permite optimizar el orden de las paradas.' });
+        if (optimizationResponse.status === 429) return reply.code(429).send({ ok: false, code: 'ORS_OPTIMIZATION_RATE_LIMIT', message: 'Se alcanzó el límite temporal de optimización de HeiGIT. Intenta más tarde.' });
+        return reply.code(422).send({ ok: false, code: 'ORS_OPTIMIZATION_FAILED', message: 'No se pudo optimizar el orden de las paradas. Desactiva la optimización o inténtalo más tarde.' });
+      }
+      const optimization = await optimizationResponse.json();
+      const optimizedRoute = optimization.routes?.[0];
+      const orderedIds = (optimizedRoute?.steps || []).filter(step => step.type === 'job').map(step => step.id);
+      if (!optimizedRoute || orderedIds.length !== jobs.length || optimization.unassigned?.length) {
+        return reply.code(422).send({ ok: false, code: 'ORS_OPTIMIZATION_INCOMPLETE', message: 'HeiGIT no pudo ordenar todas las paradas. Prueba sin optimización o revisa las ubicaciones.' });
+      }
+      routeLocations = [locations[0], ...orderedIds.map(id => locations[id]), locations[locations.length - 1]];
+      optimized = true;
+    }
+
     const body = {
-      coordinates: locations.map(point => [point.lng, point.lat]), instructions: true, language: 'es', units: 'm',
+      coordinates: routeLocations.map(point => [point.lng, point.lat]), instructions: true, language: 'es', units: 'm',
       ...(input.mode === 'truck' ? { options: { vehicle_type: 'hgv', profile_params: { restrictions: buildRestrictions(input.vehicle || {}) } } } : {}),
     };
     const response = await fetch(ORS_BASE_URL + '/openrouteservice/v2/directions/' + profile + '/json', {
