@@ -2,8 +2,12 @@ import Fastify from 'fastify';
 import cors from '@fastify/cors';
 import rateLimit from '@fastify/rate-limit';
 import { z } from 'zod';
+import { createClient } from '@supabase/supabase-js';
 
 const app = Fastify({ logger: true, bodyLimit: 64 * 1024, trustProxy: true });
+const supabaseAuth = process.env.SUPABASE_URL && process.env.SUPABASE_PUBLISHABLE_KEY
+  ? createClient(process.env.SUPABASE_URL, process.env.SUPABASE_PUBLISHABLE_KEY, { auth: { persistSession: false, autoRefreshToken: false } })
+  : null;
 await app.register(cors, { origin: (origin, cb) => cb(null, !origin || /^https:\/\/(route-planner|route-planner-web)[a-z0-9.-]*\.vercel\.app$/.test(origin) || (process.env.ALLOWED_ORIGINS || '').split(',').map(v => v.trim()).includes(origin)), methods: ['GET', 'POST', 'OPTIONS'] });
 await app.register(rateLimit, { max: 40, timeWindow: '1 minute' });
 
@@ -63,7 +67,12 @@ app.post('/v1/routes/validate', async (request, reply) => {
   return { ok: true, valid: true, mode: parsed.data.mode, stopCount: parsed.data.stops.length };
 });
 
-app.post('/v1/routes/plan', async (request, reply) => {
+app.post('/v1/routes/plan', { config: { rateLimit: { max: 10, timeWindow: '1 minute' } } }, async (request, reply) => {
+  const authorization = request.headers.authorization || '';
+  const accessToken = authorization.startsWith('Bearer ') ? authorization.slice(7) : '';
+  if (!accessToken || !supabaseAuth) return reply.code(401).send({ ok: false, code: 'AUTH_REQUIRED', message: 'Inicia sesión para calcular y consumir rutas.' });
+  const { data: authData, error: authError } = await supabaseAuth.auth.getUser(accessToken);
+  if (authError || !authData.user) return reply.code(401).send({ ok: false, code: 'INVALID_SESSION', message: 'Tu sesión no es válida. Inicia sesión de nuevo.' });
   const parsed = routeSchema.safeParse(request.body);
   if (!parsed.success) return reply.code(400).send({ ok: false, message: 'Revisa el origen, destino y los datos del vehículo.', issues: parsed.error.issues.map(issue => ({ path: issue.path.join('.'), message: issue.message })) });
   const apiKey = process.env.HERE_API_KEY;
