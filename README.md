@@ -17,6 +17,10 @@ API Fastify para geocodificar direcciones y calcular recorridos con OpenRouteSer
 
 La API distingue errores de acceso de HeiGIT (`ORS_ACCESS_DENIED`), restricciones del nivel de clave (`ORS_PLAN_RESTRICTION`), límites de solicitudes (`ORS_RATE_LIMIT`) y tiempos de espera (`ORS_TIMEOUT`). Estos códigos permiten mostrar mensajes útiles sin exponer la clave ni los detalles internos del proveedor.
 
+## Optimización de paradas
+
+`POST /v1/routes/plan` acepta `optimize: true` para ordenar automáticamente dos o más paradas de reparto mediante VROOM (`https://api.heigit.org/vroom/v0`). La API vuelve a solicitar Directions con el orden resultante para devolver geometría e indicaciones. La optimización permanece desactivada por defecto y no se ofrece para camiones porque VROOM no recibe las restricciones de dimensiones y peso que Directions aplica al perfil HGV.
+
 ## Perfiles
 - Reparto: driving-car.
 - Transporte pesado: driving-hgv, vehicle_type hgv y restricciones de altura, ancho, largo, peso bruto y carga por eje en metros/toneladas.
