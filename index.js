@@ -53,13 +53,13 @@ async function peliasSearch(value, apiKey, autocomplete = false, size = 6) {
   return response.json();
 }
 async function resolvePlusCode(value, apiKey) {
-  const match = value.match(/([23456789CFGHJMPQRVWX]{2,8}\\+[23456789CFGHJMPQRVWX]{2,7})/i);
+  const match = value.match(/([23456789CFGHJMPQRVWX]{2,8}\+[23456789CFGHJMPQRVWX]{2,7})/i);
   if (!match) return null;
   const code = match[1].toUpperCase();
   if (!isValid(code)) return null;
   let fullCode = code;
   if (!isFull(code)) {
-    const locality = value.replace(match[1], '').replace(/^[,\\s]+|[,\\s]+$/g, '');
+    const locality = value.replace(match[1], '').replace(/^[,\s]+|[,\s]+$/g, '');
     if (!locality || !isShort(code)) throw new Error('PLUS_CODE_NEEDS_LOCALITY');
     const localityResult = await peliasSearch(locality, apiKey, false, 1);
     const reference = peliasPoint(localityResult.features?.[0], locality);
