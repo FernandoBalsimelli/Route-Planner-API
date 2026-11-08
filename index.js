@@ -9,7 +9,7 @@ const app = Fastify({ logger: true, bodyLimit: 64 * 1024, trustProxy: true });
 const supabaseAuth = process.env.SUPABASE_URL && process.env.SUPABASE_PUBLISHABLE_KEY
   ? createClient(process.env.SUPABASE_URL, process.env.SUPABASE_PUBLISHABLE_KEY, { auth: { persistSession: false, autoRefreshToken: false } })
   : null;
-await app.register(cors, { origin: (origin, cb) => cb(null, !origin || /^https:\/\/(route-planner|route-planner-web)[a-z0-9.-]*\.vercel\.app$/.test(origin) || /^http:\/\/(localhost|127\.0\.0\.1)(:\\d+)?$/.test(origin) || (process.env.ALLOWED_ORIGINS || '').split(',').map(v => v.trim()).includes(origin)), methods: ['GET', 'POST', 'OPTIONS'], allowedHeaders: ['Content-Type', 'Authorization'] });
+await app.register(cors, { origin: (origin, cb) => cb(null, !origin || /^https:\/\/(route-planner|route-planner-web)[a-z0-9.-]*\.vercel\.app$/.test(origin) || /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin) || (process.env.ALLOWED_ORIGINS || '').split(',').map(v => v.trim()).includes(origin)), methods: ['GET', 'POST', 'OPTIONS'], allowedHeaders: ['Content-Type', 'Authorization'] });
 await app.register(rateLimit, { max: 40, timeWindow: '1 minute' });
 
 const ORS_BASE_URL = 'https://api.heigit.org';
