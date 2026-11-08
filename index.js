@@ -285,9 +285,7 @@ app.setErrorHandler((error, request, reply) => {
   request.log.error(error);
   reply.code(error.statusCode && error.statusCode < 500 ? error.statusCode : 500).send({ ok: false, message: 'Error interno del servicio.' });
 });
-// Vercel runs Fastify as a serverless handler; do not bind a listening socket there.
-if (!process.env.VERCEL) {
-  const port = Number(process.env.PORT || 3000);
-  await app.listen({ port, host: '0.0.0.0' });
-}
+// Vercel's Fastify runtime expects the app to start listening on the assigned port.
+const port = Number(process.env.PORT || 3000);
+await app.listen({ port, host: '0.0.0.0' });
 export default app;
