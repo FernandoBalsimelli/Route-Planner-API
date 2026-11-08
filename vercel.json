@@ -1,8 +1,3 @@
 {
-  "framework": "fastify",
-  "functions": {
-    "index.js": {
-      "maxDuration": 30
-    }
-  }
+  "framework": "fastify"
 }
