@@ -68,6 +68,7 @@ async function photonSearch(value, size = 6) {
   }).filter(Boolean);
 }
 async function searchLocations(value, apiKey, autocomplete = false, size = 6) {
+  if (!apiKey) return photonSearch(value, size);
   try {
     const payload = await peliasSearch(value, apiKey, autocomplete, size);
     const results = (payload.features || []).map(feature => peliasPoint(feature, value)).filter(Boolean);
@@ -123,12 +124,12 @@ app.get('/v1/locations/suggest', { config: { rateLimit: { max: 30, timeWindow: '
   const query = String(request.query?.q || '').trim();
   if (query.length < 2 || query.length > 180) return reply.code(400).send({ ok: false, message: 'Escribe al menos 2 caracteres para buscar.' });
   const apiKey = process.env.ORS_API_KEY;
-  if (!apiKey) return reply.code(503).send({ ok: false, code: 'ORS_API_KEY_MISSING', message: 'El buscador de direcciones no está disponible: falta la clave de HeiGIT.' });
   try {
     const point = coordinate(query);
     if (point) {
       let label = query;
       try {
+        if (!apiKey) throw new Error('Reverse geocoding unavailable without HeiGIT key');
         const reverseUrl = new URL(ORS_BASE_URL + '/pelias/v1/reverse');
         reverseUrl.searchParams.set('point.lat', String(point.lat)); reverseUrl.searchParams.set('point.lon', String(point.lng)); reverseUrl.searchParams.set('size', '1'); reverseUrl.searchParams.set('lang', 'es');
         const reverseResponse = await fetch(reverseUrl, { headers: { Authorization: apiKey, Accept: 'application/json' }, signal: AbortSignal.timeout(8000) });
@@ -284,6 +285,9 @@ app.setErrorHandler((error, request, reply) => {
   request.log.error(error);
   reply.code(error.statusCode && error.statusCode < 500 ? error.statusCode : 500).send({ ok: false, message: 'Error interno del servicio.' });
 });
-const port = Number(process.env.PORT || 3000);
-await app.listen({ port, host: '0.0.0.0' });
+// Vercel runs Fastify as a serverless handler; do not bind a listening socket there.
+if (!process.env.VERCEL) {
+  const port = Number(process.env.PORT || 3000);
+  await app.listen({ port, host: '0.0.0.0' });
+}
 export default app;
