@@ -90,3 +90,30 @@ test('truck routing preserves selected coordinates, order and vehicle restrictio
   assert.equal(response.json().route.distanceMeters, 800000);
   assert.deepEqual(response.json().route.waypoints.map(p => p.label), [origin.label, stop.label, destination.label]);
 });
+
+test('reverse geocoding labels a location without moving the device coordinates', async () => {
+  provider = async () => Response.json({ features: [{ geometry: { coordinates: [-106.10, 28.67] }, properties: { label: 'Dirección cercana' } }] });
+  const response = await app.inject('/v1/locations/reverse?lat=28.662926123&lng=-106.099908456');
+  assert.equal(response.statusCode, 200);
+  assert.equal(response.json().location.lat, 28.662926123);
+  assert.equal(response.json().location.lng, -106.099908456);
+  assert.equal(response.json().location.label, 'Dirección cercana');
+});
+
+test('reverse fallback and complete outage preserve exact coordinates', async () => {
+  provider = async url => url.hostname === 'api.heigit.org' ? Response.json({}, { status: 503 })
+    : Response.json({ features: [{ properties: { name: 'Lugar de prueba', city: 'Chihuahua' } }] });
+  let response = await app.inject('/v1/locations/reverse?lat=28.66&lng=-106.09');
+  assert.match(response.json().location.label, /Lugar de prueba/);
+  provider = async () => Response.json({}, { status: 503 });
+  response = await app.inject('/v1/locations/reverse?lat=28.66&lng=-106.09');
+  assert.equal(response.json().warning, 'ADDRESS_LOOKUP_UNAVAILABLE');
+  assert.equal(response.json().location.lat, 28.66);
+});
+
+test('reverse rejects missing, blank and out-of-range coordinates', async () => {
+  provider = async () => { throw new Error('Invalid input must not reach providers'); };
+  for (const query of ['lat=&lng=0', 'lat=1', 'lat=91&lng=1']) {
+    assert.equal((await app.inject('/v1/locations/reverse?' + query)).statusCode, 400);
+  }
+});

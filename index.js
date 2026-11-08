@@ -6,7 +6,7 @@ import { createClient } from '@supabase/supabase-js';
 import { decode, encode, isFull, isShort, isValid, recoverNearest } from '@erikmichelson/open-location-code-ts';
 import { providerError, routingFailure } from './lib/routing-errors.js';
 
-const app = Fastify({ logger: true, bodyLimit: 64 * 1024, trustProxy: true });
+const app = Fastify({ logger: { serializers: { req: request => ({ method: request.method, url: request.url?.split('?')[0], host: request.host, remoteAddress: request.ip }) } }, bodyLimit: 64 * 1024, trustProxy: true });
 const supabaseAuth = process.env.SUPABASE_URL && process.env.SUPABASE_PUBLISHABLE_KEY
   ? createClient(process.env.SUPABASE_URL, process.env.SUPABASE_PUBLISHABLE_KEY, { auth: { persistSession: false, autoRefreshToken: false } })
   : null;
@@ -93,6 +93,33 @@ async function searchLocations(value, apiKey, autocomplete = false, size = 6) {
   }
   return photonSearch(value, size);
 }
+async function reverseLocation(point, apiKey) {
+  const location = { ...point, label: `${point.lat}, ${point.lng}`, plusCode: encode(point.lat, point.lng) };
+  if (apiKey) {
+    try {
+      const url = new URL(ORS_BASE_URL + '/pelias/v1/reverse');
+      url.searchParams.set('point.lat', String(point.lat)); url.searchParams.set('point.lon', String(point.lng));
+      url.searchParams.set('size', '1'); url.searchParams.set('lang', 'es');
+      const response = await fetch(url, { headers: { Authorization: apiKey, Accept: 'application/json' }, signal: AbortSignal.timeout(5000) });
+      if (response.ok) {
+        const feature = peliasPoint((await response.json()).features?.[0]);
+        if (feature) return { location: { ...location, label: feature.label } };
+      }
+    } catch { /* Try the compatible public fallback. */ }
+  }
+  try {
+    const url = new URL('https://photon.komoot.io/reverse');
+    url.searchParams.set('lat', String(point.lat)); url.searchParams.set('lon', String(point.lng));
+    const response = await fetch(url, { headers: { Accept: 'application/json' }, signal: AbortSignal.timeout(5000) });
+    if (response.ok) {
+      const p = (await response.json()).features?.[0]?.properties;
+      const street = p?.street ? [p.housenumber, p.street].filter(Boolean).join(' ') : '';
+      const label = p && [p.name, street, p.city || p.district, p.state, p.country].filter(Boolean).join(', ');
+      if (label) return { location: { ...location, label } };
+    }
+  } catch { /* The exact device coordinates remain valid without an address. */ }
+  return { location, warning: 'ADDRESS_LOOKUP_UNAVAILABLE' };
+}
 async function resolvePlusCode(value, apiKey) {
   const match = value.match(/([23456789CFGHJMPQRVWX]{2,8}\+[23456789CFGHJMPQRVWX]{2,7})/i);
   if (!match) return null;
@@ -141,18 +168,8 @@ app.get('/v1/locations/suggest', { config: { rateLimit: { max: 30, timeWindow: '
   try {
     const point = coordinate(query);
     if (point) {
-      let label = query;
-      try {
-        if (!apiKey) throw new Error('Reverse geocoding unavailable without HeiGIT key');
-        const reverseUrl = new URL(ORS_BASE_URL + '/pelias/v1/reverse');
-        reverseUrl.searchParams.set('point.lat', String(point.lat)); reverseUrl.searchParams.set('point.lon', String(point.lng)); reverseUrl.searchParams.set('size', '1'); reverseUrl.searchParams.set('lang', 'es');
-        const reverseResponse = await fetch(reverseUrl, { headers: { Authorization: apiKey, Accept: 'application/json' }, signal: AbortSignal.timeout(8000) });
-        if (reverseResponse.ok) {
-          const reversePayload = await reverseResponse.json();
-          label = reversePayload.features?.[0]?.properties?.label || query;
-        }
-      } catch {}
-      return { ok: true, suggestions: [{ ...point, label, plusCode: encode(point.lat, point.lng), source: 'coordinates' }] };
+      const { location, warning } = await reverseLocation(point, apiKey);
+      return { ok: true, suggestions: [{ ...location, source: 'coordinates' }], ...(warning ? { warning } : {}) };
     }
     const plusCode = await resolvePlusCode(query, apiKey);
     if (plusCode) return { ok: true, suggestions: [{ ...plusCode, source: 'plus_code' }] };
@@ -169,22 +186,10 @@ app.get('/v1/locations/suggest', { config: { rateLimit: { max: 30, timeWindow: '
   }
 });
 app.get('/v1/locations/reverse', { config: { rateLimit: { max: 30, timeWindow: '1 minute' } } }, async (request, reply) => {
+  if (typeof request.query?.lat !== 'string' || typeof request.query?.lng !== 'string' || !request.query.lat.trim() || !request.query.lng.trim()) return reply.code(400).send({ ok: false, message: 'Coordenadas inválidas.' });
   const lat = Number(request.query?.lat), lng = Number(request.query?.lng);
   if (!Number.isFinite(lat) || !Number.isFinite(lng) || Math.abs(lat) > 90 || Math.abs(lng) > 180) return reply.code(400).send({ ok: false, message: 'Coordenadas inválidas.' });
-  const apiKey = process.env.ORS_API_KEY;
-  if (!apiKey) return reply.code(503).send({ ok: false, code: 'ORS_API_KEY_MISSING', message: 'La búsqueda de dirección no está disponible.' });
-  try {
-    const url = new URL(ORS_BASE_URL + '/pelias/v1/reverse');
-    url.searchParams.set('point.lat', String(lat)); url.searchParams.set('point.lon', String(lng)); url.searchParams.set('size', '1'); url.searchParams.set('lang', 'es');
-    const response = await fetch(url, { headers: { Authorization: apiKey, Accept: 'application/json' }, signal: AbortSignal.timeout(10000) });
-    if (!response.ok) throw Object.assign(new Error('ORS_GEOCODING_FAILED'), { status: response.status });
-    const payload = await response.json();
-    const feature = peliasPoint(payload.features?.[0], lat + ', ' + lng);
-    return { ok: true, location: { lat, lng, label: feature?.label || (lat + ', ' + lng), plusCode: encode(lat, lng) } };
-  } catch (error) {
-    request.log.warn({ err: error?.message, providerStatus: error?.status }, 'Reverse geocoding failed');
-    return { ok: true, location: { lat, lng, label: lat + ', ' + lng, plusCode: encode(lat, lng) }, warning: 'ADDRESS_LOOKUP_UNAVAILABLE' };
-  }
+  return { ok: true, ...await reverseLocation({ lat, lng }, process.env.ORS_API_KEY) };
 });
 
 
