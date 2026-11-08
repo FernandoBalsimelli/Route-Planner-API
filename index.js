@@ -287,5 +287,6 @@ app.setErrorHandler((error, request, reply) => {
 });
 // Vercel's Fastify runtime expects the app to start listening on the assigned port.
 const port = Number(process.env.PORT || 3000);
-await app.listen({ port, host: '0.0.0.0' });
+// Let Vercel's zero-config Fastify adapter capture listen() during startup.
+app.listen({ port });
 export default app;
