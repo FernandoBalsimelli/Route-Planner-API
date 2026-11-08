@@ -1,0 +1,17 @@
+{
+  "name": "route-planner-api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch index.js",
+    "start": "node index.js",
+    "build": "node --check index.js"
+  },
+  "dependencies": {
+    "@fastify/cors": "11.1.0",
+    "@fastify/rate-limit": "10.3.0",
+    "fastify": "5.6.1",
+    "zod": "3.25.76"
+  }
+}
