@@ -63,3 +63,14 @@ Si el proveedor no encuentra una vía transitable cerca de un punto, la API devu
 destino) y el punto afectado. Debe corregirse ese acceso; la API conserva las
 coordenadas confirmadas y las restricciones del vehículo. También distingue
 `ORS_ROUTE_TOO_LONG`, `ORS_NO_ROUTE` y `ORS_ROUTING_UNAVAILABLE`.
+
+### Nearby suggestions
+
+`GET /v1/locations/suggest?q=Bodega%20Aurrera%20Express&lat=25.6866&lng=-100.3161`
+uses the origin as a soft focus for Pelias and Photon. Results include optional
+`distanceMeters` (straight-line distance), `name` and `locality`. Explicit city
+matches take precedence; comma/`en`/postal qualifiers disable origin proximity.
+An empty or distant (>50 km) focused response includes `NO_NEARBY_MATCHES`.
+Coordinates and full/compound Plus Codes retain their existing resolution.
+Responses are cached in memory for 60 seconds, capped at 200 queries. Query
+strings are omitted from request logs. No paid providers were added.

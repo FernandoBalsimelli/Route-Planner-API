@@ -5,7 +5,7 @@ import { z } from 'zod';
 import { createClient } from '@supabase/supabase-js';
 import { decode, encode, isFull, isShort, isValid, recoverNearest } from '@erikmichelson/open-location-code-ts';
 import { providerError, routingFailure } from './lib/routing-errors.js';
-import { searchFocus, nearbyResults } from './lib/nearby.js';
+import { searchFocus, namesLocality, prioritizeLocations } from './lib/nearby.js';
 
 const app = Fastify({ logger: { serializers: { req: request => ({ method: request.method, url: request.url?.split('?')[0], host: request.host, remoteAddress: request.ip }) } }, bodyLimit: 64 * 1024, trustProxy: true });
 const supabaseAuth = process.env.SUPABASE_URL && process.env.SUPABASE_PUBLISHABLE_KEY
@@ -48,7 +48,7 @@ function peliasPoint(feature, fallback = '') {
     ? [p.name, p.region || p.region_a, p.country].filter(Boolean).join(', ')
     : p.label || p.name || fallback || (lat + ', ' + lng);
   if (p.layer === 'venue' && p.street && !label.toLowerCase().includes(p.street.toLowerCase())) label = [p.name, [p.housenumber, p.street].filter(Boolean).join(' '), p.neighbourhood, p.locality, p.region, p.country].filter(Boolean).join(', ');
-  return { lat, lng, label: label.slice(0, 180), plusCode: encode(lat, lng), kind: p.layer };
+  return { lat, lng, label: label.slice(0, 180), plusCode: encode(lat, lng), kind: p.layer, name: p.name, locality: p.locality || (p.layer === 'locality' ? p.name : undefined) };
 }
 async function peliasSearch(value, apiKey, autocomplete = false, size = 6, focus = null) {
   const url = new URL(ORS_BASE_URL + '/pelias/v1/' + (autocomplete ? 'autocomplete' : 'search'));
@@ -80,22 +80,22 @@ async function photonSearch(value, size = 6, focus = null) {
     const street = p.housenumber && p.street ? p.housenumber + ' ' + p.street : p.street;
     const city = p.city || p.district;
     const label = [p.name, street, city !== p.name ? city : null, p.state, p.country].filter(Boolean).join(', ');
-    return { lat, lng, label: (label || value).slice(0, 180), plusCode: encode(lat, lng), source: 'openstreetmap', kind: p.osm_key === 'shop' || p.osm_key === 'amenity' ? 'venue' : p.type === 'city' ? 'locality' : p.type };
+    return { lat, lng, label: (label || value).slice(0, 180), plusCode: encode(lat, lng), source: 'openstreetmap', name: p.name, locality: p.city, kind: p.osm_key === 'shop' || p.osm_key === 'amenity' ? 'venue' : p.type === 'city' ? 'locality' : p.type };
   }).filter(Boolean).slice(0, size);
 }
 async function searchLocations(value, apiKey, autocomplete = false, size = 6, focus = null) {
-  if (!apiKey) return nearbyResults(await photonSearch(value, size, focus), focus, size);
+  if (!apiKey) return prioritizeLocations(value, await photonSearch(value, size, focus), focus, size);
   try {
     const payload = await peliasSearch(value, apiKey, autocomplete, size, focus);
     const results = (payload.features || [])
       .filter(feature => !['country', 'region', 'macroregion', 'county', 'macrocounty', 'localadmin', 'continent'].includes(feature.properties?.layer))
       .map(feature => peliasPoint(feature, value)).filter(Boolean);
     if (results.length) {
-      const ranked = nearbyResults(results, focus, size);
+      const ranked = prioritizeLocations(value, results, focus, size);
       // If the first index has only distant matches, consult the compatible
       // OSM index as well. An unavailable fallback never discards good results.
       if (focus && ranked[0].distanceMeters > 50000) {
-        try { return nearbyResults([...results, ...await photonSearch(value, size, focus)], focus, size); } catch { return ranked; }
+        try { return prioritizeLocations(value, [...results, ...await photonSearch(value, size, focus)], focus, size); } catch { return ranked; }
       }
       return ranked;
     }
@@ -103,7 +103,7 @@ async function searchLocations(value, apiKey, autocomplete = false, size = 6, fo
     if (![401, 402, 403, 404, 429].includes(error?.status) && !(error?.status >= 500) && error?.name !== 'TimeoutError' && error?.name !== 'AbortError' && error?.name !== 'TypeError') throw error;
     app.log.warn({ status: error?.status, message: error?.message }, 'HeiGIT geocoding unavailable; falling back to Photon');
   }
-  return nearbyResults(await photonSearch(value, size, focus), focus, size);
+  return prioritizeLocations(value, await photonSearch(value, size, focus), focus, size);
 }
 const suggestionCache = new Map();
 async function cachedSuggestions(query, apiKey, focus) {
@@ -197,7 +197,8 @@ app.get('/v1/locations/suggest', { config: { rateLimit: { max: 30, timeWindow: '
     const plusCode = await resolvePlusCode(query, apiKey);
     if (plusCode) return { ok: true, suggestions: [{ ...plusCode, source: 'plus_code' }] };
     const suggestions = (await cachedSuggestions(query, apiKey, focus)).map(point => ({ ...point, source: point.source || 'address' }));
-    return { ok: true, suggestions, nearby: Boolean(focus), ...(focus && (!suggestions.length || suggestions[0].distanceMeters > 50000) ? { warning: 'NO_NEARBY_MATCHES' } : {}) };
+    const nearby = Boolean(focus && !suggestions.some(point => namesLocality(query, point)));
+    return { ok: true, suggestions, nearby, ...(nearby && (!suggestions.length || suggestions[0].distanceMeters > 50000) ? { warning: 'NO_NEARBY_MATCHES' } : {}) };
   } catch (error) {
     if (error?.message === 'INVALID_SEARCH_FOCUS') return reply.code(400).send({ ok: false, code: 'INVALID_SEARCH_FOCUS', message: 'La ubicación de referencia no es válida.' });
     request.log.warn({ err: error?.message, providerStatus: error?.status }, 'Location suggestions failed');

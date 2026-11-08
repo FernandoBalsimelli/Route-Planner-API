@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { after, test } from 'node:test';
-import { distanceMeters, nearbyResults, searchFocus } from '../lib/nearby.js';
+import { distanceMeters, nearbyResults, searchFocus, prioritizeLocations } from '../lib/nearby.js';
 process.env.ORS_API_KEY = 'test-key';
 const { app } = await import('../index.js');
 const realFetch = globalThis.fetch;
@@ -22,6 +22,12 @@ test('explicit city/postcode overrides proximity, and partial/invalid coordinate
   assert.deepEqual(searchFocus('Bodega Aurrera Express', '25', '-100'), { lat: 25, lng: -100 });
   assert.throws(() => searchFocus('Bodega', 'no', '-100'), /INVALID_SEARCH_FOCUS/);
   assert.throws(() => searchFocus('Bodega', '25', undefined), /INVALID_SEARCH_FOCUS/);
+});
+test('an explicitly named city outranks a closer branch elsewhere in the state', () => {
+  const results = [{ label: 'Tienda, Jiménez, Chihuahua', locality: 'Jiménez', lat: 27, lng: -104 }, { label: 'Tienda, Chihuahua', locality: 'Chihuahua', lat: 28.6, lng: -106 }];
+  const ranked = prioritizeLocations('Bodega Aurrera Chihuahua', results, { lat: 25.6, lng: -100 });
+  assert.equal(ranked.length, 1); assert.equal(ranked[0].locality, 'Chihuahua'); assert.equal(ranked[0].distanceMeters, undefined);
+  assert.equal(prioritizeLocations('Bodega Aurrera, estado de Chihuahua', results, null).length, 2);
 });
 test('suggest endpoint sends focus upstream, sorts nearby branches and caches repeats', async () => {
   let calls = 0;
