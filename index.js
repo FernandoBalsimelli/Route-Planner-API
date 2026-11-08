@@ -92,7 +92,9 @@ app.post('/v1/routes/plan', { config: { rateLimit: { max: 10, timeWindow: '1 min
       let providerMessage = '';
       try { providerMessage = (await response.json()).error?.message || ''; } catch {}
       request.log.warn({ status: response.status, providerMessage }, 'OpenRouteService directions request failed');
-      if (response.status === 429) return reply.code(429).send({ ok: false, code: 'ORS_RATE_LIMIT', message: 'Se alcanzó temporalmente el límite gratuito de rutas. Intenta más tarde.' });
+      if (response.status === 401 || response.status === 403) return reply.code(502).send({ ok: false, code: 'ORS_ACCESS_DENIED', message: 'HeiGIT rechazó la clave o el acceso a este perfil. Comprueba el estado de tu clave y de la solicitud de upgrade.' });
+      if (response.status === 402) return reply.code(503).send({ ok: false, code: 'ORS_PLAN_RESTRICTION', message: 'El nivel actual de la clave no permite esta solicitud. Comprueba los permisos y límites de tu plan de HeiGIT.' });
+      if (response.status === 429) return reply.code(429).send({ ok: false, code: 'ORS_RATE_LIMIT', message: 'Se alcanzó temporalmente el límite de solicitudes de HeiGIT. Intenta más tarde.' });
       return reply.code(422).send({ ok: false, code: 'ORS_ROUTING_FAILED', message: 'OpenRouteService no pudo calcular esta ruta. Revisa los puntos, las restricciones del vehículo o inténtalo con otro recorrido.' });
     }
     const data = await response.json(), route = data.routes?.[0];
@@ -108,10 +110,14 @@ app.post('/v1/routes/plan', { config: { rateLimit: { max: 10, timeWindow: '1 min
     }, provider: 'openrouteservice' };
   } catch (error) {
     const message = error instanceof Error ? error.message : 'UNKNOWN_ERROR';
-    request.log.error({ err: message }, 'Route planning failed');
-    if (message.startsWith('LOCATION_NOT_FOUND:')) return reply.code(422).send({ ok: false, message: 'No se encontró esta ubicación: ' + message.slice(19) });
-    if (message === 'ORS_GEOCODING_FAILED') return reply.code(502).send({ ok: false, message: 'No se pudo localizar una de las direcciones con OpenRouteService.' });
-    return reply.code(502).send({ ok: false, message: 'Ocurrió un error al consultar el servicio de rutas. Intenta de nuevo.' });
+    request.log.error({ err: message, providerStatus: error?.status }, 'Route planning failed');
+    if (message.startsWith('LOCATION_NOT_FOUND:')) return reply.code(422).send({ ok: false, code: 'LOCATION_NOT_FOUND', message: 'No se encontró esta ubicación: ' + message.slice(19) });
+    if (error?.status === 401 || error?.status === 403) return reply.code(502).send({ ok: false, code: 'ORS_ACCESS_DENIED', message: 'HeiGIT rechazó la clave o el acceso a la geocodificación. Comprueba el estado de tu clave y de la solicitud de upgrade.' });
+    if (error?.status === 402) return reply.code(503).send({ ok: false, code: 'ORS_PLAN_RESTRICTION', message: 'El nivel actual de la clave no permite esta solicitud. Comprueba los permisos y límites de tu plan de HeiGIT.' });
+    if (error?.status === 429) return reply.code(429).send({ ok: false, code: 'ORS_RATE_LIMIT', message: 'Se alcanzó temporalmente el límite de solicitudes de HeiGIT. Intenta más tarde.' });
+    if (message === 'ORS_GEOCODING_FAILED') return reply.code(502).send({ ok: false, code: 'ORS_GEOCODING_FAILED', message: 'No se pudo localizar una de las direcciones con OpenRouteService.' });
+    if (error?.name === 'TimeoutError' || error?.name === 'AbortError') return reply.code(504).send({ ok: false, code: 'ORS_TIMEOUT', message: 'HeiGIT tardó demasiado en responder. Intenta de nuevo en unos momentos.' });
+    return reply.code(502).send({ ok: false, code: 'ROUTE_PROVIDER_ERROR', message: 'Ocurrió un error al consultar el servicio de rutas. Intenta de nuevo.' });
   }
 });
 app.setNotFoundHandler((request, reply) => reply.code(404).send({ ok: false, message: 'Endpoint no encontrado.' }));
