@@ -34,3 +34,15 @@ Host vigente: https://api.heigit.org
 
 ## Desarrollo
 npm install && npm run dev
+
+
+## Búsqueda y selección de ubicaciones
+
+- `GET /v1/locations/suggest?q=...`: sugerencias de direcciones y lugares mediante Pelias Autocomplete; devuelve etiqueta, coordenadas y Plus Code.
+- `GET /v1/locations/reverse?lat=...&lng=...`: convierte coordenadas a dirección legible y Plus Code.
+- Se aceptan coordenadas decimales separadas por coma o espacio.
+- Se aceptan Plus Codes globales y códigos cortos acompañados de ciudad/localidad. Un código corto sin referencia geográfica no identifica un punto único.
+- `POST /v1/routes/plan` acepta texto libre o puntos confirmados con `label`, `lat` y `lng`; los puntos confirmados se enrutan sin geocodificarlos otra vez.
+- Los Plus Codes se decodifican con la implementación TypeScript del estándar Open Location Code; no se requiere una API de Google ni una clave de Google Maps.
+
+La búsqueda sugiere resultados basados en OpenStreetMap/Pelias; su cobertura y nombres pueden diferir de Google Maps.
