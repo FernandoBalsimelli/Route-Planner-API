@@ -3,16 +3,19 @@ import cors from '@fastify/cors';
 import rateLimit from '@fastify/rate-limit';
 import { z } from 'zod';
 import { createClient } from '@supabase/supabase-js';
+import { decode, encode, isFull, isShort, isValid, recoverNearest } from '@erikmichelson/open-location-code-ts';
 
 const app = Fastify({ logger: true, bodyLimit: 64 * 1024, trustProxy: true });
 const supabaseAuth = process.env.SUPABASE_URL && process.env.SUPABASE_PUBLISHABLE_KEY
   ? createClient(process.env.SUPABASE_URL, process.env.SUPABASE_PUBLISHABLE_KEY, { auth: { persistSession: false, autoRefreshToken: false } })
   : null;
-await app.register(cors, { origin: (origin, cb) => cb(null, !origin || /^https:\/\/(route-planner|route-planner-web)[a-z0-9.-]*\.vercel\.app$/.test(origin) || (process.env.ALLOWED_ORIGINS || '').split(',').map(v => v.trim()).includes(origin)), methods: ['GET', 'POST', 'OPTIONS'] });
+await app.register(cors, { origin: (origin, cb) => cb(null, !origin || /^https:\/\/(route-planner|route-planner-web)[a-z0-9.-]*\.vercel\.app$/.test(origin) || /^http:\/\/(localhost|127\.0\.0\.1)(:\\d+)?$/.test(origin) || (process.env.ALLOWED_ORIGINS || '').split(',').map(v => v.trim()).includes(origin)), methods: ['GET', 'POST', 'OPTIONS'], allowedHeaders: ['Content-Type', 'Authorization'] });
 await app.register(rateLimit, { max: 40, timeWindow: '1 minute' });
 
 const ORS_BASE_URL = 'https://api.heigit.org';
-const locationSchema = z.string().trim().min(2).max(180);
+const locationTextSchema = z.string().trim().min(2).max(180);
+const locationPointSchema = z.object({ label: z.string().trim().min(1).max(180), lat: z.number().min(-90).max(90), lng: z.number().min(-180).max(180), plusCode: z.string().optional() });
+const locationSchema = z.union([locationTextSchema, locationPointSchema]);
 const routeSchema = z.object({
   origin: locationSchema, destination: locationSchema,
   stops: z.array(locationSchema).max(8).optional().default([]),
@@ -33,17 +36,50 @@ function coordinate(value) {
   const lat = Number(match[1]), lng = Number(match[2]);
   return Math.abs(lat) <= 90 && Math.abs(lng) <= 180 ? { lat, lng } : null;
 }
-async function geocode(value, apiKey) {
-  const point = coordinate(value);
-  if (point) return point;
-  const url = new URL(ORS_BASE_URL + '/pelias/v1/search');
-  url.searchParams.set('text', value); url.searchParams.set('size', '1'); url.searchParams.set('lang', 'es');
+function peliasPoint(feature, fallback = '') {
+  const coordinates = feature?.geometry?.coordinates;
+  if (!Array.isArray(coordinates) || coordinates.length < 2) return null;
+  const lat = Number(coordinates[1]), lng = Number(coordinates[0]);
+  if (!Number.isFinite(lat) || !Number.isFinite(lng)) return null;
+  return { lat, lng, label: feature.properties?.label || feature.properties?.name || fallback || (lat + ', ' + lng), plusCode: encode(lat, lng) };
+}
+async function peliasSearch(value, apiKey, autocomplete = false, size = 6) {
+  const url = new URL(ORS_BASE_URL + '/pelias/v1/' + (autocomplete ? 'autocomplete' : 'search'));
+  url.searchParams.set('text', value);
+  url.searchParams.set('size', String(size));
+  url.searchParams.set('lang', 'es');
   const response = await fetch(url, { headers: { Authorization: apiKey, Accept: 'application/json' }, signal: AbortSignal.timeout(10000) });
   if (!response.ok) { const error = new Error('ORS_GEOCODING_FAILED'); error.status = response.status; throw error; }
-  const payload = await response.json();
-  const feature = payload.features?.[0], coordinates = feature?.geometry?.coordinates;
-  if (!Array.isArray(coordinates) || coordinates.length < 2) throw new Error('LOCATION_NOT_FOUND:' + value);
-  return { lat: coordinates[1], lng: coordinates[0], label: feature.properties?.label || value };
+  return response.json();
+}
+async function resolvePlusCode(value, apiKey) {
+  const match = value.match(/([23456789CFGHJMPQRVWX]{2,8}\\+[23456789CFGHJMPQRVWX]{2,7})/i);
+  if (!match) return null;
+  const code = match[1].toUpperCase();
+  if (!isValid(code)) return null;
+  let fullCode = code;
+  if (!isFull(code)) {
+    const locality = value.replace(match[1], '').replace(/^[,\\s]+|[,\\s]+$/g, '');
+    if (!locality || !isShort(code)) throw new Error('PLUS_CODE_NEEDS_LOCALITY');
+    const localityResult = await peliasSearch(locality, apiKey, false, 1);
+    const reference = peliasPoint(localityResult.features?.[0], locality);
+    if (!reference) throw new Error('LOCATION_NOT_FOUND:' + locality);
+    fullCode = recoverNearest(code, reference.lat, reference.lng);
+  }
+  const area = decode(fullCode);
+  return { lat: area.latitudeCenter, lng: area.longitudeCenter, label: 'Plus Code ' + fullCode, plusCode: fullCode };
+}
+async function geocode(value, apiKey) {
+  if (value && typeof value === 'object' && Number.isFinite(value.lat) && Number.isFinite(value.lng)) return { lat: value.lat, lng: value.lng, label: value.label, plusCode: value.plusCode || encode(value.lat, value.lng) };
+  const text = String(value || '').trim();
+  const point = coordinate(text);
+  if (point) return { ...point, label: text, plusCode: encode(point.lat, point.lng) };
+  const plusCode = await resolvePlusCode(text, apiKey);
+  if (plusCode) return plusCode;
+  const payload = await peliasSearch(text, apiKey, false, 1);
+  const result = peliasPoint(payload.features?.[0], text);
+  if (!result) throw new Error('LOCATION_NOT_FOUND:' + text);
+  return result;
 }
 function buildRestrictions(vehicle = {}) {
   const restrictions = {};
@@ -58,6 +94,49 @@ function buildRestrictions(vehicle = {}) {
 app.get('/', async () => ({ name: 'Route Planner API', version: 'v1', status: process.env.ORS_API_KEY ? 'ready' : 'awaiting_ors_key' }));
 app.get('/health', async () => ({ ok: true, service: 'route-planner-api', version: '0.2.0', routingProvider: 'openrouteservice', orsConfigured: Boolean(process.env.ORS_API_KEY) }));
 app.get('/v1', async () => ({ name: 'Route Planner API', version: 'v1', capabilities: ['route-validation', 'openrouteservice-geocoding', 'openrouteservice-routing', 'route-optimization', 'truck-restrictions'], status: process.env.ORS_API_KEY ? 'ready' : 'awaiting_ors_key' }));
+
+app.get('/v1/locations/suggest', { config: { rateLimit: { max: 30, timeWindow: '1 minute' } } }, async (request, reply) => {
+  const query = String(request.query?.q || '').trim();
+  if (query.length < 2 || query.length > 180) return reply.code(400).send({ ok: false, message: 'Escribe al menos 2 caracteres para buscar.' });
+  const apiKey = process.env.ORS_API_KEY;
+  if (!apiKey) return reply.code(503).send({ ok: false, code: 'ORS_API_KEY_MISSING', message: 'El buscador de direcciones no está disponible: falta la clave de HeiGIT.' });
+  try {
+    const point = coordinate(query);
+    if (point) return { ok: true, suggestions: [{ ...point, label: query, plusCode: encode(point.lat, point.lng), source: 'coordinates' }] };
+    const plusCode = await resolvePlusCode(query, apiKey);
+    if (plusCode) return { ok: true, suggestions: [{ ...plusCode, source: 'plus_code' }] };
+    const payload = await peliasSearch(query, apiKey, true, 6);
+    const suggestions = (payload.features || []).map(feature => peliasPoint(feature, query)).filter(Boolean).map(point => ({ ...point, source: 'address' }));
+    return { ok: true, suggestions };
+  } catch (error) {
+    request.log.warn({ err: error?.message, providerStatus: error?.status }, 'Location suggestions failed');
+    if (error?.message === 'PLUS_CODE_NEEDS_LOCALITY') return reply.code(422).send({ ok: false, code: 'PLUS_CODE_NEEDS_LOCALITY', message: 'Este es un Plus Code corto. Añade la ciudad o localidad después del código, o utiliza el código global completo.' });
+    if (error?.status === 401) return reply.code(502).send({ ok: false, code: 'ORS_AUTH_FAILED', message: 'HeiGIT no reconoció la clave de geocodificación.' });
+    if (error?.status === 403) return reply.code(502).send({ ok: false, code: 'ORS_ACCESS_OR_DAILY_LIMIT', message: 'HeiGIT denegó la búsqueda por permisos o cuota diaria.' });
+    if (error?.status === 429) return reply.code(429).send({ ok: false, code: 'ORS_RATE_LIMIT', message: 'Se alcanzó el límite temporal de búsquedas. Intenta de nuevo en un momento.' });
+    if (error?.name === 'TimeoutError' || error?.name === 'AbortError') return reply.code(504).send({ ok: false, code: 'LOCATION_SEARCH_TIMEOUT', message: 'La búsqueda tardó demasiado. Intenta de nuevo.' });
+    return reply.code(502).send({ ok: false, code: 'LOCATION_SEARCH_FAILED', message: 'No se pudieron cargar las sugerencias de dirección.' });
+  }
+});
+app.get('/v1/locations/reverse', { config: { rateLimit: { max: 30, timeWindow: '1 minute' } } }, async (request, reply) => {
+  const lat = Number(request.query?.lat), lng = Number(request.query?.lng);
+  if (!Number.isFinite(lat) || !Number.isFinite(lng) || Math.abs(lat) > 90 || Math.abs(lng) > 180) return reply.code(400).send({ ok: false, message: 'Coordenadas inválidas.' });
+  const apiKey = process.env.ORS_API_KEY;
+  if (!apiKey) return reply.code(503).send({ ok: false, code: 'ORS_API_KEY_MISSING', message: 'La búsqueda de dirección no está disponible.' });
+  try {
+    const url = new URL(ORS_BASE_URL + '/pelias/v1/reverse');
+    url.searchParams.set('point.lat', String(lat)); url.searchParams.set('point.lon', String(lng)); url.searchParams.set('size', '1'); url.searchParams.set('lang', 'es');
+    const response = await fetch(url, { headers: { Authorization: apiKey, Accept: 'application/json' }, signal: AbortSignal.timeout(10000) });
+    if (!response.ok) throw Object.assign(new Error('ORS_GEOCODING_FAILED'), { status: response.status });
+    const payload = await response.json();
+    const feature = peliasPoint(payload.features?.[0], lat + ', ' + lng);
+    return { ok: true, location: { lat, lng, label: feature?.label || (lat + ', ' + lng), plusCode: encode(lat, lng) } };
+  } catch (error) {
+    request.log.warn({ err: error?.message, providerStatus: error?.status }, 'Reverse geocoding failed');
+    return { ok: true, location: { lat, lng, label: lat + ', ' + lng, plusCode: encode(lat, lng) }, warning: 'ADDRESS_LOOKUP_UNAVAILABLE' };
+  }
+});
+
 
 app.post('/v1/routes/validate', async (request, reply) => {
   const parsed = routeSchema.safeParse(request.body);
@@ -155,6 +234,7 @@ app.post('/v1/routes/plan', { config: { rateLimit: { max: 10, timeWindow: '1 min
     const message = error instanceof Error ? error.message : 'UNKNOWN_ERROR';
     request.log.error({ err: message, providerStatus: error?.status }, 'Route planning failed');
     if (message.startsWith('LOCATION_NOT_FOUND:')) return reply.code(422).send({ ok: false, code: 'LOCATION_NOT_FOUND', message: 'No se encontró esta ubicación: ' + message.slice(19) });
+    if (message === 'PLUS_CODE_NEEDS_LOCALITY') return reply.code(422).send({ ok: false, code: 'PLUS_CODE_NEEDS_LOCALITY', message: 'Este Plus Code corto necesita una ciudad o localidad. Añádela después del código o utiliza el código global completo.' });
     if (error?.status === 401) return reply.code(502).send({ ok: false, code: 'ORS_AUTH_FAILED', message: 'HeiGIT no reconoció la clave para geocodificar. Comprueba que la credencial esté configurada correctamente.' });
     if (error?.status === 403) return reply.code(502).send({ ok: false, code: 'ORS_ACCESS_OR_DAILY_LIMIT', message: 'HeiGIT denegó la geocodificación por permisos o por alcanzar la cuota diaria. Revisa el panel de tu clave.' });
     if (error?.status === 402) return reply.code(503).send({ ok: false, code: 'ORS_PLAN_RESTRICTION', message: 'El nivel actual de la clave no permite esta solicitud. Comprueba los permisos y límites de tu plan de HeiGIT.' });
