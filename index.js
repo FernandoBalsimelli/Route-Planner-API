@@ -6,6 +6,7 @@ import { createClient } from '@supabase/supabase-js';
 import { decode, encode, isFull, isShort, isValid, recoverNearest } from '@erikmichelson/open-location-code-ts';
 import { providerError, routingFailure } from './lib/routing-errors.js';
 import { searchFocus, namesLocality, prioritizeLocations } from './lib/nearby.js';
+import { requestedHouseNumber, rankAddressMatches } from './lib/address-match.js';
 
 const app = Fastify({ logger: { serializers: { req: request => ({ method: request.method, url: request.url?.split('?')[0], host: request.host, remoteAddress: request.ip }) } }, bodyLimit: 64 * 1024, trustProxy: true });
 const supabaseAuth = process.env.SUPABASE_URL && process.env.SUPABASE_PUBLISHABLE_KEY
@@ -48,7 +49,7 @@ function peliasPoint(feature, fallback = '') {
     ? [p.name, p.region || p.region_a, p.country].filter(Boolean).join(', ')
     : p.label || p.name || fallback || (lat + ', ' + lng);
   if (p.layer === 'venue' && p.street && !label.toLowerCase().includes(p.street.toLowerCase())) label = [p.name, [p.housenumber, p.street].filter(Boolean).join(' '), p.neighbourhood, p.locality, p.region, p.country].filter(Boolean).join(', ');
-  return { lat, lng, label: label.slice(0, 180), plusCode: encode(lat, lng), kind: p.layer, name: p.name, locality: p.locality || (p.layer === 'locality' ? p.name : undefined) };
+  return { lat, lng, label: label.slice(0, 180), plusCode: encode(lat, lng), houseNumber: p.housenumber, street: p.street, postalCode: p.postalcode, providerAccuracy: p.accuracy, kind: p.layer, name: p.name, locality: p.locality || (p.layer === 'locality' ? p.name : undefined) };
 }
 async function peliasSearch(value, apiKey, autocomplete = false, size = 6, focus = null) {
   const url = new URL(ORS_BASE_URL + '/pelias/v1/' + (autocomplete ? 'autocomplete' : 'search'));
@@ -80,22 +81,24 @@ async function photonSearch(value, size = 6, focus = null) {
     const street = p.housenumber && p.street ? p.housenumber + ' ' + p.street : p.street;
     const city = p.city || p.district;
     const label = [p.name, street, city !== p.name ? city : null, p.state, p.country].filter(Boolean).join(', ');
-    return { lat, lng, label: (label || value).slice(0, 180), plusCode: encode(lat, lng), source: 'openstreetmap', name: p.name, locality: p.city, kind: p.osm_key === 'shop' || p.osm_key === 'amenity' ? 'venue' : p.type === 'city' ? 'locality' : p.type };
+    return { lat, lng, label: (label || value).slice(0, 180), plusCode: encode(lat, lng), source: 'openstreetmap', houseNumber: p.housenumber, street: p.street, postalCode: p.postcode, name: p.name, locality: p.city, kind: p.osm_key === 'shop' || p.osm_key === 'amenity' ? 'venue' : p.type === 'city' ? 'locality' : p.type };
   }).filter(Boolean).slice(0, size);
 }
 async function searchLocations(value, apiKey, autocomplete = false, size = 6, focus = null) {
-  if (!apiKey) return prioritizeLocations(value, await photonSearch(value, size, focus), focus, size);
+  const requested = requestedHouseNumber(value);
+  const rank = results => rankAddressMatches(value, prioritizeLocations(value, rankAddressMatches(value, results), focus, Math.max(size, 8))).slice(0, size);
+  if (!apiKey) return rank(await photonSearch(value, Math.max(size, 8), focus));
   try {
-    const payload = await peliasSearch(value, apiKey, autocomplete, size, focus);
+    const payload = await peliasSearch(value, apiKey, autocomplete && !requested, Math.max(size, 8), focus);
     const results = (payload.features || [])
       .filter(feature => !['country', 'region', 'macroregion', 'county', 'macrocounty', 'localadmin', 'continent'].includes(feature.properties?.layer))
       .map(feature => peliasPoint(feature, value)).filter(Boolean);
     if (results.length) {
-      const ranked = prioritizeLocations(value, results, focus, size);
+      const ranked = rank(results);
       // If the first index has only distant matches, consult the compatible
       // OSM index as well. An unavailable fallback never discards good results.
-      if (focus && ranked[0].distanceMeters > 50000) {
-        try { return prioritizeLocations(value, [...results, ...await photonSearch(value, size, focus)], focus, size); } catch { return ranked; }
+      if ((requested && ranked[0].numberMatch !== 'matched') || (focus && ranked[0].distanceMeters > 50000)) {
+        try { return rank([...results, ...await photonSearch(value, Math.max(size, 8), focus)]); } catch { return ranked; }
       }
       return ranked;
     }
@@ -103,7 +106,7 @@ async function searchLocations(value, apiKey, autocomplete = false, size = 6, fo
     if (![401, 402, 403, 404, 429].includes(error?.status) && !(error?.status >= 500) && error?.name !== 'TimeoutError' && error?.name !== 'AbortError' && error?.name !== 'TypeError') throw error;
     app.log.warn({ status: error?.status, message: error?.message }, 'HeiGIT geocoding unavailable; falling back to Photon');
   }
-  return prioritizeLocations(value, await photonSearch(value, size, focus), focus, size);
+  return rank(await photonSearch(value, Math.max(size, 8), focus));
 }
 const suggestionCache = new Map();
 async function cachedSuggestions(query, apiKey, focus) {
@@ -167,6 +170,7 @@ async function geocode(value, apiKey) {
   if (plusCode) return plusCode;
   const result = (await searchLocations(text, apiKey, false, 1))[0];
   if (!result) throw new Error('LOCATION_NOT_FOUND:' + text);
+  if (result.numberMatch && result.numberMatch !== 'matched') throw new Error('ADDRESS_NUMBER_UNCONFIRMED');
   return result;
 }
 function buildRestrictions(vehicle = {}) {
@@ -313,6 +317,7 @@ app.post('/v1/routes/plan', { config: { rateLimit: { max: 10, timeWindow: '1 min
       waypoints: routeLocations.map((point, index) => ({ ...point, type: index === 0 ? 'origin' : index === routeLocations.length - 1 ? 'destination' : 'stop' })),
     }, provider: 'openrouteservice' };
   } catch (error) {
+    if (error?.message === 'ADDRESS_NUMBER_UNCONFIRMED') return reply.code(422).send({ ok: false, code: 'ADDRESS_NUMBER_UNCONFIRMED', message: 'No se encontró el número exterior de una dirección. Confirma el acceso en el mapa o usa su Plus Code antes de calcular; no elegiremos el centro de la calle automáticamente.' });
     const message = error instanceof Error ? error.message : 'UNKNOWN_ERROR';
     request.log.error({ err: message, providerStatus: error?.status }, 'Route planning failed');
     if (message.startsWith('LOCATION_NOT_FOUND:')) return reply.code(422).send({ ok: false, code: 'LOCATION_NOT_FOUND', message: 'No se encontró esta ubicación: ' + message.slice(19) });
