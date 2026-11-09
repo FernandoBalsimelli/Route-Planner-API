@@ -106,3 +106,15 @@ Las cuatro primeras migraciones fueron recuperadas del historial de este proyect
 alojado; se conservan exactamente sus versiones. No deben volver a aplicarse a
 una base donde ya figuren como ejecutadas. La primera ejecución del nuevo
 workflow debe comprobarse en Actions antes de considerarlo validado.
+
+
+## Capacidad de paradas
+
+Se aceptan 48 paradas intermedias más origen y destino, equivalentes al máximo
+de 50 puntos de OpenRouteService Directions. El guardado atómico usa el mismo
+límite. La migración expand_route_stops_to_provider_limit reemplaza únicamente
+la validación de capacidad, conserva RLS/SECURITY INVOKER y no modifica datos
+existentes. Volver al límite anterior requiere reemplazar la función por su
+versión previa; las rutas grandes existentes siguen almacenadas.
+
+[Fuente oficial del límite](https://giscience.github.io/openrouteservice/hosted-api-restrictions).
