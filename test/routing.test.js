@@ -117,3 +117,13 @@ test('reverse rejects missing, blank and out-of-range coordinates', async () => 
     assert.equal((await app.inject('/v1/locations/reverse?' + query)).statusCode, 400);
   }
 });
+
+test('unconfirmed house number does not silently route to the street centroid', async () => {
+  let routingCalls = 0;
+  provider = async url => {
+    if (url.pathname.includes('/directions/')) routingCalls++;
+    return Response.json({ features: [{ geometry: { coordinates: [-100.27, 25.6] }, properties: { layer: 'street', name: 'San Ángel', label: 'San Ángel, Monterrey', locality: 'Monterrey' } }] });
+  };
+  const response = await plan({ destination: 'S. Prueba 202, Colonia Ejemplo, 00000 Monterrey, N.L.' });
+  assert.equal(response.statusCode, 422); assert.equal(response.json().code, 'ADDRESS_NUMBER_UNCONFIRMED'); assert.equal(routingCalls, 0);
+});
