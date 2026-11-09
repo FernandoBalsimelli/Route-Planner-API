@@ -1,0 +1,48 @@
+name: API and database checks
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+concurrency:
+  group: api-checks-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  api:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: route_planner_ci
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd pg_isready --health-interval 5s
+          --health-timeout 5s --health-retries 10
+    env:
+      ROUTE_PLANNER_TEST_DB_URL: postgresql://postgres:postgres@127.0.0.1:5432/route_planner_ci
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '26'
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npm test
+      - name: Apply migrations to disposable Postgres and verify RLS
+        run: |
+          command -v psql >/dev/null || (sudo apt-get update && sudo apt-get install --yes postgresql-client)
+          psql "$ROUTE_PLANNER_TEST_DB_URL" -v ON_ERROR_STOP=1 -f test/sql/bootstrap.sql
+          for migration in supabase/migrations/*.sql; do
+            psql "$ROUTE_PLANNER_TEST_DB_URL" -v ON_ERROR_STOP=1 -f "$migration"
+          done
+          psql "$ROUTE_PLANNER_TEST_DB_URL" -v ON_ERROR_STOP=1 -f test/sql/verify.sql
+      - run: npm audit --omit=dev
