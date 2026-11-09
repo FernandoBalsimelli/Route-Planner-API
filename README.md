@@ -83,3 +83,12 @@ removal is an archive operation. Coordinates are unique per owner. RLS rejects
 cross-account reads/writes and the public API role has no physical DELETE grant.
 The runtime API is unchanged by these migrations. Rollback the UI independently;
 retain the table and data if reverting a release.
+
+### Atomic saved routes
+
+`save_route_with_stops(uuid,jsonb,jsonb)` is an authenticated SECURITY INVOKER
+Supabase RPC. It validates inputs and vehicle ownership, inserts the route and
+ordered stops transactionally, and uses a per-owner request key and content
+fingerprint to make retries idempotent. Its additive columns are nullable for
+older clients. Never drop data when reverting the UI; leave the migration in
+place. Anonymous users have no EXECUTE privilege.
