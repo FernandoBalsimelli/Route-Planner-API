@@ -18,6 +18,7 @@ const origin = { label: 'Monterrey, Nuevo León, México', lat: 25.67, lng: -100
 const destination = { label: 'Chihuahua, Chihuahua, México', lat: 28.66, lng: -106.09 };
 const stop = { label: 'Parada de prueba', lat: 25.68, lng: -100.30 };
 const plan = payload => app.inject({ method: 'POST', url: '/v1/routes/plan', headers: { authorization: 'Bearer test-session' }, payload: { origin, destination, stops: [stop], ...payload } });
+function encodePath(points){let lat=0,lng=0;const encode=n=>{let value=n<0?~(n<<1):n<<1,result='';while(value>=32){result+=String.fromCharCode((value&31|32)+63);value>>=5;}return result+String.fromCharCode(value+63);};return points.map(([nextLat,nextLng])=>{const y=Math.round(nextLat*1e5),x=Math.round(nextLng*1e5),chunk=encode(y-lat)+encode(x-lng);lat=y;lng=x;return chunk;}).join('');}
 
 test('city suggestions exclude regional centroids and identify the city and state', async () => {
   provider = async url => {
@@ -129,8 +130,9 @@ test('unconfirmed house number does not silently route to the street centroid', 
 });
 
 test('route response preserves maneuver geometry indexes and reports unverified municipal coverage',async()=>{
- provider=async()=>Response.json({routes:[{summary:{distance:100,duration:20},geometry:'encoded-route',segments:[{steps:[{type:1,instruction:'Gira a la derecha',name:'Vía pública de prueba',distance:100,duration:20,way_points:[3,7]},{type:10,instruction:'Llegada',way_points:[-1,2]}]}]}]});
+ const geometry=encodePath(Array.from({length:8},(_,index)=>[25.67,-100.35+index*(.15/7)]));
+ provider=async()=>Response.json({routes:[{summary:{distance:100,duration:20},geometry,segments:[{steps:[{type:1,instruction:'Gira a la derecha',name:'Vía pública de prueba',distance:100,duration:20,way_points:[3,7]},{type:10,instruction:'Llegada',way_points:[-1,2]}]}]}]});
  const response=await plan({stops:[]});assert.equal(response.statusCode,200);
  const route=response.json().route;assert.equal(route.sections[0].actions[0].geometryStart,3);assert.equal(route.sections[0].actions[0].geometryEnd,7);assert.equal(route.sections[0].actions[1].geometryStart,undefined);
- assert.equal(route.regulatoryCoverage.status,'not_verified');assert.equal(route.regulatoryCoverage.requiresOperatorReview,true);
+ assert.equal(route.regulatoryCoverage.status,'not_verified');assert.equal(route.regulatoryCoverage.requiresOperatorReview,true);assert.equal(route.regulatoryCoverage.municipalityIdentification,'identified_approximate');assert.ok(route.regulatoryCoverage.municipalitiesIdentified.some(item=>item.id==='19039'&&item.coverage==='reference_only'));assert.ok(route.regulatoryCoverage.municipalitiesIdentified.some(item=>item.id==='19026'&&item.coverage==='not_loaded'));
 });
