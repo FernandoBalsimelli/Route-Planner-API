@@ -74,3 +74,12 @@ An empty or distant (>50 km) focused response includes `NO_NEARBY_MATCHES`.
 Coordinates and full/compound Plus Codes retain their existing resolution.
 Responses are cached in memory for 60 seconds, capped at 200 queries. Query
 strings are omitted from request logs. No paid providers were added.
+
+### Favorite delivery locations
+
+Additive Supabase migrations in `supabase/migrations` introduce owner-scoped
+verified locations. Public clients can select/insert/update their own favorites;
+removal is an archive operation. Coordinates are unique per owner. RLS rejects
+cross-account reads/writes and the public API role has no physical DELETE grant.
+The runtime API is unchanged by these migrations. Rollback the UI independently;
+retain the table and data if reverting a release.
