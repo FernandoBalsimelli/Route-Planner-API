@@ -136,3 +136,26 @@ test('route response preserves maneuver geometry indexes and reports unverified 
  const route=response.json().route;assert.equal(route.sections[0].actions[0].geometryStart,3);assert.equal(route.sections[0].actions[0].geometryEnd,7);assert.equal(route.sections[0].actions[1].geometryStart,undefined);
  assert.equal(route.regulatoryCoverage.status,'not_verified');assert.equal(route.regulatoryCoverage.requiresOperatorReview,true);assert.equal(route.regulatoryCoverage.municipalityIdentification,'identified_approximate');assert.ok(route.regulatoryCoverage.municipalitiesIdentified.some(item=>item.id==='19039'&&item.coverage==='reference_only'));assert.ok(route.regulatoryCoverage.municipalitiesIdentified.some(item=>item.id==='19026'&&item.coverage==='not_loaded'));
 });
+
+
+test('a route with 48 intermediate deliveries reaches Directions with all 50 points in order', async () => {
+  const stops = Array.from({length:48},(_,i)=>({label:`Delivery ${i+1}`,lat:25.67+i/10000,lng:-100.31}));
+  provider = async (url, options) => {
+    assert.match(url.pathname, /driving-hgv\/json$/);
+    const body=JSON.parse(options.body);
+    assert.equal(body.coordinates.length,50);
+    assert.deepEqual(body.coordinates,[origin,...stops,destination].map(p=>[p.lng,p.lat]));
+    assert.equal(body.options.profile_params.restrictions.height,4);
+    return Response.json({routes:[{summary:{distance:1000,duration:300},geometry:'encoded-route',segments:[]}]});
+  };
+  const response = await plan({stops, mode:'truck', vehicle:{heightM:4}});
+  assert.equal(response.statusCode,200);
+  assert.equal(response.json().route.waypoints.length,50);
+  assert.equal(response.json().route.waypoints[48].label,'Delivery 48');
+});
+
+test('the API rejects routes beyond the real provider limit before making any provider call',async()=>{
+  provider=async()=>{throw Error('provider must not be called');};
+  const response=await plan({stops:Array.from({length:49},()=>stop)});
+  assert.equal(response.statusCode,400);
+});

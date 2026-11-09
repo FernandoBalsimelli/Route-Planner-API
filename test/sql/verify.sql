@@ -57,6 +57,20 @@ begin
   if has_function_privilege('anon','public.save_route_with_stops(uuid,jsonb,jsonb)','EXECUTE') then raise exception 'Anonymous save RPC allowed'; end if;
   if exists(select 1 from pg_proc where oid='public.save_route_with_stops(uuid,jsonb,jsonb)'::regprocedure and prosecdef) then raise exception 'Save RPC elevates privileges'; end if;
 
+  -- Exercise the provider-sized route through the same transaction and RLS.
+  select jsonb_agg(jsonb_build_object('label','Delivery '||n,'lat',25.67+n*0.0001,'lng',-100.31) order by n)
+    into stop_data from generate_series(1,48) n;
+  request_uuid:=gen_random_uuid();
+  route_data:=jsonb_set(route_data,'{name}','"48 deliveries"');
+  route_uuid:=public.save_route_with_stops(request_uuid,route_data,stop_data);
+  retry_uuid:=public.save_route_with_stops(request_uuid,route_data,stop_data);
+  if route_uuid<>retry_uuid or (select count(*) from public.route_stops where route_id=route_uuid)<>48 then raise exception 'Large route lost stops or retry duplicated it'; end if;
+  if (select location->>'label' from public.route_stops where route_id=route_uuid and sequence=48)<>'Delivery 48' then raise exception 'Last delivery missing'; end if;
+  failed:=false;
+  begin perform public.save_route_with_stops(gen_random_uuid(),jsonb_set(route_data,'{name}','"49 deliveries rejected"'),stop_data||jsonb_build_array(stop_data->0));
+  exception when invalid_parameter_value then failed:=true; end;
+  if not failed or exists(select 1 from public.saved_routes where name='49 deliveries rejected') then raise exception 'Oversized route was partly saved'; end if;
+
   perform set_config('request.jwt.claims','{"sub":"00000000-0000-4000-8000-000000000002","role":"authenticated"}',true);
   if exists(select 1 from public.saved_routes where id=route_uuid) or exists(select 1 from public.vehicles where id=vehicle_uuid) or exists(select 1 from public.favorite_locations where id=favorite_uuid) then raise exception 'Cross-account read allowed'; end if;
   update public.saved_routes set status='archived' where id=route_uuid;
