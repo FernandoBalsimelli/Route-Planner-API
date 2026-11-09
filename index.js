@@ -7,6 +7,7 @@ import { decode, encode, isFull, isShort, isValid, recoverNearest } from '@erikm
 import { providerError, routingFailure } from './lib/routing-errors.js';
 import { searchFocus, namesLocality, prioritizeLocations } from './lib/nearby.js';
 import { requestedHouseNumber, rankAddressMatches } from './lib/address-match.js';
+import { municipalCatalog, municipalReference, routeRegulatoryCoverage } from './lib/municipal-regulations.js';
 
 const app = Fastify({ logger: { serializers: { req: request => ({ method: request.method, url: request.url?.split('?')[0], host: request.host, remoteAddress: request.ip }) } }, bodyLimit: 64 * 1024, trustProxy: true });
 const supabaseAuth = process.env.SUPABASE_URL && process.env.SUPABASE_PUBLISHABLE_KEY
@@ -187,6 +188,15 @@ app.get('/', async () => ({ name: 'Route Planner API', version: 'v1', status: pr
 app.get('/health', async () => ({ ok: true, service: 'route-planner-api', version: '0.2.0', routingProvider: 'openrouteservice', orsConfigured: Boolean(process.env.ORS_API_KEY) }));
 app.get('/v1', async () => ({ name: 'Route Planner API', version: 'v1', capabilities: ['route-validation', 'openrouteservice-geocoding', 'openrouteservice-routing', 'route-optimization', 'truck-restrictions'], status: process.env.ORS_API_KEY ? 'ready' : 'awaiting_ors_key' }));
 
+app.get('/v1/regulations/municipalities', async (request, reply) => {
+  try { return {ok:true,...municipalCatalog({state:String(request.query?.state||''),q:String(request.query?.q||''),offset:Number(request.query?.offset||0),limit:Number(request.query?.limit||100)})}; }
+  catch { return reply.code(400).send({ok:false,message:'Entidad, búsqueda o paginación no válidas.'}); }
+});
+app.get('/v1/regulations/municipalities/:id', async (request, reply) => {
+  const result=municipalReference(request.params.id);
+  return result?{ok:true,...result}:reply.code(404).send({ok:false,message:'Municipio no encontrado en el catálogo oficial.'});
+});
+
 app.get('/v1/locations/suggest', { config: { rateLimit: { max: 30, timeWindow: '1 minute' } } }, async (request, reply) => {
   const query = String(request.query?.q || '').trim();
   if (query.length < 2 || query.length > 180) return reply.code(400).send({ ok: false, message: 'Escribe al menos 2 caracteres para buscar.' });
@@ -309,11 +319,12 @@ app.post('/v1/routes/plan', { config: { rateLimit: { max: 10, timeWindow: '1 min
     if (!route) return reply.code(422).send({ ok: false, message: 'OpenRouteService no encontró una ruta para esos puntos y ese vehículo.' });
     const sections = (route.segments || []).map(segment => ({
       summary: { length: segment.distance, duration: segment.duration },
-      actions: (segment.steps || []).map(step => ({ action: String(step.type ?? ''), instruction: step.instruction, duration: step.duration, length: step.distance })),
+      actions: (segment.steps || []).map(step => ({ action: String(step.type ?? ''), instruction: step.instruction, duration: step.duration, length: step.distance, roadName: step.name, ...(Array.isArray(step.way_points) && step.way_points.length === 2 && step.way_points.every(Number.isInteger) && step.way_points[0] >= 0 && step.way_points[1] >= step.way_points[0] ? { geometryStart: step.way_points[0], geometryEnd: step.way_points[1] } : {}) })),
     }));
     const summary = route.summary || {};
     return { ok: true, route: {
       distanceMeters: summary.distance || 0, durationSeconds: summary.duration || 0, polyline: route.geometry, sections, notices: [], optimized,
+      regulatoryCoverage: routeRegulatoryCoverage(),
       waypoints: routeLocations.map((point, index) => ({ ...point, type: index === 0 ? 'origin' : index === routeLocations.length - 1 ? 'destination' : 'stop' })),
     }, provider: 'openrouteservice' };
   } catch (error) {

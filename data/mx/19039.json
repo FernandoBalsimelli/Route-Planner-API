@@ -1,0 +1,778 @@
+{
+  "municipalityId": "19039",
+  "name": "Monterrey",
+  "country": "MX",
+  "status": "reference_only",
+  "routingEnforced": false,
+  "source": {
+    "url": "https://www.monterrey.gob.mx/pdf/portaln/reglamentos/Reglamento%20de%20Transito%20y%20Vialidad%20del%20Municipio%20de%20Monterrey.pdf",
+    "title": "Reglamento de Tránsito y Vialidad del Municipio de Monterrey",
+    "sha256": "965778f0f966c39dc865f8d69492a4cc8b95c73e6aea56e50e4c071b8dfd3aff",
+    "checkedAt": "2026-11-09T07:11:23.623278+00:00",
+    "pages": [
+      20,
+      21,
+      22,
+      163,
+      164,
+      165,
+      166,
+      167
+    ]
+  },
+  "trunkSegments": [
+    {
+      "sourceRow": 1,
+      "road": "Bulevar Gustavo Díaz Ordaz.",
+      "segment": "En ambos sentidos de circulación de límite municipal a, av. General Pablo Gonzalez Garza (Fleteros).",
+      "page": 163,
+      "annex": 1,
+      "geometry": null,
+      "geometryStatus": "not_validated"
+    },
+    {
+      "sourceRow": 2,
+      "road": "Bulevar Antonio l. Rodriguez.",
+      "segment": "De Bulevar Gustavo Díaz Ordaz-Puente Gonzalitos, sentido Poniente a Oriente.",
+      "page": 163,
+      "annex": 1,
+      "geometry": null,
+      "geometryStatus": "not_validated"
+    },
+    {
+      "sourceRow": 3,
+      "road": "Av. Aarón Sáenz.",
+      "segment": "De la av. Pablo González Garza (Fleteros) al Boulevard Gustavo Díaz Ordaz en el sentido oriente-poniente y en el sentido poniente a oriente hasta la calle Camino al Club de Tiro.",
+      "page": 163,
+      "annex": 1,
+      "geometry": null,
+      "geometryStatus": "not_validated"
+    },
+    {
+      "sourceRow": 4,
+      "road": "Camino al Club de Tiro.",
+      "segment": "De la av. Aarón Sáenz al bulevar Gustavo Díaz Ordaz.",
+      "page": 163,
+      "annex": 1,
+      "geometry": null,
+      "geometryStatus": "not_validated"
+    },
+    {
+      "sourceRow": 5,
+      "road": "Gasa del Puente Gonzalitos.",
+      "segment": "En el sentido de circulación de Poniente a Oriente de Boulevard Antonio L. Rodriguez hacia carriles normales de la av. Morones Prieto.",
+      "page": 163,
+      "annex": 1,
+      "geometry": null,
+      "geometryStatus": "not_validated"
+    },
+    {
+      "sourceRow": 6,
+      "road": "Carriles normales de la Av. Ignacio Morones Prieto (prohibidos carriles exprés).",
+      "segment": "En lo correspondiente al Municipio de Monterrey.",
+      "page": 163,
+      "annex": 1,
+      "geometry": null,
+      "geometryStatus": "not_validated"
+    },
+    {
+      "sourceRow": 7,
+      "road": "Av. Gral. Pablo González Garza.",
+      "segment": "En ambos sentidos de circulación de Av. Aarón Sáenz hasta av. Colon.",
+      "page": 163,
+      "annex": 1,
+      "geometry": null,
+      "geometryStatus": "not_validated"
+    },
+    {
+      "sourceRow": 8,
+      "road": "Calle Arteaga.",
+      "segment": "Con sentido de circulación de poniente a oriente de av. Pablo Gonzalez Garza (Fleteros) hasta av. Venustiano Carranza.",
+      "page": 164,
+      "annex": 1,
+      "geometry": null,
+      "geometryStatus": "not_validated"
+    },
+    {
+      "sourceRow": 9,
+      "road": "Av. Venustiano Carranza.",
+      "segment": "Con sentido de circulación de sur a norte de la calle Arteaga hasta la Av. Ruiz Cortines y en sentido de circulación de norte a sur de la av. Ruiz Cortines hasta la Av. Colón.",
+      "page": 164,
+      "annex": 1,
+      "geometry": null,
+      "geometryStatus": "not_validated"
+    },
+    {
+      "sourceRow": 10,
+      "road": "Av. Adolfo Ruiz Cortines.",
+      "segment": "En ambos sentidos de circulación de ave. Rangel Frías- a límite municipal de Monterrey",
+      "page": 164,
+      "annex": 1,
+      "geometry": null,
+      "geometryStatus": "not_validated"
+    },
+    {
+      "sourceRow": 11,
+      "road": "Av. Lic. Raúl Rangel Frías.",
+      "segment": "En ambos sentidos de circulación de av. Ruiz Cortines hasta Av. Abraham Lincoln.",
+      "page": 164,
+      "annex": 1,
+      "geometry": null,
+      "geometryStatus": "not_validated"
+    },
+    {
+      "sourceRow": 12,
+      "road": "Av. Abraham Lincoln.",
+      "segment": "En ambos sentidos de circulación de limite municipal a la av. Fidel Velázquez.",
+      "page": 164,
+      "annex": 1,
+      "geometry": null,
+      "geometryStatus": "not_validated"
+    },
+    {
+      "sourceRow": 13,
+      "road": "Av. Fidel Velázquez.",
+      "segment": "En ambos sentidos de circulación de Abraham Lincoln- al límite municipal.",
+      "page": 164,
+      "annex": 1,
+      "geometry": null,
+      "geometryStatus": "not_validated"
+    },
+    {
+      "sourceRow": 14,
+      "road": "Av. Manuel l. Barragán.",
+      "segment": "Con sentido de circulación de norte a sur de límite Municipal a la Av. Ruiz Cortines.",
+      "page": 164,
+      "annex": 1,
+      "geometry": null,
+      "geometryStatus": "not_validated"
+    },
+    {
+      "sourceRow": 15,
+      "road": "Av. Alfonso Reyes.",
+      "segment": "De av. Ruiz Cortines hasta av. Cd. De los Ángeles en el sentido de sur a norte.",
+      "page": 164,
+      "annex": 1,
+      "geometry": null,
+      "geometryStatus": "not_validated"
+    },
+    {
+      "sourceRow": 16,
+      "road": "Calzada Guadalupe Victoria.",
+      "segment": "En ambos sentidos de circulación de av. Vicente Guerrero hasta la av. Gral. Bernardo Reyes.",
+      "page": 164,
+      "annex": 1,
+      "geometry": null,
+      "geometryStatus": "not_validated"
+    },
+    {
+      "sourceRow": 17,
+      "road": "Av. Gral. Bernardo Reyes.",
+      "segment": "En ambos sentidos de circulación de Calzada Guadalupe Victoria hasta av. Almazán.",
+      "page": 164,
+      "annex": 1,
+      "geometry": null,
+      "geometryStatus": "not_validated"
+    },
+    {
+      "sourceRow": 18,
+      "road": "Av. Anillo Periférico - de la Aurora.",
+      "segment": "En ambos sentidos de circulación de la av. Bernardo Reyes hasta el límite municipal.",
+      "page": 164,
+      "annex": 1,
+      "geometry": null,
+      "geometryStatus": "not_validated"
+    },
+    {
+      "sourceRow": 19,
+      "road": "Av. Almazán.",
+      "segment": "En ambos sentidos de circulación de av. General Bernardo Reyes de la av. Manuel L. Barragán lo correspondiente al Municipio de Monterrey.",
+      "page": 164,
+      "annex": 1,
+      "geometry": null,
+      "geometryStatus": "not_validated"
+    },
+    {
+      "sourceRow": 20,
+      "road": "Av. Churubusco.",
+      "segment": "En ambos sentidos de circulación de av. Ruiz Cortines hasta la av. Constitución.",
+      "page": 164,
+      "annex": 1,
+      "geometry": null,
+      "geometryStatus": "not_validated"
+    },
+    {
+      "sourceRow": 21,
+      "road": "Av. Constitución.",
+      "segment": "De límite municipal de Monterrey hasta la av. Revolución.",
+      "page": 164,
+      "annex": 1,
+      "geometry": null,
+      "geometryStatus": "not_validated"
+    },
+    {
+      "sourceRow": 22,
+      "road": "Av. Revolución.",
+      "segment": "En ambos sentidos de circulación de av. Constitución hasta la av. Eugenio Garza Sada.",
+      "page": 164,
+      "annex": 1,
+      "geometry": null,
+      "geometryStatus": "not_validated"
+    },
+    {
+      "sourceRow": 23,
+      "road": "Av. Eugenio Garza Sada- Carr. Nacional.",
+      "segment": "En ambos sentidos de circulación de av. Revolución al límite con el tramo a cargo de la SCT.",
+      "page": 164,
+      "annex": 1,
+      "geometry": null,
+      "geometryStatus": "not_validated"
+    },
+    {
+      "sourceRow": 24,
+      "road": "Av. Fundidora.",
+      "segment": "En sentido de circulación de sur a norte de av. Constitución hasta la av. Francisco I. Madero",
+      "page": 164,
+      "annex": 1,
+      "geometry": null,
+      "geometryStatus": "not_validated"
+    },
+    {
+      "sourceRow": 25,
+      "road": "Calle Francisco Márquez.",
+      "segment": "En sentido de circulación de norte a sur de av. Francisco I. Madero hasta la av. Constitución.",
+      "page": 165,
+      "annex": 1,
+      "geometry": null,
+      "geometryStatus": "not_validated"
+    },
+    {
+      "sourceRow": 26,
+      "road": "Av. Jose Ángel Conchello.",
+      "segment": "En ambos sentidos de circulación de av. Ruiz Cortines hasta la av. Francisco I. Madero.",
+      "page": 165,
+      "annex": 1,
+      "geometry": null,
+      "geometryStatus": "not_validated"
+    },
+    {
+      "sourceRow": 27,
+      "road": "Av. Félix u. Gómez.",
+      "segment": "En sentido de circulación de norte a sur de av. José Ángel Conchello hasta la av. Cd. De los Ángeles y con sentido de sur a norte de Plan de Ayutla hasta la av. Jose A. Conchello.",
+      "page": 165,
+      "annex": 1,
+      "geometry": null,
+      "geometryStatus": "not_validated"
+    },
+    {
+      "sourceRow": 28,
+      "road": "José María Luis Mora.",
+      "segment": "En ambos sentidos de circulación de av. Ruiz Cortines hasta la av. Guerrero.",
+      "page": 165,
+      "annex": 1,
+      "geometry": null,
+      "geometryStatus": "not_validated"
+    },
+    {
+      "sourceRow": 29,
+      "road": "Av. Cristóbal Colón.",
+      "segment": "En sentido de circulación de oriente-poniente de av. Venustiano Carranza hasta la av. Pablo Gonzalez Garza (Fleteros).",
+      "page": 165,
+      "annex": 1,
+      "geometry": null,
+      "geometryStatus": "not_validated"
+    },
+    {
+      "sourceRow": 30,
+      "road": "Av. Gral. Pedro María Anaya.",
+      "segment": "En ambos sentidos de circulación de av. Bernardo Reyes hasta la av. Vicente Guerrero.",
+      "page": 165,
+      "annex": 1,
+      "geometry": null,
+      "geometryStatus": "not_validated"
+    },
+    {
+      "sourceRow": 31,
+      "road": "Av. Vicente Guerrero.",
+      "segment": "En ambos sentidos de circulación de límite municipal hasta la av. Luis Mora.",
+      "page": 165,
+      "annex": 1,
+      "geometry": null,
+      "geometryStatus": "not_validated"
+    },
+    {
+      "sourceRow": 32,
+      "road": "Av. Diego Díaz de Berlanga.",
+      "segment": "En ambos sentidos de circulación de av.cd. De los Ángeles hasta la av. Ruiz Cortines.",
+      "page": 165,
+      "annex": 1,
+      "geometry": null,
+      "geometryStatus": "not_validated"
+    },
+    {
+      "sourceRow": 33,
+      "road": "Av. San Nicolás.",
+      "segment": "En ambos sentidos de av. José Ángel Conchello hasta la calle Segunda de San Francisco.",
+      "page": 165,
+      "annex": 1,
+      "geometry": null,
+      "geometryStatus": "not_validated"
+    },
+    {
+      "sourceRow": 34,
+      "road": "Av. Tomas Alva Édison",
+      "segment": "En ambos sentidos de circulación de av. Luis Mora hasta la calle Rómulo Días de la Vega.",
+      "page": 165,
+      "annex": 1,
+      "geometry": null,
+      "geometryStatus": "not_validated"
+    },
+    {
+      "sourceRow": 35,
+      "road": "Camino al Diente.",
+      "segment": "En sentido de sur a norte de av. Garza Sada hasta la av. Revolución.",
+      "page": 165,
+      "annex": 1,
+      "geometry": null,
+      "geometryStatus": "not_validated"
+    },
+    {
+      "sourceRow": 36,
+      "road": "Calle Magallanes.",
+      "segment": "En ambos sentidos de circulación de av. Guerrero hasta la vía a Tampico.",
+      "page": 165,
+      "annex": 1,
+      "geometry": null,
+      "geometryStatus": "not_validated"
+    },
+    {
+      "sourceRow": 37,
+      "road": "Calle vía Tampico.",
+      "segment": "En el sentido de circulación de sur a norte desde calle Magallanes y Progreso",
+      "page": 165,
+      "annex": 1,
+      "geometry": null,
+      "geometryStatus": "not_validated"
+    },
+    {
+      "sourceRow": 38,
+      "road": "Ave. Cd. De los Ángeles.",
+      "segment": "De av. Universidad hasta la av. Churubusco.",
+      "page": 165,
+      "annex": 1,
+      "geometry": null,
+      "geometryStatus": "not_validated"
+    }
+  ],
+  "timeRules": [
+    {
+      "sourceRow": 1,
+      "road": "Bulevar Antonio L. Rdz.",
+      "segment": "Del Bulevar Gustavo Díaz Ordaz hasta el puente Gonzalitos en sentido poniente a oriente.",
+      "page": 166,
+      "annex": 2,
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "start": "06:30",
+      "end": "09:30",
+      "timezone": "America/Monterrey",
+      "maximumAxlesExempt": 4,
+      "interpretation": "reference_only",
+      "interpretationNote": "La excepción del artículo 39 para hasta cuatro ejes se limita a sus restricciones horarias; no autoriza todas las calles."
+    },
+    {
+      "sourceRow": 2,
+      "road": "Av. Ignacio Morones Prieto.",
+      "segment": "Lo correspondiente al Municipio de Monterrey.",
+      "page": 166,
+      "annex": 2,
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "start": "06:30",
+      "end": "09:30",
+      "timezone": "America/Monterrey",
+      "maximumAxlesExempt": 4,
+      "interpretation": "reference_only",
+      "interpretationNote": "La excepción del artículo 39 para hasta cuatro ejes se limita a sus restricciones horarias; no autoriza todas las calles."
+    },
+    {
+      "sourceRow": 3,
+      "road": "Av. Abraham Lincoln.",
+      "segment": "De la av. Rangel Frías a la av. Fidel Velázquez.",
+      "page": 166,
+      "annex": 2,
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "start": "06:30",
+      "end": "09:30",
+      "timezone": "America/Monterrey",
+      "maximumAxlesExempt": 4,
+      "interpretation": "reference_only",
+      "interpretationNote": "La excepción del artículo 39 para hasta cuatro ejes se limita a sus restricciones horarias; no autoriza todas las calles."
+    },
+    {
+      "sourceRow": 4,
+      "road": "Av. Fidel Velázquez.",
+      "segment": "En ambos sentidos de circulación de Abraham Lincoln hasta el límite municipal.",
+      "page": 166,
+      "annex": 2,
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "start": "06:30",
+      "end": "09:30",
+      "timezone": "America/Monterrey",
+      "maximumAxlesExempt": 4,
+      "interpretation": "reference_only",
+      "interpretationNote": "La excepción del artículo 39 para hasta cuatro ejes se limita a sus restricciones horarias; no autoriza todas las calles."
+    },
+    {
+      "sourceRow": 5,
+      "road": "Av. Manuel l. Barragán.",
+      "segment": "Con sentido de circulación de norte a sur de límite municipal hasta la av. Ruiz Cortines.",
+      "page": 166,
+      "annex": 2,
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "start": "06:30",
+      "end": "09:30",
+      "timezone": "America/Monterrey",
+      "maximumAxlesExempt": 4,
+      "interpretation": "reference_only",
+      "interpretationNote": "La excepción del artículo 39 para hasta cuatro ejes se limita a sus restricciones horarias; no autoriza todas las calles."
+    },
+    {
+      "sourceRow": 6,
+      "road": "Av. Constitución.",
+      "segment": "De límite municipal de Monterrey hasta la av. Revolución.",
+      "page": 166,
+      "annex": 2,
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "start": "06:30",
+      "end": "09:30",
+      "timezone": "America/Monterrey",
+      "maximumAxlesExempt": 4,
+      "interpretation": "reference_only",
+      "interpretationNote": "La excepción del artículo 39 para hasta cuatro ejes se limita a sus restricciones horarias; no autoriza todas las calles."
+    },
+    {
+      "sourceRow": 7,
+      "road": "Av. Revolución.",
+      "segment": "En ambos sentidos de circulación de av. Constitución hasta la av. Eugenio Garza Sada.",
+      "page": 166,
+      "annex": 2,
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "start": "06:30",
+      "end": "09:30",
+      "timezone": "America/Monterrey",
+      "maximumAxlesExempt": 4,
+      "interpretation": "reference_only",
+      "interpretationNote": "La excepción del artículo 39 para hasta cuatro ejes se limita a sus restricciones horarias; no autoriza todas las calles."
+    },
+    {
+      "sourceRow": 8,
+      "road": "Av. Eugenio Garza Sada- Carr. Nacional.",
+      "segment": "En ambos sentidos de circulación de av. Revolución al límite con el tramo a cargo de la SCT.",
+      "page": 166,
+      "annex": 2,
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "start": "06:30",
+      "end": "09:30",
+      "timezone": "America/Monterrey",
+      "maximumAxlesExempt": 4,
+      "interpretation": "reference_only",
+      "interpretationNote": "La excepción del artículo 39 para hasta cuatro ejes se limita a sus restricciones horarias; no autoriza todas las calles."
+    },
+    {
+      "sourceRow": 1,
+      "road": "Av. Revolución",
+      "segment": "En el sentido de circulación de norte a sur de av. Chapultepec hasta la av. Eugenio Garza Sada.",
+      "page": 166,
+      "annex": 2,
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "days": [
+        6,
+        7
+      ],
+      "start": "12:00",
+      "end": "14:00",
+      "timezone": "America/Monterrey",
+      "maximumAxlesExempt": null,
+      "interpretation": "requires_review",
+      "interpretationNote": "El anexo incluye fin de semana; cotejar su aplicación con el artículo 39, que menciona lunes a viernes."
+    },
+    {
+      "sourceRow": 2,
+      "road": "Av. Eugenio Garza Sada- Carr. Nacional",
+      "segment": "En ambos sentidos de circulación de av. Revolución al límite con el tramo a cargo de la SCT.",
+      "page": 166,
+      "annex": 2,
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "days": [
+        6,
+        7
+      ],
+      "start": "12:00",
+      "end": "14:00",
+      "timezone": "America/Monterrey",
+      "maximumAxlesExempt": null,
+      "interpretation": "requires_review",
+      "interpretationNote": "El anexo incluye fin de semana; cotejar su aplicación con el artículo 39, que menciona lunes a viernes."
+    },
+    {
+      "sourceRow": 1,
+      "road": "Bulevar Antonio L. Rodríguez.",
+      "segment": "Del Bulevar Gustavo Díaz Ordaz hasta el puente Gonzalitos de sentido poniente a oriente.",
+      "page": 166,
+      "annex": 3,
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "start": "18:00",
+      "end": "20:00",
+      "timezone": "America/Monterrey",
+      "maximumAxlesExempt": 4,
+      "interpretation": "reference_only",
+      "interpretationNote": "La excepción del artículo 39 para hasta cuatro ejes se limita a sus restricciones horarias; no autoriza todas las calles."
+    },
+    {
+      "sourceRow": 2,
+      "road": "Av. Ignacio Morones Prieto.",
+      "segment": "Lo correspondiente al municipio de monterrey",
+      "page": 166,
+      "annex": 3,
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "start": "18:00",
+      "end": "20:00",
+      "timezone": "America/Monterrey",
+      "maximumAxlesExempt": 4,
+      "interpretation": "reference_only",
+      "interpretationNote": "La excepción del artículo 39 para hasta cuatro ejes se limita a sus restricciones horarias; no autoriza todas las calles."
+    },
+    {
+      "sourceRow": 3,
+      "road": "Av. Abraham Lincoln.",
+      "segment": "De la av. Rangel Frías hasta la ave. Fidel Velázquez",
+      "page": 167,
+      "annex": 3,
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "start": "18:00",
+      "end": "20:00",
+      "timezone": "America/Monterrey",
+      "maximumAxlesExempt": 4,
+      "interpretation": "reference_only",
+      "interpretationNote": "La excepción del artículo 39 para hasta cuatro ejes se limita a sus restricciones horarias; no autoriza todas las calles."
+    },
+    {
+      "sourceRow": 4,
+      "road": "Av. Fidel Velázquez.",
+      "segment": "Ambos sentidos de circulación de Abraham Lincoln hasta límite municipal",
+      "page": 167,
+      "annex": 3,
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "start": "18:00",
+      "end": "20:00",
+      "timezone": "America/Monterrey",
+      "maximumAxlesExempt": 4,
+      "interpretation": "reference_only",
+      "interpretationNote": "La excepción del artículo 39 para hasta cuatro ejes se limita a sus restricciones horarias; no autoriza todas las calles."
+    },
+    {
+      "sourceRow": 5,
+      "road": "Av. Revolución.",
+      "segment": "En ambos sentidos de circulación de av. Constitución hasta la av. Eugenio Garza Sada.",
+      "page": 167,
+      "annex": 3,
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "start": "18:00",
+      "end": "20:00",
+      "timezone": "America/Monterrey",
+      "maximumAxlesExempt": 4,
+      "interpretation": "reference_only",
+      "interpretationNote": "La excepción del artículo 39 para hasta cuatro ejes se limita a sus restricciones horarias; no autoriza todas las calles."
+    },
+    {
+      "sourceRow": 6,
+      "road": "Av. Eugenio garza Sada- Carr. Nacional.",
+      "segment": "En ambos sentidos de circulación de av. Revolución al límite con el tramo a cargo de la SCT.",
+      "page": 167,
+      "annex": 3,
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "start": "18:00",
+      "end": "20:00",
+      "timezone": "America/Monterrey",
+      "maximumAxlesExempt": 4,
+      "interpretation": "reference_only",
+      "interpretationNote": "La excepción del artículo 39 para hasta cuatro ejes se limita a sus restricciones horarias; no autoriza todas las calles."
+    },
+    {
+      "sourceRow": 1,
+      "road": "Av. Revolución.",
+      "segment": "En el sentido de circulación de sur a norte de av. Garza Sada hasta av. José Alvarado.",
+      "page": 167,
+      "annex": 3,
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "days": [
+        6,
+        7
+      ],
+      "start": "18:00",
+      "end": "21:00",
+      "timezone": "America/Monterrey",
+      "maximumAxlesExempt": null,
+      "interpretation": "requires_review",
+      "interpretationNote": "El anexo incluye fin de semana; cotejar su aplicación con el artículo 39, que menciona lunes a viernes."
+    },
+    {
+      "sourceRow": 2,
+      "road": "Av. Revolución.",
+      "segment": "En el sentido de circulación de sur a norte de av. Garza Sada hasta av. José Alvarado.",
+      "page": 167,
+      "annex": 3,
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "days": [
+        6,
+        7
+      ],
+      "start": "18:00",
+      "end": "21:00",
+      "timezone": "America/Monterrey",
+      "maximumAxlesExempt": null,
+      "interpretation": "requires_review",
+      "interpretationNote": "El anexo incluye fin de semana; cotejar su aplicación con el artículo 39, que menciona lunes a viernes."
+    },
+    {
+      "sourceRow": 3,
+      "road": "Av. Eugenio garza Sada -Carr. Nacional.",
+      "segment": "En ambos sentidos de circulación de av. Revolución al límite con el tramo a cargo de la SCT.",
+      "page": 167,
+      "annex": 3,
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "days": [
+        6,
+        7
+      ],
+      "start": "18:00",
+      "end": "21:00",
+      "timezone": "America/Monterrey",
+      "maximumAxlesExempt": null,
+      "interpretation": "requires_review",
+      "interpretationNote": "El anexo incluye fin de semana; cotejar su aplicación con el artículo 39, que menciona lunes a viernes."
+    }
+  ],
+  "notices": [
+    "Los nombres y tramos del documento no son geometrías verificadas para excluir calles del motor de rutas.",
+    "No se ha comprobado que el recorrido cruza estas vías ni que el operador dispone de permiso.",
+    "El anexo 3 repite dos entradas de Av. Revolución el fin de semana; se conservan como aparecen en la fuente.",
+    "La cobertura municipal de México está en construcción. Un municipio sin reglas cargadas no se considera libre de restricciones."
+  ]
+}
