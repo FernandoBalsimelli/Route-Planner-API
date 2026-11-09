@@ -92,3 +92,17 @@ ordered stops transactionally, and uses a per-owner request key and content
 fingerprint to make retries idempotent. Its additive columns are nullable for
 older clients. Never drop data when reverting the UI; leave the migration in
 place. Anonymous users have no EXECUTE privilege.
+
+### CI de esquema y aislamiento
+
+GitHub Actions aplica las siete migraciones ordenadas a un Postgres 17 desechable.
+`test/sql/bootstrap.sql` define únicamente las dos identidades y auth.uid del
+fixture; se niega a ejecutarse fuera de una base llamada route_planner_ci.
+`test/sql/verify.sql` comprueba creación, idempotencia, orden/coordenadas de las
+paradas, archivo/restauración, favoritos y aislamiento entre cuentas. Termina
+en ROLLBACK. No usa claves ni conexiones de producción.
+
+Las cuatro primeras migraciones fueron recuperadas del historial de este proyecto
+alojado; se conservan exactamente sus versiones. No deben volver a aplicarse a
+una base donde ya figuren como ejecutadas. La primera ejecución del nuevo
+workflow debe comprobarse en Actions antes de considerarlo validado.
