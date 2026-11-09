@@ -7,6 +7,8 @@ import { decode, encode, isFull, isShort, isValid, recoverNearest } from '@erikm
 import { providerError, routingFailure } from './lib/routing-errors.js';
 import { searchFocus, namesLocality, prioritizeLocations } from './lib/nearby.js';
 import { requestedHouseNumber, rankAddressMatches } from './lib/address-match.js';
+import { getSourceStatus } from './lib/source-monitor.js';
+import { decodePolyline } from './lib/municipal-boundaries.js';
 import { municipalCatalog, municipalReference, routeRegulatoryCoverage } from './lib/municipal-regulations.js';
 
 const app = Fastify({ logger: { serializers: { req: request => ({ method: request.method, url: request.url?.split('?')[0], host: request.host, remoteAddress: request.ip }) } }, bodyLimit: 64 * 1024, trustProxy: true });
@@ -188,6 +190,8 @@ app.get('/', async () => ({ name: 'Route Planner API', version: 'v1', status: pr
 app.get('/health', async () => ({ ok: true, service: 'route-planner-api', version: '0.2.0', routingProvider: 'openrouteservice', orsConfigured: Boolean(process.env.ORS_API_KEY) }));
 app.get('/v1', async () => ({ name: 'Route Planner API', version: 'v1', capabilities: ['route-validation', 'openrouteservice-geocoding', 'openrouteservice-routing', 'route-optimization', 'truck-restrictions'], status: process.env.ORS_API_KEY ? 'ready' : 'awaiting_ors_key' }));
 
+app.get('/v1/regulations/source-status', async () => ({ok:true,...await getSourceStatus()}));
+
 app.get('/v1/regulations/municipalities', async (request, reply) => {
   try { return {ok:true,...municipalCatalog({state:String(request.query?.state||''),q:String(request.query?.q||''),offset:Number(request.query?.offset||0),limit:Number(request.query?.limit||100)})}; }
   catch { return reply.code(400).send({ok:false,message:'Entidad, búsqueda o paginación no válidas.'}); }
@@ -322,10 +326,14 @@ app.post('/v1/routes/plan', { config: { rateLimit: { max: 10, timeWindow: '1 min
       actions: (segment.steps || []).map(step => ({ action: String(step.type ?? ''), instruction: step.instruction, duration: step.duration, length: step.distance, roadName: step.name, ...(Array.isArray(step.way_points) && step.way_points.length === 2 && step.way_points.every(Number.isInteger) && step.way_points[0] >= 0 && step.way_points[1] >= step.way_points[0] ? { geometryStart: step.way_points[0], geometryEnd: step.way_points[1] } : {}) })),
     }));
     const summary = route.summary || {};
+    const geometryPoints = decodePolyline(route.geometry);
+    const waypointIndexes = Array.isArray(route.way_points) && route.way_points.length === routeLocations.length
+      && geometryPoints && route.way_points.every((value,index,all) => Number.isSafeInteger(value) && value >= 0 && value < geometryPoints.length && (!index || value >= all[index-1]))
+      ? route.way_points : null;
     return { ok: true, route: {
       distanceMeters: summary.distance || 0, durationSeconds: summary.duration || 0, polyline: route.geometry, sections, notices: [], optimized,
       regulatoryCoverage: routeRegulatoryCoverage(route.geometry),
-      waypoints: routeLocations.map((point, index) => ({ ...point, type: index === 0 ? 'origin' : index === routeLocations.length - 1 ? 'destination' : 'stop' })),
+      waypoints: routeLocations.map((point, index) => ({ ...point, ...(waypointIndexes ? {geometryIndex:waypointIndexes[index]} : {}), type: index === 0 ? 'origin' : index === routeLocations.length - 1 ? 'destination' : 'stop' })),
     }, provider: 'openrouteservice' };
   } catch (error) {
     if (error?.message === 'ADDRESS_NUMBER_UNCONFIRMED') return reply.code(422).send({ ok: false, code: 'ADDRESS_NUMBER_UNCONFIRMED', message: 'No se encontró el número exterior de una dirección. Confirma el acceso en el mapa o usa su Plus Code antes de calcular; no elegiremos el centro de la calle automáticamente.' });
