@@ -1,0 +1,487 @@
+{
+  "sources": [
+    {
+      "id": "monterrey-transito",
+      "title": "Monterrey · Reglamento de Tránsito y Vialidad",
+      "url": "https://www.monterrey.gob.mx/pdf/portaln/reglamentos/Reglamento%20de%20Transito%20y%20Vialidad%20del%20Municipio%20de%20Monterrey.pdf",
+      "reviewedSha256": "965778f0f966c39dc865f8d69492a4cc8b95c73e6aea56e50e4c071b8dfd3aff",
+      "reviewedAt": "2026-11-09T18:55:50.460481+00:00",
+      "legalReview": "partial_consolidated",
+      "scope": "Municipio de Monterrey; artículos 37–45 y anexos 1–3."
+    },
+    {
+      "id": "jalisco-carga",
+      "title": "Jalisco · Portal oficial de transporte de carga",
+      "url": "https://transportedecarga.jalisco.gob.mx/",
+      "reviewedSha256": null,
+      "reviewedAt": "2026-11-09T18:55:50.460481+00:00",
+      "legalReview": "partial_portal",
+      "scope": "Polígono metropolitano de Guadalajara y mapa funcional IMEPLAN; no todo el territorio de los nueve municipios.",
+      "watchMainScript": true
+    },
+    {
+      "id": "juarez-carga",
+      "title": "Juárez · Reglamento de Tránsito de Rutas de Carga (2003)",
+      "url": "https://www.juarez.gob.mx/2015cf/transparencia/docs.php?file=155127",
+      "reviewedSha256": null,
+      "reviewedAt": "2026-11-09T18:55:50.460481+00:00",
+      "legalReview": "validity_requires_review",
+      "scope": "Documento histórico publicado por el municipio; verificar reformas y acuerdos actuales.",
+      "relatedUrls": [
+        "https://www.juarez.gob.mx/gaceta-municipal/"
+      ]
+    },
+    {
+      "id": "guachochi-transito",
+      "title": "Guachochi · Reglamento de Vialidad y Tránsito (2023)",
+      "url": "https://chihuahua.gob.mx/sites/default/atach2/periodico-oficial/anexos/2023-10/ANEXO%2081-2023%20%20ACUERDO%20N%C2%B0%20184%20%20REGLAMENTO%20DE%20VIALIDAD%20Y%20TRANSITO%20GUACHOCHI-2023.pdf",
+      "reviewedSha256": "b6a5ea63d8e27ce905a23947dd26d036bc82ea263b6e3735539f9e34251e23fa",
+      "reviewedAt": "2026-11-09T18:55:50.460481+00:00",
+      "legalReview": "validity_requires_review",
+      "scope": "Artículos 89–91; no se han incorporado acuerdos posteriores de calles y horarios."
+    },
+    {
+      "id": "cdmx-centro",
+      "title": "CDMX · Autoridad del Centro Histórico, guía 2024",
+      "url": "https://www.autoridadcentrohistorico.cdmx.gob.mx/storage/app/media/Que_Si_y_Que_NoCH_2024.pdf",
+      "reviewedSha256": null,
+      "reviewedAt": "2026-11-09T18:55:50.460481+00:00",
+      "legalReview": "validity_requires_review",
+      "scope": "Sólo perímetro A del Centro Histórico. Folleto 2024 que cita Gaceta del 15 de diciembre de 2021; revisar vigencia y modificaciones.",
+      "relatedUrls": [
+        "https://regulaciones.cdmx.gob.mx/mejora/public/regulacionPdf/1679"
+      ]
+    }
+  ],
+  "packages": [
+    {
+      "municipalityIds": [
+        "14039",
+        "14044",
+        "14051",
+        "14070",
+        "14097",
+        "14098",
+        "14101",
+        "14120",
+        "14124"
+      ],
+      "sourceId": "jalisco-carga",
+      "scope": "Polígono de regulación del Área Metropolitana de Guadalajara; ubicación exacta pendiente de incorporar.",
+      "rules": [
+        {
+          "id": "jal-unitarios",
+          "title": "Camiones unitarios C2 y C3",
+          "description": "El portal distingue C2 (2 ejes, 6 llantas) y C3 (3 ejes, 8 o 10 llantas) sin restricción horaria en esa clasificación. Esto no elimina permisos, límites físicos, señalización ni otras normas.",
+          "kind": "vehicle_class",
+          "citation": "Portal oficial · Tipologías de vehículos de carga",
+          "geometry": null,
+          "routingEnforced": false,
+          "vehicleConfigurations": [
+            "C2",
+            "C3"
+          ]
+        },
+        {
+          "id": "jal-sencillos",
+          "title": "Remolques y tractocamiones sencillos",
+          "description": "El portal indica circulación sin restricción de entrada para las configuraciones sencillas enumeradas. No equivale a acceso libre a todas las calles.",
+          "kind": "vehicle_class",
+          "citation": "Portal oficial · Camiones con remolque",
+          "geometry": null,
+          "routingEnforced": false,
+          "vehicleConfigurations": [
+            "C2-R2",
+            "C3-R2",
+            "C2-R3",
+            "C3-R3",
+            "T2",
+            "T2-S1",
+            "T2-S2",
+            "T2-S3",
+            "T3",
+            "T3-S1",
+            "T3-S2",
+            "T3-S3"
+          ]
+        },
+        {
+          "id": "jal-dobles",
+          "title": "Configuraciones dobles · restricción intraurbana",
+          "description": "El portal prohíbe circulación intraurbana de 06:00 a 09:00 para configuraciones dobles. Entrada y salida sujetas al mapa funcional IMEPLAN; falta verificar días, excepciones y polígono antes de aplicar al trazado.",
+          "kind": "time_window",
+          "citation": "Portal oficial · Configuraciones dobles",
+          "geometry": null,
+          "routingEnforced": false,
+          "window": {
+            "start": "06:00",
+            "end": "09:00",
+            "timezone": "America/Mexico_City",
+            "days": null,
+            "effect": "prohibited",
+            "daysStatus": "not_specified_in_portal"
+          },
+          "vehicleConfigurations": [
+            "T2-S1-R2",
+            "T2-S2-R2",
+            "T2-S1-R3",
+            "T3-S1-R2",
+            "T3-S1-R3",
+            "T3-S2-R2",
+            "T3-S2-R3",
+            "T3-S2-R4",
+            "T2-S2-S2",
+            "T3-S2-S2",
+            "T3-S3-S2"
+          ]
+        },
+        {
+          "id": "jal-permiso",
+          "title": "Permiso para zonas restringidas",
+          "description": "El portal tramita permisos y pide tarjeta de circulación, seguro y documentación adicional según unidad y tipo de carga. La app no tramita ni compra permisos.",
+          "kind": "permit",
+          "citation": "Portal oficial · Antes de iniciar tu trámite",
+          "geometry": null,
+          "routingEnforced": false
+        }
+      ],
+      "notices": [
+        "Referencia metropolitana compartida: aparecer en este municipio no determina que el recorrido entre al polígono.",
+        "La información del portal no sustituye la revisión del acuerdo vigente, sus excepciones y el mapa funcional."
+      ],
+      "relatedLinks": [
+        {
+          "title": "Mapa funcional oficial · IMEPLAN",
+          "url": "https://zoom.imeplan.mx/mapa"
+        }
+      ]
+    },
+    {
+      "municipalityIds": [
+        "08027"
+      ],
+      "sourceId": "guachochi-transito",
+      "scope": "Municipio de Guachochi, Chihuahua; referencia parcial de los artículos 89–91.",
+      "rules": [
+        {
+          "id": "gua-carril",
+          "title": "Circulación por el carril derecho",
+          "description": "Los vehículos pesados de carga y equipo especial deben usar el carril derecho, salvo adelantamiento por accidente o descompostura.",
+          "kind": "lane",
+          "citation": "Artículo 89 · página 35",
+          "geometry": null,
+          "routingEnforced": false,
+          "page": 35
+        },
+        {
+          "id": "gua-descarga",
+          "title": "Lugares y horarios de descarga autorizados",
+          "description": "Las maniobras deben realizarse dentro de predios adecuados sin entorpecer el tránsito; en otro caso la Dirección autoriza lugares y horarios. El artículo faculta restricciones de rutas y horarios, pero no enumera un horario universal.",
+          "kind": "permit",
+          "citation": "Artículo 89 · página 35",
+          "geometry": null,
+          "routingEnforced": false,
+          "page": 35
+        },
+        {
+          "id": "gua-rutas",
+          "title": "Rutas señaladas por la autoridad",
+          "description": "Se prohíbe transitar por una ruta distinta de la señalada por la Dirección; también se establecen condiciones de sujeción, visibilidad y contención de la carga.",
+          "kind": "access",
+          "citation": "Artículo 90 · página 35",
+          "geometry": null,
+          "routingEnforced": false,
+          "page": 35
+        },
+        {
+          "id": "gua-altura",
+          "title": "Altura máxima con carga · 4.25 m",
+          "description": "El artículo 91 fija altura máxima de 4.25 m desde el piso hasta la carga. No significa que todas las calles admitan esa altura ni sustituye límites menores señalizados.",
+          "kind": "dimension",
+          "citation": "Artículo 91 · página 35",
+          "geometry": null,
+          "routingEnforced": false,
+          "page": 35,
+          "maximumHeightM": 4.25
+        }
+      ],
+      "notices": [
+        "No se ha verificado la cadena completa de reformas posteriores a la publicación del 11 de octubre de 2023.",
+        "Faltan los acuerdos específicos de rutas, horarios y geometrías para evaluar automáticamente una entrega."
+      ]
+    },
+    {
+      "municipalityIds": [
+        "08037"
+      ],
+      "sourceId": "juarez-carga",
+      "scope": "Municipio de Juárez, Chihuahua; documento publicado en 2003, pendiente de vigencia consolidada.",
+      "rules": [
+        {
+          "id": "jua-clases",
+          "title": "Excepciones por clase de vehículo",
+          "description": "El artículo 4 exceptúa a los C2 definidos en sus tablas de las rutas de los artículos 18–20, manteniendo límites de peso y dimensiones; el artículo 5 limita plataforma C2 en Zona Centro a 4.26 m y permite horarios específicos de la autoridad.",
+          "kind": "vehicle_class",
+          "citation": "Artículos 4–5 · página 4",
+          "geometry": null,
+          "routingEnforced": false,
+          "page": 4
+        },
+        {
+          "id": "jua-descarga",
+          "title": "Descarga fuera de la vía pública",
+          "description": "El artículo 10 exige maniobras fuera de la vía pública salvo permiso excepcional con lugares y horarios autorizados.",
+          "kind": "permit",
+          "citation": "Artículo 10 · página 5",
+          "geometry": null,
+          "routingEnforced": false,
+          "page": 5
+        },
+        {
+          "id": "jua-red",
+          "title": "Red de carga A y B",
+          "description": "El documento restringe vehículos sujetos a su régimen a corredores definitivos A y transitorios B, con excepciones de los artículos 3, 4 y 34–39. Consultar trayectorias y plano oficial; no se han georreferenciado ni verificado sus modificaciones.",
+          "kind": "access",
+          "citation": "Artículos 18–23 · páginas 6–14",
+          "geometry": null,
+          "routingEnforced": false,
+          "page": 6
+        },
+        {
+          "id": "jua-horarios",
+          "title": "Horarios determinados por la Dirección",
+          "description": "El documento faculta restricciones por horas de intenso tránsito y traslados nocturnos de materiales peligrosos. No se deduce una franja universal para todos los camiones.",
+          "kind": "time_window",
+          "citation": "Artículos 5 y 23",
+          "geometry": null,
+          "routingEnforced": false,
+          "page": 14
+        }
+      ],
+      "notices": [
+        "Esta fuente es histórica: no se presenta como reglamento consolidado vigente en 2026.",
+        "Revisar la Gaceta Municipal y acuerdos posteriores antes de utilizar sus corredores."
+      ]
+    },
+    {
+      "municipalityIds": [
+        "09015"
+      ],
+      "sourceId": "cdmx-centro",
+      "scope": "Sólo perímetro A del Centro Histórico, no toda la alcaldía Cuauhtémoc ni toda la Ciudad de México.",
+      "rules": [
+        {
+          "id": "cdmx-ligeros",
+          "title": "Vehículos menores de 3.8 t y hasta 7.5 m",
+          "description": "El folleto describe circulación a cualquier hora para esta categoría, excepto vías con señalización restrictiva. Deben revisarse condiciones, acceso y permisos del punto de descarga.",
+          "kind": "vehicle_class",
+          "citation": "Guía 2024 · página 1",
+          "geometry": null,
+          "routingEnforced": false,
+          "page": 1
+        },
+        {
+          "id": "cdmx-unitarios",
+          "title": "Unitarios de 3.8 a 20 t y hasta 14 m",
+          "description": "La guía describe circulación permitida entre 20:00 y 10:00 del día siguiente para esta categoría dentro del perímetro A. No aplicar a toda la ciudad ni inferir excepciones por cuenta propia.",
+          "kind": "time_window",
+          "citation": "Guía 2024 · página 1",
+          "geometry": null,
+          "routingEnforced": false,
+          "page": 1,
+          "window": {
+            "start": "20:00",
+            "end": "10:00",
+            "timezone": "America/Mexico_City",
+            "days": null,
+            "effect": "permitted_with_conditions",
+            "crossesMidnight": true
+          }
+        },
+        {
+          "id": "cdmx-mayores",
+          "title": "Articulados y unidades que exceden la categoría",
+          "description": "La guía establece prohibición para vehículos con remolque o semirremolque y para la categoría de unidades de mayor peso y longitud que describe. Se necesita clasificación exacta y verificación de excepciones autorizadas.",
+          "kind": "access",
+          "citation": "Guía 2024 · página 1",
+          "geometry": null,
+          "routingEnforced": false,
+          "page": 1
+        },
+        {
+          "id": "cdmx-maniobras",
+          "title": "Carga y descarga por tipo de vía",
+          "description": "La guía distingue maniobras generales de 20:00 a 10:00 y en vías principales de 20:00 a 07:00, con seis ejes de prohibición permanente. El peso, longitud, señalización y permisos siguen condicionando la operación.",
+          "kind": "loading",
+          "citation": "Guía 2024 · página 1",
+          "geometry": null,
+          "routingEnforced": false,
+          "page": 1
+        },
+        {
+          "id": "cdmx-excepciones",
+          "title": "Excepciones con autorización",
+          "description": "La guía exceptúa del horario de circulación al traslado de valores y contempla unidades de construcción y casos especiales con solicitud y autorización de SEMOVI y, según corresponda, SSC. Una entrega comercial ordinaria no obtiene por sí sola esa excepción.",
+          "kind": "permit",
+          "citation": "Guía 2024 · página 1",
+          "page": 1,
+          "geometry": null,
+          "routingEnforced": false
+        }
+      ],
+      "notices": [
+        "Folleto de 2024: no se ha comprobado la vigencia consolidada con todas las reformas y fichas posteriores.",
+        "El perímetro A no está cargado como geometría legal; la detección de la alcaldía sólo invita a consultar la fuente."
+      ],
+      "trunkSegments": [
+        {
+          "road": "Eje 1 Oriente · Anillo de Circunvalación",
+          "segment": "Prohibición permanente de carga y descarga señalada por la guía para este eje; no implica prohibición universal de circulación.",
+          "page": 1,
+          "geometry": null,
+          "geometryStatus": "not_validated"
+        },
+        {
+          "road": "San Pablo–José María Izazaga",
+          "segment": "Prohibición permanente de carga y descarga señalada por la guía para este eje; no implica prohibición universal de circulación.",
+          "page": 1,
+          "geometry": null,
+          "geometryStatus": "not_validated"
+        },
+        {
+          "road": "Eje Central Lázaro Cárdenas",
+          "segment": "Prohibición permanente de carga y descarga señalada por la guía para este eje; no implica prohibición universal de circulación.",
+          "page": 1,
+          "geometry": null,
+          "geometryStatus": "not_validated"
+        },
+        {
+          "road": "Avenida Hidalgo",
+          "segment": "Prohibición permanente de carga y descarga señalada por la guía para este eje; no implica prohibición universal de circulación.",
+          "page": 1,
+          "geometry": null,
+          "geometryStatus": "not_validated"
+        },
+        {
+          "road": "Eje 1 Poniente · Guerrero",
+          "segment": "Prohibición permanente de carga y descarga señalada por la guía para este eje; no implica prohibición universal de circulación.",
+          "page": 1,
+          "geometry": null,
+          "geometryStatus": "not_validated"
+        },
+        {
+          "road": "Avenida Juárez",
+          "segment": "Prohibición permanente de carga y descarga señalada por la guía para este eje; no implica prohibición universal de circulación.",
+          "page": 1,
+          "geometry": null,
+          "geometryStatus": "not_validated"
+        },
+        {
+          "road": "Allende–Bolívar",
+          "segment": "República de Perú–Av. José María Izazaga. Vía principal: carga y descarga 20:00–07:00 para las categorías de la guía, salvo prohibición de maniobras en los ejes expresamente excluidos. No acredita acceso ni vigencia actual.",
+          "page": 1,
+          "geometry": null,
+          "geometryStatus": "not_validated"
+        },
+        {
+          "road": "Isabel la Católica",
+          "segment": "Av. José María Izazaga–República de Perú. Vía principal: carga y descarga 20:00–07:00 para las categorías de la guía, salvo prohibición de maniobras en los ejes expresamente excluidos. No acredita acceso ni vigencia actual.",
+          "page": 1,
+          "geometry": null,
+          "geometryStatus": "not_validated"
+        },
+        {
+          "road": "5 de Febrero",
+          "segment": "Plaza de la Constitución–Av. José María Izazaga. Vía principal: carga y descarga 20:00–07:00 para las categorías de la guía, salvo prohibición de maniobras en los ejes expresamente excluidos. No acredita acceso ni vigencia actual.",
+          "page": 1,
+          "geometry": null,
+          "geometryStatus": "not_validated"
+        },
+        {
+          "road": "República de Brasil",
+          "segment": "Plaza de la Constitución–República de Costa Rica. Vía principal: carga y descarga 20:00–07:00 para las categorías de la guía, salvo prohibición de maniobras en los ejes expresamente excluidos. No acredita acceso ni vigencia actual.",
+          "page": 1,
+          "geometry": null,
+          "geometryStatus": "not_validated"
+        },
+        {
+          "road": "20 de Noviembre",
+          "segment": "Av. José María Izazaga–Plaza de la Constitución. Vía principal: carga y descarga 20:00–07:00 para las categorías de la guía, salvo prohibición de maniobras en los ejes expresamente excluidos. No acredita acceso ni vigencia actual.",
+          "page": 1,
+          "geometry": null,
+          "geometryStatus": "not_validated"
+        },
+        {
+          "road": "Av. José María Pino Suárez",
+          "segment": "Plaza de la Constitución–Av. José María Izazaga. Vía principal: carga y descarga 20:00–07:00 para las categorías de la guía, salvo prohibición de maniobras en los ejes expresamente excluidos. No acredita acceso ni vigencia actual.",
+          "page": 1,
+          "geometry": null,
+          "geometryStatus": "not_validated"
+        },
+        {
+          "road": "Calle del Carmen–Correo Mayor",
+          "segment": "Apartado–Av. San Pablo. Vía principal: carga y descarga 20:00–07:00 para las categorías de la guía, salvo prohibición de maniobras en los ejes expresamente excluidos. No acredita acceso ni vigencia actual.",
+          "page": 1,
+          "geometry": null,
+          "geometryStatus": "not_validated"
+        },
+        {
+          "road": "Jesús María–Loreto–Rodríguez Puebla",
+          "segment": "Av. San Pablo–José Joaquín Herrera. Vía principal: carga y descarga 20:00–07:00 para las categorías de la guía, salvo prohibición de maniobras en los ejes expresamente excluidos. No acredita acceso ni vigencia actual.",
+          "page": 1,
+          "geometry": null,
+          "geometryStatus": "not_validated"
+        },
+        {
+          "road": "Plaza de la Constitución",
+          "segment": "Plaza de la Constitución. Vía principal: carga y descarga 20:00–07:00 para las categorías de la guía, salvo prohibición de maniobras en los ejes expresamente excluidos. No acredita acceso ni vigencia actual.",
+          "page": 1,
+          "geometry": null,
+          "geometryStatus": "not_validated"
+        },
+        {
+          "road": "Belisario Domínguez–República de Venezuela",
+          "segment": "Eje Central–Leona Vicario. Vía principal: carga y descarga 20:00–07:00 para las categorías de la guía, salvo prohibición de maniobras en los ejes expresamente excluidos. No acredita acceso ni vigencia actual.",
+          "page": 1,
+          "geometry": null,
+          "geometryStatus": "not_validated"
+        },
+        {
+          "road": "Donceles–Justo Sierra–Mixcalco",
+          "segment": "Eje Central Lázaro Cárdenas–Leona Vicario. Vía principal: carga y descarga 20:00–07:00 para las categorías de la guía, salvo prohibición de maniobras en los ejes expresamente excluidos. No acredita acceso ni vigencia actual.",
+          "page": 1,
+          "geometry": null,
+          "geometryStatus": "not_validated"
+        },
+        {
+          "road": "Tacuba–Av. Hidalgo",
+          "segment": "República de Brasil–Eje 1 Poniente. Vía principal: carga y descarga 20:00–07:00 para las categorías de la guía, salvo prohibición de maniobras en los ejes expresamente excluidos. No acredita acceso ni vigencia actual.",
+          "page": 1,
+          "geometry": null,
+          "geometryStatus": "not_validated"
+        },
+        {
+          "road": "5 de Mayo",
+          "segment": "Eje Central Lázaro Cárdenas–Monte de Piedad. Vía principal: carga y descarga 20:00–07:00 para las categorías de la guía, salvo prohibición de maniobras en los ejes expresamente excluidos. No acredita acceso ni vigencia actual.",
+          "page": 1,
+          "geometry": null,
+          "geometryStatus": "not_validated"
+        },
+        {
+          "road": "República de Uruguay",
+          "segment": "Eje 1 Oriente–Eje Central Lázaro Cárdenas. Vía principal: carga y descarga 20:00–07:00 para las categorías de la guía, salvo prohibición de maniobras en los ejes expresamente excluidos. No acredita acceso ni vigencia actual.",
+          "page": 1,
+          "geometry": null,
+          "geometryStatus": "not_validated"
+        },
+        {
+          "road": "Ayuntamiento–República del Salvador",
+          "segment": "Eje Central Lázaro Cárdenas–Eje 1 Oriente. Vía principal: carga y descarga 20:00–07:00 para las categorías de la guía, salvo prohibición de maniobras en los ejes expresamente excluidos. No acredita acceso ni vigencia actual.",
+          "page": 1,
+          "geometry": null,
+          "geometryStatus": "not_validated"
+        }
+      ]
+    }
+  ]
+}

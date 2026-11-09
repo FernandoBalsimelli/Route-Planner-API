@@ -8,7 +8,7 @@ Revisión: 2026-11-09. Exclusivamente Route Planner. El programa general sigue a
 | --- | --- | --- |
 | Catálogo y límites INEGI | 32 entidades y 2,478 municipios/demarcaciones; límites oficiales de diciembre de 2025 simplificados y versionados | Identifica aproximadamente qué jurisdicciones toca la polilínea; no es una lista de calles permitidas |
 | Monterrey, código 19039 | 38 renglones de red troncal y 19 renglones de horarios extraídos de los anexos 1–3 del reglamento oficial | Referencia consultable con página y sentido; no exclusión geométrica |
-| Otros municipios | Identidad oficial y estado «reglas pendientes» | Ninguna validación legal añadida |
+| Otros municipios | Nuevas referencias parciales y estados pendientes; ver ciclo nacional más abajo | Ninguna validación legal añadida |
 | Motor ORS / OSM | Parámetros de dimensiones y peso existentes | Aplica los datos disponibles del proveedor; cobertura incompleta |
 | Navegación interna | GPS e indicaciones sobre la polilínea del cálculo, sin sustituirla | Conserva ese trazado; no acredita legalidad |
 
@@ -113,3 +113,64 @@ no usa credenciales ni cuentas de producción. Producción conserva su configura
 Datos nuevos son JSON versionados. No hay migración de base de datos ni
 modificaciones a Gestión, planes, credenciales o servicios contratados. Recuperar
 los despliegues anteriores de Web/API revierte esta versión.
+
+## Ciclo nacional y enlaces con puntos guía · 9 de noviembre de 2026
+
+El recuadro destacado de Monterrey se retira. El catálogo comienza sin entidad
+preseleccionada; estados y municipios se ordenan por nombre antes de paginar.
+
+La API incorpora referencias **parciales para 13 municipios**, contando Monterrey:
+9 del AMG comparten una referencia del polígono metropolitano de Jalisco;
+Guachochi (arts. 89–91), Juárez (documento histórico de 2003) y Cuauhtémoc
+(sólo perímetro A del Centro Histórico). No se afirma vigencia consolidada de
+las nuevas referencias ni cobertura de toda su superficie. El portal actual de
+Jalisco distingue C2/C3, remolques/sencillos y dobles; no aplicar el horario
+06:00–09:00 de dobles indiscriminadamente a todos los vehículos. La guía CDMX
+conserva 6 ejes de prohibición de maniobras y 15 vías principales con tramos;
+prohibición de descarga no equivale a prohibición de circulación.
+
+`data/mx/national-references.json` versiona fuente, ámbito, revisión, condiciones
+vehiculares, zona horaria, interpretación y geometrías pendientes. Los horarios
+con días no confirmados mantienen `days: null`. Ninguna referencia nueva altera
+el cálculo ni autoriza automáticamente la ruta; siguen **0 municipios con
+validación legal completa** y 2,465 municipios sin referencia cargada.
+
+`official-sources.yml` comprueba cinco fuentes oficiales cada seis horas, también
+al cambiar su registro/script en main. Sólo utiliza un runner público estándar
+y el token temporal del propio repositorio. No instala servicios ni activa pagos.
+Guarda hashes, última descarga correcta y errores; mantiene evidencia previa
+cuando falla una consulta. En páginas SPA comprueba también el bundle principal;
+en Juárez y CDMX vigila además la publicación/registro relacionado. Cambios,
+indisponibilidad o más de 18 h sin ejecución se muestran separadamente de la
+vigencia jurídica. El monitor **no descubre automáticamente todos los decretos**,
+no convierte cambios en reglas aplicables y no garantiza actualización en tiempo
+real. La actualización de estado usa una condición SHA para no pisar otra edición.
+`GET /v1/regulations/source-status` lee el reporte público versionado con caché
+15 min y fallback local; no transmite recorridos, cuentas ni ubicaciones.
+
+Los resultados incluyen `waypoints[].geometryIndex` sólo si el mapeo completo
+que entrega ORS es válido y monotónico. La Web prepara puntos guía 25 m después
+de maniobras y cada 1.5 km en tramos largos, conservando cada entrega exacta,
+incluso en bucles/paradas repetidas. Los enlaces mantienen límites 9/3 y 2048
+caracteres, compartiendo extremos y mostrando etiquetas Guía/Entrega. Las rutas
+antiguas sin mapeo piden recalcular para habilitar guías. El usuario puede
+quitar las guías. `dir_action=navigate` solicita navegación cuando Google la
+soporta y el origen coincide con la posición; en otro caso puede abrir vista previa.
+
+**Límite de integración confirmado:** los enlaces de Google Maps no aceptan una
+polilínea externa, dimensiones ni permisos de camión. Los puntos guía influyen
+pero no bloquean el trazado ni garantizan las calles entre ellos. Google tiene
+Large Vehicle Routing limitado a clientes provisionados y cobertura declarada en
+los 48 estados contiguos de EE. UU. y Japón; no México. El token se consume en
+Navigation SDK dentro de una app integrada, no transfiere ORS a la app de Google
+Maps. No se activó ningún producto comercial. Fuentes técnicas primarias:
+https://developers.google.com/maps/documentation/routes/lvr-routes-etas
+https://developers.google.com/maps/documentation/navigation/android-sdk/large-vehicle-navigation
+https://developers.google.com/maps/documentation/urls/get-started
+
+Pendiente obligatorio del programa: cobertura nacional legal/geométrica completa,
+validación de vigencia, excepciones y permisos por jurisdicción, acuerdos nuevos
+y cierres temporales. No se encontró una fuente oficial única mantenida que
+resuelva todos esos campos para los 2,478 municipios. INEGI/RNC no sustituye a
+los reglamentos. Priorizar las jurisdicciones de los recorridos reales y revisar
+cada fuente antes de activar una exclusión. No declarar finalizado el prompt maestro.

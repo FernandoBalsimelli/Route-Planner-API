@@ -37,3 +37,13 @@ test('public municipality endpoints validate identifiers and pagination and expo
  assert.equal((await app.inject('/v1/regulations/municipalities?state=99')).statusCode,400);
  assert.equal((await app.inject('/v1/regulations/municipalities/99999')).statusCode,404);
 });
+test('entities and municipalities sort alphabetically before pagination without featuring Nuevo León',()=>{
+ const result=municipalCatalog({state:'19',limit:600});assert.equal(result.states[0].name,'Aguascalientes');assert.equal(result.municipalities[0].name,'Abasolo');
+ assert.deepEqual(municipalCatalog({state:'19',limit:2,offset:2}).municipalities,result.municipalities.slice(2,4));
+ assert.equal(result.municipalitiesWithPartialReference,13);
+});
+test('new references preserve metropolitan scope, actual vehicle classes and unknown legal geometry',()=>{
+ const jal=municipalReference('14039');assert.match(jal.scope,/Polígono/);assert.equal(jal.rules.find(rule=>rule.id==='jal-dobles').window.start,'06:00');assert.equal(jal.rules.find(rule=>rule.id==='jal-dobles').window.days,null);assert.deepEqual(jal.rules.find(rule=>rule.id==='jal-unitarios').vehicleConfigurations,['C2','C3']);
+ for(const id of ['14039','08027','08037','09015']){const entry=municipalReference(id);assert.equal(entry.status,'reference_only');assert.equal(entry.routingEnforced,false);assert.ok(entry.rules.every(rule=>rule.geometry===null&&!rule.routingEnforced));}
+ assert.equal(municipalReference('09015').trunkSegments.length,21);assert.match(municipalReference('08037').notices.join(' '),/histórica/);
+});

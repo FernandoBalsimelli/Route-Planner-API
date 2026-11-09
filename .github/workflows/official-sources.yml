@@ -1,0 +1,42 @@
+name: Monitor official regulation sources
+on:
+  schedule:
+    - cron: '30 */6 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/check-official-sources.mjs'
+      - 'data/mx/national-references.json'
+      - '.github/workflows/official-sources.yml'
+permissions:
+  contents: read
+concurrency:
+  group: route-planner-official-sources
+  cancel-in-progress: false
+jobs:
+  sources:
+    if: github.repository == 'FernandoBalsimelli/Route-Planner-API'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '26'
+      - run: node scripts/check-official-sources.mjs
+      - name: Commit technical status only
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # The API update uses a SHA lease. A concurrent source edit is never overwritten.
+          git rev-parse HEAD:data/mx/source-status.json > /tmp/status-sha
+          node --input-type=module <<'JS' > /tmp/source-status-update.json
+          import {readFileSync} from 'node:fs';
+          console.log(JSON.stringify({message:'chore: update official source availability [skip ci]',branch:'main',sha:readFileSync('/tmp/status-sha','utf8').trim(),content:readFileSync('data/mx/source-status.json').toString('base64')}));
+          JS
+          gh api --method PUT repos/FernandoBalsimelli/Route-Planner-API/contents/data/mx/source-status.json --input /tmp/source-status-update.json --silent

@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-11-09T19:01:16.644Z",
+  "sources": [
+    {
+      "id": "cdmx-centro",
+      "checkedAt": "2026-11-09T19:01:16.644Z",
+      "lastSuccessAt": null,
+      "status": "unavailable",
+      "error": "HTTP_503"
+    },
+    {
+      "id": "guachochi-transito",
+      "checkedAt": "2026-11-09T19:01:16.644Z",
+      "lastSuccessAt": "2026-11-09T19:01:16.644Z",
+      "status": "unchanged",
+      "sha256": "b6a5ea63d8e27ce905a23947dd26d036bc82ea263b6e3735539f9e34251e23fa",
+      "initialSha256": "b6a5ea63d8e27ce905a23947dd26d036bc82ea263b6e3735539f9e34251e23fa",
+      "relatedHashes": {},
+      "initialRelatedHashes": {},
+      "error": null
+    },
+    {
+      "id": "jalisco-carga",
+      "checkedAt": "2026-11-09T19:01:16.644Z",
+      "lastSuccessAt": "2026-11-09T19:01:16.644Z",
+      "status": "unreviewed",
+      "sha256": "933aa2ae6cc3223992b9d9fc8ab050afd3922f556f5d80c50cd41d217c4c6a6c",
+      "initialSha256": "933aa2ae6cc3223992b9d9fc8ab050afd3922f556f5d80c50cd41d217c4c6a6c",
+      "relatedHashes": {
+        "https://transportedecarga.jalisco.gob.mx/main.e031437b43e0350ea748.js": "23a65fe8f742d86df193b133f3d85c63336213f2a2938c31d9c07018bbecaa8a"
+      },
+      "initialRelatedHashes": {
+        "https://transportedecarga.jalisco.gob.mx/main.e031437b43e0350ea748.js": "23a65fe8f742d86df193b133f3d85c63336213f2a2938c31d9c07018bbecaa8a"
+      },
+      "error": null
+    },
+    {
+      "id": "juarez-carga",
+      "checkedAt": "2026-11-09T19:01:16.644Z",
+      "lastSuccessAt": "2026-11-09T19:01:16.644Z",
+      "status": "unreviewed",
+      "sha256": "4f80a7a495c017fd8642525688f73919c110608dd5e64cff4cb5950d83eb92cd",
+      "initialSha256": "4f80a7a495c017fd8642525688f73919c110608dd5e64cff4cb5950d83eb92cd",
+      "relatedHashes": {
+        "https://www.juarez.gob.mx/gaceta-municipal/": "07d594a78a731a5d9297154f12efef5ab40d9541164541d343e8628269f00f6b"
+      },
+      "initialRelatedHashes": {
+        "https://www.juarez.gob.mx/gaceta-municipal/": "07d594a78a731a5d9297154f12efef5ab40d9541164541d343e8628269f00f6b"
+      },
+      "error": null
+    },
+    {
+      "id": "monterrey-transito",
+      "checkedAt": "2026-11-09T19:01:16.644Z",
+      "lastSuccessAt": "2026-11-09T19:01:16.644Z",
+      "status": "unchanged",
+      "sha256": "965778f0f966c39dc865f8d69492a4cc8b95c73e6aea56e50e4c071b8dfd3aff",
+      "initialSha256": "965778f0f966c39dc865f8d69492a4cc8b95c73e6aea56e50e4c071b8dfd3aff",
+      "relatedHashes": {},
+      "initialRelatedHashes": {},
+      "error": null
+    }
+  ]
+}

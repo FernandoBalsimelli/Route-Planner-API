@@ -17,7 +17,7 @@ after(async () => { globalThis.fetch = originalFetch; await app.close(); });
 const origin = { label: 'Monterrey, Nuevo León, México', lat: 25.67, lng: -100.31 };
 const destination = { label: 'Chihuahua, Chihuahua, México', lat: 28.66, lng: -106.09 };
 const stop = { label: 'Parada de prueba', lat: 25.68, lng: -100.30 };
-const plan = payload => app.inject({ method: 'POST', url: '/v1/routes/plan', headers: { authorization: 'Bearer test-session' }, payload: { origin, destination, stops: [stop], ...payload } });
+const plan = (payload,remoteAddress='127.0.0.1') => app.inject({remoteAddress, method: 'POST', url: '/v1/routes/plan', headers: { authorization: 'Bearer test-session' }, payload: { origin, destination, stops: [stop], ...payload } });
 function encodePath(points){let lat=0,lng=0;const encode=n=>{let value=n<0?~(n<<1):n<<1,result='';while(value>=32){result+=String.fromCharCode((value&31|32)+63);value>>=5;}return result+String.fromCharCode(value+63);};return points.map(([nextLat,nextLng])=>{const y=Math.round(nextLat*1e5),x=Math.round(nextLng*1e5),chunk=encode(y-lat)+encode(x-lng);lat=y;lng=x;return chunk;}).join('');}
 
 test('city suggestions exclude regional centroids and identify the city and state', async () => {
@@ -158,4 +158,14 @@ test('the API rejects routes beyond the real provider limit before making any pr
   provider=async()=>{throw Error('provider must not be called');};
   const response=await plan({stops:Array.from({length:49},()=>stop)});
   assert.equal(response.statusCode,400);
+});
+test('route waypoint geometry indexes are preserved only when the complete ordered provider mapping is valid',async()=>{
+ const geometry=encodePath([[25.67,-100.31],[25.68,-100.30],[28.66,-106.09]]);
+ for(const indexes of [[0,1,2],[0,2,1],[0,1,9],[0,2],[-1,1,2]]){
+  provider=async()=>Response.json({routes:[{summary:{distance:100,duration:20},geometry,way_points:indexes,segments:[]}]});
+  const response=await plan({},'192.0.2.10');assert.equal(response.statusCode,200);
+  const waypoints=response.json().route.waypoints;
+  if(JSON.stringify(indexes)==='[0,1,2]')assert.deepEqual(waypoints.map(point=>point.geometryIndex),indexes);
+  else assert.ok(waypoints.every(point=>!Object.hasOwn(point,'geometryIndex')));
+ }
 });
