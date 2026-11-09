@@ -127,3 +127,10 @@ test('unconfirmed house number does not silently route to the street centroid', 
   const response = await plan({ destination: 'S. Prueba 202, Colonia Ejemplo, 00000 Monterrey, N.L.' });
   assert.equal(response.statusCode, 422); assert.equal(response.json().code, 'ADDRESS_NUMBER_UNCONFIRMED'); assert.equal(routingCalls, 0);
 });
+
+test('route response preserves maneuver geometry indexes and reports unverified municipal coverage',async()=>{
+ provider=async()=>Response.json({routes:[{summary:{distance:100,duration:20},geometry:'encoded-route',segments:[{steps:[{type:1,instruction:'Gira a la derecha',name:'Vía pública de prueba',distance:100,duration:20,way_points:[3,7]},{type:10,instruction:'Llegada',way_points:[-1,2]}]}]}]});
+ const response=await plan({stops:[]});assert.equal(response.statusCode,200);
+ const route=response.json().route;assert.equal(route.sections[0].actions[0].geometryStart,3);assert.equal(route.sections[0].actions[0].geometryEnd,7);assert.equal(route.sections[0].actions[1].geometryStart,undefined);
+ assert.equal(route.regulatoryCoverage.status,'not_verified');assert.equal(route.regulatoryCoverage.requiresOperatorReview,true);
+});
