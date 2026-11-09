@@ -1,7 +1,9 @@
 import assert from 'node:assert/strict';
 import {test,after} from 'node:test';
 import {municipalCatalog,municipalReference,routeRegulatoryCoverage} from '../lib/municipal-regulations.js';
+import {boundaryProvenance,identifyMunicipalities} from '../lib/municipal-boundaries.js';
 const {app}=await import('../index.js');after(()=>app.close());
+function encodePath(points){let lat=0,lng=0;const encode=n=>{let value=n<0?~(n<<1):n<<1,result='';while(value>=32){result+=String.fromCharCode((value&31|32)+63);value>>=5;}return result+String.fromCharCode(value+63);};return points.map(([nextLat,nextLng])=>{const y=Math.round(nextLat*1e5),x=Math.round(nextLng*1e5),chunk=encode(y-lat)+encode(x-lng);lat=y;lng=x;return chunk;}).join('');}
 test('official geographic catalog has 32 entities and unique municipality codes without claiming verified traffic rules',()=>{
  const result=municipalCatalog({state:'19'});assert.equal(result.states.length,32);assert.ok(result.totalMunicipalities>=2478);assert.equal(result.fullyVerifiedMunicipalities,0);
  assert.ok(result.municipalities.some(row=>row.id==='19039'&&row.name==='Monterrey'&&row.coverage==='reference_only'));
@@ -19,6 +21,15 @@ test('Monterrey keeps all source rows, directional segments, time zones and unre
 test('unknown municipalities and route coverage fail closed instead of marking roads permitted',()=>{
  const result=municipalReference('01001');assert.equal(result.status,'not_loaded');assert.equal(result.routingEnforced,false);assert.ok(result.notices.length);
  assert.equal(municipalReference('99999'),null);assert.equal(routeRegulatoryCoverage().status,'not_verified');assert.deepEqual(routeRegulatoryCoverage().municipalitiesIdentified,[]);
+});
+test('official December 2025 boundaries identify route jurisdictions without claiming legal enforcement',()=>{
+ const provenance=boundaryProvenance();assert.equal(provenance.municipalityCount,2478);assert.match(provenance.sourceDescription.join(' '),/diciembre de 2025/);assert.equal(provenance.use,'jurisdiction_identification_only');
+ const polyline=encodePath([[25.67,-100.35],[25.67,-100.20]]),identified=identifyMunicipalities(polyline);
+ assert.equal(identified.status,'identified_approximate');assert.ok(identified.municipalities.some(item=>item.id==='19039'&&item.name==='Monterrey'));assert.ok(identified.municipalities.some(item=>item.id==='19026'&&item.name==='Guadalupe'));
+ const coverage=routeRegulatoryCoverage(polyline);assert.equal(coverage.status,'not_verified');assert.equal(coverage.municipalGeometryEnforced,false);assert.equal(coverage.municipalitiesWithReference,1);assert.ok(coverage.municipalitiesWithoutRules>=1);assert.equal(coverage.municipalitiesIdentified.find(item=>item.id==='19039').coverage,'reference_only');assert.ok(coverage.municipalitiesIdentified.every(item=>!item.routingEnforced));assert.match(coverage.message,/aproximadamente/);
+});
+test('outside-Mexico and malformed geometries remain unresolved instead of reporting an empty legal route',()=>{
+ for(const geometry of [encodePath([[40.7,-74.1],[40.8,-73.9]]),'not a polyline']){const result=routeRegulatoryCoverage(geometry);assert.equal(result.municipalityIdentification,'unresolved');assert.deepEqual(result.municipalitiesIdentified,[]);assert.equal(result.requiresOperatorReview,true);assert.match(result.message,/No se pudieron identificar/);}
 });
 test('public municipality endpoints validate identifiers and pagination and expose provenance',async()=>{
  const list=await app.inject('/v1/regulations/municipalities?state=19&limit=600');assert.equal(list.statusCode,200);assert.equal(list.json().geographicCatalogOnly,true);

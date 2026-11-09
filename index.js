@@ -324,7 +324,7 @@ app.post('/v1/routes/plan', { config: { rateLimit: { max: 10, timeWindow: '1 min
     const summary = route.summary || {};
     return { ok: true, route: {
       distanceMeters: summary.distance || 0, durationSeconds: summary.duration || 0, polyline: route.geometry, sections, notices: [], optimized,
-      regulatoryCoverage: routeRegulatoryCoverage(),
+      regulatoryCoverage: routeRegulatoryCoverage(route.geometry),
       waypoints: routeLocations.map((point, index) => ({ ...point, type: index === 0 ? 'origin' : index === routeLocations.length - 1 ? 'destination' : 'stop' })),
     }, provider: 'openrouteservice' };
   } catch (error) {
