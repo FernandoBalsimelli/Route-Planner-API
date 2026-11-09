@@ -4,15 +4,17 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "node --watch index.js",
-    "start": "node index.js",
-    "build": "node --check index.js"
+    "dev": "node --watch server.js",
+    "start": "node server.js",
+    "build": "node --check index.js && node --check server.js",
+    "test": "node --test"
   },
   "dependencies": {
+    "@erikmichelson/open-location-code-ts": "1.20250411.0",
     "@fastify/cors": "11.1.0",
     "@fastify/rate-limit": "10.3.0",
-    "fastify": "5.6.1",
-    "zod": "3.25.76",
-    "@supabase/supabase-js": "2.81.1"
+    "@supabase/supabase-js": "2.81.1",
+    "fastify": "5.12.8",
+    "zod": "4.6.7"
   }
 }

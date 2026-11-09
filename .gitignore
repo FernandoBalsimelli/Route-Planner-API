@@ -4,3 +4,6 @@ node_modules
 !.env.example
 .vercel
 .DS_Store
+
+# Supabase CLI machine-local cache
+supabase/.temp/
