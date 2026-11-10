@@ -5,7 +5,7 @@ import { z } from 'zod';
 import { createClient } from '@supabase/supabase-js';
 import { decode, encode, isFull, isShort, isValid, recoverNearest } from '@erikmichelson/open-location-code-ts';
 import { providerError, routingFailure } from './lib/routing-errors.js';
-import { searchFocus, namesLocality, prioritizeLocations } from './lib/nearby.js';
+import { searchFocus, namesLocality, prioritizeLocations, searchBounds, retailSearchIntent, providerSearchText } from './lib/nearby.js';
 import { requestedHouseNumber, rankAddressMatches } from './lib/address-match.js';
 import { getSourceStatus } from './lib/source-monitor.js';
 import { decodePolyline } from './lib/municipal-boundaries.js';
@@ -46,7 +46,7 @@ function peliasPoint(feature, fallback = '') {
   const coordinates = feature?.geometry?.coordinates;
   if (!Array.isArray(coordinates) || coordinates.length < 2) return null;
   const lat = Number(coordinates[1]), lng = Number(coordinates[0]);
-  if (!Number.isFinite(lat) || !Number.isFinite(lng)) return null;
+  if (!Number.isFinite(coordinates[0]) || !Number.isFinite(coordinates[1]) || Math.abs(lat)>90 || Math.abs(lng)>180) return null;
   const p = feature.properties || {};
   let label = p.layer === 'locality' && p.name
     ? [p.name, p.region || p.region_a, p.country].filter(Boolean).join(', ')
@@ -56,7 +56,7 @@ function peliasPoint(feature, fallback = '') {
 }
 async function peliasSearch(value, apiKey, autocomplete = false, size = 6, focus = null) {
   const url = new URL(ORS_BASE_URL + '/pelias/v1/' + (autocomplete ? 'autocomplete' : 'search'));
-  url.searchParams.set('text', value);
+  url.searchParams.set('text', providerSearchText(value));
   url.searchParams.set('size', String(size));
   url.searchParams.set('lang', 'es');
   if (focus) { url.searchParams.set('focus.point.lat', String(focus.lat)); url.searchParams.set('focus.point.lon', String(focus.lng)); }
@@ -67,20 +67,27 @@ async function peliasSearch(value, apiKey, autocomplete = false, size = 6, focus
   if (!response.ok) { const error = new Error('ORS_GEOCODING_FAILED'); error.status = response.status; throw error; }
   return response.json();
 }
-async function photonSearch(value, size = 6, focus = null) {
+async function photonPayload(url,localOnly){
+  try{
+    const response=await fetch(url,{headers:{Accept:'application/json'},signal:AbortSignal.timeout(localOnly?6500:10000)});
+    if(!response.ok){const error=new Error('PHOTON_GEOCODING_FAILED');error.status=response.status;throw error;}
+    return await response.json();
+  }catch(error){error.provider='photon';throw error;}
+}
+async function photonSearch(value, size = 6, focus = null, localOnly = false) {
   const url = new URL('https://photon.komoot.io/api/');
   // The public Photon instance does not support lang=es. Its default keeps
   // local names instead of rejecting the fallback request with HTTP 400.
-  url.searchParams.set('q', value); url.searchParams.set('limit', String(Math.max(size, 6)));
+  url.searchParams.set('q', providerSearchText(value)); url.searchParams.set('limit', String(Math.max(size, 6)));
   if (focus) { url.searchParams.set('lat', String(focus.lat)); url.searchParams.set('lon', String(focus.lng)); url.searchParams.set('zoom', '12'); url.searchParams.set('location_bias_scale', '0.1'); }
-  const response = await fetch(url, { headers: { Accept: 'application/json' }, signal: AbortSignal.timeout(10000) });
-  if (!response.ok) throw new Error('PHOTON_GEOCODING_FAILED');
-  const payload = await response.json();
+  if(focus&&localOnly)url.searchParams.set('bbox',searchBounds(focus));
+  if(retailSearchIntent(value)){url.searchParams.set('dedupe','0');url.searchParams.set('osm_tag','shop');}
+  const payload=await photonPayload(url,localOnly);
   return (payload.features || []).map(feature => {
     const p = feature.properties || {}, coords = feature.geometry?.coordinates || [];
     if (['state', 'country', 'county'].includes(p.type)) return null;
     const lat = Number(coords[1]), lng = Number(coords[0]);
-    if (!Number.isFinite(lat) || !Number.isFinite(lng)) return null;
+    if (!Number.isFinite(coords[0]) || !Number.isFinite(coords[1]) || Math.abs(lat)>90 || Math.abs(lng)>180) return null;
     const street = p.housenumber && p.street ? p.housenumber + ' ' + p.street : p.street;
     const city = p.city || p.district;
     const label = [p.name, street, city !== p.name ? city : null, p.state, p.country].filter(Boolean).join(', ');
@@ -90,36 +97,51 @@ async function photonSearch(value, size = 6, focus = null) {
 async function searchLocations(value, apiKey, autocomplete = false, size = 6, focus = null) {
   const requested = requestedHouseNumber(value);
   const rank = results => rankAddressMatches(value, prioritizeLocations(value, rankAddressMatches(value, results), focus, Math.max(size, 8))).slice(0, size);
-  if (!apiKey) return rank(await photonSearch(value, Math.max(size, 8), focus));
-  try {
-    const payload = await peliasSearch(value, apiKey, autocomplete && !requested, Math.max(size, 8), focus);
-    const results = (payload.features || [])
-      .filter(feature => !['country', 'region', 'macroregion', 'county', 'macrocounty', 'localadmin', 'continent'].includes(feature.properties?.layer))
-      .map(feature => peliasPoint(feature, value)).filter(Boolean);
-    if (results.length) {
-      const ranked = rank(results);
-      // If the first index has only distant matches, consult the compatible
-      // OSM index as well. An unavailable fallback never discards good results.
-      if ((requested && ranked[0].numberMatch !== 'matched') || (focus && ranked[0].distanceMeters > 50000)) {
-        try { return rank([...results, ...await photonSearch(value, Math.max(size, 8), focus)]); } catch { return ranked; }
+  // A nearby hit in the global index is not evidence that all local branches
+  // were searched. Query the bounded OSM index in parallel for focused names.
+  // The explicit error handler prevents an unhandled background rejection.
+  const localPromise=autocomplete&&focus&&!requested
+    ? photonSearch(value,Math.max(size,20),focus,true).then(results=>({results,error:null}),error=>({results:[],error}))
+    : null;
+  const local=async()=>localPromise?await localPromise:{results:[],error:null};
+  if (apiKey) {
+    try {
+      const payload = await peliasSearch(value, apiKey, autocomplete && !requested, Math.max(size, 8), focus);
+      const results = (payload.features || [])
+        .filter(feature => !['country', 'region', 'macroregion', 'county', 'macrocounty', 'localadmin', 'continent'].includes(feature.properties?.layer))
+        .map(feature => peliasPoint(feature, value)).filter(Boolean);
+      const localResult=await local();
+      const ranked=rank([...results,...localResult.results]);
+      if(ranked.length){
+        if(localResult.error)return ranked;
+        if((requested&&ranked[0].numberMatch!=='matched')||(focus&&ranked[0].distanceMeters>50000&&localResult.results.length===0)){
+          try{return rank([...results,...localResult.results,...await photonSearch(value,Math.max(size,8),focus)]);}catch{return ranked;}
+        }
+        return ranked;
       }
-      return ranked;
+    } catch (error) {
+      if (![401, 402, 403, 404, 429].includes(error?.status) && !(error?.status >= 500) && error?.name !== 'TimeoutError' && error?.name !== 'AbortError' && error?.name !== 'TypeError') throw error;
+      app.log.warn({ status: error?.status, message: error?.message }, 'HeiGIT geocoding unavailable; falling back to Photon');
     }
-  } catch (error) {
-    if (![401, 402, 403, 404, 429].includes(error?.status) && !(error?.status >= 500) && error?.name !== 'TimeoutError' && error?.name !== 'AbortError' && error?.name !== 'TypeError') throw error;
-    app.log.warn({ status: error?.status, message: error?.message }, 'HeiGIT geocoding unavailable; falling back to Photon');
   }
+  const localResult=await local();
+  const localRanked=rank(localResult.results);
+  if(localRanked.length)return localRanked;
+  if(localResult.error)throw localResult.error;
   return rank(await photonSearch(value, Math.max(size, 8), focus));
 }
-const suggestionCache = new Map();
+const suggestionCache = new Map(), pendingSuggestions = new Map();
 async function cachedSuggestions(query, apiKey, focus) {
   const key = JSON.stringify([query.toLocaleLowerCase('es'), focus?.lat, focus?.lng]);
   const cached = suggestionCache.get(key);
   if (cached && cached.expires > Date.now()) return cached.value;
-  const value = await searchLocations(query, apiKey, true, 8, focus);
-  if (suggestionCache.size >= 200) suggestionCache.delete(suggestionCache.keys().next().value);
-  suggestionCache.set(key, { value, expires: Date.now() + 60000 });
-  return value;
+  if(pendingSuggestions.has(key))return pendingSuggestions.get(key);
+  const pending=searchLocations(query,apiKey,true,8,focus).then(value=>{
+    if(suggestionCache.size>=200)suggestionCache.delete(suggestionCache.keys().next().value);
+    suggestionCache.set(key,{value,expires:Date.now()+120000});return value;
+  }).finally(()=>pendingSuggestions.delete(key));
+  pendingSuggestions.set(key,pending);
+  return pending;
 }
 async function reverseLocation(point, apiKey) {
   const location = { ...point, label: `${point.lat}, ${point.lng}`, plusCode: encode(point.lat, point.lng) };
@@ -220,6 +242,11 @@ app.get('/v1/locations/suggest', { config: { rateLimit: { max: 30, timeWindow: '
   } catch (error) {
     if (error?.message === 'INVALID_SEARCH_FOCUS') return reply.code(400).send({ ok: false, code: 'INVALID_SEARCH_FOCUS', message: 'La ubicación de referencia no es válida.' });
     request.log.warn({ err: error?.message, providerStatus: error?.status }, 'Location suggestions failed');
+    if(error?.provider==='photon'){
+      if(error.status===429)return reply.code(429).send({ok:false,code:'PHOTON_RATE_LIMIT',message:'El servicio alterno de direcciones está ocupado por su límite de consultas. Espera un momento y vuelve a buscar, o corrobora el punto en el mapa.'});
+      if(error.name==='TimeoutError'||error.name==='AbortError')return reply.code(504).send({ok:false,code:'PHOTON_SEARCH_TIMEOUT',message:'El servicio alterno de direcciones tardó demasiado. Vuelve a buscar o corrobora el punto en el mapa.'});
+      return reply.code(503).send({ok:false,code:'PHOTON_UNAVAILABLE',message:'El servicio alterno de direcciones no está disponible. Vuelve a buscar más tarde o corrobora el punto en el mapa.'});
+    }
     if (error?.message === 'PLUS_CODE_NEEDS_LOCALITY') return reply.code(422).send({ ok: false, code: 'PLUS_CODE_NEEDS_LOCALITY', message: 'Este es un Plus Code corto. Añade la ciudad o localidad después del código, o utiliza el código global completo.' });
     if (error?.status === 401) return reply.code(502).send({ ok: false, code: 'ORS_AUTH_FAILED', message: 'HeiGIT no reconoció la clave de geocodificación.' });
     if (error?.status === 403) return reply.code(502).send({ ok: false, code: 'ORS_ACCESS_OR_DAILY_LIMIT', message: 'HeiGIT denegó la búsqueda por permisos o cuota diaria.' });
