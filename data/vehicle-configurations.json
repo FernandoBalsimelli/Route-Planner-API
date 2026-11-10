@@ -1,0 +1,100 @@
+{
+  "source": "https://sidof.segob.gob.mx/notas/docFuente/5508944",
+  "citation": "NOM-012-SCT-2-2017 · Tabla B-2, sólo nomenclatura y número de ejes",
+  "reviewedAt": "2026-11-10",
+  "legalLimitsValidated": false,
+  "configurations": [
+    {
+      "code": "C2",
+      "axles": 2
+    },
+    {
+      "code": "C3",
+      "axles": 3
+    },
+    {
+      "code": "C2-R2",
+      "axles": 4
+    },
+    {
+      "code": "C3-R2",
+      "axles": 5
+    },
+    {
+      "code": "C3-R3",
+      "axles": 6
+    },
+    {
+      "code": "C2-R3",
+      "axles": 5
+    },
+    {
+      "code": "T2-S1",
+      "axles": 3
+    },
+    {
+      "code": "T2-S2",
+      "axles": 4
+    },
+    {
+      "code": "T3-S2",
+      "axles": 5
+    },
+    {
+      "code": "T3-S3",
+      "axles": 6
+    },
+    {
+      "code": "T2-S3",
+      "axles": 5
+    },
+    {
+      "code": "T3-S1",
+      "axles": 4
+    },
+    {
+      "code": "T2-S1-R2",
+      "axles": 5
+    },
+    {
+      "code": "T2-S1-R3",
+      "axles": 6
+    },
+    {
+      "code": "T2-S2-R2",
+      "axles": 6
+    },
+    {
+      "code": "T3-S1-R2",
+      "axles": 6
+    },
+    {
+      "code": "T3-S1-R3",
+      "axles": 7
+    },
+    {
+      "code": "T3-S2-R2",
+      "axles": 7
+    },
+    {
+      "code": "T3-S2-R4",
+      "axles": 9
+    },
+    {
+      "code": "T3-S2-R3",
+      "axles": 8
+    },
+    {
+      "code": "T3-S3-S2",
+      "axles": 8
+    },
+    {
+      "code": "T2-S2-S2",
+      "axles": 6
+    },
+    {
+      "code": "T3-S2-S2",
+      "axles": 7
+    }
+  ]
+}

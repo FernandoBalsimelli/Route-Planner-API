@@ -25,6 +25,18 @@ begin
   end;
   if not failed then raise exception 'Cross-owner vehicle insertion was allowed'; end if;
 
+  update public.vehicles set axle_count=5,vehicle_configuration='T3-S2',payload_capacity_t=30.125 where id=vehicle_uuid;
+  if not exists(select 1 from public.vehicles where id=vehicle_uuid and payload_capacity_t=30.125 and axle_count=5) then raise exception 'Operating profile was not preserved'; end if;
+  failed:=false;
+  begin update public.vehicles set axle_count=3 where id=vehicle_uuid; exception when check_violation then failed:=true; end;
+  if not failed then raise exception 'Contradictory configuration accepted'; end if;
+  failed:=false;
+  begin update public.vehicles set payload_capacity_t=3.4999 where id=vehicle_uuid; exception when check_violation then failed:=true; end;
+  if not failed then raise exception 'Payload precision was silently rounded'; end if;
+  failed:=false;
+  begin update public.vehicles set vehicle_configuration='unknown' where id=vehicle_uuid; exception when check_violation then failed:=true; end;
+  if not failed then raise exception 'Unknown configuration accepted'; end if;
+
   route_data:=jsonb_build_object('name','Synthetic delivery route','vehicle_id',vehicle_uuid,
     'origin',jsonb_build_object('label','Origin','lat',25.67,'lng',-100.31),
     'destination',jsonb_build_object('label','Destination','lat',25.70,'lng',-100.34),

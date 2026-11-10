@@ -229,3 +229,12 @@ test('no route with road exclusions never retries silently without them', async 
   assert.match(response.json().message, /no se quitarán automáticamente/);
   assert.equal(requests, 1);
 });
+
+
+test('truck operating context is validated and retained without inventing ORS restrictions',async()=>{
+ const context={heightM:4,widthM:2.5,lengthM:18,grossWeightT:38,axleWeightT:9,axleCount:5,configuration:'T3-S2',payloadCapacityT:30.125};
+ provider=async(url,options)=>{const body=JSON.parse(options.body);assert.deepEqual(body.options.profile_params.restrictions,{height:4,width:2.5,length:18,weight:38,axleload:9});assert.equal(body.options.axleCount,undefined);return Response.json({routes:[{summary:{distance:2000,duration:300},segments:[]}]});};
+ const result=await plan({mode:'truck',vehicle:context},'127.5.0.1');assert.equal(result.statusCode,200);assert.deepEqual(result.json().route.vehicleContext,context);
+ provider=async()=>{throw Error('Invalid operating data must not reach provider');};
+ for(const vehicle of [{...context,axleCount:3},{...context,axleCount:undefined},{...context,configuration:'unknown'},{...context,payloadCapacityT:3.4999},{...context,axleCount:2.5}])assert.equal((await plan({mode:'truck',vehicle},'127.5.0.2')).statusCode,400);
+});
