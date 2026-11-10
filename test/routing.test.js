@@ -169,3 +169,63 @@ test('route waypoint geometry indexes are preserved only when the complete order
   else assert.ok(waypoints.every(point=>!Object.hasOwn(point,'geometryIndex')));
  }
 });
+
+
+test('road preferences reach Directions alongside all HGV restrictions without changing deliveries', async () => {
+  provider = async (url, options) => {
+    assert.ok(url.pathname.endsWith('/driving-hgv/json'));
+    const body = JSON.parse(options.body);
+    assert.deepEqual(body.coordinates, [origin, stop, destination].map(p => [p.lng, p.lat]));
+    assert.deepEqual(body.options.avoid_features, ['tollways', 'highways']);
+    assert.deepEqual(body.options.profile_params.restrictions, { height: 4, width: 2.5, length: 18, weight: 40, axleload: 9 });
+    assert.equal(body.options.vehicle_type, 'hgv');
+    return Response.json({ routes: [{ summary: { distance: 1234, duration: 500 }, segments: [] }] });
+  };
+  const preferences = { avoidTolls: true, avoidHighways: true };
+  const response = await plan({ mode: 'truck', preferences, vehicle: { heightM: 4, widthM: 2.5, lengthM: 18, grossWeightT: 40, axleWeightT: 9 } }, '127.4.0.1');
+  assert.equal(response.statusCode, 200);
+  assert.deepEqual(response.json().route.preferences, preferences);
+  assert.equal(response.json().route.optimized, false);
+});
+
+test('two-point delivery applies each road preference and defaults preserve existing routing', async () => {
+  for (const [preferences, expected] of [[{ avoidTolls: true }, ['tollways']], [{ avoidHighways: true }, ['highways']], [undefined, undefined]]) {
+    provider = async (url, options) => {
+      assert.ok(url.pathname.endsWith('/driving-car/json'));
+      const body = JSON.parse(options.body);
+      assert.equal(body.coordinates.length, 2);
+      assert.deepEqual(body.options?.avoid_features, expected);
+      if (!expected) assert.equal(body.options, undefined);
+      return Response.json({ routes: [{ summary: { distance: 1234, duration: 500 }, segments: [] }] });
+    };
+    const response = await plan({ stops: [], preferences }, '127.4.0.2');
+    assert.equal(response.statusCode, 200);
+    assert.equal(response.json().route.preferences.avoidTolls, preferences?.avoidTolls || false);
+    assert.equal(response.json().route.preferences.avoidHighways, preferences?.avoidHighways || false);
+  }
+});
+
+test('unsupported optimization preferences and malformed values fail before external routing', async () => {
+  provider = async () => { throw new Error('Validation must precede routing'); };
+  for (const preferences of [{ avoidTolls: 'true' }, { avoidHighways: 1 }, { tolls: true }, null]) {
+    const response = await plan({ preferences }, '127.4.0.3');
+    assert.equal(response.statusCode, 400);
+  }
+  const response = await plan({ stops: [stop, stop], optimize: true, preferences: { avoidTolls: true } }, '127.4.0.3');
+  assert.equal(response.statusCode, 400);
+  assert.match(response.json().issues[0].message, /optimización.*preferencias/);
+});
+
+test('no route with road exclusions never retries silently without them', async () => {
+  let requests = 0;
+  provider = async (url, options) => {
+    requests++;
+    assert.deepEqual(JSON.parse(options.body).options.avoid_features, ['highways']);
+    return Response.json({ error: { code: 2009, message: 'Route could not be found' } }, { status: 404 });
+  };
+  const response = await plan({ preferences: { avoidHighways: true } }, '127.4.0.4');
+  assert.equal(response.statusCode, 422);
+  assert.equal(response.json().code, 'ORS_NO_ROUTE');
+  assert.match(response.json().message, /no se quitarán automáticamente/);
+  assert.equal(requests, 1);
+});

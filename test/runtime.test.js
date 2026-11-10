@@ -31,7 +31,7 @@ test('HTTP handler passes JSON request bodies through to route validation', asyn
     body: JSON.stringify({ origin: 'Chihuahua', destination: 'Ciudad Juárez', stops: ['Villa Ahumada'] }),
   });
   assert.equal(response.status, 200);
-  assert.deepEqual(await response.json(), { ok: true, valid: true, mode: 'delivery', stopCount: 1 });
+  assert.deepEqual(await response.json(), { ok: true, valid: true, mode: 'delivery', stopCount: 1, preferences: { avoidTolls: false, avoidHighways: false } });
 });
 
 test('invalid input and unauthenticated planning return JSON errors', async () => {
