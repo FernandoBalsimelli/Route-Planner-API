@@ -233,3 +233,7 @@ COREMUN mientras la ficha vinculada de OJP respondió 503; ahora se conserva la
 evidencia nueva y el fallo exacto. En Juárez cambió la página vinculada de Gaceta,
 no el hash del documento principal. Son comprobaciones técnicas de esa ventana,
 no declaraciones de reformas ni de disponibilidad futura.
+
+Una respuesta remota retrasada de CDN no sustituye el reporte incorporado más
+reciente. Se conserva la comprobación con fecha más reciente y se comparten
+consultas simultáneas, manteniendo el límite de caché y tiempos de espera.

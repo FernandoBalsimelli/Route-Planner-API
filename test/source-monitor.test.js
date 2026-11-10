@@ -77,3 +77,14 @@ test('public reports independently mark stale evidence and reject injected docum
  const row=report.sources.find(row=>row.id===id);assert.equal(report.stale,false);assert.equal(row.stale,true);assert.equal(row.changeDetected,true);assert.equal(row.documents.length,1);assert.equal(row.documents[0].stale,true);assert.equal(row.documents[0].error,'NETWORK_OR_TIMEOUT');assert.equal(row.documentBreakdownAvailable,true);
  assert.ok(report.sources.filter(row=>row.id!==id).every(row=>row.stale&&row.status==='not_checked'));
 });
+
+
+test('a delayed remote checkpoint cannot replace newer bundled evidence and concurrent readers share one fetch',async()=>{
+ const {getSourceStatus}=await import('../lib/source-monitor.js');
+ const {default:snapshot}=await import('../data/mx/source-status.json',{with:{type:'json'}});
+ const original=globalThis.fetch;let calls=0;
+ try{
+  globalThis.fetch=async()=>{calls++;return Response.json({schemaVersion:1,checkedAt:'2020-01-01T00:00:00Z',sources:[]});};
+  const [a,b]=await Promise.all([getSourceStatus(),getSourceStatus()]);assert.equal(a.checkedAt,snapshot.checkedAt);assert.deepEqual(a,b);assert.equal(calls,1);assert.ok(a.sources.some(row=>row.documentBreakdownAvailable));
+ }finally{globalThis.fetch=original;}
+});
