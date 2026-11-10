@@ -40,10 +40,27 @@ test('public municipality endpoints validate identifiers and pagination and expo
 test('entities and municipalities sort alphabetically before pagination without featuring Nuevo León',()=>{
  const result=municipalCatalog({state:'19',limit:600});assert.equal(result.states[0].name,'Aguascalientes');assert.equal(result.municipalities[0].name,'Abasolo');
  assert.deepEqual(municipalCatalog({state:'19',limit:2,offset:2}).municipalities,result.municipalities.slice(2,4));
- assert.equal(result.municipalitiesWithPartialReference,13);
+ assert.equal(result.municipalitiesWithPartialReference,14);
 });
 test('new references preserve metropolitan scope, actual vehicle classes and unknown legal geometry',()=>{
  const jal=municipalReference('14039');assert.match(jal.scope,/Polígono/);assert.equal(jal.rules.find(rule=>rule.id==='jal-dobles').window.start,'06:00');assert.equal(jal.rules.find(rule=>rule.id==='jal-dobles').window.days,null);assert.deepEqual(jal.rules.find(rule=>rule.id==='jal-unitarios').vehicleConfigurations,['C2','C3']);
  for(const id of ['14039','08027','08037','09015']){const entry=municipalReference(id);assert.equal(entry.status,'reference_only');assert.equal(entry.routingEnforced,false);assert.ok(entry.rules.every(rule=>rule.geometry===null&&!rule.routingEnforced));}
  assert.equal(municipalReference('09015').trunkSegments.length,21);assert.match(municipalReference('08037').notices.join(' '),/histórica/);
+});
+
+
+test('Puebla separates amended loading windows, payload capacity, historical zones and repealed provisions', async () => {
+ const entry=municipalReference('21114');assert.equal(entry.status,'reference_only');assert.equal(entry.routingEnforced,false);
+ assert.equal(entry.source.id,'puebla-carga');assert.equal(entry.source.approvedAt,'2021-12-28');assert.equal(entry.source.publicationDateStatus,'requires_official_gazette_verification');
+ const lower=entry.rules.find(rule=>rule.id==='pue-capacidad-menor'),higher=entry.rules.find(rule=>rule.id==='pue-capacidad-mayor');
+ assert.deepEqual(lower.vehicleConditions,{payloadCapacityT:{lt:3.5}});assert.deepEqual(higher.vehicleConditions,{payloadCapacityT:{gt:3.5}});
+ assert.equal(lower.window.start,'09:30');assert.equal(higher.window.end,'07:00');assert.equal(higher.endsNextDay,true);assert.equal(higher.requiresOffStreetOperations,true);
+ assert.equal(lower.window.days,null);assert.equal(higher.window.timezone,'America/Mexico_City');
+ const historic=entry.rules.find(rule=>rule.id==='pue-zona-monumentos');assert.equal(historic.limits.grossWeightT,13);assert.equal(historic.limits.lengthM,12.5);assert.equal(historic.limits.heightM,4.25);assert.deepEqual(historic.vehicleConfigurations,['C2']);
+ assert.equal(entry.rules.find(rule=>rule.id==='pue-centro-largo').lengthWithoutSpecialAuthorizationM,11);
+ assert.deepEqual(entry.supersededProvisions[0].provisions,['Octavo','Noveno','Decimotercero']);
+ assert.ok(entry.rules.every(rule=>rule.geometry===null&&!rule.routingEnforced&&rule.interpretation==='requires_review'));
+ assert.match(entry.notices.join(' '),/exactamente igual a 3.5/);assert.match(entry.notices.join(' '),/vigencia actual/i);
+ const response=await app.inject('/v1/regulations/municipalities/21114');assert.equal(response.statusCode,200);assert.equal(response.json().source.id,'puebla-carga');
+ assert.equal(municipalCatalog().fullyVerifiedMunicipalities,0);
 });

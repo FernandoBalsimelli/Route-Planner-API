@@ -174,3 +174,27 @@ y cierres temporales. No se encontró una fuente oficial única mantenida que
 resuelva todos esos campos para los 2,478 municipios. INEGI/RNC no sustituye a
 los reglamentos. Priorizar las jurisdicciones de los recorridos reales y revisar
 cada fuente antes de activar una exclusión. No declarar finalizado el prompt maestro.
+
+
+## Puebla · referencia parcial revisada el 10 de noviembre de 2026
+
+Se añade Puebla (INEGI 21114): 14 municipios con alguna referencia parcial y
+2,464 sin referencia; siguen cero municipios con validación legal automática.
+La fuente es RES. 2021/49 en la Gaceta municipal, aprobada el 28-12-2021.
+La ficha del Orden Jurídico Poblano ofrece texto consolidado, pero su descarga
+respondió 503 en la revisión local; no se inventa un hash del PDF ni se declara
+comprobada la publicación o vigencia actual de todas sus disposiciones.
+
+Se conserva una advertencia explícita sobre la derogación de Octavo, Noveno y
+Decimotercero: los horarios de esos apartados de 2020 no se activan como reglas.
+La referencia distingue capacidad de carga menor/mayor de 3.5 t de peso bruto,
+ventanas de maniobras con cruce de medianoche y días desconocidos, condiciones
+de instalaciones, autorizaciones, límites C2 de Zona de Monumentos Históricos
+y longitud de Centro Histórico. El caso exactamente 3.5 t queda sin resolver.
+Ningún límite se extiende a todo el municipio ni al estado. No hay geometrías
+legales, sentido, excepciones ni permisos individuales verificados para enrutar.
+
+Se incorpora una sexta fuente al monitor: reforma municipal, página COREMUN y
+ficha OJP. Vigilar documentos no descubre todos los acuerdos ni certifica vigencia.
+Los datos y comparadores son sólo referencia; no se incorporan a Directions.
+Fuente primaria y enlaces de contraste quedan versionados en national-references.

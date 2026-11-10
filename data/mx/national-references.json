@@ -51,6 +51,21 @@
       "relatedUrls": [
         "https://regulaciones.cdmx.gob.mx/mejora/public/regulacionPdf/1679"
       ]
+    },
+    {
+      "id": "puebla-carga",
+      "title": "Puebla · Reforma de lineamientos de carga RES. 2021/49",
+      "url": "https://gaceta.pueblacapital.gob.mx/publicaciones/minutas/item/847-res-2021-49-dictamen-por-virtud-del-cual-se-reforman-y-derogan-diversas-disposiciones-de-los-lineamientos-para-la-operacion-del-transporte-de-carga-y-distribucion-de-mercancias-en-el-municipio-de-puebla-publicado-en-el-periodico-oficial-del",
+      "reviewedSha256": "30d6e5dd5a195983c1673b598e3ba2b0d1624c7c7f56ee8c7e4ed24e12f40be7",
+      "reviewedAt": "2026-11-10T13:10:42.825013+00:00",
+      "legalReview": "validity_requires_review",
+      "scope": "Municipio de Puebla: autorizaciones y maniobras; condiciones adicionales para Zona de Monumentos Históricos y Centro Histórico. Reforma aprobada el 28-12-2021; faltan reformas/acuerdos posteriores y geometrías.",
+      "approvedAt": "2021-12-28",
+      "publicationDateStatus": "requires_official_gazette_verification",
+      "relatedUrls": [
+        "https://gaceta.pueblacapital.gob.mx/coremun",
+        "https://ojp.puebla.gob.mx/normatividad-municipal/item/2396-lineamientos-para-la-operacion-del-transporte-de-carga-y-distribucion-de-mercancias-en-el-municipio-de-puebla"
+      ]
     }
   ],
   "packages": [
@@ -480,6 +495,139 @@
           "page": 1,
           "geometry": null,
           "geometryStatus": "not_validated"
+        }
+      ]
+    },
+    {
+      "municipalityIds": [
+        "21114"
+      ],
+      "sourceId": "puebla-carga",
+      "scope": "Jurisdicción municipal de Puebla; no todo el estado. Horarios de maniobras no equivalen a permiso de circulación. Polígonos patrimoniales, vías y sentidos pendientes de georreferenciar.",
+      "rules": [
+        {
+          "id": "pue-permiso",
+          "title": "Autorización y vigencia",
+          "description": "La autorización fija duración por evento y vigencia máxima de un año; debe portarse. Andenes o patios interiores tienen condiciones propias.",
+          "kind": "permit",
+          "citation": "RES. 2021/49 · Segundo, Tercero y Séptimo",
+          "geometry": null,
+          "routingEnforced": false,
+          "interpretation": "requires_review",
+          "maximumPermitValidityYears": 1
+        },
+        {
+          "id": "pue-capacidad-menor",
+          "title": "Maniobras: capacidad menor de 3.5 t",
+          "description": "El texto contempla 09:30–12:00 para capacidad de carga menor de 3.5 t. Capacidad de carga no es peso bruto; permisos y ámbito deben corroborarse.",
+          "kind": "time_window",
+          "citation": "RES. 2021/49 · Decimoprimero I",
+          "geometry": null,
+          "routingEnforced": false,
+          "interpretation": "requires_review",
+          "window": {
+            "start": "09:30",
+            "end": "12:00",
+            "timezone": "America/Mexico_City",
+            "days": null,
+            "effect": "conditional_loading_window",
+            "daysStatus": "not_specified_in_reviewed_text"
+          },
+          "vehicleConditions": {
+            "payloadCapacityT": {
+              "lt": 3.5
+            }
+          }
+        },
+        {
+          "id": "pue-capacidad-mayor",
+          "title": "Maniobras: capacidad mayor de 3.5 t",
+          "description": "Contempla 21:00–07:00 del día siguiente para capacidad mayor de 3.5 t, dentro de instalaciones y sin obstruir banqueta ni calzada.",
+          "kind": "time_window",
+          "citation": "RES. 2021/49 · Decimoprimero II",
+          "geometry": null,
+          "routingEnforced": false,
+          "interpretation": "requires_review",
+          "window": {
+            "start": "21:00",
+            "end": "07:00",
+            "timezone": "America/Mexico_City",
+            "days": null,
+            "effect": "conditional_loading_window",
+            "daysStatus": "not_specified_in_reviewed_text"
+          },
+          "endsNextDay": true,
+          "vehicleConditions": {
+            "payloadCapacityT": {
+              "gt": 3.5
+            }
+          },
+          "requiresOffStreetOperations": true
+        },
+        {
+          "id": "pue-zona-monumentos",
+          "title": "Zona de Monumentos Históricos · límites del texto",
+          "description": "C2: peso total 13 t, largo 12.50 m, ancho 2.60 m y altura 4.25 m; ámbito y excepciones pendientes de verificar.",
+          "kind": "dimensions",
+          "citation": "RES. 2021/49 · Decimoprimero III",
+          "geometry": null,
+          "routingEnforced": false,
+          "interpretation": "requires_review",
+          "vehicleConfigurations": [
+            "C2"
+          ],
+          "limits": {
+            "grossWeightT": 13,
+            "lengthM": 12.5,
+            "widthM": 2.6,
+            "heightM": 4.25,
+            "loadWidthM": 2.6
+          },
+          "geographicScope": "Zona de Monumentos Históricos"
+        },
+        {
+          "id": "pue-centro-largo",
+          "title": "Centro Histórico · autorización por longitud",
+          "description": "El texto fija 11 m para ingreso al Centro Histórico; exceder requiere autorización de las autoridades citadas. No extiende ese límite a todo Puebla.",
+          "kind": "permit",
+          "citation": "RES. 2021/49 · Decimoprimero, párrafo final",
+          "geometry": null,
+          "routingEnforced": false,
+          "interpretation": "requires_review",
+          "lengthWithoutSpecialAuthorizationM": 11,
+          "geographicScope": "Centro Histórico"
+        }
+      ],
+      "supersededProvisions": [
+        {
+          "citation": "RES. 2021/49 · Considerando XIX",
+          "provisions": [
+            "Octavo",
+            "Noveno",
+            "Decimotercero"
+          ],
+          "status": "derogated_by_reviewed_amendment",
+          "routingEnforced": false
+        }
+      ],
+      "notices": [
+        "Referencia parcial de la reforma de 2021; vigencia actual y publicación/entrada en vigor exactas pendientes de consolidar con el Periódico Oficial y actos posteriores. No se aplica al cálculo.",
+        "No reutilizar los horarios de los apartados Octavo, Noveno o Decimotercero de la versión de 2020: la reforma consultada los deroga.",
+        "La capacidad exactamente igual a 3.5 t no queda resuelta por los comparadores menor/mayor del texto; no se asigna automáticamente una ventana. Días, permisos, excepciones y el alcance entre vía pública e instalaciones requieren revisión.",
+        "No hay geometrías legales verificadas para zonas, tramos o sentidos. El perfil HGV no transmite capacidad de carga, configuración C2 ni autorizaciones municipales."
+      ],
+      "relatedLinks": [
+        {
+          "title": "Orden Jurídico Poblano · ficha del ordenamiento",
+          "url": "https://ojp.puebla.gob.mx/normatividad-municipal/item/2396-lineamientos-para-la-operacion-del-transporte-de-carga-y-distribucion-de-mercancias-en-el-municipio-de-puebla"
+        },
+        {
+          "title": "Texto consolidado disponible en OJP · verificar descarga y reformas",
+          "url": "https://ojp.puebla.gob.mx/normatividad-municipal/item/download/3472_e1e2843ce8ac25201253295b75b8841c"
+        },
+        {
+          "title": "COREMUN actual del municipio",
+          "url": "https://gaceta.pueblacapital.gob.mx/coremun"
         }
       ]
     }
