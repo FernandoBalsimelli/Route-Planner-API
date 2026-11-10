@@ -27,6 +27,7 @@ const routeSchema = z.object({
   stops: z.array(locationSchema).max(48).optional().default([]),
   mode: z.enum(['delivery', 'truck']).default('delivery'),
   optimize: z.boolean().default(false),
+  preferences: z.object({ avoidTolls: z.boolean().default(false), avoidHighways: z.boolean().default(false) }).strict().default({ avoidTolls: false, avoidHighways: false }),
   vehicle: z.object({
     heightM: z.number().positive().max(10).optional(),
     widthM: z.number().positive().max(5).optional(),
@@ -34,6 +35,10 @@ const routeSchema = z.object({
     grossWeightT: z.number().positive().max(100).optional(),
     axleWeightT: z.number().positive().max(30).optional(),
   }).optional(),
+}).superRefine((input, ctx) => {
+  if (input.mode === 'delivery' && input.optimize && input.stops.length > 1 && (input.preferences.avoidTolls || input.preferences.avoidHighways)) {
+    ctx.addIssue({ code: 'custom', path: ['optimize'], message: 'La optimización del orden no aplica las preferencias de carreteras. Desactívala para evitar peajes o autopistas y conservar el orden de entregas.' });
+  }
 });
 
 function coordinate(value) {
@@ -266,7 +271,7 @@ app.get('/v1/locations/reverse', { config: { rateLimit: { max: 30, timeWindow: '
 app.post('/v1/routes/validate', async (request, reply) => {
   const parsed = routeSchema.safeParse(request.body);
   if (!parsed.success) return reply.code(400).send({ ok: false, message: 'Datos de ruta inválidos.', issues: parsed.error.issues.map(issue => ({ path: issue.path.join('.'), message: issue.message })) });
-  return { ok: true, valid: true, mode: parsed.data.mode, stopCount: parsed.data.stops.length };
+  return { ok: true, valid: true, mode: parsed.data.mode, stopCount: parsed.data.stops.length, preferences: parsed.data.preferences };
 });
 
 app.post('/v1/routes/plan', { config: { rateLimit: { max: 10, timeWindow: '1 minute' } } }, async (request, reply) => {
@@ -326,9 +331,17 @@ app.post('/v1/routes/plan', { config: { rateLimit: { max: 10, timeWindow: '1 min
       optimized = true;
     }
 
+    const avoidFeatures = [
+      ...(input.preferences.avoidTolls ? ['tollways'] : []),
+      ...(input.preferences.avoidHighways ? ['highways'] : []),
+    ];
+    const options = {
+      ...(avoidFeatures.length ? { avoid_features: avoidFeatures } : {}),
+      ...(input.mode === 'truck' ? { vehicle_type: 'hgv', profile_params: { restrictions: buildRestrictions(input.vehicle || {}) } } : {}),
+    };
     const body = {
       coordinates: routeLocations.map(point => [point.lng, point.lat]), instructions: true, language: 'es', units: 'm',
-      ...(input.mode === 'truck' ? { options: { vehicle_type: 'hgv', profile_params: { restrictions: buildRestrictions(input.vehicle || {}) } } } : {}),
+      ...(Object.keys(options).length ? { options } : {}),
     };
     const response = await fetch(ORS_BASE_URL + '/openrouteservice/v2/directions/' + profile + '/json', {
       method: 'POST',
@@ -344,6 +357,7 @@ app.post('/v1/routes/plan', { config: { rateLimit: { max: 10, timeWindow: '1 min
       if (response.status === 402) return reply.code(503).send({ ok: false, code: 'ORS_PLAN_RESTRICTION', message: 'El nivel actual de la clave no permite esta solicitud. Comprueba los permisos y límites de tu plan de HeiGIT.' });
       if (response.status === 429) return reply.code(429).send({ ok: false, code: 'ORS_RATE_LIMIT', message: 'Se alcanzó temporalmente el límite de solicitudes de HeiGIT. Intenta más tarde.' });
       const { status, ...problem } = routingFailure(response.status, failure, routeLocations, locations);
+      if (['ORS_NO_ROUTE', 'ORS_ROUTING_FAILED'].includes(problem.code) && avoidFeatures.length) problem.message += ' Se solicitaron exclusiones de peajes o autopistas; no se quitarán automáticamente. Puedes revisarlas y volver a calcular.';
       return reply.code(status).send(problem);
     }
     const data = await response.json(), route = data.routes?.[0];
@@ -358,7 +372,7 @@ app.post('/v1/routes/plan', { config: { rateLimit: { max: 10, timeWindow: '1 min
       && geometryPoints && route.way_points.every((value,index,all) => Number.isSafeInteger(value) && value >= 0 && value < geometryPoints.length && (!index || value >= all[index-1]))
       ? route.way_points : null;
     return { ok: true, route: {
-      distanceMeters: summary.distance || 0, durationSeconds: summary.duration || 0, polyline: route.geometry, sections, notices: [], optimized,
+      distanceMeters: summary.distance || 0, durationSeconds: summary.duration || 0, polyline: route.geometry, sections, notices: [], optimized, preferences: input.preferences,
       regulatoryCoverage: routeRegulatoryCoverage(route.geometry),
       waypoints: routeLocations.map((point, index) => ({ ...point, ...(waypointIndexes ? {geometryIndex:waypointIndexes[index]} : {}), type: index === 0 ? 'origin' : index === routeLocations.length - 1 ? 'destination' : 'stop' })),
     }, provider: 'openrouteservice' };
