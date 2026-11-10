@@ -1,4 +1,5 @@
 import Fastify from 'fastify';
+import vehicleConfigurations from './data/vehicle-configurations.json' with { type: 'json' };
 import cors from '@fastify/cors';
 import rateLimit from '@fastify/rate-limit';
 import { z } from 'zod';
@@ -34,6 +35,12 @@ const routeSchema = z.object({
     lengthM: z.number().positive().max(30).optional(),
     grossWeightT: z.number().positive().max(100).optional(),
     axleWeightT: z.number().positive().max(30).optional(),
+    axleCount: z.number().int().min(2).max(12).optional(),
+    configuration: z.enum(vehicleConfigurations.configurations.map(item=>item.code)).optional(),
+    payloadCapacityT: z.number().positive().max(100).multipleOf(0.001).optional(),
+  }).superRefine((vehicle,ctx)=>{
+    const configuration=vehicleConfigurations.configurations.find(item=>item.code===vehicle.configuration);
+    if(configuration&&vehicle.axleCount!==configuration.axles)ctx.addIssue({code:'custom',path:['axleCount'],message:'El número de ejes no coincide con la configuración seleccionada.'});
   }).optional(),
 }).superRefine((input, ctx) => {
   if (input.mode === 'delivery' && input.optimize && input.stops.length > 1 && (input.preferences.avoidTolls || input.preferences.avoidHighways)) {
@@ -372,7 +379,7 @@ app.post('/v1/routes/plan', { config: { rateLimit: { max: 10, timeWindow: '1 min
       && geometryPoints && route.way_points.every((value,index,all) => Number.isSafeInteger(value) && value >= 0 && value < geometryPoints.length && (!index || value >= all[index-1]))
       ? route.way_points : null;
     return { ok: true, route: {
-      distanceMeters: summary.distance || 0, durationSeconds: summary.duration || 0, polyline: route.geometry, sections, notices: [], optimized, preferences: input.preferences,
+      distanceMeters: summary.distance || 0, durationSeconds: summary.duration || 0, polyline: route.geometry, sections, notices: [], optimized, preferences: input.preferences, ...(input.mode==='truck'?{vehicleContext:input.vehicle||{}}:{}),
       regulatoryCoverage: routeRegulatoryCoverage(route.geometry),
       waypoints: routeLocations.map((point, index) => ({ ...point, ...(waypointIndexes ? {geometryIndex:waypointIndexes[index]} : {}), type: index === 0 ? 'origin' : index === routeLocations.length - 1 ? 'destination' : 'stop' })),
     }, provider: 'openrouteservice' };
