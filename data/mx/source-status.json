@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-11-09T19:04:47.284Z",
+  "checkedAt": "2026-11-10T07:37:54.677Z",
   "sources": [
     {
       "id": "cdmx-centro",
-      "checkedAt": "2026-11-09T19:04:47.284Z",
+      "checkedAt": "2026-11-10T07:37:54.677Z",
       "lastSuccessAt": null,
       "status": "unavailable",
       "error": "NETWORK_OR_TIMEOUT"
     },
     {
       "id": "guachochi-transito",
-      "checkedAt": "2026-11-09T19:04:47.284Z",
-      "lastSuccessAt": "2026-11-09T19:04:47.284Z",
+      "checkedAt": "2026-11-10T07:37:54.677Z",
+      "lastSuccessAt": "2026-11-10T07:37:54.677Z",
       "status": "unchanged",
       "sha256": "b6a5ea63d8e27ce905a23947dd26d036bc82ea263b6e3735539f9e34251e23fa",
       "initialSha256": "b6a5ea63d8e27ce905a23947dd26d036bc82ea263b6e3735539f9e34251e23fa",
@@ -22,8 +22,8 @@
     },
     {
       "id": "jalisco-carga",
-      "checkedAt": "2026-11-09T19:04:47.284Z",
-      "lastSuccessAt": "2026-11-09T19:04:47.284Z",
+      "checkedAt": "2026-11-10T07:37:54.677Z",
+      "lastSuccessAt": "2026-11-10T07:37:54.677Z",
       "status": "unreviewed",
       "sha256": "933aa2ae6cc3223992b9d9fc8ab050afd3922f556f5d80c50cd41d217c4c6a6c",
       "initialSha256": "933aa2ae6cc3223992b9d9fc8ab050afd3922f556f5d80c50cd41d217c4c6a6c",
@@ -37,7 +37,7 @@
     },
     {
       "id": "juarez-carga",
-      "checkedAt": "2026-11-09T19:04:47.284Z",
+      "checkedAt": "2026-11-10T07:37:54.677Z",
       "lastSuccessAt": "2026-11-09T19:01:16.644Z",
       "status": "unavailable",
       "sha256": "4f80a7a495c017fd8642525688f73919c110608dd5e64cff4cb5950d83eb92cd",
@@ -52,8 +52,8 @@
     },
     {
       "id": "monterrey-transito",
-      "checkedAt": "2026-11-09T19:04:47.284Z",
-      "lastSuccessAt": "2026-11-09T19:04:47.284Z",
+      "checkedAt": "2026-11-10T07:37:54.677Z",
+      "lastSuccessAt": "2026-11-10T07:37:54.677Z",
       "status": "unchanged",
       "sha256": "965778f0f966c39dc865f8d69492a4cc8b95c73e6aea56e50e4c071b8dfd3aff",
       "initialSha256": "965778f0f966c39dc865f8d69492a4cc8b95c73e6aea56e50e4c071b8dfd3aff",
