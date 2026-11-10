@@ -2,6 +2,7 @@
 import {createHash} from 'node:crypto';
 import {readFile,writeFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
+import {evidenceBefore,successfulEvidence,failedEvidence} from '../lib/source-evidence.js';
 import registry from '../data/mx/national-references.json' with {type:'json'};
 const MAX_BYTES=20*1024*1024;
 const digest=bytes=>createHash('sha256').update(bytes).digest('hex');
@@ -22,25 +23,40 @@ export async function download(url,hosts,fetcher=fetch){
  throw Error('TOO_MANY_REDIRECTS');
 }
 export async function checkSource(source,previous={},fetcher=fetch,now=new Date().toISOString()){
- const urls=[source.url,...(source.relatedUrls||[])];
- const hosts=new Set(urls.flatMap(url=>{const host=new URL(url).hostname;return [host,host.startsWith('www.')?host.slice(4):'www.'+host];}));
- try{
-  const document=await download(source.url,hosts,fetcher),sha256=digest(document.bytes),relatedHashes={};
-  if(source.watchMainScript){
-   const matches=[...document.bytes.toString('utf8').matchAll(/<script\b[^>]*\bsrc=["']([^"']+)["']/gi)];
-   const asset=matches.map(match=>new URL(match[1],document.url)).find(url=>/\/(?:main|app)[.\-][^/]+\.js$/.test(url.pathname));
-   if(!asset)throw Error('MAIN_SCRIPT_NOT_FOUND');
-   urls.push(asset.href);
-  }
-  for(const url of urls.slice(1,4)){const asset=await download(url,hosts,fetcher);relatedHashes[url]=digest(asset.bytes);}
-  const initialSha256=previous.initialSha256||sha256,initialRelatedHashes=previous.initialRelatedHashes||relatedHashes;
-  const changed=sha256!==(source.reviewedSha256||initialSha256)||JSON.stringify(relatedHashes)!==JSON.stringify(initialRelatedHashes);
-  return {id:source.id,checkedAt:now,lastSuccessAt:now,status:changed?'changed':source.reviewedSha256?'unchanged':'unreviewed',sha256,initialSha256,relatedHashes,initialRelatedHashes,error:null};
- }catch(error){
-  const message=error instanceof Error?error.message:'';
-  const safeError=/^(HTTP_\d{3}|UNAPPROVED_REDIRECT|INVALID_REDIRECT|DOCUMENT_TOO_LARGE|EMPTY_DOCUMENT|TOO_MANY_REDIRECTS|MAIN_SCRIPT_NOT_FOUND)$/.test(message)?message:'NETWORK_OR_TIMEOUT';
-  return {...previous,id:source.id,checkedAt:now,lastSuccessAt:previous.lastSuccessAt||null,status:'unavailable',error:safeError};
+ const relatedUrls=source.relatedUrls||[];
+ const hosts=new Set([source.url,...relatedUrls].flatMap(url=>{const host=new URL(url).hostname;return [host,host.startsWith('www.')?host.slice(4):'www.'+host];}));
+ const documents=[];
+ let primary,scriptKnown=!source.watchMainScript;
+ async function check(url,kind){
+  const before=evidenceBefore(source,previous,url,kind);
+  try{
+   const result=await download(url,hosts,fetcher);
+   const document=successfulEvidence(url,kind,digest(result.bytes),before,kind==='primary'?source.reviewedSha256:null,now);
+   documents.push(document);return result;
+  }catch(error){documents.push(failedEvidence(url,kind,before,error,now));return null;}
  }
+ primary=await check(source.url,'primary');
+ for(const url of relatedUrls)await check(url,'related');
+ if(source.watchMainScript){
+  const matches=primary?[...primary.bytes.toString('utf8').matchAll(/<script\b[^>]*\bsrc=["']([^"']+)["']/gi)]:[];
+  const asset=matches.map(match=>new URL(match[1],primary.url)).find(url=>/\/(?:main|app)[.\-][^/]+\.js$/.test(url.pathname));
+  if(asset){scriptKnown=true;await check(asset.href,'script');}
+  else documents.push(failedEvidence(null,'script',{},new Error(primary?'MAIN_SCRIPT_NOT_FOUND':'SCRIPT_DISCOVERY_UNAVAILABLE'),now));
+ }
+ const main=documents[0],failed=documents.filter(item=>item.status==='unavailable');
+ const changeKinds=[...new Set(documents.filter(item=>item.changeDetected).map(item=>item.kind))];
+ // A changed set of links/bundles is distinct from changed contents at the same URL.
+ const previousRelated=Object.keys(previous.initialRelatedHashes||{}).sort();
+ const currentRelated=documents.filter(item=>item.kind!=='primary'&&item.url).map(item=>item.url).sort();
+ const relatedSetChanged=scriptKnown && previousRelated.length>0 && JSON.stringify(previousRelated)!==JSON.stringify(currentRelated);
+ const changeDetected=changeKinds.length>0||relatedSetChanged;
+ const allSucceeded=failed.length===0;
+ const relatedHashes=Object.fromEntries(documents.filter(item=>item.kind!=='primary'&&item.url&&item.sha256).map(item=>[item.url,item.sha256]));
+ const initialRelatedHashes={...(previous.initialRelatedHashes||{}),...Object.fromEntries(documents.filter(item=>item.kind!=='primary'&&item.url&&item.initialSha256).map(item=>[item.url,item.initialSha256]))};
+ return {id:source.id,checkedAt:now,lastSuccessAt:allSucceeded?now:previous.lastSuccessAt||null,primaryLastSuccessAt:main.lastSuccessAt,
+  status:!allSucceeded?'unavailable':changeDetected?'changed':documents.every(item=>item.status==='unchanged')?'unchanged':'unreviewed',
+  availability:allSucceeded?'available':documents.some(item=>item.status!=='unavailable')?'partial':'unavailable',
+  changeDetected,changeKinds,relatedSetChanged,sha256:main.sha256||null,initialSha256:main.initialSha256||null,relatedHashes,initialRelatedHashes,documents,error:failed[0]?.error||null};
 }
 export async function checkAll(sources,previous,fetcher=fetch){
  const checkedAt=new Date().toISOString(),rows=[];
