@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-11-10T13:48:48.328Z",
+  "checkedAt": "2026-11-10T19:55:12.029Z",
   "sources": [
     {
       "id": "cdmx-centro",
-      "checkedAt": "2026-11-10T13:48:48.328Z",
+      "checkedAt": "2026-11-10T19:55:12.029Z",
       "lastSuccessAt": null,
       "primaryLastSuccessAt": null,
       "status": "unavailable",
@@ -23,7 +23,7 @@
           "sha256": null,
           "changeDetected": false,
           "lastSuccessAt": null,
-          "checkedAt": "2026-11-10T13:48:48.328Z",
+          "checkedAt": "2026-11-10T19:55:12.029Z",
           "status": "unavailable",
           "error": "NETWORK_OR_TIMEOUT"
         },
@@ -33,7 +33,7 @@
           "sha256": null,
           "changeDetected": false,
           "lastSuccessAt": null,
-          "checkedAt": "2026-11-10T13:48:48.328Z",
+          "checkedAt": "2026-11-10T19:55:12.029Z",
           "status": "unavailable",
           "error": "NETWORK_OR_TIMEOUT"
         }
@@ -42,9 +42,9 @@
     },
     {
       "id": "guachochi-transito",
-      "checkedAt": "2026-11-10T13:48:48.328Z",
-      "lastSuccessAt": "2026-11-10T13:48:48.328Z",
-      "primaryLastSuccessAt": "2026-11-10T13:48:48.328Z",
+      "checkedAt": "2026-11-10T19:55:12.029Z",
+      "lastSuccessAt": "2026-11-10T19:55:12.029Z",
+      "primaryLastSuccessAt": "2026-11-10T19:55:12.029Z",
       "status": "unchanged",
       "availability": "available",
       "changeDetected": false,
@@ -58,8 +58,8 @@
         {
           "url": "https://chihuahua.gob.mx/sites/default/atach2/periodico-oficial/anexos/2023-10/ANEXO%2081-2023%20%20ACUERDO%20N%C2%B0%20184%20%20REGLAMENTO%20DE%20VIALIDAD%20Y%20TRANSITO%20GUACHOCHI-2023.pdf",
           "kind": "primary",
-          "checkedAt": "2026-11-10T13:48:48.328Z",
-          "lastSuccessAt": "2026-11-10T13:48:48.328Z",
+          "checkedAt": "2026-11-10T19:55:12.029Z",
+          "lastSuccessAt": "2026-11-10T19:55:12.029Z",
           "status": "unchanged",
           "changeDetected": false,
           "sha256": "b6a5ea63d8e27ce905a23947dd26d036bc82ea263b6e3735539f9e34251e23fa",
@@ -71,9 +71,9 @@
     },
     {
       "id": "jalisco-carga",
-      "checkedAt": "2026-11-10T13:48:48.328Z",
-      "lastSuccessAt": "2026-11-10T13:48:48.328Z",
-      "primaryLastSuccessAt": "2026-11-10T13:48:48.328Z",
+      "checkedAt": "2026-11-10T19:55:12.029Z",
+      "lastSuccessAt": "2026-11-10T19:55:12.029Z",
+      "primaryLastSuccessAt": "2026-11-10T19:55:12.029Z",
       "status": "unreviewed",
       "availability": "available",
       "changeDetected": false,
@@ -91,8 +91,8 @@
         {
           "url": "https://transportedecarga.jalisco.gob.mx/",
           "kind": "primary",
-          "checkedAt": "2026-11-10T13:48:48.328Z",
-          "lastSuccessAt": "2026-11-10T13:48:48.328Z",
+          "checkedAt": "2026-11-10T19:55:12.029Z",
+          "lastSuccessAt": "2026-11-10T19:55:12.029Z",
           "status": "unreviewed",
           "changeDetected": false,
           "sha256": "933aa2ae6cc3223992b9d9fc8ab050afd3922f556f5d80c50cd41d217c4c6a6c",
@@ -102,8 +102,8 @@
         {
           "url": "https://transportedecarga.jalisco.gob.mx/main.e031437b43e0350ea748.js",
           "kind": "script",
-          "checkedAt": "2026-11-10T13:48:48.328Z",
-          "lastSuccessAt": "2026-11-10T13:48:48.328Z",
+          "checkedAt": "2026-11-10T19:55:12.029Z",
+          "lastSuccessAt": "2026-11-10T19:55:12.029Z",
           "status": "unreviewed",
           "changeDetected": false,
           "sha256": "23a65fe8f742d86df193b133f3d85c63336213f2a2938c31d9c07018bbecaa8a",
@@ -115,7 +115,7 @@
     },
     {
       "id": "juarez-carga",
-      "checkedAt": "2026-11-10T13:48:48.328Z",
+      "checkedAt": "2026-11-10T19:55:12.029Z",
       "lastSuccessAt": "2026-11-10T13:43:55.256Z",
       "primaryLastSuccessAt": "2026-11-10T13:43:55.256Z",
       "status": "unavailable",
@@ -137,7 +137,7 @@
         {
           "url": "https://www.juarez.gob.mx/2015cf/transparencia/docs.php?file=155127",
           "kind": "primary",
-          "checkedAt": "2026-11-10T13:48:48.328Z",
+          "checkedAt": "2026-11-10T19:55:12.029Z",
           "lastSuccessAt": "2026-11-10T13:43:55.256Z",
           "status": "unavailable",
           "changeDetected": false,
@@ -148,7 +148,7 @@
         {
           "url": "https://www.juarez.gob.mx/gaceta-municipal/",
           "kind": "related",
-          "checkedAt": "2026-11-10T13:48:48.328Z",
+          "checkedAt": "2026-11-10T19:55:12.029Z",
           "lastSuccessAt": "2026-11-10T13:43:55.256Z",
           "status": "unavailable",
           "changeDetected": true,
@@ -161,9 +161,9 @@
     },
     {
       "id": "monterrey-transito",
-      "checkedAt": "2026-11-10T13:48:48.328Z",
-      "lastSuccessAt": "2026-11-10T13:48:48.328Z",
-      "primaryLastSuccessAt": "2026-11-10T13:48:48.328Z",
+      "checkedAt": "2026-11-10T19:55:12.029Z",
+      "lastSuccessAt": "2026-11-10T19:55:12.029Z",
+      "primaryLastSuccessAt": "2026-11-10T19:55:12.029Z",
       "status": "unchanged",
       "availability": "available",
       "changeDetected": false,
@@ -177,8 +177,8 @@
         {
           "url": "https://www.monterrey.gob.mx/pdf/portaln/reglamentos/Reglamento%20de%20Transito%20y%20Vialidad%20del%20Municipio%20de%20Monterrey.pdf",
           "kind": "primary",
-          "checkedAt": "2026-11-10T13:48:48.328Z",
-          "lastSuccessAt": "2026-11-10T13:48:48.328Z",
+          "checkedAt": "2026-11-10T19:55:12.029Z",
+          "lastSuccessAt": "2026-11-10T19:55:12.029Z",
           "status": "unchanged",
           "changeDetected": false,
           "sha256": "965778f0f966c39dc865f8d69492a4cc8b95c73e6aea56e50e4c071b8dfd3aff",
@@ -190,9 +190,9 @@
     },
     {
       "id": "puebla-carga",
-      "checkedAt": "2026-11-10T13:48:48.328Z",
-      "lastSuccessAt": "2026-11-10T13:48:48.328Z",
-      "primaryLastSuccessAt": "2026-11-10T13:48:48.328Z",
+      "checkedAt": "2026-11-10T19:55:12.029Z",
+      "lastSuccessAt": "2026-11-10T19:55:12.029Z",
+      "primaryLastSuccessAt": "2026-11-10T19:55:12.029Z",
       "status": "changed",
       "availability": "available",
       "changeDetected": true,
@@ -201,10 +201,10 @@
         "related"
       ],
       "relatedSetChanged": false,
-      "sha256": "b503c59f5dd9fa46cb74e9f764b6916459fc4f017990f1bb7d6903a96df1e15b",
+      "sha256": "667c0ab82e2c3895c497e0438ea8387726a3cb17285e51baa229350ba38b207c",
       "initialSha256": "565e7e635f9270f2523a5d6b13546615394148e217bc309a975723f498bd78c7",
       "relatedHashes": {
-        "https://gaceta.pueblacapital.gob.mx/coremun": "4bf89bbd3114f173078b9507fa6911a9aafc10582b10f45ddd6e6954129aa1a3",
+        "https://gaceta.pueblacapital.gob.mx/coremun": "579960b37c04c1aef5a088ffd7b23a92296519a2584f7134fe31cc5584bf9f46",
         "https://ojp.puebla.gob.mx/normatividad-municipal/item/2396-lineamientos-para-la-operacion-del-transporte-de-carga-y-distribucion-de-mercancias-en-el-municipio-de-puebla": "bf6eb2fca5f5f0568852d417e27513bb3415c51cfef75bcbc590c9e40b8aaf95"
       },
       "initialRelatedHashes": {
@@ -215,30 +215,30 @@
         {
           "url": "https://gaceta.pueblacapital.gob.mx/publicaciones/minutas/item/847-res-2021-49-dictamen-por-virtud-del-cual-se-reforman-y-derogan-diversas-disposiciones-de-los-lineamientos-para-la-operacion-del-transporte-de-carga-y-distribucion-de-mercancias-en-el-municipio-de-puebla-publicado-en-el-periodico-oficial-del",
           "kind": "primary",
-          "checkedAt": "2026-11-10T13:48:48.328Z",
-          "lastSuccessAt": "2026-11-10T13:48:48.328Z",
+          "checkedAt": "2026-11-10T19:55:12.029Z",
+          "lastSuccessAt": "2026-11-10T19:55:12.029Z",
           "status": "changed",
           "changeDetected": true,
-          "sha256": "b503c59f5dd9fa46cb74e9f764b6916459fc4f017990f1bb7d6903a96df1e15b",
+          "sha256": "667c0ab82e2c3895c497e0438ea8387726a3cb17285e51baa229350ba38b207c",
           "initialSha256": "565e7e635f9270f2523a5d6b13546615394148e217bc309a975723f498bd78c7",
           "error": null
         },
         {
           "url": "https://gaceta.pueblacapital.gob.mx/coremun",
           "kind": "related",
-          "checkedAt": "2026-11-10T13:48:48.328Z",
-          "lastSuccessAt": "2026-11-10T13:48:48.328Z",
+          "checkedAt": "2026-11-10T19:55:12.029Z",
+          "lastSuccessAt": "2026-11-10T19:55:12.029Z",
           "status": "changed",
           "changeDetected": true,
-          "sha256": "4bf89bbd3114f173078b9507fa6911a9aafc10582b10f45ddd6e6954129aa1a3",
+          "sha256": "579960b37c04c1aef5a088ffd7b23a92296519a2584f7134fe31cc5584bf9f46",
           "initialSha256": "5d8132328de52220fcae90a8a68a073d3b1d03c35e7a513e8d4e3840e70db6a6",
           "error": null
         },
         {
           "url": "https://ojp.puebla.gob.mx/normatividad-municipal/item/2396-lineamientos-para-la-operacion-del-transporte-de-carga-y-distribucion-de-mercancias-en-el-municipio-de-puebla",
           "kind": "related",
-          "checkedAt": "2026-11-10T13:48:48.328Z",
-          "lastSuccessAt": "2026-11-10T13:48:48.328Z",
+          "checkedAt": "2026-11-10T19:55:12.029Z",
+          "lastSuccessAt": "2026-11-10T19:55:12.029Z",
           "status": "unreviewed",
           "changeDetected": false,
           "sha256": "bf6eb2fca5f5f0568852d417e27513bb3415c51cfef75bcbc590c9e40b8aaf95",
