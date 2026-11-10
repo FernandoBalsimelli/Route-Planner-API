@@ -17,8 +17,10 @@ La respuesta de un cálculo de camión conserva `vehicleContext`, los datos norm
 
 ## Persistencia y recuperación
 
-Migración aditiva `20261110175839_vehicle_operating_profile.sql`: `vehicles.axle_count`, `vehicle_configuration`, `payload_capacity_t`, todos anulables. Una restricción CHECK rechaza configuración desconocida o ejes inconsistentes. La capacidad usa numeric sin redondeo automático y rechaza más de tres decimales para no alterar umbrales legales. No modifica propiedad, RLS ni elimina filas.
+Migración aditiva `20261110181032_vehicle_operating_profile.sql`: `vehicles.axle_count`, `vehicle_configuration`, `payload_capacity_t`, todos anulables. Una restricción CHECK rechaza configuración desconocida o ejes inconsistentes. La capacidad usa numeric sin redondeo automático y rechaza más de tres decimales para no alterar umbrales legales. No modifica propiedad, RLS ni elimina filas.
 
 El cliente conserva estos datos en `saved_routes.route_metadata.vehicle`, junto al perfil dimensional histórico. Editar posteriormente el vehículo no modifica el perfil guardado en una ruta anterior. No requiere migrar el JSON histórico ni inventar campos ausentes.
 
 Orden de despliegue: comprobar migraciones y RLS en Postgres aislado, aplicar la migración en Route Planner, publicar API compatible y luego Web. Rollback: volver a los despliegues anteriores, conservar las columnas nuevas y los datos; no ejecutar DROP para revertir la interfaz.
+
+La versión aplicada por Supabase es `20261110181032`. El archivo se alinea con ese registro; el SQL es idéntico al probado inicialmente con la versión local `20261110175839`. No se reejecuta la migración ni se modifica su historial remoto.
