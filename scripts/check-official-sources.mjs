@@ -5,8 +5,10 @@ import {fileURLToPath} from 'node:url';
 import {evidenceBefore,successfulEvidence,failedEvidence} from '../lib/source-evidence.js';
 import registry from '../data/mx/national-references.json' with {type:'json'};
 const MAX_BYTES=20*1024*1024;
+const MAX_CONFIGURED_BYTES=32*1024*1024;
 const digest=bytes=>createHash('sha256').update(bytes).digest('hex');
-export async function download(url,hosts,fetcher=fetch){
+export async function download(url,hosts,fetcher=fetch,maxBytes=MAX_BYTES){
+ if(!Number.isSafeInteger(maxBytes)||maxBytes<1||maxBytes>MAX_CONFIGURED_BYTES)throw Error('INVALID_DOCUMENT_LIMIT');
  let target=new URL(url);
  const signal=AbortSignal.timeout(20000);
  for(let hop=0;hop<4;hop++){
@@ -14,9 +16,9 @@ export async function download(url,hosts,fetcher=fetch){
   const response=await fetcher(target,{redirect:'manual',signal,headers:{'User-Agent':'Route-Planner-Source-Monitor/1.0 (+https://github.com/FernandoBalsimelli/Route-Planner-API)','Accept':'application/pdf,text/html,application/javascript;q=0.8,*/*;q=0.5'}});
   if([301,302,303,307,308].includes(response.status)){const location=response.headers.get('location');if(!location)throw Error('INVALID_REDIRECT');target=new URL(location,target);continue;}
   if(!response.ok)throw Error(`HTTP_${response.status}`);
-  if(Number(response.headers.get('content-length'))>MAX_BYTES)throw Error('DOCUMENT_TOO_LARGE');
+  if(Number(response.headers.get('content-length'))>maxBytes)throw Error('DOCUMENT_TOO_LARGE');
   const chunks=[];let length=0;
-  for await(const chunk of response.body){length+=chunk.length;if(length>MAX_BYTES){throw Error('DOCUMENT_TOO_LARGE');}chunks.push(chunk);}
+  for await(const chunk of response.body){length+=chunk.length;if(length>maxBytes){throw Error('DOCUMENT_TOO_LARGE');}chunks.push(chunk);}
   if(!length)throw Error('EMPTY_DOCUMENT');
   return {bytes:Buffer.concat(chunks),url:target.href};
  }
@@ -30,7 +32,7 @@ export async function checkSource(source,previous={},fetcher=fetch,now=new Date(
  async function check(url,kind){
   const before=evidenceBefore(source,previous,url,kind);
   try{
-   const result=await download(url,hosts,fetcher);
+   const result=await download(url,hosts,fetcher,source.documentByteLimit);
    const document=successfulEvidence(url,kind,digest(result.bytes),before,kind==='primary'?source.reviewedSha256:null,now);
    documents.push(document);return result;
   }catch(error){documents.push(failedEvidence(url,kind,before,error,now));return null;}

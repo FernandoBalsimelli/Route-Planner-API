@@ -40,7 +40,7 @@ test('public municipality endpoints validate identifiers and pagination and expo
 test('entities and municipalities sort alphabetically before pagination without featuring Nuevo León',()=>{
  const result=municipalCatalog({state:'19',limit:600});assert.equal(result.states[0].name,'Aguascalientes');assert.equal(result.municipalities[0].name,'Abasolo');
  assert.deepEqual(municipalCatalog({state:'19',limit:2,offset:2}).municipalities,result.municipalities.slice(2,4));
- assert.equal(result.municipalitiesWithPartialReference,14);
+ assert.equal(result.municipalitiesWithPartialReference,15);
 });
 test('new references preserve metropolitan scope, actual vehicle classes and unknown legal geometry',()=>{
  const jal=municipalReference('14039');assert.match(jal.scope,/Polígono/);assert.equal(jal.rules.find(rule=>rule.id==='jal-dobles').window.start,'06:00');assert.equal(jal.rules.find(rule=>rule.id==='jal-dobles').window.days,null);assert.deepEqual(jal.rules.find(rule=>rule.id==='jal-unitarios').vehicleConfigurations,['C2','C3']);
@@ -62,5 +62,20 @@ test('Puebla separates amended loading windows, payload capacity, historical zon
  assert.ok(entry.rules.every(rule=>rule.geometry===null&&!rule.routingEnforced&&rule.interpretation==='requires_review'));
  assert.match(entry.notices.join(' '),/exactamente igual a 3.5/);assert.match(entry.notices.join(' '),/vigencia actual/i);
  const response=await app.inject('/v1/regulations/municipalities/21114');assert.equal(response.statusCode,200);assert.equal(response.json().source.id,'puebla-carga');
+ assert.equal(municipalCatalog().fullyVerifiedMunicipalities,0);
+});
+
+test('Chihuahua capital keeps the state framework separate from planning examples and unknown local schedules', async () => {
+ const entry=municipalReference('08019');assert.equal(entry.source.id,'chihuahua-capital-carga');assert.equal(entry.source.consolidatedThrough,'2026-08-08');
+ assert.equal(entry.status,'reference_only');assert.equal(entry.routingEnforced,false);assert.match(entry.scope,/08019/);
+ const legal=entry.rules.find(rule=>rule.id==='chih-art66'),proposal=entry.rules.find(rule=>rule.id==='chih-mo44');
+ assert.equal(legal.kind,'legal_framework');assert.equal(legal.scheduleStatus,'authority_schedule_not_verified');assert.equal(legal.timezone,'America/Chihuahua');assert.equal(legal.page,25);
+ assert.equal(proposal.kind,'planning_proposal');assert.equal(proposal.interpretation,'planning_only_not_operational_rule');assert.equal(proposal.page,390);assert.notEqual(proposal.sourceUrl,entry.source.url);
+ assert.ok(entry.source.relatedUrls.includes(proposal.sourceUrl));assert.match(proposal.description,/ejemplos/);
+ for(const rule of entry.rules){assert.equal(rule.window,undefined);assert.equal(rule.vehicleConditions,undefined);assert.equal(rule.limits,undefined);assert.equal(rule.geometry,null);assert.equal(rule.routingEnforced,false);}
+ assert.deepEqual(entry.timeRules,[]);assert.deepEqual(entry.trunkSegments,[]);
+ for(const id of ['08002','08004'])assert.equal(municipalReference(id).status,'not_loaded','a metropolitan program cannot add legal coverage to adjacent municipalities');
+ const response=await app.inject('/v1/regulations/municipalities/08019');assert.equal(response.statusCode,200);assert.equal(response.json().rules[1].kind,'planning_proposal');
+ const coverage=routeRegulatoryCoverage(encodePath([[28.63,-106.07],[28.65,-106.08]]));assert.equal(coverage.status,'not_verified');assert.ok(coverage.municipalitiesIdentified.some(row=>row.id==='08019'&&row.coverage==='reference_only'&&!row.routingEnforced));
  assert.equal(municipalCatalog().fullyVerifiedMunicipalities,0);
 });

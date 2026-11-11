@@ -66,6 +66,37 @@
         "https://gaceta.pueblacapital.gob.mx/coremun",
         "https://ojp.puebla.gob.mx/normatividad-municipal/item/2396-lineamientos-para-la-operacion-del-transporte-de-carga-y-distribucion-de-mercancias-en-el-municipio-de-puebla"
       ]
+    },
+    {
+      "id": "chihuahua-capital-carga",
+      "title": "Chihuahua capital · marco estatal y planeación metropolitana de carga",
+      "url": "https://www.congresochihuahua2.gob.mx/biblioteca/leyes/archivosLeyes/117.pdf",
+      "reviewedSha256": "d7ff847e53a398668d4b906d892af3313f214fc97bc0868abf4cdf9690d5d3bf",
+      "reviewedAt": "2026-11-11T09:07:13.627673+00:00",
+      "legalReview": "partial_consolidated",
+      "documentTypeLabel": "Ley estatal · referencia parcial del artículo 66",
+      "jurisdictionLabel": "Vías de competencia estatal y atribuciones municipales; consulta de Chihuahua capital (08019)",
+      "publishedAt": "2006-09-20",
+      "consolidatedThrough": "2026-08-08",
+      "scope": "Ley de Vialidad y Tránsito para el Estado de Chihuahua, artículos 1 y 66. No sustituye los acuerdos de horarios, vialidades, permisos ni la normativa municipal aplicable.",
+      "documentByteLimit": 25165824,
+      "relatedUrls": [
+        "https://chihuahua.gob.mx/sites/default/atach2/periodico-oficial/anexos/2025-07/ANEXO%2054-2025%20PSMAMS%20CREDITOS%20TOMO%20IV.pdf"
+      ],
+      "relatedDocuments": [
+        {
+          "url": "https://chihuahua.gob.mx/sites/default/atach2/periodico-oficial/anexos/2025-07/ANEXO%2054-2025%20PSMAMS%20CREDITOS%20TOMO%20IV.pdf",
+          "documentType": "planning_program",
+          "publishedAt": "2025-07-05",
+          "reviewedSha256": "4c8040f0fc719c828ae2e3e538a5148412810695581576baba14d800b5541f4b",
+          "pages": [
+            390,
+            391
+          ],
+          "section": "MO-4.4",
+          "scope": "Zona metropolitana de Chihuahua; no acredita acuerdos operativos en ninguno de sus municipios."
+        }
+      ]
     }
   ],
   "packages": [
@@ -628,6 +659,59 @@
         {
           "title": "COREMUN actual del municipio",
           "url": "https://gaceta.pueblacapital.gob.mx/coremun"
+        }
+      ]
+    },
+    {
+      "municipalityIds": [
+        "08019"
+      ],
+      "sourceId": "chihuahua-capital-carga",
+      "scope": "Chihuahua capital (08019). Marco estatal consultado para este municipio; no se incorpora como regulación municipal propia ni se extiende cobertura a Aldama o Aquiles Serdán.",
+      "rules": [
+        {
+          "id": "chih-art66",
+          "title": "Circulación y maniobras en horas de tráfico intenso",
+          "description": "El artículo 66 restringe camiones de carga y maniobras en avenidas, calzadas, paseos y calles principales de los centros de población durante horas de intenso tránsito. La Dirección o el municipio deben fijar el horario; este artículo no publica horas concretas.",
+          "kind": "legal_framework",
+          "citation": "Ley de Vialidad y Tránsito para el Estado de Chihuahua · artículos 1 y 66",
+          "page": 25,
+          "geometry": null,
+          "routingEnforced": false,
+          "interpretation": "requires_local_implementation",
+          "timezone": "America/Chihuahua",
+          "scheduleStatus": "authority_schedule_not_verified",
+          "vehicleCriteriaStatus": "no_numeric_dimensions_weight_or_axle_threshold_in_article",
+          "permitsStatus": "local_authorizations_not_verified",
+          "exceptionsStatus": "not_verified"
+        },
+        {
+          "id": "chih-mo44",
+          "title": "Horarios propuestos en el programa de movilidad",
+          "description": "MO-4.4 plantea definir vialidades y horas punta, y menciona como ejemplos 06:00–09:00, 13:00–15:00 y 18:00–20:00. Son ejemplos de planeación: no acreditan una prohibición vigente ni una autorización para circular fuera de esas horas.",
+          "kind": "planning_proposal",
+          "citation": "PSMAMS · Tomo IV, MO-4.4 · POE 54, 05-07-2025 · páginas PDF 390–391 (impresas 389–390)",
+          "sourceUrl": "https://chihuahua.gob.mx/sites/default/atach2/periodico-oficial/anexos/2025-07/ANEXO%2054-2025%20PSMAMS%20CREDITOS%20TOMO%20IV.pdf",
+          "page": 390,
+          "geometry": null,
+          "routingEnforced": false,
+          "interpretation": "planning_only_not_operational_rule"
+        }
+      ],
+      "notices": [
+        "Referencia parcial: no se han verificado los acuerdos que fijan calles, tramos, sentidos, días, horarios operativos, excepciones ni permisos para Chihuahua capital. No se aplica al trazado.",
+        "La ley es estatal. El documento de planeación es metropolitano; ninguno acredita por sí solo una restricción municipal georreferenciada.",
+        "No hay umbrales de dimensiones, peso, capacidad o ejes incorporados para este municipio. No se infiere una exención por las características de tu unidad.",
+        "Zona horaria de contexto: America/Chihuahua. No hay ventanas ejecutables, geometrías legales verificadas ni garantía de ruta autorizada. Consulta los actos de la autoridad y la señalización."
+      ],
+      "relatedLinks": [
+        {
+          "title": "Programa metropolitano oficial · propuesta MO-4.4, no horario vigente",
+          "url": "https://chihuahua.gob.mx/sites/default/atach2/periodico-oficial/anexos/2025-07/ANEXO%2054-2025%20PSMAMS%20CREDITOS%20TOMO%20IV.pdf#page=390"
+        },
+        {
+          "title": "Normatividad del municipio de Chihuahua · verificar acuerdos aplicables",
+          "url": "https://wvwv.municipiochihuahua.gob.mx/SHA/Normatividad"
         }
       ]
     }

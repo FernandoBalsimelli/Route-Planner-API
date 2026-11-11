@@ -237,3 +237,20 @@ no declaraciones de reformas ni de disponibilidad futura.
 Una respuesta remota retrasada de CDN no sustituye el reporte incorporado más
 reciente. Se conserva la comprobación con fecha más reciente y se comparten
 consultas simultáneas, manteniendo el límite de caché y tiempos de espera.
+
+
+## Chihuahua capital · 11 de noviembre de 2026
+
+Se incorpora 08019 con el marco estatal del artículo 66 (consolidación oficial
+al 08-08-2026) y la propuesta metropolitana MO-4.4 (POE 54, 05-07-2025).
+Los ejemplos de horas punta se mantienen como `planning_proposal`, sin ventanas,
+umbrales numéricos ni geometrías ejecutables. No acreditan restricciones vigentes.
+
+El monitor incluye ley y programa con fechas/huellas independientes, conserva
+los reportes previos y admite sólo para esta fuente un anexo de hasta 24 MiB
+(tope absoluto 32 MiB; predeterminado 20 MiB). Ver
+[CHIHUAHUA-CAPITAL-REFERENCE.md](CHIHUAHUA-CAPITAL-REFERENCE.md).
+
+Total: 15 municipios con referencia parcial, siete fuentes principales, cero
+con validación legal automática completa. No se extiende cobertura a los otros
+municipios metropolitanos ni se aplica esta ficha al cálculo de rutas.
