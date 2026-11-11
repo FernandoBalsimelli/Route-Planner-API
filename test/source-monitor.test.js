@@ -19,6 +19,16 @@ test('monitor blocks nonofficial redirects, oversized and empty responses withou
  const empty=await checkSource(source,{},async()=>new Response(''));assert.equal(empty.error,'EMPTY_DOCUMENT');
  const failed=await checkSource(source,{},async()=>{throw Error('sensitive details from network');});assert.equal(failed.error,'NETWORK_OR_TIMEOUT');
 });
+
+test('declared large official annexes use a bounded limit without weakening default or streaming checks',async()=>{
+ const hosts=new Set(['official.gob.mx']);
+ const annex=async()=>new Response('fixture',{headers:{'content-length':String(23352913)}});
+ await assert.rejects(()=>download(source.url,hosts,annex),/DOCUMENT_TOO_LARGE/);
+ const monitored=await checkSource({...source,documentByteLimit:24*1024*1024},{},annex);assert.equal(monitored.availability,'available');
+ let fetched=false;
+ await assert.rejects(()=>download(source.url,hosts,async()=>{fetched=true;return new Response('x');},33*1024*1024),/INVALID_DOCUMENT_LIMIT/);assert.equal(fetched,false);
+ await assert.rejects(()=>download(source.url,hosts,async()=>new Response('12345'),4),/DOCUMENT_TOO_LARGE/);
+});
 test('SPA monitoring checks the current same-host main bundle and detects content changes',async()=>{
  const spa={...source,url:'https://official.gob.mx/',watchMainScript:true};
  const fetcher=version=>async url=>new URL(url).pathname==='/'?new Response('<script src="main.abc.js"></script>'):new Response(version);

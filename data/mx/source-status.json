@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-11-11T06:55:25.362Z",
+  "checkedAt": "2026-11-11T09:08:23.946Z",
   "sources": [
     {
       "id": "cdmx-centro",
@@ -39,6 +39,50 @@
         }
       ],
       "error": "NETWORK_OR_TIMEOUT"
+    },
+    {
+      "id": "chihuahua-capital-carga",
+      "checkedAt": "2026-11-11T09:08:23.946Z",
+      "lastSuccessAt": "2026-11-11T09:08:23.946Z",
+      "primaryLastSuccessAt": "2026-11-11T09:08:23.946Z",
+      "status": "unreviewed",
+      "availability": "available",
+      "changeDetected": false,
+      "changeKinds": [],
+      "relatedSetChanged": false,
+      "sha256": "d7ff847e53a398668d4b906d892af3313f214fc97bc0868abf4cdf9690d5d3bf",
+      "initialSha256": "d7ff847e53a398668d4b906d892af3313f214fc97bc0868abf4cdf9690d5d3bf",
+      "relatedHashes": {
+        "https://chihuahua.gob.mx/sites/default/atach2/periodico-oficial/anexos/2025-07/ANEXO%2054-2025%20PSMAMS%20CREDITOS%20TOMO%20IV.pdf": "4c8040f0fc719c828ae2e3e538a5148412810695581576baba14d800b5541f4b"
+      },
+      "initialRelatedHashes": {
+        "https://chihuahua.gob.mx/sites/default/atach2/periodico-oficial/anexos/2025-07/ANEXO%2054-2025%20PSMAMS%20CREDITOS%20TOMO%20IV.pdf": "4c8040f0fc719c828ae2e3e538a5148412810695581576baba14d800b5541f4b"
+      },
+      "documents": [
+        {
+          "url": "https://www.congresochihuahua2.gob.mx/biblioteca/leyes/archivosLeyes/117.pdf",
+          "kind": "primary",
+          "checkedAt": "2026-11-11T09:08:23.946Z",
+          "lastSuccessAt": "2026-11-11T09:08:23.946Z",
+          "status": "unchanged",
+          "changeDetected": false,
+          "sha256": "d7ff847e53a398668d4b906d892af3313f214fc97bc0868abf4cdf9690d5d3bf",
+          "initialSha256": "d7ff847e53a398668d4b906d892af3313f214fc97bc0868abf4cdf9690d5d3bf",
+          "error": null
+        },
+        {
+          "url": "https://chihuahua.gob.mx/sites/default/atach2/periodico-oficial/anexos/2025-07/ANEXO%2054-2025%20PSMAMS%20CREDITOS%20TOMO%20IV.pdf",
+          "kind": "related",
+          "checkedAt": "2026-11-11T09:08:23.946Z",
+          "lastSuccessAt": "2026-11-11T09:08:23.946Z",
+          "status": "unreviewed",
+          "changeDetected": false,
+          "sha256": "4c8040f0fc719c828ae2e3e538a5148412810695581576baba14d800b5541f4b",
+          "initialSha256": "4c8040f0fc719c828ae2e3e538a5148412810695581576baba14d800b5541f4b",
+          "error": null
+        }
+      ],
+      "error": null
     },
     {
       "id": "guachochi-transito",
