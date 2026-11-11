@@ -238,3 +238,28 @@ test('truck operating context is validated and retained without inventing ORS re
  provider=async()=>{throw Error('Invalid operating data must not reach provider');};
  for(const vehicle of [{...context,axleCount:3},{...context,axleCount:undefined},{...context,configuration:'unknown'},{...context,payloadCapacityT:3.4999},{...context,axleCount:2.5}])assert.equal((await plan({mode:'truck',vehicle},'127.5.0.2')).statusCode,400);
 });
+
+test('alternatives preserve HGV dimensions and preferences and serialize each independent geometry',async()=>{
+ const end={...origin,label:'Destino cercano',lat:25.69};
+ const geometries=[encodePath([[25.67,-100.31],[25.68,-100.30],[25.69,-100.31]]),encodePath([[25.67,-100.31],[25.685,-100.32],[25.69,-100.31]]),encodePath([[25.67,-100.31],[25.68,-100.33],[25.69,-100.31]])];
+ const truck={heightM:4,widthM:2.5,lengthM:18,grossWeightT:38,axleWeightT:9};
+ provider=async(url,options)=>{assert.match(url.pathname,/driving-hgv/);const body=JSON.parse(options.body);assert.deepEqual(body.alternative_routes,{target_count:3,share_factor:0.6,weight_factor:1.4});assert.deepEqual(body.options.avoid_features,['tollways','highways']);assert.deepEqual(body.options.profile_params.restrictions,{height:4,width:2.5,length:18,weight:38,axleload:9});return Response.json({routes:geometries.map((geometry,i)=>({summary:{distance:3000+i*100,duration:600+i*60},geometry,way_points:[0,2],segments:[{distance:3000+i*100,duration:600+i*60,steps:[{instruction:`Opción ${i+1}`,way_points:[0,2]}]}]}))});};
+ const response=await plan({destination:end,stops:[],mode:'truck',vehicle:truck,preferences:{avoidTolls:true,avoidHighways:true},alternatives:true},'127.6.0.1');assert.equal(response.statusCode,200);
+ const payload=response.json(),routes=[payload.route,...payload.alternatives];assert.equal(routes.length,3);assert.deepEqual(payload.alternativeSummary,{requested:true,routeCount:3,maximumRoutes:3,omittedRoutes:0});
+ for(const [i,route] of routes.entries()){assert.equal(route.polyline,geometries[i]);assert.equal(route.distanceMeters,3000+i*100);assert.equal(route.sections[0].actions[0].instruction,`Opción ${i+1}`);assert.equal(route.waypoints[1].geometryIndex,2);assert.equal(route.regulatoryCoverage.status,'not_verified');assert.deepEqual(route.vehicleContext,truck);assert.deepEqual(route.preferences,{avoidTolls:true,avoidHighways:true});}
+});
+test('alternatives reject intermediate deliveries and distant endpoints without consuming a provider route',async()=>{
+ provider=async()=>{throw Error('Directions must not be called');};
+ assert.equal((await plan({alternatives:true},'127.6.0.2')).statusCode,400);
+ const response=await plan({alternatives:true,stops:[]},'127.6.0.2');assert.equal(response.statusCode,422);assert.equal(response.json().code,'ORS_ALTERNATIVES_DISTANCE_LIMIT');
+});
+test('alternatives discard incomplete and duplicate options, and explicitly report a single returned route',async()=>{
+ const end={...origin,lat:25.68},geometry=encodePath([[25.67,-100.31],[25.68,-100.31]]),valid={geometry,way_points:[0,1],summary:{distance:1000,duration:120},segments:[]};
+ provider=async()=>Response.json({routes:[valid,{...valid,summary:{distance:2000,duration:200}},{...valid,geometry:encodePath([[25.67,-100.31],[25.68,-100.32]]),summary:{duration:200}}]});
+ const response=await plan({destination:end,stops:[],alternatives:true},'127.6.0.3');assert.equal(response.statusCode,200);assert.deepEqual(response.json().alternatives,[]);assert.equal(response.json().alternativeSummary.routeCount,1);assert.equal(response.json().alternativeSummary.omittedRoutes,2);
+ provider=async()=>Response.json({routes:[{...valid,summary:{distance:-1,duration:100}}]});const bad=await plan({destination:end,stops:[],alternatives:true},'127.6.0.3');assert.equal(bad.statusCode,502);assert.equal(bad.json().code,'ORS_INVALID_ROUTE');
+});
+test('alternative provider limits remain specific and never retry with weaker restrictions',async()=>{
+ let calls=0;provider=async()=>{calls++;return Response.json({error:{code:2004,message:'The approximated route distance must not be greater than 100000 meters for use with the alternative Routes algorithm.'}},{status:400});};
+ const response=await plan({destination:{...origin,lat:25.68},stops:[],alternatives:true},'127.6.0.4');assert.equal(response.statusCode,422);assert.match(response.json().message,/100 km/);assert.match(response.json().message,/conservando los puntos y las restricciones/);assert.equal(calls,1);
+});
