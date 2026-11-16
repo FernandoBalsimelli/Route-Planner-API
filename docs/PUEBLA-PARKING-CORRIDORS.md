@@ -9,7 +9,9 @@ troncal ni un conjunto de calles autorizadas para camiones.
 [Acta C26/11, 14-08-2025, Anexo Único, páginas 80–88](https://gaceta.pueblacapital.gob.mx/publicaciones/actas/cabildo/item/download/1132_565ca888d94782ae1c7b763eb389da28).
 Descarga real HTTP 200: 2,395,402 bytes, 167 páginas; SHA-256
 `0917dc30ac70594a6e954243800bc5219d7ea3f2bc8017f7ea532b8ec510555c`.
-Se extrajo el anexo y se revisaron visualmente sus nueve páginas. La fecha
+Recomprobación real del 16-11-2026: HTTP 200, mismo tamaño y hash; el
+importador reprodujo el JSON versionado sin diferencias. Se conserva 15-11
+como fecha de la revisión inicial. Se extrajo el anexo y se revisaron visualmente sus nueve páginas. La fecha
 14-08-2025 corresponde al acto, no a la creación técnica del PDF ni a una
 publicación legal comprobada. El Transitorio Primero, página 80, condiciona
 la entrada en vigor a la publicación en Gaceta municipal: esa fecha concreta
