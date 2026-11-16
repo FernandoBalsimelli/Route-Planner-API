@@ -309,3 +309,18 @@ Detalle, fuentes y pendientes: [PUEBLA-OPERATIONS-REFERENCE.md](PUEBLA-OPERATION
 Siguen 15 municipios con referencia parcial y cero con validación automática
 completa. Los resultados y publicación del ciclo se registran en el informe
 de ingeniería de Web; este apartado no declara completa la cobertura.
+
+
+## Puebla · ventanas citadas en el acta 14-08-2025 · 15-11-2026
+
+Tres nuevas referencias parciales de los arts. 11–13 distinguen capacidad hasta
+3.5 t inclusive de capacidad mayor, ventana nocturna con cambio de día, permiso
+previo y duración de maniobras en corredores del estacionamiento rotativo. La
+comparación inclusiva no altera los comparadores estrictos de otras fuentes.
+Fechas del acto, ámbitos y enlace a página 70 quedan separados de COREMUN.
+
+Días, excepciones, permisos individuales, publicación y vigencia posterior,
+corredores y geometrías continúan por comprobar. No se aplican estas ventanas
+a Directions. PDF oficial añadido al monitor existente; detalle y hash en
+[PUEBLA-OPERATIONS-REFERENCE.md](PUEBLA-OPERATIONS-REFERENCE.md). Continúan
+15 municipios con referencia parcial y cero validaciones legales completas.

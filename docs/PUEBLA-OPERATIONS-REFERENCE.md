@@ -66,3 +66,44 @@ producción se informa por separado en ENGINEERING-STATUS.md de Web.
 Se mantienen 15 municipios con referencia parcial, cero con validación legal
 automática completa y las limitaciones de navegación Google/HGV existentes.
 No se contratan servicios ni se modifica el esquema alojado.
+
+
+## Acta C26/11 de 14-08-2025: ventanas de corredores
+
+Se incorporan por separado tres referencias de los artículos 11–13 del texto
+contenido en esa acta municipal, página PDF 70. Se descargó el documento oficial
+real: HTTP 200, 2,395,402 bytes, SHA-256
+`0917dc30ac70594a6e954243800bc5219d7ea3f2bc8017f7ea532b8ec510555c`.
+La página 70 se extrajo y se revisó visualmente. La fecha del acto es 14-08-2025;
+la fecha de creación técnica del archivo PDF no se usa como publicación legal.
+
+Fuente: https://gaceta.pueblacapital.gob.mx/publicaciones/actas/cabildo/item/download/1132_565ca888d94782ae1c7b763eb389da28
+
+| Referencia del acta | Capacidad de carga | Ventana citada | Condiciones pendientes |
+| --- | --- | --- | --- |
+| Art. 11 a | Hasta 3.5 t, inclusive | 08:00–20:59, America/Mexico_City | Sólo corredores del programa; excluye sustancias restringidas; permiso previo, días, ámbito y vigencia por comprobar. |
+| Art. 11 b | Más de 3.5 t | 21:00–07:00, cruce de medianoche | Mismas condiciones; no acredita derecho de estacionamiento o circulación. |
+| Arts. 12–13 | No se crea un comparador adicional | Permiso previo; 20 min y 10 de tolerancia | Autoridad indicada por la fuente; autorización individual y vigencia actual pendientes. |
+
+La comparación inclusiva se añade sólo cuando la referencia declara `lte`.
+Capacidad exactamente 3.5 t coincide con ese dato del artículo 11 a. Los
+comparadores estrictos de RES. 2021/49 siguen sin resolver ese valor y COREMUN
+Sexdecies sigue sin magnitud de tonelaje inferida. No se sustituye capacidad
+por peso bruto; coincidir con un dato no otorga permiso.
+
+Los días se conservan en `null`, no como todos los días. Se guardan la excepción
+por sustancias, necesidad de permiso y `endsNextDay` de la ventana nocturna.
+Ninguna ventana se aplica al ruteo. No se valida íntegramente el acta ni reformas
+posteriores, publicación, reglas de entrada en vigor o polígonos. El anexo
+contiene corredores y horarios de operación cuya extracción geométrica sigue
+pendiente; no se confunde ese horario de estacionamiento con el de maniobras.
+
+Se añade el PDF al mismo monitor oficial de Puebla, con evidencia independiente
+y sin servicios o programación adicionales. Su primera descarga vigilada queda
+sin revisión legal completa. La interfaz diferencia fecha del acto de fecha de
+consolidación; los datos técnicos de integridad se conservan en la API.
+
+Se mantienen 15 municipios con referencia parcial y cero con validación legal
+automática completa. La consulta de RES. 2025/88 y el acta de agosto es evidencia
+parcial de actos posteriores; falta reconstruir toda la cadena de publicación
+y vigencia. No se afirma ausencia de modificaciones de 2026.
