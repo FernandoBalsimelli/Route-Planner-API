@@ -114,3 +114,22 @@ test('Puebla rotating-parking loading references preserve inclusive capacity, mi
  assert.equal(entry.rules.find(row=>row.id==='pue-coremun-rotativo-restriccion').thresholdReference.quantity,'not_specified_in_cited_article');
  assert.equal(municipalCatalog().fullyVerifiedMunicipalities,0);
 });
+
+test('Puebla parking annex preserves all source records, duplicate rows, split pages and limited operational scope',async()=>{
+ const reference=municipalReference('21114'),annex=reference.parkingCorridorReference;
+ assert.equal(annex.activity,'parking_operation');assert.equal(annex.status,'reference_only');assert.equal(annex.routingEnforced,false);assert.equal(annex.timezone,'America/Mexico_City');
+ assert.equal(annex.rows.length,128);assert.deepEqual(annex.rows.map(row=>row.sourceRow),Array.from({length:128},(_,i)=>i+1));
+ assert.equal(new Set(annex.rows.map(row=>row.polygon)).size,6);assert.equal(annex.rows.filter(row=>row.polygon.startsWith('Polígono 5 ')).length,8);assert.equal(annex.rows.filter(row=>row.polygon.startsWith('Polígono 6 ')).length,4);
+ assert.deepEqual(annex.duplicateGroups,[[10,15],[126,128]]);assert.deepEqual(annex.rows[123].sourcePages,[87,88]);assert.match(annex.rows[123].polygon,/San Alejandro - Ortopedia/);
+ assert.equal(annex.source.sha256,'0917dc30ac70594a6e954243800bc5219d7ea3f2bc8017f7ea532b8ec510555c');assert.deepEqual(annex.source.pages,[80,81,82,83,84,85,86,87,88]);assert.ok(reference.source.relatedUrls.includes(annex.source.url));
+ assert.equal(annex.source.publicationAndCurrentValidity,'not_fully_verified');assert.equal(annex.source.entryIntoForce.publicationDate,null);assert.equal(annex.source.entryIntoForce.sourcePage,80);assert.match(annex.notices.join(' '),/No aplica.*no significa circulación libre/);
+ for(const row of annex.rows){
+  assert.equal(row.geometry,null);assert.equal(row.geometryStatus,'not_validated');assert.equal(row.directionStatus,'not_specified_in_annex');assert.equal(row.routingEnforced,false);assert.equal(row.rawCells,undefined);assert.equal(row.rawPolygonContinuation,undefined);
+  assert.equal(row.schedules[0].start,'08:00');assert.equal(row.schedules[0].end,'22:00');assert.deepEqual(row.schedules[0].days,[1,2,3,4,5]);
+  assert.equal(row.schedules[1].start,'11:00');assert.equal(row.schedules[1].end,'17:00');
+ }
+ assert.equal(annex.rows.filter(row=>row.schedules[2].status==='hours_cited').length,41);assert.equal(annex.rows.filter(row=>row.schedules[2].status==='not_applicable_in_source').length,87);
+ for(const id of ['19039','08019','01001'])assert.equal(municipalReference(id).parkingCorridorReference,undefined);
+ const response=await app.inject('/v1/regulations/municipalities/21114');assert.equal(response.statusCode,200);assert.equal(response.json().parkingCorridorReference.rows.length,128);assert.equal(response.json().timeRules.length,0,'parking schedules must not become routing or loading windows');
+ assert.equal(municipalCatalog().fullyVerifiedMunicipalities,0);assert.equal(municipalCatalog().municipalitiesWithPartialReference,15);
+});

@@ -324,3 +324,21 @@ corredores y geometrías continúan por comprobar. No se aplican estas ventanas
 a Directions. PDF oficial añadido al monitor existente; detalle y hash en
 [PUEBLA-OPERATIONS-REFERENCE.md](PUEBLA-OPERATIONS-REFERENCE.md). Continúan
 15 municipios con referencia parcial y cero validaciones legales completas.
+
+
+## Puebla · corredores citados del estacionamiento · 15-11-2026
+
+Se incorporan los 128 registros del Anexo Único del acta C26/11 (páginas 80–88),
+con calles, extremos, seis etiquetas de polígono, horarios de operación y página
+por registro. Se conservan dos grupos de duplicados y la discrepancia 5/6 de
+San Alejandro–Ortopedia. El registro 124 mantiene sus dos páginas. Los horarios
+no son ventanas de maniobras ni permisos para camiones; «No aplica» en domingo
+no se convierte en autorización.
+
+El Transitorio Primero supedita la entrada en vigor a publicación en Gaceta;
+la fecha concreta y la vigencia posterior siguen pendientes. Sin sentidos ni
+geometrías verificadas, los registros no afectan Directions. La consulta Web
+permite filtrar calle/cruce y polígono sin fusionar registros. El importador se
+detiene si cambia el hash del PDF oficial. Evidencia y reproducción en
+[PUEBLA-PARKING-CORRIDORS.md](PUEBLA-PARKING-CORRIDORS.md). Permanecen 15 municipios
+con referencia parcial y cero con validación legal automática completa.
