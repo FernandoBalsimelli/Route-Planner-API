@@ -64,7 +64,8 @@
       "publicationDateStatus": "requires_official_gazette_verification",
       "relatedUrls": [
         "https://gaceta.pueblacapital.gob.mx/coremun",
-        "https://ojp.puebla.gob.mx/normatividad-municipal/item/2396-lineamientos-para-la-operacion-del-transporte-de-carga-y-distribucion-de-mercancias-en-el-municipio-de-puebla"
+        "https://ojp.puebla.gob.mx/normatividad-municipal/item/2396-lineamientos-para-la-operacion-del-transporte-de-carga-y-distribucion-de-mercancias-en-el-municipio-de-puebla",
+        "https://gaceta.pueblacapital.gob.mx/media/k2/attachments/COREMUN.pdf"
       ]
     },
     {
@@ -659,6 +660,10 @@
         {
           "title": "COREMUN actual del municipio",
           "url": "https://gaceta.pueblacapital.gob.mx/coremun"
+        },
+        {
+          "title": "COREMUN · PDF municipal consolidado (consulta informativa; verificar reformas posteriores)",
+          "url": "https://gaceta.pueblacapital.gob.mx/media/k2/attachments/COREMUN.pdf"
         }
       ]
     },

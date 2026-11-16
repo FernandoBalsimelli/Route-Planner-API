@@ -254,3 +254,40 @@ los reportes previos y admite sólo para esta fuente un anexo de hasta 24 MiB
 Total: 15 municipios con referencia parcial, siete fuentes principales, cero
 con validación legal automática completa. No se extiende cobertura a los otros
 municipios metropolitanos ni se aplica esta ficha al cálculo de rutas.
+
+
+## Puebla · vigilar el PDF de COREMUN, no sólo su página · 15-11-2026
+
+El enlace municipal de COREMUN carga un visor con
+`file=/media/k2/attachments/COREMUN.pdf`. El monitor sólo comprobaba la página
+HTML; un cambio del PDF tras ese visor podía pasar inadvertido. Se añade la URL
+HTTPS del PDF al mismo registro de Puebla y a sus enlaces de consulta, sin
+nuevo proveedor, cron, cuota ni servicio. Se conserva el hash independiente,
+el estado sin revisión legal y la comprobación existente de enlaces oficiales.
+
+Descarga real del 16-11-2026 04:23 UTC (15-11, Chihuahua): HTTP 200, 8,017,957 bytes,
+SHA-256 `b8015929109522726f95e0d9278564592757bcd2a690abe0a326e898ae1c891f`.
+La portada declara consolidación al 10-12-2025 y carácter informativo; remite al
+Periódico Oficial como fuente original. Se localizaron artículos 298/299 en
+páginas PDF 158–160 y 323 Quindecies/Sexdecies en página 176 para la próxima
+revisión. No se ha revisado íntegramente el código ni actos posteriores; no se
+modifican horarios ni umbrales a partir de esa localización. La referencia de
+2021 mantiene sus advertencias de vigencia, jurisdicción y geometrías pendientes.
+
+El informe real de esta comprobación conserva evidencia por documento: el PDF
+nuevo queda `unreviewed`, las páginas municipales con cambios y la ficha OJP
+respondió 503. Esa caída no oculta la descarga válida del PDF. CDMX siguió sin
+comprobación completa; Juárez respondió y quedó con cambios pendientes de
+revisión. Ninguno de esos estados equivale a una reforma legal confirmada.
+
+La prueba nueva usa contenidos controlados para verificar que cambiar sólo el
+PDF tras páginas idénticas se refleje públicamente como cambio y nunca como
+aprobación legal. La descarga real se informa separadamente. Se mantienen
+15 municipios con referencia parcial, cero validaciones legales completas y
+ninguna geometría municipal aplicada a Directions.
+
+Fuente directa: https://gaceta.pueblacapital.gob.mx/media/k2/attachments/COREMUN.pdf
+Página/visor de origen: https://gaceta.pueblacapital.gob.mx/coremun
+La programación existente solicita comprobación cada seis horas; GitHub puede
+demorar las ejecuciones. El reporte marca evidencia antigua a las 18 horas.
+No garantiza vigilancia en tiempo real ni actualiza automáticamente normas.
