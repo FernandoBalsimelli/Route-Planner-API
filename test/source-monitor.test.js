@@ -98,3 +98,20 @@ test('a delayed remote checkpoint cannot replace newer bundled evidence and conc
   const [a,b]=await Promise.all([getSourceStatus(),getSourceStatus()]);assert.equal(a.checkedAt,snapshot.checkedAt);assert.deepEqual(a,b);assert.equal(calls,1);assert.ok(a.sources.some(row=>row.documentBreakdownAvailable));
  }finally{globalThis.fetch=original;}
 });
+
+
+test('Puebla watches the actual consolidated PDF and detects changes behind unchanged pages without legal approval',async()=>{
+ const {officialSources}=await import('../lib/source-monitor.js');
+ const puebla=officialSources.find(row=>row.id==='puebla-carga');
+ const pdf='https://gaceta.pueblacapital.gob.mx/media/k2/attachments/COREMUN.pdf';
+ assert.ok(puebla.relatedUrls.includes(pdf));
+ const original=await checkSource(puebla,{},async url=>new Response(String(url)===pdf?'PDF version one':'same wrapper'));
+ const initial=original.documents.find(row=>row.url===pdf);
+ assert.equal(initial.status,'unreviewed');assert.equal(initial.changeDetected,false);
+ const next=await checkSource(puebla,original,async url=>new Response(String(url)===pdf?'PDF version two':'same wrapper'));
+ const exposed=sourceStatus({schemaVersion:1,checkedAt:next.checkedAt,sources:[next]}).sources.find(row=>row.id===puebla.id);
+ assert.equal(exposed.documents.find(row=>row.url===pdf).status,'changed');
+ assert.equal(exposed.documents.find(row=>row.url===pdf).changeDetected,true);
+ assert.equal(exposed.legalReview,'validity_requires_review');
+ assert.equal(sourceStatus().legalRulesAutomaticallyUpdated,false);
+});
