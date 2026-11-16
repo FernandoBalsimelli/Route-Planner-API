@@ -133,3 +133,21 @@ test('Puebla parking annex preserves all source records, duplicate rows, split p
  const response=await app.inject('/v1/regulations/municipalities/21114');assert.equal(response.statusCode,200);assert.equal(response.json().parkingCorridorReference.rows.length,128);assert.equal(response.json().timeRules.length,0,'parking schedules must not become routing or loading windows');
  assert.equal(municipalCatalog().fullyVerifiedMunicipalities,0);assert.equal(municipalCatalog().municipalitiesWithPartialReference,15);
 });
+
+test('Puebla publication history distinguishes official publication, superseded sanction dates and unverified present validity',async()=>{
+ const annex=municipalReference('21114').parkingCorridorReference,review=annex.publicationReview;
+ assert.equal(review.status,'partial_history');assert.equal(review.routingEnforced,false);assert.equal(review.municipalityId,'21114');assert.equal(review.reviewedAt,'2026-11-16');
+ assert.equal(annex.source.entryIntoForce.publicationDate,null);assert.match(review.publication.scope,/no certifica publicación íntegra/);
+ assert.deepEqual(review.publication.sourceIds,['gazette148','res162']);assert.equal(review.publication.date,'2025-08-14');
+ const [original,amendment]=review.records;
+ assert.equal(original.approvedAt,'2025-08-14');assert.equal(original.publishedAt,'2025-08-14');assert.equal(original.sanctions.fromDate,'2025-10-01');assert.equal(original.sanctions.status,'superseded');assert.equal(original.sanctions.supersededBy,amendment.resolution);
+ assert.equal(amendment.approvedAt,'2025-09-18');assert.equal(amendment.publishedAt,'2025-09-18');assert.equal(amendment.sanctions.fromDate,'2025-11-01');assert.equal(amendment.sanctions.status,'amended_date_cited');assert.match(amendment.scope,/Sólo Polígono 5/);
+ const source=municipalReference('21114').source;
+ assert.equal(review.sources.length,4);
+ for(const evidence of review.sources){assert.equal(evidence.http,200);assert.match(evidence.sha256,/^[a-f0-9]{64}$/);assert.equal(evidence.reviewStatus,'selected_sections_only');assert.ok(source.relatedUrls.includes(evidence.url));assert.equal(new URL(evidence.url).hostname,'gaceta.pueblacapital.gob.mx');}
+ assert.ok(review.records.every(record=>record.sourceIds.every(id=>review.sources.some(source=>source.id===id))));
+ assert.match(review.notices.join(' '),/2026.*no se han revisado exhaustivamente/);
+ assert.equal(annex.rows.length,128);assert.deepEqual(annex.duplicateGroups,[[10,15],[126,128]]);assert.deepEqual(municipalReference('21114').timeRules,[]);
+ assert.equal(municipalReference('19039').parkingCorridorReference,undefined);assert.equal(municipalCatalog().fullyVerifiedMunicipalities,0);
+ const raw=(await import('../data/mx/21114-parking-corridors.json',{with:{type:'json'}})).default;assert.equal(raw.source.entryIntoForce.publicationDate,null,'the reproducible PDF extraction remains unchanged');
+});
