@@ -79,3 +79,23 @@ test('Chihuahua capital keeps the state framework separate from planning example
  const coverage=routeRegulatoryCoverage(encodePath([[28.63,-106.07],[28.65,-106.08]]));assert.equal(coverage.status,'not_verified');assert.ok(coverage.municipalitiesIdentified.some(row=>row.id==='08019'&&row.coverage==='reference_only'&&!row.routingEnforced));
  assert.equal(municipalCatalog().fullyVerifiedMunicipalities,0);
 });
+
+
+test('Puebla keeps consolidated loading and parking references separate from permissions, vehicle limits and routing',async()=>{
+ const entry=municipalReference('21114'),rows=entry.rules.filter(rule=>rule.id.startsWith('pue-coremun-'));
+ assert.equal(rows.length,4);assert.equal(municipalCatalog().municipalitiesWithPartialReference,15);
+ for(const rule of rows){
+  assert.equal(rule.geometry,null);assert.equal(rule.routingEnforced,false);assert.equal(rule.interpretation,'requires_review');
+  assert.equal(rule.evidence.jurisdiction,'Municipio de Puebla · INEGI 21114');assert.equal(rule.evidence.consolidatedThrough,'2025-12-10');
+  assert.equal(rule.evidence.reviewStatus,'selected_provisions_only');assert.equal(rule.evidence.officialGazetteStatus,'not_fully_verified');
+  assert.equal(rule.evidence.sha256,'b8015929109522726f95e0d9278564592757bcd2a690abe0a326e898ae1c891f');
+  assert.ok(entry.source.relatedUrls.includes(rule.sourceUrl));assert.equal(rule.timezone,'America/Mexico_City');
+  for(const field of ['window','limits','vehicleConditions','vehicleConfigurations','lengthWithoutSpecialAuthorizationM'])assert.equal(rule[field],undefined,'partial operational evidence must not create a route permission or inferred vehicle comparison');
+ }
+ const loading=rows.find(row=>row.activity==='loading');assert.equal(loading.page,159);assert.equal(loading.scheduleStatus,'authority_schedule_not_verified');
+ const commercial=rows.find(row=>row.activity==='circulation');assert.equal(commercial.page,160);
+ const dwell=rows.find(row=>row.maximumDwellMinutes);assert.equal(dwell.activity,'parking');assert.equal(dwell.maximumDwellMinutes,30);assert.equal(dwell.operationMinutes+dwell.toleranceMinutes,30);
+ const restricted=rows.find(row=>row.thresholdReference);assert.equal(restricted.activity,'parking');assert.equal(restricted.page,176);assert.equal(restricted.thresholdReference.quantity,'not_specified_in_cited_article');assert.equal(restricted.thresholdReference.operator,'gt');
+ const response=await app.inject('/v1/regulations/municipalities/21114');assert.equal(response.statusCode,200);assert.equal(response.json().rules.filter(row=>row.evidence).length,4);assert.equal(response.json().routingEnforced,false);
+ assert.equal(municipalCatalog().fullyVerifiedMunicipalities,0);
+});

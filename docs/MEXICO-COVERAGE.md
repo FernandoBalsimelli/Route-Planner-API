@@ -291,3 +291,21 @@ Página/visor de origen: https://gaceta.pueblacapital.gob.mx/coremun
 La programación existente solicita comprobación cada seis horas; GitHub puede
 demorar las ejecuciones. El reporte marca evidencia antigua a las 18 horas.
 No garantiza vigilancia en tiempo real ni actualiza automáticamente normas.
+
+
+## Puebla · alcance de maniobras y estacionamiento · 15-11-2026
+
+Se incorporan cuatro disposiciones seleccionadas de COREMUN (298 I–III, 299
+I–III, 323 Quindecies y Sexdecies), separando circulación, maniobras y
+estacionamiento rotativo. Cada una conserva fuente, páginas, hash, fecha de
+consulta y ámbito específico. La consolidación indicada es 10-12-2025; faltan
+cotejo completo con el Periódico Oficial y actos posteriores.
+
+No se asigna el tonelaje ambiguo de Sexdecies a peso bruto/capacidad ni se crea
+un horario de circulación. Los 30 minutos de maniobras no anulan prohibiciones
+de estacionamiento. No se añaden geometrías o exclusiones a Directions.
+Detalle, fuentes y pendientes: [PUEBLA-OPERATIONS-REFERENCE.md](PUEBLA-OPERATIONS-REFERENCE.md).
+
+Siguen 15 municipios con referencia parcial y cero con validación automática
+completa. Los resultados y publicación del ciclo se registran en el informe
+de ingeniería de Web; este apartado no declara completa la cobertura.

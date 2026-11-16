@@ -628,6 +628,122 @@
           "interpretation": "requires_review",
           "lengthWithoutSpecialAuthorizationM": 11,
           "geographicScope": "Centro Histórico"
+        },
+        {
+          "id": "pue-coremun-maniobras",
+          "title": "Carga y descarga · horas y zonas de la autoridad",
+          "description": "El artículo 298 I remite la circulación de carga y las maniobras en las arterias y zonas comerciales, de oficinas y edificios públicos que describe a las horas y zonas que determine la autoridad citada como SEMOVI. II–III exigen no obstruir peatones o vehículos, salvo el supuesto de riesgo indicado, y usar el tiempo mínimo sin superar el autorizado. No se incorpora un horario universal: faltan los actos que fijan horas, zonas y excepciones.",
+          "activity": "loading",
+          "kind": "legal_framework",
+          "page": 159,
+          "citation": "COREMUN · artículo 298 I–III; reforma indicada 30-12-2019; páginas PDF 158–159",
+          "sourceUrl": "https://gaceta.pueblacapital.gob.mx/media/k2/attachments/COREMUN.pdf",
+          "evidence": {
+            "jurisdiction": "Municipio de Puebla · INEGI 21114",
+            "scope": "Arterias y zonas señaladas en el artículo 298 I; horarios y delimitaciones de la autoridad no verificados.",
+            "consultedAt": "2026-11-15",
+            "consolidatedThrough": "2025-12-10",
+            "sha256": "b8015929109522726f95e0d9278564592757bcd2a690abe0a326e898ae1c891f",
+            "pages": [
+              158,
+              159
+            ],
+            "reviewStatus": "selected_provisions_only",
+            "officialGazetteStatus": "not_fully_verified"
+          },
+          "geometry": null,
+          "routingEnforced": false,
+          "interpretation": "requires_review",
+          "timezone": "America/Mexico_City",
+          "scheduleStatus": "authority_schedule_not_verified"
+        },
+        {
+          "id": "pue-coremun-transporte-comercial",
+          "title": "Transporte comercial · autorización del vehículo",
+          "description": "El artículo 299 distingue los bienes propios transportados en vehículos particulares, sujetos a sus condiciones, del transporte para fines industriales o comerciales. Los demás casos requieren vehículos autorizados de carga, las condiciones del artículo 296 y las normas sanitarias o ambientales aplicables; el transporte mercantil de bebidas alcohólicas tiene permisos propios. Seleccionar Camión o declarar medidas no acredita esas autorizaciones.",
+          "activity": "circulation",
+          "kind": "legal_framework",
+          "page": 160,
+          "citation": "COREMUN · artículo 299 I–III; página PDF 160",
+          "sourceUrl": "https://gaceta.pueblacapital.gob.mx/media/k2/attachments/COREMUN.pdf",
+          "evidence": {
+            "jurisdiction": "Municipio de Puebla · INEGI 21114",
+            "scope": "Transporte de bienes por vías municipales; autorizaciones individuales y requisitos del artículo 296 por comprobar.",
+            "consultedAt": "2026-11-15",
+            "consolidatedThrough": "2025-12-10",
+            "sha256": "b8015929109522726f95e0d9278564592757bcd2a690abe0a326e898ae1c891f",
+            "pages": [
+              160
+            ],
+            "reviewStatus": "selected_provisions_only",
+            "officialGazetteStatus": "not_fully_verified"
+          },
+          "geometry": null,
+          "routingEnforced": false,
+          "interpretation": "requires_review",
+          "timezone": "America/Mexico_City"
+        },
+        {
+          "id": "pue-coremun-rotativo-maniobras",
+          "title": "Estacionamiento rotativo · tiempo de maniobras",
+          "description": "Si las bahías de carga están ocupadas, el artículo 323 Quindecies contempla espacios autorizados y delimitados del estacionamiento rotativo, con un máximo de 30 minutos. Para las bahías del perímetro indica 20 minutos de maniobra y 10 de tolerancia. Debe leerse junto con las demás prohibiciones, incluido el artículo 323 Sexdecies: no autoriza por sí solo a estacionar cualquier camión ni a circular por la zona.",
+          "activity": "parking",
+          "kind": "parking_reference",
+          "page": 176,
+          "citation": "COREMUN · artículo 323 Quindecies; adición indicada 30-12-2022; página PDF 176",
+          "sourceUrl": "https://gaceta.pueblacapital.gob.mx/media/k2/attachments/COREMUN.pdf",
+          "evidence": {
+            "jurisdiction": "Municipio de Puebla · INEGI 21114",
+            "scope": "Bahías y espacios autorizados del perímetro de estacionamiento rotativo; no todo el municipio.",
+            "consultedAt": "2026-11-15",
+            "consolidatedThrough": "2025-12-10",
+            "sha256": "b8015929109522726f95e0d9278564592757bcd2a690abe0a326e898ae1c891f",
+            "pages": [
+              176
+            ],
+            "reviewStatus": "selected_provisions_only",
+            "officialGazetteStatus": "not_fully_verified"
+          },
+          "geometry": null,
+          "routingEnforced": false,
+          "interpretation": "requires_review",
+          "timezone": "America/Mexico_City",
+          "maximumDwellMinutes": 30,
+          "operationMinutes": 20,
+          "toleranceMinutes": 10
+        },
+        {
+          "id": "pue-coremun-rotativo-restriccion",
+          "title": "Estacionamiento rotativo · restricción por tonelaje",
+          "description": "El artículo 323 Sexdecies prohíbe estacionarse a autobuses o vehículos de carga de más de 3.5 toneladas dentro del perímetro de estacionamiento rotativo durante su funcionamiento. El texto consultado no aclara aquí si la magnitud es peso bruto o capacidad de carga; no se compara automáticamente con esos datos del perfil ni se interpreta el caso exactamente 3.5. Faltan perímetro, horario de operación y actos posteriores verificados.",
+          "activity": "parking",
+          "kind": "parking_reference",
+          "page": 176,
+          "citation": "COREMUN · artículo 323 Sexdecies; adición indicada 30-12-2022; página PDF 176",
+          "sourceUrl": "https://gaceta.pueblacapital.gob.mx/media/k2/attachments/COREMUN.pdf",
+          "evidence": {
+            "jurisdiction": "Municipio de Puebla · INEGI 21114",
+            "scope": "Sólo perímetro de estacionamiento rotativo y durante su operación; no prohibición municipal general de circulación.",
+            "consultedAt": "2026-11-15",
+            "consolidatedThrough": "2025-12-10",
+            "sha256": "b8015929109522726f95e0d9278564592757bcd2a690abe0a326e898ae1c891f",
+            "pages": [
+              176
+            ],
+            "reviewStatus": "selected_provisions_only",
+            "officialGazetteStatus": "not_fully_verified"
+          },
+          "geometry": null,
+          "routingEnforced": false,
+          "interpretation": "requires_review",
+          "timezone": "America/Mexico_City",
+          "scheduleStatus": "rotating_parking_operation_not_verified",
+          "thresholdReference": {
+            "value": 3.5,
+            "unit": "t",
+            "operator": "gt",
+            "quantity": "not_specified_in_cited_article"
+          }
         }
       ],
       "supersededProvisions": [
@@ -646,7 +762,8 @@
         "Referencia parcial de la reforma de 2021; vigencia actual y publicación/entrada en vigor exactas pendientes de consolidar con el Periódico Oficial y actos posteriores. No se aplica al cálculo.",
         "No reutilizar los horarios de los apartados Octavo, Noveno o Decimotercero de la versión de 2020: la reforma consultada los deroga.",
         "La capacidad exactamente igual a 3.5 t no queda resuelta por los comparadores menor/mayor del texto; no se asigna automáticamente una ventana. Días, permisos, excepciones y el alcance entre vía pública e instalaciones requieren revisión.",
-        "No hay geometrías legales verificadas para zonas, tramos o sentidos. El perfil HGV no transmite capacidad de carga, configuración C2 ni autorizaciones municipales."
+        "No hay geometrías legales verificadas para zonas, tramos o sentidos. El perfil HGV no transmite capacidad de carga, configuración C2 ni autorizaciones municipales.",
+        "COREMUN aporta referencias separadas de circulación, maniobras y estacionamiento rotativo, consultadas en disposiciones seleccionadas de una versión informativa consolidada al 10-12-2025. Faltan cotejo íntegro con el Periódico Oficial, reformas posteriores, actos de horarios, perímetro y permisos; los 30 minutos no anulan la restricción del artículo 323 Sexdecies ni autorizan circulación."
       ],
       "relatedLinks": [
         {
