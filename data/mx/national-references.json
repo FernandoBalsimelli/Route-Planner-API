@@ -755,18 +755,6 @@
           "citation": "Acta C26/11, Cabildo 14-08-2025 · reglas del estacionamiento rotativo, artículos 11–13 · página PDF 70",
           "page": 70,
           "sourceUrl": "https://gaceta.pueblacapital.gob.mx/publicaciones/actas/cabildo/item/download/1132_565ca888d94782ae1c7b763eb389da28",
-          "evidence": {
-            "jurisdiction": "Municipio de Puebla · INEGI 21114",
-            "scope": "Corredores del programa de estacionamiento rotativo; geometría y días aplicables pendientes de verificación. Excluye las sustancias restringidas que cita el artículo.",
-            "consultedAt": "2026-11-15",
-            "approvedAt": "2025-08-14",
-            "sha256": "0917dc30ac70594a6e954243800bc5219d7ea3f2bc8017f7ea532b8ec510555c",
-            "pages": [
-              70
-            ],
-            "reviewStatus": "selected_provisions_only",
-            "officialGazetteStatus": "not_fully_verified"
-          },
           "geometry": null,
           "routingEnforced": false,
           "interpretation": "requires_review",
@@ -783,18 +771,8 @@
             "effect": "loading_reference_only"
           },
           "requiresPermit": true,
-          "excludesRestrictedSubstances": true
-        },
-        {
-          "id": "pue-rotativo-2025-mayor",
-          "title": "Corredores del programa · capacidad mayor de 3.5 t",
-          "description": "El artículo 11 b cita maniobras de 21:00 a 07:00 para capacidad de carga superior a 3.5 t. La ventana cruza medianoche y no acredita estacionamiento ni circulación. Antes de usarla deben comprobarse corredor, días, permiso previo, sustancias y actos posteriores; no sustituye la revisión del artículo 323 Sexdecies ni de las condiciones del acceso de descarga.",
-          "activity": "loading",
-          "kind": "loading_reference",
-          "citation": "Acta C26/11, Cabildo 14-08-2025 · reglas del estacionamiento rotativo, artículos 11–13 · página PDF 70",
-          "page": 70,
-          "sourceUrl": "https://gaceta.pueblacapital.gob.mx/publicaciones/actas/cabildo/item/download/1132_565ca888d94782ae1c7b763eb389da28",
-          "evidence": {
+          "excludesRestrictedSubstances": true,
+          "actEvidence": {
             "jurisdiction": "Municipio de Puebla · INEGI 21114",
             "scope": "Corredores del programa de estacionamiento rotativo; geometría y días aplicables pendientes de verificación. Excluye las sustancias restringidas que cita el artículo.",
             "consultedAt": "2026-11-15",
@@ -805,7 +783,17 @@
             ],
             "reviewStatus": "selected_provisions_only",
             "officialGazetteStatus": "not_fully_verified"
-          },
+          }
+        },
+        {
+          "id": "pue-rotativo-2025-mayor",
+          "title": "Corredores del programa · capacidad mayor de 3.5 t",
+          "description": "El artículo 11 b cita maniobras de 21:00 a 07:00 para capacidad de carga superior a 3.5 t. La ventana cruza medianoche y no acredita estacionamiento ni circulación. Antes de usarla deben comprobarse corredor, días, permiso previo, sustancias y actos posteriores; no sustituye la revisión del artículo 323 Sexdecies ni de las condiciones del acceso de descarga.",
+          "activity": "loading",
+          "kind": "loading_reference",
+          "citation": "Acta C26/11, Cabildo 14-08-2025 · reglas del estacionamiento rotativo, artículos 11–13 · página PDF 70",
+          "page": 70,
+          "sourceUrl": "https://gaceta.pueblacapital.gob.mx/publicaciones/actas/cabildo/item/download/1132_565ca888d94782ae1c7b763eb389da28",
           "geometry": null,
           "routingEnforced": false,
           "interpretation": "requires_review",
@@ -823,18 +811,8 @@
           },
           "endsNextDay": true,
           "requiresPermit": true,
-          "excludesRestrictedSubstances": true
-        },
-        {
-          "id": "pue-rotativo-2025-permiso",
-          "title": "Corredores del programa · permiso previo y duración",
-          "description": "Los artículos 12–13 exigen permiso previo de la autoridad de movilidad citada en el acta, y un máximo de 20 minutos de maniobras con 10 de tolerancia. Registrar medidas, seleccionar Camión o coincidir con una capacidad no acredita ese permiso ni elimina otras prohibiciones. La autoridad competente actual, publicación, vigencia, condiciones individuales y excepciones requieren comprobación.",
-          "activity": "loading",
-          "kind": "permit",
-          "citation": "Acta C26/11, Cabildo 14-08-2025 · reglas del estacionamiento rotativo, artículos 11–13 · página PDF 70",
-          "page": 70,
-          "sourceUrl": "https://gaceta.pueblacapital.gob.mx/publicaciones/actas/cabildo/item/download/1132_565ca888d94782ae1c7b763eb389da28",
-          "evidence": {
+          "excludesRestrictedSubstances": true,
+          "actEvidence": {
             "jurisdiction": "Municipio de Puebla · INEGI 21114",
             "scope": "Corredores del programa de estacionamiento rotativo; geometría y días aplicables pendientes de verificación. Excluye las sustancias restringidas que cita el artículo.",
             "consultedAt": "2026-11-15",
@@ -845,13 +823,35 @@
             ],
             "reviewStatus": "selected_provisions_only",
             "officialGazetteStatus": "not_fully_verified"
-          },
+          }
+        },
+        {
+          "id": "pue-rotativo-2025-permiso",
+          "title": "Corredores del programa · permiso previo y duración",
+          "description": "Los artículos 12–13 exigen permiso previo de la autoridad de movilidad citada en el acta, y un máximo de 20 minutos de maniobras con 10 de tolerancia. Registrar medidas, seleccionar Camión o coincidir con una capacidad no acredita ese permiso ni elimina otras prohibiciones. La autoridad competente actual, publicación, vigencia, condiciones individuales y excepciones requieren comprobación.",
+          "activity": "loading",
+          "kind": "permit",
+          "citation": "Acta C26/11, Cabildo 14-08-2025 · reglas del estacionamiento rotativo, artículos 11–13 · página PDF 70",
+          "page": 70,
+          "sourceUrl": "https://gaceta.pueblacapital.gob.mx/publicaciones/actas/cabildo/item/download/1132_565ca888d94782ae1c7b763eb389da28",
           "geometry": null,
           "routingEnforced": false,
           "interpretation": "requires_review",
           "requiresPermit": true,
           "operationMinutes": 20,
-          "toleranceMinutes": 10
+          "toleranceMinutes": 10,
+          "actEvidence": {
+            "jurisdiction": "Municipio de Puebla · INEGI 21114",
+            "scope": "Corredores del programa de estacionamiento rotativo; geometría y días aplicables pendientes de verificación. Excluye las sustancias restringidas que cita el artículo.",
+            "consultedAt": "2026-11-15",
+            "approvedAt": "2025-08-14",
+            "sha256": "0917dc30ac70594a6e954243800bc5219d7ea3f2bc8017f7ea532b8ec510555c",
+            "pages": [
+              70
+            ],
+            "reviewStatus": "selected_provisions_only",
+            "officialGazetteStatus": "not_fully_verified"
+          }
         }
       ],
       "supersededProvisions": [

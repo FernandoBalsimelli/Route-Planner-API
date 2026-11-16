@@ -107,3 +107,9 @@ Se mantienen 15 municipios con referencia parcial y cero con validación legal
 automática completa. La consulta de RES. 2025/88 y el acta de agosto es evidencia
 parcial de actos posteriores; falta reconstruir toda la cadena de publicación
 y vigencia. No se afirma ausencia de modificaciones de 2026.
+
+Compatibilidad: las fichas de acta usan `actEvidence`, mientras COREMUN conserva
+`evidence`. Las pestañas de la Web anterior esperan consolidación en evidence;
+no reciben ahí una fecha de acto diferente ni un valor ausente. La nueva Web
+lee ambos tipos. Esto permite publicar en pasos y conservar rollback sin
+obligar a cerrar pestañas ni inventar una fecha de consolidación del acta.
