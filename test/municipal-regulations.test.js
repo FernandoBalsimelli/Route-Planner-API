@@ -96,6 +96,21 @@ test('Puebla keeps consolidated loading and parking references separate from per
  const commercial=rows.find(row=>row.activity==='circulation');assert.equal(commercial.page,160);
  const dwell=rows.find(row=>row.maximumDwellMinutes);assert.equal(dwell.activity,'parking');assert.equal(dwell.maximumDwellMinutes,30);assert.equal(dwell.operationMinutes+dwell.toleranceMinutes,30);
  const restricted=rows.find(row=>row.thresholdReference);assert.equal(restricted.activity,'parking');assert.equal(restricted.page,176);assert.equal(restricted.thresholdReference.quantity,'not_specified_in_cited_article');assert.equal(restricted.thresholdReference.operator,'gt');
- const response=await app.inject('/v1/regulations/municipalities/21114');assert.equal(response.statusCode,200);assert.equal(response.json().rules.filter(row=>row.evidence).length,4);assert.equal(response.json().routingEnforced,false);
+ const response=await app.inject('/v1/regulations/municipalities/21114');assert.equal(response.statusCode,200);assert.equal(response.json().rules.filter(row=>row.id.startsWith('pue-coremun-')&&row.evidence).length,4);assert.equal(response.json().routingEnforced,false);
+ assert.equal(municipalCatalog().fullyVerifiedMunicipalities,0);
+});
+
+
+test('Puebla rotating-parking loading references preserve inclusive capacity, midnight, permits and unresolved jurisdiction geometry',()=>{
+ const entry=municipalReference('21114'),rows=entry.rules.filter(row=>row.id.startsWith('pue-rotativo-2025-'));
+ assert.equal(rows.length,3);
+ for(const row of rows){assert.equal(row.activity,'loading');assert.equal(row.routingEnforced,false);assert.equal(row.geometry,null);assert.equal(row.actEvidence.approvedAt,'2025-08-14');assert.equal(row.actEvidence.consolidatedThrough,undefined);assert.equal(row.page,70);assert.equal(row.actEvidence.reviewStatus,'selected_provisions_only');assert.ok(entry.source.relatedUrls.includes(row.sourceUrl));assert.equal(row.requiresPermit,true);assert.equal(row.evidence,undefined,'older clients must not receive an evidence object without the consolidation date they require');}
+ const inclusive=rows.find(row=>row.id.endsWith('-hasta')),larger=rows.find(row=>row.id.endsWith('-mayor')),permit=rows.find(row=>row.id.endsWith('-permiso'));
+ assert.deepEqual(inclusive.vehicleConditions,{payloadCapacityT:{lte:3.5}});assert.equal(inclusive.window.start,'08:00');assert.equal(inclusive.window.end,'20:59');
+ assert.deepEqual(larger.vehicleConditions,{payloadCapacityT:{gt:3.5}});assert.equal(larger.window.start,'21:00');assert.equal(larger.window.end,'07:00');assert.equal(larger.endsNextDay,true);
+ for(const row of [inclusive,larger]){assert.equal(row.window.days,null);assert.equal(row.window.timezone,'America/Mexico_City');assert.equal(row.window.effect,'loading_reference_only');assert.equal(row.excludesRestrictedSubstances,true);}
+ assert.equal(permit.operationMinutes,20);assert.equal(permit.toleranceMinutes,10);assert.equal(permit.window,undefined);
+ assert.deepEqual(entry.rules.find(row=>row.id==='pue-capacidad-menor').vehicleConditions,{payloadCapacityT:{lt:3.5}},'a different source keeps its strict boundary');
+ assert.equal(entry.rules.find(row=>row.id==='pue-coremun-rotativo-restriccion').thresholdReference.quantity,'not_specified_in_cited_article');
  assert.equal(municipalCatalog().fullyVerifiedMunicipalities,0);
 });
