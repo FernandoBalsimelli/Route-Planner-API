@@ -91,3 +91,12 @@ geometrías verificadas, excepciones y permisos individuales. El PDF ya pertenec
 al monitor de Puebla; no se crea otro servicio, cuota ni programación. El monitor
 detecta cambios técnicos por documento, no los aprueba como reformas. Toda
 actualización del anexo exige nueva revisión y cambio versionado del hash.
+
+
+## Revisión documental separada · 16-11-2026
+
+Se corroboró la publicación histórica de la reforma RES. 2025/148 (14-08-2025)
+y se identificó RES. 2025/162, que sustituye el inicio citado de sanciones del
+Polígono 5 de 01-10 a 01-11-2025. No se equipara con publicación íntegra ni
+vigencia actual de todas las reglas/anexo; el snapshot reproducible no se altera.
+Detalles, fuentes y límites: [PUEBLA-PUBLICATION-HISTORY.md](PUEBLA-PUBLICATION-HISTORY.md).

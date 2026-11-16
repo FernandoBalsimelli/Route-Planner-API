@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "municipalityId": "21114",
+  "jurisdiction": "Municipio de Puebla · INEGI 21114",
+  "activity": "parking_operation",
+  "status": "partial_history",
+  "reviewedAt": "2026-11-16",
+  "routingEnforced": false,
+  "publication": {
+    "date": "2025-08-14",
+    "status": "corroborated_in_official_gazette",
+    "sourceIds": [
+      "gazette148",
+      "res162"
+    ],
+    "citation": "Tomo LXXXIII núm. 1 y RES. 2025/162, considerando X",
+    "scope": "Publicación histórica de RES. 2025/148; no certifica publicación íntegra ni vigencia de todas las reglas y del anexo."
+  },
+  "records": [
+    {
+      "id": "res148",
+      "resolution": "RES. 2025/148",
+      "approvedAt": "2025-08-14",
+      "publishedAt": "2025-08-14",
+      "title": "Reforma e incorporación de San Alejandro–Ortopedia",
+      "description": "Modifica artículos 2, 14 I, 19 y Anexo Único; el resolutivo segundo vincula su entrada en vigor a la publicación municipal. Esa publicación se corrobora en el tomo y en el antecedente de la resolución posterior.",
+      "scope": "Estacionamiento rotativo; la fecha de sanciones citada corresponde sólo al Polígono 5 San Alejandro–Ortopedia.",
+      "sanctions": {
+        "fromDate": "2025-10-01",
+        "status": "superseded",
+        "supersededBy": "RES. 2025/162",
+        "label": "Fecha inicial de sanciones sustituida"
+      },
+      "sourceIds": [
+        "res148",
+        "gazette148"
+      ]
+    },
+    {
+      "id": "res162",
+      "resolution": "RES. 2025/162",
+      "approvedAt": "2025-09-18",
+      "publishedAt": "2025-09-18",
+      "title": "Cambio del inicio citado de infracciones y sanciones",
+      "description": "Modifica el transitorio único de RES. 2025/148 y traslada la fecha citada de sanciones del polígono 5 al 1 de noviembre de 2025. No es una autorización de acceso, circulación ni descarga.",
+      "scope": "Sólo Polígono 5 San Alejandro–Ortopedia; no se extiende a los demás polígonos ni a todo Puebla.",
+      "sanctions": {
+        "fromDate": "2025-11-01",
+        "status": "amended_date_cited",
+        "label": "Fecha modificada citada; vigencia posterior pendiente"
+      },
+      "sourceIds": [
+        "res162",
+        "gazette162"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "res148",
+      "url": "https://gaceta.pueblacapital.gob.mx/publicaciones/minutas/item/2067-res-2025-148-dictamen-por-virtud-del-cual-se-reforman-los-articulos-2-14-fraccion-i-19-parrafo-primero-y-el-anexo-unico-de-las-reglas-de-operacion-del-estacionamiento-rotativo-para-la-administracion-2024-2027-a-fin-de-incorporar-el",
+      "http": 200,
+      "bytes": 131857,
+      "sha256": "6eee5429c5bb26192aee08e2933f4922d219f0f57e4e09954af41adf7d6e1ca6",
+      "title": "RES. 2025/148 · resolutivos segundo y cuarto; transitorio único",
+      "reviewedAt": "2026-11-16",
+      "reviewStatus": "selected_sections_only"
+    },
+    {
+      "id": "gazette148",
+      "url": "https://gaceta.pueblacapital.gob.mx/index.php/buscar/item/2070-tomo-lxxxiii-numero-1",
+      "http": 200,
+      "bytes": 177757,
+      "sha256": "c28c9dba30ad2f2d7065168facd12cbd2570d1e4dd27ae2951bf67ede5febe93",
+      "title": "Gaceta · Tomo LXXXIII, número 1 · 14-08-2025",
+      "reviewedAt": "2026-11-16",
+      "reviewStatus": "selected_sections_only"
+    },
+    {
+      "id": "res162",
+      "url": "https://gaceta.pueblacapital.gob.mx/publicaciones/minutas/item/2087-res-2025-162-punto-de-acuerdo-por-el-que-se-aprueba-modificar-el-transitorio-unico-de-la-res-2025-148-a-fin-de-ampliar-hasta-el-1-de-noviembre-de-2025-el-periodo-durante-el-cual-no-se-aplicaran-infracciones-ni-sanciones-en-el-poligono-5-san",
+      "http": 200,
+      "bytes": 111955,
+      "sha256": "f62cd75aae18bfa799d64ca0ed91fe836efe64cbff594f98fb01e6a2cf2fda93",
+      "title": "RES. 2025/162 · considerandos X/XII y resolutivo primero",
+      "reviewedAt": "2026-11-16",
+      "reviewStatus": "selected_sections_only"
+    },
+    {
+      "id": "gazette162",
+      "url": "https://gaceta.pueblacapital.gob.mx/index.php/buscar/item/2086-tomo-lxxxiv-numero-1",
+      "http": 200,
+      "bytes": 178512,
+      "sha256": "995adff665ec1f4d70091c75a482fc49714e3a54a3599972ce0dd1b58ed7b2bb",
+      "title": "Gaceta · Tomo LXXXIV, número 1 · 18-09-2025",
+      "reviewedAt": "2026-11-16",
+      "reviewStatus": "selected_sections_only"
+    }
+  ],
+  "notices": [
+    "La fecha corroborada corresponde a la reforma RES. 2025/148; aún falta comprobar la publicación íntegra del texto de las reglas y del anexo.",
+    "La publicación histórica está corroborada; la vigencia actual y todos los actos posteriores, incluidos los de 2026, no se han revisado exhaustivamente.",
+    "Inicio de sanciones, publicación y horarios de operación son conceptos distintos. Ninguna fecha concede permiso de circulación o de carga.",
+    "La discrepancia entre etiquetas 5/6 del anexo y sus geometrías o sentidos sigue sin resolver; no se asigna una sanción automáticamente a esos registros."
+  ]
+}
