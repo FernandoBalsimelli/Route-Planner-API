@@ -1,0 +1,6921 @@
+{
+  "schemaVersion": 1,
+  "municipalityId": "21114",
+  "activity": "parking_operation",
+  "timezone": "America/Mexico_City",
+  "status": "reference_only",
+  "routingEnforced": false,
+  "source": {
+    "url": "https://gaceta.pueblacapital.gob.mx/publicaciones/actas/cabildo/item/download/1132_565ca888d94782ae1c7b763eb389da28",
+    "title": "Acta C26/11 · Anexo Único del estacionamiento rotativo",
+    "sha256": "0917dc30ac70594a6e954243800bc5219d7ea3f2bc8017f7ea532b8ec510555c",
+    "approvedAt": "2025-08-14",
+    "consultedAt": "2026-11-15",
+    "pages": [
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88
+    ],
+    "reviewStatus": "selected_annex_only",
+    "publicationAndCurrentValidity": "not_fully_verified",
+    "entryIntoForce": {
+      "criterion": "municipal_gazette_publication",
+      "sourcePage": 80,
+      "publicationDate": null,
+      "status": "publication_date_not_verified"
+    }
+  },
+  "notices": [
+    "Son horarios citados de operación del estacionamiento rotativo; no autorizan circulación ni sustituyen las ventanas de maniobras y sus permisos.",
+    "La publicación, entrada en vigor y vigencia posterior del anexo no están verificadas íntegramente. No se aplica al trazado.",
+    "La fuente usa Polígono 5 y Polígono 6 para San Alejandro - Ortopedia. Se conservan ambos; la discrepancia requiere revisión.",
+    "Se conservan los registros repetidos del anexo. “No aplica” en domingo no significa circulación libre ni permiso para estacionarse.",
+    "Los nombres y extremos no son geometrías verificadas ni indican un sentido de circulación autorizado."
+  ],
+  "duplicateGroups": [
+    [
+      10,
+      15
+    ],
+    [
+      126,
+      128
+    ]
+  ],
+  "rows": [
+    {
+      "sourceRow": 1,
+      "polygon": "Polígono 1 Centro Histórico",
+      "corridor": "12 Poniente-Oriente",
+      "betweenStreets": "11 Norte y 4 Norte",
+      "sourcePages": [
+        80
+      ],
+      "rawCells": [
+        "",
+        "Polígono 1\n1 Centro\nHistórico",
+        "12\nPoniente-\nOriente",
+        "11 Norte y 4\nNorte",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "11:00 a\n17:00 hrs"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 2,
+      "polygon": "Polígono 1 Centro Histórico",
+      "corridor": "12 Oriente",
+      "betweenStreets": "6 Norte y Privada 6 Norte",
+      "sourcePages": [
+        80
+      ],
+      "rawCells": [
+        "",
+        "Polígono 1\n2 Centro\nHistórico",
+        "12 Oriente",
+        "6 Norte y\nPrivada 6\nNorte",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "11:00 a\n17:00 hrs"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 3,
+      "polygon": "Polígono 1 Centro Histórico",
+      "corridor": "10 Poniente-Oriente",
+      "betweenStreets": "11 Norte y Blvd. Héroes del 5 de mayo",
+      "sourcePages": [
+        80
+      ],
+      "rawCells": [
+        "",
+        "Polígono 1\n3 Centro\nHistórico",
+        "10\nPoniente-\nOriente",
+        "11 Norte y Blvd.\nHéroes del 5 de\nmayo",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "11:00 a\n17:00 hrs"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 4,
+      "polygon": "Polígono 1 Centro Histórico",
+      "corridor": "8 Poniente-Oriente",
+      "betweenStreets": "11 Norte y 8 Norte",
+      "sourcePages": [
+        80
+      ],
+      "rawCells": [
+        "",
+        "Polígono 1\n4 Centro\nHistórico",
+        "8\nPoniente-\nOriente",
+        "11 Norte y 8\nNorte",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "11:00 a\n17:00 hrs"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 5,
+      "polygon": "Polígono 1 Centro Histórico",
+      "corridor": "6 Poniente",
+      "betweenStreets": "11 Norte y 3 Norte",
+      "sourcePages": [
+        80
+      ],
+      "rawCells": [
+        "",
+        "Polígono 1\n5 Centro\nHistórico",
+        "6\nPoniente",
+        "11 Norte y 3\nNorte",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "11:00 a\n17:00 hrs"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 6,
+      "polygon": "Polígono 1 Centro Histórico",
+      "corridor": "2 Poniente",
+      "betweenStreets": "11 Norte y 5 de mayo",
+      "sourcePages": [
+        80
+      ],
+      "rawCells": [
+        "",
+        "Polígono 1\n6 Centro\nHistórico",
+        "2\nPoniente",
+        "11 Norte y 5 de\nmayo",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "11:00 a\n17:00 hrs"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 7,
+      "polygon": "Polígono 1 Centro Histórico",
+      "corridor": "2 Oriente",
+      "betweenStreets": "2 Sur y Blvd. Héroes del 5 de mayo",
+      "sourcePages": [
+        80
+      ],
+      "rawCells": [
+        "",
+        "Polígono 1\n7 Centro\nHistórico",
+        "2 Oriente",
+        "2 Sur y Blvd.\nHéroes del 5 de\nmayo",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "11:00 a\n17:00 hrs"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 8,
+      "polygon": "Polígono 1 Centro Histórico",
+      "corridor": "3 Poniente",
+      "betweenStreets": "11 Sur y 16 de Septiembre",
+      "sourcePages": [
+        80
+      ],
+      "rawCells": [
+        "",
+        "Polígono 1\n8 Centro\nHistórico",
+        "3\nPoniente",
+        "11 Sur y 16 de\nSeptiembre",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "11:00 a\n17:00 hrs"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 9,
+      "polygon": "Polígono 1 Centro Histórico",
+      "corridor": "3 Oriente",
+      "betweenStreets": "2 Sur y 4 Sur",
+      "sourcePages": [
+        80
+      ],
+      "rawCells": [
+        "",
+        "Polígono 1\n9 Centro\nHistórico",
+        "3 Oriente",
+        "2 Sur y 4 Sur",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "11:00 a\n17:00 hrs"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 10,
+      "polygon": "Polígono 1 Centro Histórico",
+      "corridor": "3 Oriente",
+      "betweenStreets": "Blvd. Héroes del 5 de mayo y 14 Sur",
+      "sourcePages": [
+        80
+      ],
+      "rawCells": [
+        "",
+        "Polígono 1\n1\nCentro\n0\nHistórico",
+        "3 Oriente",
+        "Blvd. Héroes\ndel 5 de mayo y\n14 Sur",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "11:00 a\n17:00 hrs"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 11,
+      "polygon": "Polígono 1 Centro Histórico",
+      "corridor": "5 Poniente",
+      "betweenStreets": "11 Sur y 16 de Septiembre",
+      "sourcePages": [
+        81
+      ],
+      "rawCells": [
+        "",
+        "Polígono 1\n1\nCentro\n1\nHistórico",
+        "5\nPoniente",
+        "11 Sur y 16 de\nSeptiembre",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "11:00 a\n17:00 hrs"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 12,
+      "polygon": "Polígono 1 Centro Histórico",
+      "corridor": "7 Poniente",
+      "betweenStreets": "11 Sur y 5 Sur",
+      "sourcePages": [
+        81
+      ],
+      "rawCells": [
+        "",
+        "Polígono 1\n1\nCentro\n2\nHistórico",
+        "7\nPoniente",
+        "11 Sur y 5 Sur",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "11:00 a\n17:00 hrs"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 13,
+      "polygon": "Polígono 1 Centro Histórico",
+      "corridor": "5 Oriente",
+      "betweenStreets": "2 Sur y Blvd. Héroes del 5 de mayo",
+      "sourcePages": [
+        81
+      ],
+      "rawCells": [
+        "",
+        "Polígono 1\n1\nCentro\n3\nHistórico",
+        "5 Oriente",
+        "2 Sur y Blvd.\nHéroes del 5 de\nmayo",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "11:00 a\n17:00 hrs"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 14,
+      "polygon": "Polígono 1 Centro Histórico",
+      "corridor": "Juan de Palafox y Mendoza",
+      "betweenStreets": "Blvd. Héroes del 5 de mayo y 14 Norte",
+      "sourcePages": [
+        81
+      ],
+      "rawCells": [
+        "",
+        "Polígono 1\n1\nCentro\n4\nHistórico",
+        "Juan de\nPalafox y\nMendoza",
+        "Blvd. Héroes\ndel 5 de mayo y\n14 Norte",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "11:00 a\n17:00 hrs"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 15,
+      "polygon": "Polígono 1 Centro Histórico",
+      "corridor": "3 Oriente",
+      "betweenStreets": "Blvd. Héroes del 5 de mayo y 14 Sur",
+      "sourcePages": [
+        81
+      ],
+      "rawCells": [
+        "",
+        "Polígono 1\n1\nCentro\n5\nHistórico",
+        "3 Oriente",
+        "Blvd. Héroes\ndel 5 de mayo y\n14 Sur",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "11:00 a\n17:00 hrs"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 16,
+      "polygon": "Polígono 1 Centro Histórico",
+      "corridor": "5 Oriente",
+      "betweenStreets": "Blvd. Héroes del 5 de mayo y 14 Sur",
+      "sourcePages": [
+        81
+      ],
+      "rawCells": [
+        "",
+        "Polígono 1\n1\nCentro\n6\nHistórico",
+        "5 Oriente",
+        "Blvd. Héroes\ndel 5 de mayo y\n14 Sur",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "11:00 a\n17:00 hrs"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 17,
+      "polygon": "Polígono 1 Centro Histórico",
+      "corridor": "7 Oriente",
+      "betweenStreets": "4 Sur y 14 Sur",
+      "sourcePages": [
+        81
+      ],
+      "rawCells": [
+        "",
+        "Polígono 1\n1\nCentro\n7\nHistórico",
+        "7 Oriente",
+        "4 Sur y 14 Sur",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "11:00 a\n17:00 hrs"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 18,
+      "polygon": "Polígono 1 Centro Histórico",
+      "corridor": "9 Poniente-Oriente",
+      "betweenStreets": "11 Sur y 14 Sur",
+      "sourcePages": [
+        81
+      ],
+      "rawCells": [
+        "",
+        "Polígono 1\n1\nCentro\n8\nHistórico",
+        "9\nPoniente-\nOriente",
+        "11 Sur y 14 Sur",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "11:00 a\n17:00 hrs"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 19,
+      "polygon": "Polígono 1 Centro Histórico",
+      "corridor": "11 Poniente-Oriente",
+      "betweenStreets": "11 Sur y 14 Sur",
+      "sourcePages": [
+        81
+      ],
+      "rawCells": [
+        "",
+        "Polígono 1\n1\nCentro\n9\nHistórico",
+        "11\nPoniente-\nOriente",
+        "11 Sur y 14 Sur",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "11:00 a\n17:00 hrs"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 20,
+      "polygon": "Polígono 1 Centro Histórico",
+      "corridor": "13 Poniente-Oriente",
+      "betweenStreets": "11 Sur y Blvd. Héroes del 5 de mayo",
+      "sourcePages": [
+        81
+      ],
+      "rawCells": [
+        "",
+        "Polígono 1\n2\nCentro\n0\nHistórico",
+        "13\nPoniente-\nOriente",
+        "11 Sur y Blvd.\nHéroes del 5 de\nmayo",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "11:00 a\n17:00 hrs"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 21,
+      "polygon": "Polígono 1 Centro Histórico",
+      "corridor": "15 Poniente-Oriente",
+      "betweenStreets": "11 Sur y Blvd. Héroes del 5 de mayo",
+      "sourcePages": [
+        81
+      ],
+      "rawCells": [
+        "",
+        "Polígono 1\n2\nCentro\n1\nHistórico",
+        "15\nPoniente-\nOriente",
+        "11 Sur y Blvd.\nHéroes del 5 de\nmayo",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "11:00 a\n17:00 hrs"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 22,
+      "polygon": "Polígono 1 Centro Histórico",
+      "corridor": "17 Poniente-Oriente",
+      "betweenStreets": "11 Sur y Blvd. Héroes del 5 de mayo",
+      "sourcePages": [
+        81
+      ],
+      "rawCells": [
+        "",
+        "Polígono 1\n2\nCentro\n2\nHistórico",
+        "17\nPoniente-\nOriente",
+        "11 Sur y Blvd.\nHéroes del 5 de\nmayo",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "11:00 a\n17:00 hrs"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 23,
+      "polygon": "Polígono 1 Centro Histórico",
+      "corridor": "19 Poniente-Oriente",
+      "betweenStreets": "11 Sur y Blvd. Héroes del 5 de mayo",
+      "sourcePages": [
+        81
+      ],
+      "rawCells": [
+        "",
+        "Polígono 1\n2\nCentro\n3\nHistórico",
+        "19\nPoniente-\nOriente",
+        "11 Sur y Blvd.\nHéroes del 5 de\nmayo",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "11:00 a\n17:00 hrs"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 24,
+      "polygon": "Polígono 1 Centro Histórico",
+      "corridor": "Privada 9 B Sur",
+      "betweenStreets": "7 Poniente y 9 Poniente",
+      "sourcePages": [
+        81
+      ],
+      "rawCells": [
+        "",
+        "Polígono 1\n2\nCentro\n4\nHistórico",
+        "Privada 9\nB Sur",
+        "7 Poniente y 9\nPoniente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "11:00 a\n17:00 hrs"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 25,
+      "polygon": "Polígono 1 Centro Histórico",
+      "corridor": "Privada 9 A Sur",
+      "betweenStreets": "7 Poniente y 9 Poniente",
+      "sourcePages": [
+        81
+      ],
+      "rawCells": [
+        "",
+        "Polígono 1\n2\nCentro\n5\nHistórico",
+        "Privada 9\nA Sur",
+        "7 Poniente y 9\nPoniente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "11:00 a\n17:00 hrs"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 26,
+      "polygon": "Polígono 1 Centro Histórico",
+      "corridor": "Callejón 5 Poniente",
+      "betweenStreets": "5 Poniente y 7 Poniente",
+      "sourcePages": [
+        81
+      ],
+      "rawCells": [
+        "",
+        "Polígono 1\n2\nCentro\n6\nHistórico",
+        "Callejón 5\nPoniente",
+        "5 Poniente y 7\nPoniente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "11:00 a\n17:00 hrs"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 27,
+      "polygon": "Polígono 1 Centro Histórico",
+      "corridor": "9 Sur",
+      "betweenStreets": "13 Poniente y 19 Poniente",
+      "sourcePages": [
+        81
+      ],
+      "rawCells": [
+        "",
+        "Polígono 1\n2\nCentro\n7\nHistórico",
+        "9 Sur",
+        "13 Poniente y\n19 Poniente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "11:00 a\n17:00 hrs"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 28,
+      "polygon": "Polígono 1 Centro Histórico",
+      "corridor": "7 Sur",
+      "betweenStreets": "12 Poniente y 11 Poniente",
+      "sourcePages": [
+        82
+      ],
+      "rawCells": [
+        "",
+        "Polígono 1\n2\nCentro\n8\nHistórico",
+        "7 Sur",
+        "12 Poniente y\n11 Poniente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "11:00 a\n17:00 hrs"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 29,
+      "polygon": "Polígono 1 Centro Histórico",
+      "corridor": "7 Sur",
+      "betweenStreets": "13 Poniente y 19 Poniente",
+      "sourcePages": [
+        82
+      ],
+      "rawCells": [
+        "",
+        "Polígono 1\n2\nCentro\n9\nHistórico",
+        "7 Sur",
+        "13 Poniente y\n19 Poniente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "11:00 a\n17:00 hrs"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 30,
+      "polygon": "Polígono 1 Centro Histórico",
+      "corridor": "16 de Septiembre",
+      "betweenStreets": "17 Poniente y 19 Poniente",
+      "sourcePages": [
+        82
+      ],
+      "rawCells": [
+        "",
+        "Polígono 1\n3\nCentro\n0\nHistórico",
+        "16 de\nSeptiemb\nre",
+        "17 Poniente y\n19 Poniente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "11:00 a\n17:00 hrs"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 31,
+      "polygon": "Polígono 1 Centro Histórico",
+      "corridor": "3 Sur",
+      "betweenStreets": "12 Poniente y 19 Poniente",
+      "sourcePages": [
+        82
+      ],
+      "rawCells": [
+        "",
+        "Polígono 1\n3\nCentro\n1\nHistórico",
+        "3 Sur",
+        "12 Poniente y\n19 Poniente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "11:00 a\n17:00 hrs"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 32,
+      "polygon": "Polígono 1 Centro Histórico",
+      "corridor": "Privada 16 de Septiembre",
+      "betweenStreets": "15 Oriente y 17 Oriente",
+      "sourcePages": [
+        82
+      ],
+      "rawCells": [
+        "",
+        "Polígono 1\n3\nCentro\n2\nHistórico",
+        "Privada 16\nde\nSeptiemb\nre",
+        "15 Oriente y 17\nOriente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "11:00 a\n17:00 hrs"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 33,
+      "polygon": "Polígono 1 Centro Histórico",
+      "corridor": "2 Sur",
+      "betweenStreets": "7 Oriente y 19 Oriente",
+      "sourcePages": [
+        82
+      ],
+      "rawCells": [
+        "",
+        "Polígono 1\n3\nCentro\n3\nHistórico",
+        "2 Sur",
+        "7 Oriente y 19\nOriente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "11:00 a\n17:00 hrs"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 34,
+      "polygon": "Polígono 1 Centro Histórico",
+      "corridor": "4 Norte",
+      "betweenStreets": "12 Oriente y Palafox y Mendoza",
+      "sourcePages": [
+        82
+      ],
+      "rawCells": [
+        "",
+        "Polígono 1\n3\nCentro\n4\nHistórico",
+        "4 Norte",
+        "12 Oriente y\nPalafox y\nMendoza",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "11:00 a\n17:00 hrs"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 35,
+      "polygon": "Polígono 1 Centro Histórico",
+      "corridor": "4 Sur",
+      "betweenStreets": "3 Oriente y 19 Oriente",
+      "sourcePages": [
+        82
+      ],
+      "rawCells": [
+        "",
+        "Polígono 1\n3\nCentro\n5\nHistórico",
+        "4 Sur",
+        "3 Oriente y 19\nOriente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "11:00 a\n17:00 hrs"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 36,
+      "polygon": "Polígono 1 Centro Histórico",
+      "corridor": "5 Sur",
+      "betweenStreets": "7 Poniente y 19 Poniente",
+      "sourcePages": [
+        82
+      ],
+      "rawCells": [
+        "",
+        "Polígono 1\n3\nCentro\n6\nHistórico",
+        "5 Sur",
+        "7 Poniente y 19\nPoniente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "11:00 a\n17:00 hrs"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 37,
+      "polygon": "Polígono 1 Centro Histórico",
+      "corridor": "6 Norte",
+      "betweenStreets": "6 Oriente y Palafox y Mendoza",
+      "sourcePages": [
+        82
+      ],
+      "rawCells": [
+        "",
+        "Polígono 1\n3\nCentro\n7\nHistórico",
+        "6 Norte",
+        "6 Oriente y\nPalafox y\nMendoza",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "11:00 a 17:\n00 hrs"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17: 00 hrs"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 38,
+      "polygon": "Polígono 1 Centro Histórico",
+      "corridor": "14 Norte- Sur",
+      "betweenStreets": "2 Oriente y 11 Oriente",
+      "sourcePages": [
+        82
+      ],
+      "rawCells": [
+        "",
+        "Polígono 1\n3\nCentro\n8\nHistórico",
+        "14 Norte-\nSur",
+        "2 Oriente y 11\nOriente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "11:00 a\n17:00 hrs\nA"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs A"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 39,
+      "polygon": "Polígono 1 Centro Histórico",
+      "corridor": "10 Sur",
+      "betweenStreets": "3 Oriente y 5 Oriente",
+      "sourcePages": [
+        82
+      ],
+      "rawCells": [
+        "",
+        "Polígono 1\n3\nCentro\n9\nHistórico",
+        "10 Sur",
+        "3 Oriente y 5\nOriente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "2\n11:00 a\n/\n17:00 hrs\n7"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "2 11:00 a / 17:00 hrs 7"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 40,
+      "polygon": "Polígono 1 Centro Histórico",
+      "corridor": "8 Sur",
+      "betweenStreets": "5 Oriente y 11 Oriente",
+      "sourcePages": [
+        82
+      ],
+      "rawCells": [
+        "",
+        "Polígono 1\n4\nCentro\n0\nHistórico",
+        "8 Sur",
+        "5 Oriente y 11\nOriente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "11:00 a\n17:00 hrs"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 41,
+      "polygon": "Polígono 1 Centro Histórico",
+      "corridor": "13 Norte- Sur",
+      "betweenStreets": "4 Poniente y 11 Poniente",
+      "sourcePages": [
+        82
+      ],
+      "rawCells": [
+        "",
+        "Polígono 1\n4\nCentro\n1\nHistórico",
+        "13 Norte-\nSur",
+        "4 Poniente y 11\nPoniente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "11:00 a\n17:00 hrs"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 42,
+      "polygon": "Polígono 2 Carmen- Huexotitla",
+      "corridor": "25 Poniente-Oriente",
+      "betweenStreets": "11 Sur y Blvd. Héroes del 5 de mayo",
+      "sourcePages": [
+        82
+      ],
+      "rawCells": [
+        "",
+        "Polígono 2\n4\nCarmen-\n2\nHuexotitla",
+        "25\nPoniente-\nOriente",
+        "11 Sur y Blvd.\nHéroes del 5 de\nmayo",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 43,
+      "polygon": "Polígono 2 Carmen- Huexotitla",
+      "corridor": "21 Poniente-Oriente",
+      "betweenStreets": "11 Sur y Blvd. Héroes del 5 de mayo",
+      "sourcePages": [
+        82
+      ],
+      "rawCells": [
+        "",
+        "Polígono 2\n4\nCarmen-\n3\nHuexotitla",
+        "21\nPoniente-\nOriente",
+        "11 Sur y Blvd.\nHéroes del 5 de\nmayo",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 44,
+      "polygon": "Polígono 2 Carmen- Huexotitla",
+      "corridor": "23 Poniente-Oriente",
+      "betweenStreets": "11 Sur y Blvd. Héroes del 5 de mayo",
+      "sourcePages": [
+        82
+      ],
+      "rawCells": [
+        "",
+        "Polígono 2\n4\nCarmen-\n4\nHuexotitla",
+        "23\nPoniente-\nOriente",
+        "11 Sur y Blvd.\nHéroes del 5 de\nmayo",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 45,
+      "polygon": "Polígono 2 Carmen- Huexotitla",
+      "corridor": "27 Poniente-Oriente",
+      "betweenStreets": "11 Sur y Blvd. Héroes del 5 de mayo",
+      "sourcePages": [
+        83
+      ],
+      "rawCells": [
+        "",
+        "Polígono 2\n4\nCarmen-\n5\nHuexotitla",
+        "27\nPoniente-\nOriente",
+        "11 Sur y Blvd.\nHéroes del 5 de\nmayo",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 46,
+      "polygon": "Polígono 2 Carmen- Huexotitla",
+      "corridor": "31 Poniente-Oriente",
+      "betweenStreets": "11 Sur y Blvd. Héroes del 5 de mayo",
+      "sourcePages": [
+        83
+      ],
+      "rawCells": [
+        "",
+        "Polígono 2\n4\nCarmen-\n6\nHuexotitla",
+        "31\nPoniente-\nOriente",
+        "11 Sur y Blvd.\nHéroes del 5 de\nmayo",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 47,
+      "polygon": "Polígono 2 Carmen- Huexotitla",
+      "corridor": "37 Poniente-Oriente",
+      "betweenStreets": "11 Sur y 2 A Sur",
+      "sourcePages": [
+        83
+      ],
+      "rawCells": [
+        "",
+        "Polígono 2\n4\nCarmen-\n7\nHuexotitla",
+        "37\nPoniente-\nOriente",
+        "11 Sur y 2 A Sur",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 48,
+      "polygon": "Polígono 2 Carmen- Huexotitla",
+      "corridor": "39 Poniente-Oriente",
+      "betweenStreets": "7 Sur y 2 A Sur",
+      "sourcePages": [
+        83
+      ],
+      "rawCells": [
+        "",
+        "Polígono 2\n4\nCarmen-\n8\nHuexotitla",
+        "39\nPoniente-\nOriente",
+        "7 Sur y 2 A Sur",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 49,
+      "polygon": "Polígono 2 Carmen- Huexotitla",
+      "corridor": "41 Poniente-Oriente",
+      "betweenStreets": "11 Sur y 16 A Oriente",
+      "sourcePages": [
+        83
+      ],
+      "rawCells": [
+        "",
+        "Polígono 2\n4\nCarmen-\n9\nHuexotitla",
+        "41\nPoniente-\nOriente",
+        "11 Sur y 16 A\nOriente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 50,
+      "polygon": "Polígono 2 Carmen- Huexotitla",
+      "corridor": "43 Oriente-Poniente",
+      "betweenStreets": "Blvd. Héroes del 5 de mayo y Blvd. Capitán Carlos Camacho Espiritu",
+      "sourcePages": [
+        83
+      ],
+      "rawCells": [
+        "",
+        "Polígono 2\n5\nCarmen-\n0\nHuexotitla",
+        "43\nOriente-\nPoniente",
+        "Blvd. Héroes\ndel 5 de mayo y\nBlvd. Capitán\nCarlos\nCamacho\nEspiritu",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 51,
+      "polygon": "Polígono 2 Carmen- Huexotitla",
+      "corridor": "43 Poniente-Oriente",
+      "betweenStreets": "Blvd. Capitán Carlos Camacho Espiritu y Blvd. Héroes del 5 de mayo",
+      "sourcePages": [
+        83
+      ],
+      "rawCells": [
+        "",
+        "Polígono 2\n5\nCarmen-\n1\nHuexotitla",
+        "43\nPoniente-\nOriente",
+        "Blvd. Capitán\nCarlos\nCamacho\nEspiritu y Blvd.\nHéroes del 5 de\nmayo",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 52,
+      "polygon": "Polígono 2 Carmen- Huexotitla",
+      "corridor": "31 Oriente-Poniente",
+      "betweenStreets": "Blvd. Héroes del 5 de mayo y 11 Sur",
+      "sourcePages": [
+        83
+      ],
+      "rawCells": [
+        "",
+        "Polígono 2\n5\nCarmen-\n2\nHuexotitla",
+        "31\nOriente-\nPoniente",
+        "Blvd. Héroes\ndel 5 de mayo y\n11 Sur",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 53,
+      "polygon": "Polígono 2 Carmen- Huexotitla",
+      "corridor": "Privada 9 C Sur",
+      "betweenStreets": "41 Poniente y 43 Poniente",
+      "sourcePages": [
+        83
+      ],
+      "rawCells": [
+        "",
+        "Polígono 2\n5\nCarmen-\n3\nHuexotitla",
+        "Privada 9\nC Sur",
+        "41 Poniente y\n43 Poniente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 54,
+      "polygon": "Polígono 2 Carmen- Huexotitla",
+      "corridor": "9 Sur",
+      "betweenStreets": "19 Poniente y 45 Poniente",
+      "sourcePages": [
+        83
+      ],
+      "rawCells": [
+        "",
+        "Polígono 2\n5\nCarmen-\n4\nHuexotitla",
+        "9 Sur",
+        "19 Poniente y\n45 Poniente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 55,
+      "polygon": "Polígono 2 Carmen- Huexotitla",
+      "corridor": "7 Sur",
+      "betweenStreets": "19 Poniente y 47 Poniente",
+      "sourcePages": [
+        83
+      ],
+      "rawCells": [
+        "",
+        "Polígono 2\n5\nCarmen-\n5\nHuexotitla",
+        "7 Sur",
+        "19 Poniente y\n47 Poniente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 56,
+      "polygon": "Polígono 2 Carmen- Huexotitla",
+      "corridor": "5 Sur",
+      "betweenStreets": "19 Poniente y 47 Poniente",
+      "sourcePages": [
+        83
+      ],
+      "rawCells": [
+        "",
+        "Polígono 2\n5\nCarmen-\n6\nHuexotitla",
+        "5 Sur",
+        "19 Poniente y\n47 Poniente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 57,
+      "polygon": "Polígono 2 Carmen- Huexotitla",
+      "corridor": "3 Sur",
+      "betweenStreets": "19 Poniente y 47 Poniente",
+      "sourcePages": [
+        83
+      ],
+      "rawCells": [
+        "",
+        "Polígono 2\n5\nCarmen-\n7\nHuexotitla",
+        "3 Sur",
+        "19 Poniente y\n47 Poniente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica\nA"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica A"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 58,
+      "polygon": "Polígono 2 Carmen- Huexotitla",
+      "corridor": "16 de Septiembre",
+      "betweenStreets": "19 Oriente y Blvd. Héroes del 5 de mayo",
+      "sourcePages": [
+        83
+      ],
+      "rawCells": [
+        "",
+        "Polígono 2\n5\nCarmen-\n8\nHuexotitla",
+        "16 de\nSeptiemb\nre",
+        "19 Oriente y\nBlvd. Héroes\ndel 5 de mayo",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "3\n/\nNo aplica\n7"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "3 / No aplica 7"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 59,
+      "polygon": "Polígono 2 Carmen- Huexotitla",
+      "corridor": "Privada 16 de Septiembre",
+      "betweenStreets": "21 Oriente y 23 Oriente",
+      "sourcePages": [
+        83
+      ],
+      "rawCells": [
+        "",
+        "Polígono 2\n5\nCarmen-\n9\nHuexotitla",
+        "Privada 16\nde\nSeptiemb\nre",
+        "21 Oriente y 23\nOriente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 60,
+      "polygon": "Polígono 2 Carmen- Huexotitla",
+      "corridor": "2 Sur",
+      "betweenStreets": "19 Oriente y 43 Oriente",
+      "sourcePages": [
+        84
+      ],
+      "rawCells": [
+        "",
+        "Polígono 2\n6\nCarmen-\n0\nHuexotitla",
+        "2 Sur",
+        "19 Oriente y 43\nOriente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 61,
+      "polygon": "Polígono 2 Carmen- Huexotitla",
+      "corridor": "16 de Septiembre A Oriente",
+      "betweenStreets": "39 Oriente y Blvd. Héroes del 5 de mayo",
+      "sourcePages": [
+        84
+      ],
+      "rawCells": [
+        "",
+        "Polígono 2\n6\nCarmen-\n1\nHuexotitla",
+        "16 de\nSeptiemb\nre A\nOriente",
+        "39 Oriente y\nBlvd. Héroes\ndel 5 de mayo",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 62,
+      "polygon": "Polígono 2 Carmen- Huexotitla",
+      "corridor": "Diagonal de la 39 Oriente",
+      "betweenStreets": "2 Sur y 39 Oriente",
+      "sourcePages": [
+        84
+      ],
+      "rawCells": [
+        "",
+        "Polígono 2\n6\nCarmen-\n2\nHuexotitla",
+        "Diagonal\nde la 39\nOriente",
+        "2 Sur y 39\nOriente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 63,
+      "polygon": "Polígono 2 Carmen- Huexotitla",
+      "corridor": "Compostela",
+      "betweenStreets": "43 Oriente y Blvd. Héroes del 5 de mayo",
+      "sourcePages": [
+        84
+      ],
+      "rawCells": [
+        "",
+        "Polígono 2\n6\nCarmen-\n3\nHuexotitla",
+        "Composte\nla",
+        "43 Oriente y\nBlvd. Héroes\ndel 5 de mayo",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 64,
+      "polygon": "Polígono 2 Carmen- Huexotitla",
+      "corridor": "Privada Victor Hugo",
+      "betweenStreets": "23 Oriente y 25 Oriente",
+      "sourcePages": [
+        84
+      ],
+      "rawCells": [
+        "",
+        "Polígono 2\n6\nCarmen-\n4\nHuexotitla",
+        "Privada\nVictor\nHugo",
+        "23 Oriente y 25\nOriente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 65,
+      "polygon": "Polígono 2 Carmen- Huexotitla",
+      "corridor": "Privada Victor Hugo",
+      "betweenStreets": "25 Oriente y 23 Oriente",
+      "sourcePages": [
+        84
+      ],
+      "rawCells": [
+        "",
+        "Polígono 2\n6\nCarmen-\n5\nHuexotitla",
+        "Privada\nVictor\nHugo",
+        "25 Oriente y 23\nOriente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 66,
+      "polygon": "Polígono 2 Carmen- Huexotitla",
+      "corridor": "4 Sur",
+      "betweenStreets": "31 Oriente y 19 Oriente",
+      "sourcePages": [
+        84
+      ],
+      "rawCells": [
+        "",
+        "Polígono 2\n6\nCarmen-\n6\nHuexotitla",
+        "4 Sur",
+        "31 Oriente y 19\nOriente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 67,
+      "polygon": "Polígono 2 Carmen- Huexotitla",
+      "corridor": "2 A Sur",
+      "betweenStreets": "37 Oriente y 31 Oriente",
+      "sourcePages": [
+        84
+      ],
+      "rawCells": [
+        "",
+        "Polígono 2\n6\nCarmen-\n7\nHuexotitla",
+        "2 A Sur",
+        "37 Oriente y 31\nOriente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 68,
+      "polygon": "Polígono 2 Carmen- Huexotitla",
+      "corridor": "Privada 2 A Sur",
+      "betweenStreets": "37 Oriente y 39 Oriente",
+      "sourcePages": [
+        84
+      ],
+      "rawCells": [
+        "",
+        "Polígono 2\n6\nCarmen-\n8\nHuexotitla",
+        "Privada 2\nA Sur",
+        "37 Oriente y 39\nOriente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 69,
+      "polygon": "Polígono 3 Chulavista – Volcanes",
+      "corridor": "23 Poniente",
+      "betweenStreets": "Blvd. Atlixco y 11 Sur",
+      "sourcePages": [
+        84
+      ],
+      "rawCells": [
+        "",
+        "Polígono 3\n6\nChulavista\n9\n– Volcanes",
+        "23\nPoniente",
+        "Blvd. Atlixco y\n11 Sur",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 70,
+      "polygon": "Polígono 3 Chulavista – Volcanes",
+      "corridor": "25 Poniente",
+      "betweenStreets": "Blvd. Atlixco y 11 Sur",
+      "sourcePages": [
+        84
+      ],
+      "rawCells": [
+        "",
+        "Polígono 3\n7\nChulavista\n0\n– Volcanes",
+        "25\nPoniente",
+        "Blvd. Atlixco y\n11 Sur",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 71,
+      "polygon": "Polígono 3 Chulavista – Volcanes",
+      "corridor": "27 Poniente",
+      "betweenStreets": "Blvd. Atlixco y 11 Sur",
+      "sourcePages": [
+        84
+      ],
+      "rawCells": [
+        "",
+        "Polígono 3\n7\nChulavista\n1\n– Volcanes",
+        "27\nPoniente",
+        "Blvd. Atlixco y\n11 Sur",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 72,
+      "polygon": "Polígono 3 Chulavista – Volcanes",
+      "corridor": "31 Poniente",
+      "betweenStreets": "11 Sur y Blvd. Atlixco",
+      "sourcePages": [
+        84
+      ],
+      "rawCells": [
+        "",
+        "Polígono 3\n7\nChulavista\n2\n– Volcanes",
+        "31\nPoniente",
+        "11 Sur y Blvd.\nAtlixco",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 73,
+      "polygon": "Polígono 3 Chulavista – Volcanes",
+      "corridor": "31 Poniente",
+      "betweenStreets": "Blvd. Atlixco y 11 Sur",
+      "sourcePages": [
+        84
+      ],
+      "rawCells": [
+        "",
+        "Polígono 3\n7\nChulavista\n3\n– Volcanes",
+        "31\nPoniente",
+        "Blvd. Atlixco y\n11 Sur",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 74,
+      "polygon": "Polígono 3 Chulavista – Volcanes",
+      "corridor": "Diagonal 19 Poniente",
+      "betweenStreets": "31 Poniente y 23 Poniente",
+      "sourcePages": [
+        84
+      ],
+      "rawCells": [
+        "",
+        "Polígono 3\n7\nChulavista\n4\n– Volcanes",
+        "Diagonal\n19\nPoniente",
+        "31 Poniente y\n23 Poniente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 75,
+      "polygon": "Polígono 3 Chulavista – Volcanes",
+      "corridor": "31 Sur",
+      "betweenStreets": "27 Poniente y 21 Poniente",
+      "sourcePages": [
+        84
+      ],
+      "rawCells": [
+        "",
+        "Polígono 3\n7\nChulavista\n5\n– Volcanes",
+        "31 Sur",
+        "27 Poniente y\n21 Poniente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 76,
+      "polygon": "Polígono 3 Chulavista – Volcanes",
+      "corridor": "33 Sur",
+      "betweenStreets": "21 Poniente y 23 Poniente",
+      "sourcePages": [
+        84
+      ],
+      "rawCells": [
+        "",
+        "Polígono 3\n7\nChulavista\n6\n– Volcanes",
+        "33 Sur",
+        "21 Poniente y\n23 Poniente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica\nA"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica A"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 77,
+      "polygon": "Polígono 3 Chulavista – Volcanes",
+      "corridor": "29 Sur",
+      "betweenStreets": "23 Poniente y 27 Poniente",
+      "sourcePages": [
+        85
+      ],
+      "rawCells": [
+        "",
+        "Polígono 3\n7\nChulavista\n7\n– Volcanes",
+        "29 Sur",
+        "23 Poniente y\n27 Poniente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 78,
+      "polygon": "Polígono 3 Chulavista – Volcanes",
+      "corridor": "25 Sur",
+      "betweenStreets": "17 Poniente y 19 Poniente",
+      "sourcePages": [
+        85
+      ],
+      "rawCells": [
+        "",
+        "Polígono 3\n7\nChulavista\n8\n– Volcanes",
+        "25 Sur",
+        "17 Poniente y\n19 Poniente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 79,
+      "polygon": "Polígono 3 Chulavista – Volcanes",
+      "corridor": "23 Sur",
+      "betweenStreets": "17 Poniente y 31 Poniente",
+      "sourcePages": [
+        85
+      ],
+      "rawCells": [
+        "",
+        "Polígono 3\n7\nChulavista\n9\n– Volcanes",
+        "23 Sur",
+        "17 Poniente y\n31 Poniente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 80,
+      "polygon": "Polígono 3 Chulavista – Volcanes",
+      "corridor": "21 Sur",
+      "betweenStreets": "17 Poniente y 31 Poniente",
+      "sourcePages": [
+        85
+      ],
+      "rawCells": [
+        "",
+        "Polígono 3\n8\nChulavista\n0\n– Volcanes",
+        "21 Sur",
+        "17 Poniente y\n31 Poniente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 81,
+      "polygon": "Polígono 3 Chulavista – Volcanes",
+      "corridor": "19 Sur",
+      "betweenStreets": "17 Poniente y 31 Poniente",
+      "sourcePages": [
+        85
+      ],
+      "rawCells": [
+        "",
+        "Polígono 3\n8\nChulavista\n1\n– Volcanes",
+        "19 Sur",
+        "17 Poniente y\n31 Poniente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 82,
+      "polygon": "Polígono 3 Chulavista – Volcanes",
+      "corridor": "17 Sur",
+      "betweenStreets": "17 Poniente y 31 Poniente",
+      "sourcePages": [
+        85
+      ],
+      "rawCells": [
+        "",
+        "Polígono 3\n8\nChulavista\n2\n– Volcanes",
+        "17 Sur",
+        "17 Poniente y\n31 Poniente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 83,
+      "polygon": "Polígono 3 Chulavista – Volcanes",
+      "corridor": "15 Sur",
+      "betweenStreets": "17 Poniente y 19 Poniente",
+      "sourcePages": [
+        85
+      ],
+      "rawCells": [
+        "",
+        "Polígono 3\n8\nChulavista\n3\n– Volcanes",
+        "15 Sur",
+        "17 Poniente y\n19 Poniente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 84,
+      "polygon": "Polígono 3 Chulavista – Volcanes",
+      "corridor": "15 Sur",
+      "betweenStreets": "25 Poniente y 27 Poniente",
+      "sourcePages": [
+        85
+      ],
+      "rawCells": [
+        "",
+        "Polígono 3\n8\nChulavista\n4\n– Volcanes",
+        "15 Sur",
+        "25 Poniente y\n27 Poniente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 85,
+      "polygon": "Polígono 3 Chulavista – Volcanes",
+      "corridor": "13 Sur",
+      "betweenStreets": "17 Poniente y 27 Poniente",
+      "sourcePages": [
+        85
+      ],
+      "rawCells": [
+        "",
+        "Polígono 3\n8\nChulavista\n5\n– Volcanes",
+        "13 Sur",
+        "17 Poniente y\n27 Poniente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 86,
+      "polygon": "Polígono 3 Chulavista – Volcanes",
+      "corridor": "19 Poniente",
+      "betweenStreets": "11 Sur y 25 Sur",
+      "sourcePages": [
+        85
+      ],
+      "rawCells": [
+        "",
+        "Polígono 3\n8\nChulavista\n6\n– Volcanes",
+        "19\nPoniente",
+        "11 Sur y 25 Sur",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 87,
+      "polygon": "Polígono 3 Chulavista – Volcanes",
+      "corridor": "21 Poniente",
+      "betweenStreets": "11 Sur y 25 Sur",
+      "sourcePages": [
+        85
+      ],
+      "rawCells": [
+        "",
+        "Polígono 3\n8\nChulavista\n7\n– Volcanes",
+        "21\nPoniente",
+        "11 Sur y 25 Sur",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 88,
+      "polygon": "Polígono 4 Juárez – Santiago",
+      "corridor": "6 Poniente",
+      "betweenStreets": "21 Norte y 13 Norte",
+      "sourcePages": [
+        85
+      ],
+      "rawCells": [
+        "",
+        "Polígono 4\n8\nJuárez –\n8\nSantiago",
+        "6\nPoniente",
+        "21 Norte y 13\nNorte",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 89,
+      "polygon": "Polígono 4 Juárez – Santiago",
+      "corridor": "4 Poniente",
+      "betweenStreets": "13 Norte y Diagonal Defensores de la República",
+      "sourcePages": [
+        85
+      ],
+      "rawCells": [
+        "",
+        "Polígono 4\n8\nJuárez –\n9\nSantiago",
+        "4\nPoniente",
+        "13 Norte y\nDiagonal\nDefensores de\nla República",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 90,
+      "polygon": "Polígono 4 Juárez – Santiago",
+      "corridor": "4 Poniente",
+      "betweenStreets": "Diagonal Defensores de la República y 13 Norte",
+      "sourcePages": [
+        85
+      ],
+      "rawCells": [
+        "",
+        "Polígono 4\n9\nJuárez –\n0\nSantiago",
+        "4\nPoniente",
+        "Diagonal\nDefensores de\nla República y\n13 Norte",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 91,
+      "polygon": "Polígono 4 Juárez – Santiago",
+      "corridor": "2 Poniente",
+      "betweenStreets": "Diagonal Defensores de la República y 13 Norte",
+      "sourcePages": [
+        85
+      ],
+      "rawCells": [
+        "",
+        "Polígono 4\n9\nJuárez –\n1\nSantiago",
+        "2\nPoniente",
+        "Diagonal\nDefensores de\nla República y\n13 Norte",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 92,
+      "polygon": "Polígono 4 Juárez – Santiago",
+      "corridor": "Reforma",
+      "betweenStreets": "Diagonal Defensores de la República y 13 Norte",
+      "sourcePages": [
+        85
+      ],
+      "rawCells": [
+        "",
+        "Polígono 4\n9\nJuárez –\n2\nSantiago",
+        "Reforma",
+        "Diagonal\nDefensores de\nla República y\n13 Norte",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 93,
+      "polygon": "Polígono 4 Juárez – Santiago",
+      "corridor": "Reforma Sur",
+      "betweenStreets": "29 Sur y Blvd. Aarón Merino Fernández",
+      "sourcePages": [
+        86
+      ],
+      "rawCells": [
+        "",
+        "Polígono 4\n9\nJuárez –\n3\nSantiago",
+        "Reforma\nSur",
+        "29 Sur y Blvd.\nAarón Merino\nFernández",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 94,
+      "polygon": "Polígono 4 Juárez – Santiago",
+      "corridor": "3 Poniente",
+      "betweenStreets": "13 Sur y 27 Sur",
+      "sourcePages": [
+        86
+      ],
+      "rawCells": [
+        "",
+        "Polígono 4\n9\nJuárez –\n4\nSantiago",
+        "3\nPoniente",
+        "13 Sur y 27 Sur",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 95,
+      "polygon": "Polígono 4 Juárez – Santiago",
+      "corridor": "5 Poniente",
+      "betweenStreets": "13 Sur y 27 Sur",
+      "sourcePages": [
+        86
+      ],
+      "rawCells": [
+        "",
+        "Polígono 4\n9\nJuárez –\n5\nSantiago",
+        "5\nPoniente",
+        "13 Sur y 27 Sur",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 96,
+      "polygon": "Polígono 4 Juárez – Santiago",
+      "corridor": "3 Poniente",
+      "betweenStreets": "Chipilo y Blvd. Aarón Merino Fernández",
+      "sourcePages": [
+        86
+      ],
+      "rawCells": [
+        "",
+        "Polígono 4\n9\nJuárez –\n6\nSantiago",
+        "3\nPoniente",
+        "Chipilo y Blvd.\nAarón Merino\nFernández",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 97,
+      "polygon": "Polígono 4 Juárez – Santiago",
+      "corridor": "Juárez",
+      "betweenStreets": "Blvd. Atlixco y 13 Sur",
+      "sourcePages": [
+        86
+      ],
+      "rawCells": [
+        "",
+        "Polígono 4\n9\nJuárez –\n7\nSantiago",
+        "Juárez",
+        "Blvd. Atlixco y\n13 Sur",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 98,
+      "polygon": "Polígono 4 Juárez – Santiago",
+      "corridor": "Juárez",
+      "betweenStreets": "13 Sur y Blvd. Atlixco",
+      "sourcePages": [
+        86
+      ],
+      "rawCells": [
+        "",
+        "Polígono 4\n9\nJuárez –\n8\nSantiago",
+        "Juárez",
+        "13 Sur y Blvd.\nAtlixco",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 99,
+      "polygon": "Polígono 4 Juárez – Santiago",
+      "corridor": "9 Poniente",
+      "betweenStreets": "Blvd. Atlixco y 13 Sur",
+      "sourcePages": [
+        86
+      ],
+      "rawCells": [
+        "",
+        "Polígono 4\n9\nJuárez –\n9\nSantiago",
+        "9\nPoniente",
+        "Blvd. Atlixco y\n13 Sur",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 100,
+      "polygon": "Polígono 4 Juárez – Santiago",
+      "corridor": "11 Poniente",
+      "betweenStreets": "21 Sur y 13 Sur",
+      "sourcePages": [
+        86
+      ],
+      "rawCells": [
+        "",
+        "1 Polígono 4\n0 Juárez –\n0 Santiago",
+        "11\nPoniente",
+        "21 Sur y 13 Sur",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 101,
+      "polygon": "Polígono 4 Juárez – Santiago",
+      "corridor": "11 Poniente",
+      "betweenStreets": "23 Sur y 27 Sur",
+      "sourcePages": [
+        86
+      ],
+      "rawCells": [
+        "",
+        "1 Polígono 4\n0 Juárez –\n1 Santiago",
+        "11\nPoniente",
+        "23 Sur y 27 Sur",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 102,
+      "polygon": "Polígono 4 Juárez – Santiago",
+      "corridor": "9 Poniente",
+      "betweenStreets": "Chipilo y Blvd. Aarón Merino Fernández",
+      "sourcePages": [
+        86
+      ],
+      "rawCells": [
+        "",
+        "1 Polígono 4\n0 Juárez –\n2 Santiago",
+        "9\nPoniente",
+        "Chipilo y Blvd.\nAarón Merino\nFernández",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 103,
+      "polygon": "Polígono 4 Juárez – Santiago",
+      "corridor": "13 Poniente",
+      "betweenStreets": "11 Sur y 29 Sur",
+      "sourcePages": [
+        86
+      ],
+      "rawCells": [
+        "",
+        "1 Polígono 4\n0 Juárez –\n3 Santiago",
+        "13\nPoniente",
+        "11 Sur y 29 Sur",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 104,
+      "polygon": "Polígono 4 Juárez – Santiago",
+      "corridor": "15 Poniente",
+      "betweenStreets": "11 Sur y 25 Sur",
+      "sourcePages": [
+        86
+      ],
+      "rawCells": [
+        "",
+        "1 Polígono 4\n0 Juárez –\n4 Santiago",
+        "15\nPoniente",
+        "11 Sur y 25 Sur",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 105,
+      "polygon": "Polígono 4 Juárez – Santiago",
+      "corridor": "17 Poniente",
+      "betweenStreets": "11 Sur y 25 Sur",
+      "sourcePages": [
+        86
+      ],
+      "rawCells": [
+        "",
+        "1 Polígono 4\n0 Juárez –\n5 Santiago",
+        "17\nPoniente",
+        "11 Sur y 25 Sur",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 106,
+      "polygon": "Polígono 4 Juárez – Santiago",
+      "corridor": "29 Sur",
+      "betweenStreets": "Reforma Sur y 13 Poniente",
+      "sourcePages": [
+        86
+      ],
+      "rawCells": [
+        "",
+        "1 Polígono 4\n0 Juárez –\n6 Santiago",
+        "29 Sur",
+        "Reforma Sur y\n13 Poniente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 107,
+      "polygon": "Polígono 4 Juárez – Santiago",
+      "corridor": "29 Sur",
+      "betweenStreets": "13 Poniente y Reforma Sur",
+      "sourcePages": [
+        86
+      ],
+      "rawCells": [
+        "",
+        "1 Polígono 4\n0 Juárez –\n7 Santiago",
+        "29 Sur",
+        "13 Poniente y\nReforma Sur",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 108,
+      "polygon": "Polígono 4 Juárez – Santiago",
+      "corridor": "27 Sur",
+      "betweenStreets": "Reforma Sur y 13 Poniente",
+      "sourcePages": [
+        86
+      ],
+      "rawCells": [
+        "",
+        "1 Polígono 4\n0 Juárez –\n8 Santiago",
+        "27 Sur",
+        "Reforma Sur y\n13 Poniente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 109,
+      "polygon": "Polígono 4 Juárez – Santiago",
+      "corridor": "25 Sur",
+      "betweenStreets": "4 Poniente y 17 Poniente",
+      "sourcePages": [
+        86
+      ],
+      "rawCells": [
+        "",
+        "1 Polígono 4\n0 Juárez –\n9 Santiago",
+        "25 Sur",
+        "4 Poniente y 17\nPoniente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 110,
+      "polygon": "Polígono 4 Juárez – Santiago",
+      "corridor": "23 Sur",
+      "betweenStreets": "4 Poniente y 17 Poniente",
+      "sourcePages": [
+        87
+      ],
+      "rawCells": [
+        "",
+        "1 Polígono 4\n1 Juárez –\n0 Santiago",
+        "23 Sur",
+        "4 Poniente y 17\nPoniente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 111,
+      "polygon": "Polígono 4 Juárez – Santiago",
+      "corridor": "21 Sur",
+      "betweenStreets": "6 Poniente y 9 Poniente",
+      "sourcePages": [
+        87
+      ],
+      "rawCells": [
+        "",
+        "1 Polígono 4\n1 Juárez –\n1 Santiago",
+        "21 Sur",
+        "6 Poniente y 9\nPoniente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 112,
+      "polygon": "Polígono 4 Juárez – Santiago",
+      "corridor": "21 Sur",
+      "betweenStreets": "13 Poniente y 17 Poniente",
+      "sourcePages": [
+        87
+      ],
+      "rawCells": [
+        "",
+        "1 Polígono 4\n1 Juárez –\n2 Santiago",
+        "21 Sur",
+        "13 Poniente y\n17 Poniente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 113,
+      "polygon": "Polígono 4 Juárez – Santiago",
+      "corridor": "19 Sur",
+      "betweenStreets": "6 Poniente y 17 Poniente",
+      "sourcePages": [
+        87
+      ],
+      "rawCells": [
+        "",
+        "1 Polígono 4\n1 Juárez –\n3 Santiago",
+        "19 Sur",
+        "6 Poniente y 17\nPoniente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 114,
+      "polygon": "Polígono 4 Juárez – Santiago",
+      "corridor": "17 Sur",
+      "betweenStreets": "6 Poniente y 17 Poniente",
+      "sourcePages": [
+        87
+      ],
+      "rawCells": [
+        "",
+        "1 Polígono 4\n1 Juárez –\n4 Santiago",
+        "17 Sur",
+        "6 Poniente y 17\nPoniente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica\nA"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica A"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 115,
+      "polygon": "Polígono 4 Juárez – Santiago",
+      "corridor": "15 Sur",
+      "betweenStreets": "6 Poniente y 17 Poniente",
+      "sourcePages": [
+        87
+      ],
+      "rawCells": [
+        "",
+        "1 Polígono 4\n1 Juárez –\n5 Santiago",
+        "15 Sur",
+        "6 Poniente y 17\nPoniente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "6\nNo ap/lica\n7"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "6 No ap/lica 7"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 116,
+      "polygon": "Polígono 4 Juárez – Santiago",
+      "corridor": "13 Sur",
+      "betweenStreets": "11 Poniente y 17 Poniente",
+      "sourcePages": [
+        87
+      ],
+      "rawCells": [
+        "",
+        "1 Polígono 4\n1 Juárez –\n6 Santiago",
+        "13 Sur",
+        "11 Poniente y 17\nPoniente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 117,
+      "polygon": "Polígono 5 San Alejandro - Ortopedia",
+      "corridor": "6 Poniente",
+      "betweenStreets": "21 Norte y 25 Norte",
+      "sourcePages": [
+        87
+      ],
+      "rawCells": [
+        "",
+        "Polígono 5\n1\nSan\n1\nAlejandro -\n7\nOrtopedia",
+        "6\nPoniente",
+        "21 Norte y 25\nNorte",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 118,
+      "polygon": "Polígono 5 San Alejandro - Ortopedia",
+      "corridor": "4 Poniente",
+      "betweenStreets": "Diagonal Defensores de la República y Blvd. Atlixco",
+      "sourcePages": [
+        87
+      ],
+      "rawCells": [
+        "",
+        "Polígono 5\n1\nSan\n1\nAlejandro -\n8\nOrtopedia",
+        "4\nPoniente",
+        "Diagonal\nDefensores de\nla República y\nBlvd. Atlixco",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 119,
+      "polygon": "Polígono 5 San Alejandro - Ortopedia",
+      "corridor": "6 Poniente",
+      "betweenStreets": "Diagonal Defensores de la República y Blvd. Norte",
+      "sourcePages": [
+        87
+      ],
+      "rawCells": [
+        "",
+        "Polígono 5\n1\nSan\n1\nAlejandro -\n9\nOrtopedia",
+        "6\nPoniente",
+        "Diagonal\nDefensores de\nla República y\nBlvd. Norte",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 120,
+      "polygon": "Polígono 5 San Alejandro - Ortopedia",
+      "corridor": "27 Norte",
+      "betweenStreets": "4 Poniente y 6 Poniente",
+      "sourcePages": [
+        87
+      ],
+      "rawCells": [
+        "",
+        "Polígono 5\n1\nSan\n2\nAlejandro -\n0\nOrtopedia",
+        "27 Norte",
+        "4 Poniente y 6\nPoniente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 121,
+      "polygon": "Polígono 5 San Alejandro - Ortopedia",
+      "corridor": "27 Norte",
+      "betweenStreets": "4 Poniente y 10 Poniente",
+      "sourcePages": [
+        87
+      ],
+      "rawCells": [
+        "",
+        "Polígono 5\n1\nSan\n2\nAlejandro -\n1\nOrtopedia",
+        "27 Norte",
+        "4 Poniente y 10\nPoniente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 122,
+      "polygon": "Polígono 5 San Alejandro - Ortopedia",
+      "corridor": "29 Norte",
+      "betweenStreets": "4 Poniente y Diagonal de la 10 Poniente",
+      "sourcePages": [
+        87
+      ],
+      "rawCells": [
+        "",
+        "Polígono 5\n1\nSan\n2\nAlejandro -\n2\nOrtopedia",
+        "29 Norte",
+        "4 Poniente y\nDiagonal de la\n10 Poniente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 123,
+      "polygon": "Polígono 5 San Alejandro - Ortopedia",
+      "corridor": "8 Poniente",
+      "betweenStreets": "29 Norte y 29 B Norte",
+      "sourcePages": [
+        87
+      ],
+      "rawCells": [
+        "",
+        "Polígono 5\n1\nSan\n2\nAlejandro -\n3\nOrtopedia",
+        "8\nPoniente",
+        "29 Norte y 29 B\nNorte",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 124,
+      "polygon": "Polígono 5 San Alejandro - Ortopedia",
+      "corridor": "29 A Norte",
+      "betweenStreets": "8 Poniente y Diagonal de la 10 Poniente",
+      "sourcePages": [
+        87,
+        88
+      ],
+      "rawCells": [
+        "",
+        "1\nPolígono 5\n2\nSan\n4",
+        "29 A\nNorte",
+        "8 Poniente y\nDiagonal de la\n10 Poniente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false,
+      "rawPolygonContinuation": "Alejandro -\nOrtopedia"
+    },
+    {
+      "sourceRow": 125,
+      "polygon": "Polígono 6 San Alejandro - Ortopedia",
+      "corridor": "29 B Norte",
+      "betweenStreets": "8 Poniente y Diagonal de la 10 Poniente",
+      "sourcePages": [
+        88
+      ],
+      "rawCells": [
+        "",
+        "Polígono 6\n1\nSan\n2\nAlejandro -\n5\nOrtopedia",
+        "29 B\nNorte",
+        "8 Poniente y\nDiagonal de la\n10 Poniente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 126,
+      "polygon": "Polígono 6 San Alejandro - Ortopedia",
+      "corridor": "Diagonal 10 Poniente",
+      "betweenStreets": "Blvd. Norte y 10 Poniente",
+      "sourcePages": [
+        88
+      ],
+      "rawCells": [
+        "",
+        "Polígono 6\n1\nSan\n2\nAlejandro -\n6\nOrtopedia",
+        "Diagonal\n10\nPoniente",
+        "Blvd. Norte y\n10 Poniente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 127,
+      "polygon": "Polígono 6 San Alejandro - Ortopedia",
+      "corridor": "10 Poniente",
+      "betweenStreets": "Blvd. Norte y Gran Avenida",
+      "sourcePages": [
+        88
+      ],
+      "rawCells": [
+        "",
+        "Polígono 6\n1\nSan\n2\nAlejandro -\n7\nOrtopedia",
+        "10\nPoniente",
+        "Blvd. Norte y\nGran Avenida",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    },
+    {
+      "sourceRow": 128,
+      "polygon": "Polígono 6 San Alejandro - Ortopedia",
+      "corridor": "Diagonal 10 Poniente",
+      "betweenStreets": "Blvd. Norte y 10 Poniente",
+      "sourcePages": [
+        88
+      ],
+      "rawCells": [
+        "",
+        "Polígono 6\n1\nSan\n2\nAlejandro -\n8\nOrtopedia",
+        "Diagonal\n10\nPoniente",
+        "Blvd. Norte y\n10 Poniente",
+        "08:00 a\n22:00 hrs",
+        "11:00 a\n17:00 hrs",
+        "No aplica"
+      ],
+      "schedules": [
+        {
+          "days": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "status": "hours_cited",
+          "start": "08:00",
+          "end": "22:00",
+          "literal": "08:00 a 22:00 hrs"
+        },
+        {
+          "days": [
+            6
+          ],
+          "status": "hours_cited",
+          "start": "11:00",
+          "end": "17:00",
+          "literal": "11:00 a 17:00 hrs"
+        },
+        {
+          "days": [
+            7
+          ],
+          "status": "not_applicable_in_source",
+          "literal": "No aplica"
+        }
+      ],
+      "geometry": null,
+      "geometryStatus": "not_validated",
+      "directionStatus": "not_specified_in_annex",
+      "routingEnforced": false
+    }
+  ]
+}

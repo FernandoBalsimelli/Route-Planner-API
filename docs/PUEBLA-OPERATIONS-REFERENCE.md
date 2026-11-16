@@ -113,3 +113,13 @@ Compatibilidad: las fichas de acta usan `actEvidence`, mientras COREMUN conserva
 no reciben ahí una fecha de acto diferente ni un valor ausente. La nueva Web
 lee ambos tipos. Esto permite publicar en pasos y conservar rollback sin
 obligar a cerrar pestañas ni inventar una fecha de consolidación del acta.
+
+
+## Anexo de corredores: incorporación separada
+
+La consulta del 15-11-2026 añade 128 registros textuales de las páginas 80–88
+con reproducción y revisión visual del PDF. No son geometrías ni permisos.
+Los horarios de operación del estacionamiento permanecen separados de los
+arts. 11–13. La publicación que exige el Transitorio Primero aún no tiene fecha
+verificada. Véase [PUEBLA-PARKING-CORRIDORS.md](PUEBLA-PARKING-CORRIDORS.md)
+para calles, extremos, duplicados, discrepancia 5/6 y controles de actualización.
