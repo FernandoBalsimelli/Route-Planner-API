@@ -1,0 +1,64 @@
+do $$ begin if current_database()<>'route_planner_ci' then raise exception 'Disposable database required'; end if; end $$;
+begin;
+set local role authenticated;
+select set_config('request.jwt.claims','{"sub":"00000000-0000-4000-8000-000000000001","role":"authenticated"}',true);
+do $$
+declare a uuid:=auth.uid(); b uuid:='00000000-0000-4000-8000-000000000002'; r uuid; p jsonb:='{"label":"Synthetic public point","lat":28.63000123,"lng":-106.0600456}'; state jsonb; saved jsonb; changed jsonb; stops jsonb; failed boolean; n integer;
+begin
+ select jsonb_agg(p||jsonb_build_object('label','Delivery '||i) order by i) into stops from generate_series(1,48)i;
+ r:=public.save_route_with_stops(gen_random_uuid(),jsonb_build_object('name','Synthetic progress','origin',p,'destination',p,'route_metadata','{"mode":"delivery"}'::jsonb),stops);
+ state:=public.route_delivery_progress(r);
+ if (state->>'revision')::integer<>0 or jsonb_array_length(state->'points')<>50 or (state->>'stale')::boolean or (select count(*) from public.route_delivery_events)<>0 then raise exception 'Reading created progress or lost stops'; end if;
+ if (state#>>'{points,0,lat}')::numeric<>28.63000123 then raise exception 'Precision changed'; end if;
+ saved:=public.route_delivery_progress(r,array[1,24,49],0,state->>'snapshot');
+ if saved->'completedSequences'<>'[1,24,49]' or (saved->>'revision')::integer<>1 then raise exception 'Progress did not persist'; end if;
+ if public.route_delivery_progress(r)->'completedSequences'<>saved->'completedSequences' then raise exception 'Second session cannot recover progress'; end if;
+ perform public.route_delivery_progress(r,array[1,24,49],1,saved->>'snapshot');
+ if (select count(*) from public.route_delivery_events where route_id=r)<>1 then raise exception 'Identical save duplicated history'; end if;
+ failed:=false;begin perform public.route_delivery_progress(r,array[1,2],0,saved->>'snapshot');exception when serialization_failure then failed:=true;end;
+ if not failed then raise exception 'Stale revision overwrote another session'; end if;
+ foreach n in array array[0,50] loop
+  failed:=false;begin perform public.route_delivery_progress(r,array[n],1,saved->>'snapshot');exception when invalid_parameter_value then failed:=true;end;
+  if not failed then raise exception 'Out of range completion accepted'; end if;
+ end loop;
+ failed:=false;begin perform public.route_delivery_progress(r,array[1,1],1,saved->>'snapshot');exception when invalid_parameter_value then failed:=true;end;
+ if not failed then raise exception 'Duplicate completion accepted'; end if;
+ failed:=false;begin perform public.route_delivery_progress(r,array[null]::integer[],1,saved->>'snapshot');exception when invalid_parameter_value then failed:=true;end;
+ if not failed then raise exception 'Null completion accepted'; end if;
+ -- A correction appends a revision; it does not erase prior manual selections.
+ saved:=public.route_delivery_progress(r,array[24],1,saved->>'snapshot');
+ if jsonb_array_length(saved->'history')<>2 or saved#>'{history,1,completedSequences}'<>'[1,24,49]' then raise exception 'Recovery history lost'; end if;
+ if has_table_privilege('authenticated','public.route_delivery_events','UPDATE,DELETE') or has_table_privilege('anon','public.route_delivery_events','SELECT') then raise exception 'Unexpected progress privileges'; end if;
+ if has_function_privilege('anon','public.route_delivery_progress(uuid,integer[],integer,text)','EXECUTE') or (select prosecdef from pg_proc where oid='public.route_delivery_progress(uuid,integer[],integer,text)'::regprocedure) then raise exception 'Progress RPC elevates or allows anonymous access'; end if;
+ perform set_config('request.jwt.claims',jsonb_build_object('sub',b,'role','authenticated')::text,true);
+ if exists(select 1 from public.route_delivery_events where route_id=r) then raise exception 'Foreign history read allowed'; end if;
+ failed:=false;begin perform public.route_delivery_progress(r);exception when invalid_parameter_value then failed:=true;end;
+ if not failed then raise exception 'Foreign progress RPC read allowed'; end if;
+ failed:=false;begin insert into public.route_delivery_events(route_id,owner_id,revision,route_snapshot,completed_sequences)values(r,b,99,saved->>'snapshot',array[1]);exception when insufficient_privilege then failed:=true;end;
+ if not failed then raise exception 'Foreign progress insertion allowed'; end if;
+ perform set_config('request.jwt.claims',jsonb_build_object('sub',a,'role','authenticated')::text,true);
+ update public.route_stops set location=p||'{"label":"Changed delivery"}' where route_id=r and sequence=1;
+ changed:=public.route_delivery_progress(r);
+ if not (changed->>'stale')::boolean or changed->'completedSequences'<>'[]' or changed->>'snapshot'=saved->>'snapshot' or (changed#>>'{history,0,samePoints}')::boolean then raise exception 'Changed itinerary reused old completion'; end if;
+ failed:=false;begin perform public.route_delivery_progress(r,array[24],2,saved->>'snapshot');exception when serialization_failure then failed:=true;end;
+ if not failed then raise exception 'Old snapshot accepted'; end if;
+ changed:=public.route_delivery_progress(r,array[]::integer[],2,changed->>'snapshot');
+ if (changed->>'revision')::integer<>3 or (select count(*) from public.route_delivery_events where route_id=r)<>3 then raise exception 'Changed-order reset destroyed history'; end if;
+ update public.saved_routes set status='archived' where id=r;
+ failed:=false;begin perform public.route_delivery_progress(r);exception when invalid_parameter_value then failed:=true;end;
+ if not failed then raise exception 'Archived progress remained editable'; end if;
+ update public.saved_routes set status='planned' where id=r;
+ if (public.route_delivery_progress(r)->>'revision')::integer<>3 then raise exception 'Restoring discarded history'; end if;
+ -- Identical address visits are still distinct stop occurrences.
+ update public.route_stops set location=p where route_id=r and sequence in(1,2);
+ state:=public.route_delivery_progress(r);
+ state:=public.route_delivery_progress(r,array[1],3,state->>'snapshot');
+ update public.route_stops set sequence=999 where route_id=r and sequence=1;
+ update public.route_stops set sequence=1 where route_id=r and sequence=2;
+ update public.route_stops set sequence=2 where route_id=r and sequence=999;
+ changed:=public.route_delivery_progress(r);
+ if not (changed->>'stale')::boolean or changed->>'snapshot'=state->>'snapshot' then raise exception 'Repeated-address occurrences lost their identity'; end if;
+ if (select count(*) from public.route_stops where route_id=r)<>48 then raise exception 'Progress changed deliveries'; end if;
+end $$;
+rollback;
+select 'Delivery progress: persistence, ordered snapshot, append-only recovery, conflict handling, archive and RLS passed' as result;
