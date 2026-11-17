@@ -29,7 +29,7 @@ create policy delivery_events_insert_own on public.route_delivery_events for ins
 create function public.route_delivery_progress(p_route_id uuid,p_completed integer[] default null,p_expected_revision integer default null,p_expected_snapshot text default null)
 returns jsonb language plpgsql security invoker set search_path='' as $$
 declare
- uid uuid:=auth.uid(); source_origin jsonb; source_destination jsonb; middle jsonb; all_points jsonb; clean_points jsonb:='[]'::jsonb;
+ uid uuid:=auth.uid(); source_origin jsonb; source_destination jsonb; middle jsonb; identities jsonb; all_points jsonb; clean_points jsonb:='[]'::jsonb;
  p jsonb; snapshot text; latest public.route_delivery_events%rowtype; rev integer:=0; completed integer[]:='{}'; n integer; history jsonb;
 begin
  if uid is null then raise exception 'Inicia sesión para consultar el avance.' using errcode='28000'; end if;
@@ -37,7 +37,7 @@ begin
  select origin,destination into source_origin,source_destination from public.saved_routes
  where id=p_route_id and owner_id=uid and status<>'archived' for update;
  if not found then raise exception 'Esta ruta no está disponible en tu cuenta.' using errcode='22023'; end if;
- select coalesce(jsonb_agg(location order by sequence),'[]'::jsonb) into middle from public.route_stops where route_id=p_route_id and owner_id=uid;
+ select coalesce(jsonb_agg(location order by sequence),'[]'::jsonb), coalesce(jsonb_agg(jsonb_build_object('id',id,'sequence',sequence) order by sequence),'[]'::jsonb) into middle,identities from public.route_stops where route_id=p_route_id and owner_id=uid;
  if jsonb_array_length(middle)>48 then raise exception 'Revisa el número de puntos del recorrido.' using errcode='22023'; end if;
  all_points:=jsonb_build_array(source_origin)||middle||jsonb_build_array(source_destination);
  for p in select value from jsonb_array_elements(all_points) loop
@@ -51,7 +51,7 @@ begin
   clean_points:=clean_points||jsonb_build_array(jsonb_build_object('label',p->>'label','lat',p->'lat','lng',p->'lng'));
  end loop;
  n:=jsonb_array_length(clean_points)-1;
- snapshot:=encode(sha256(convert_to(clean_points::text,'UTF8')),'hex');
+ snapshot:=encode(sha256(convert_to(clean_points::text||identities::text,'UTF8')),'hex');
  select * into latest from public.route_delivery_events where route_id=p_route_id and owner_id=uid order by revision desc limit 1;
  if found then rev:=latest.revision; end if;
  if p_completed is not null then

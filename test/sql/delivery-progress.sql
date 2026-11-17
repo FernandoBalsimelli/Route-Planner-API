@@ -49,6 +49,15 @@ begin
  if not failed then raise exception 'Archived progress remained editable'; end if;
  update public.saved_routes set status='planned' where id=r;
  if (public.route_delivery_progress(r)->>'revision')::integer<>3 then raise exception 'Restoring discarded history'; end if;
+ -- Identical address visits are still distinct stop occurrences.
+ update public.route_stops set location=p where route_id=r and sequence in(1,2);
+ state:=public.route_delivery_progress(r);
+ state:=public.route_delivery_progress(r,array[1],3,state->>'snapshot');
+ update public.route_stops set sequence=999 where route_id=r and sequence=1;
+ update public.route_stops set sequence=1 where route_id=r and sequence=2;
+ update public.route_stops set sequence=2 where route_id=r and sequence=999;
+ changed:=public.route_delivery_progress(r);
+ if not (changed->>'stale')::boolean or changed->>'snapshot'=state->>'snapshot' then raise exception 'Repeated-address occurrences lost their identity'; end if;
  if (select count(*) from public.route_stops where route_id=r)<>48 then raise exception 'Progress changed deliveries'; end if;
 end $$;
 rollback;
