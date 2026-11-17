@@ -22,3 +22,8 @@ El push del registro activa la comprobación ya configurada; no hay nuevo cron,
 proveedor, permiso, cuota o servicio de pago. Un reporte técnico es evidencia de
 descarga, no certificación de vigencia. Resultados y publicación en el informe
 de ingeniería de Web.
+
+La primera comprobación automatizada, 17-11-2026 05:26:32 UTC, recibió HTTP 403
+para esta URL desde GitHub, sin hash ni descarga correcta. Se conserva como
+fallo técnico independiente de la descarga directa 200 de esta revisión. No se
+afirma acceso automático garantizado ni se sustituye el fallo por evidencia manual.

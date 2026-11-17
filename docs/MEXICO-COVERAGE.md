@@ -367,3 +367,7 @@ del Sol. La consulta municipal lo señala para revisión; no se convierte en
 reglamento permanente, horario general, desvío autorizado o geometría de ruteo.
 Detalle, fuente, huella y límites: [JUAREZ-OPERATIONS-MONITOR.md](JUAREZ-OPERATIONS-MONITOR.md).
 Continúan 15 municipios con referencia parcial y cero validaciones legales completas.
+
+La comprobación automática del 17-11-2026 05:26:32 UTC recibió HTTP 403 para
+el nuevo aviso. Se conserva como fuente no disponible desde ese ejecutor;
+la descarga directa 200 no sustituye ese estado ni acredita vigencia actual.
