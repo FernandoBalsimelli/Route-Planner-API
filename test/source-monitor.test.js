@@ -135,3 +135,15 @@ test('Juárez notice evidence survives an unavailable historical primary documen
  const report=await checkSource(source,{},async url=>String(url)===source.url?new Response('unavailable',{status:503}):new Response('official linked document'));
  assert.equal(report.availability,'partial');assert.equal(report.documents.find(row=>row.url===notice).status,'unreviewed');assert.ok(report.documents.find(row=>row.url===notice).sha256);assert.equal(report.documents[0].error,'HTTP_503');
 });
+
+test('Juárez follow-up notices remain separate monitored evidence without inferring a reopening date or truck detour',async()=>{
+ const {officialSources}=await import('../lib/source-monitor.js');const {municipalReference,municipalCatalog}=await import('../lib/municipal-regulations.js');
+ const source=officialSources.find(row=>row.id==='juarez-carga');const urls=source.relatedUrls.filter(url=>/\/noticia\/(34518|34811)\//.test(url));assert.equal(urls.length,2);
+ const first=await checkSource(source,{},async url=>new Response(String(url)===urls[0]?'first notice':'other document'));
+ const changed=await checkSource(source,first,async url=>String(url)===source.url?new Response('',{status:403}):new Response(String(url)===urls[0]?'updated notice':'other document'));
+ const publicRow=sourceStatus({checkedAt:changed.checkedAt,sources:[changed]}).sources.find(row=>row.id===source.id);
+ assert.equal(publicRow.documents.find(row=>row.url===urls[0]).changeDetected,true);assert.equal(publicRow.documents.find(row=>row.url===urls[1]).changeDetected,false);
+ const reference=municipalReference('08037');assert.ok(reference.notices.some(text=>text.includes('siete meses')&&text.includes('enero')&&text.includes('No se deduce')));
+ assert.ok(urls.every(url=>reference.relatedLinks.some(link=>link.url===url)));assert.equal(reference.routingEnforced,false);assert.deepEqual(reference.timeRules,[]);assert.equal(reference.rules.length,4);
+ assert.equal(municipalCatalog().municipalitiesWithPartialReference,15);assert.equal(municipalCatalog().fullyVerifiedMunicipalities,0);
+});
