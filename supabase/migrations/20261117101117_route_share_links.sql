@@ -43,7 +43,7 @@ begin
   clean := clean || jsonb_build_object(k,v->k);
  end loop;
  if v ? 'configuration' then
-  if jsonb_typeof(v->'configuration') is distinct from 'string' or not (v ? 'axleCount') or (v->>'axleCount')::numeric <> case v->>'configuration'
+  if jsonb_typeof(v->'configuration') is distinct from 'string' or not (v ? 'axleCount') or (v->>'axleCount')::numeric <> (case v->>'configuration'
 when 'C2' then 2
 when 'C3' then 3
 when 'C2-R2' then 4
@@ -67,7 +67,7 @@ when 'T3-S2-R3' then 8
 when 'T3-S3-S2' then 8
 when 'T2-S2-S2' then 6
 when 'T3-S2-S2' then 7
-   else -1 end then
+   else -1 end) then
    raise exception 'La configuración del camión no coincide con sus ejes.' using errcode='22023';
   end if;
   clean := clean || jsonb_build_object('configuration',v->'configuration');
