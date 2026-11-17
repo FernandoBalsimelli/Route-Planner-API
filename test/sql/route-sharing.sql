@@ -10,7 +10,7 @@ begin
  set local role authenticated;
  perform set_config('request.jwt.claims',jsonb_build_object('sub',a,'role','authenticated')::text,true);
  route:=jsonb_build_object('name','Synthetic shared truck','origin',point||'{"ownerEmail":"DO NOT SHARE"}', 'destination',point,
- 'route_metadata','{"mode":"truck","vehicle":{"heightM":4.1,"widthM":2.5,"lengthM":18,"grossWeightT":38,"axleWeightT":9,"axleCount":5,"configuration":"T3-S2","payloadCapacityT":30.125,"vehicle_id":"DO NOT SHARE"},"result":{"polyline":"DO NOT SHARE","distanceMeters":999,"regulatoryCoverage":{"status":"DO NOT SHARE"},"preferences":{"avoidTolls":true,"avoidHighways":false}}}');
+ 'route_metadata','{"mode":"truck","vehicle":{"heightM":4.1,"widthM":2.5,"lengthM":18,"grossWeightT":38,"axleWeightT":9,"axleCount":5,"configuration":"T3-S2","payloadCapacityT":30.125,"vehicle_id":"DO NOT SHARE"},"result":{"polyline":"DO NOT SHARE","distanceMeters":999,"regulatoryCoverage":{"status":"DO NOT SHARE"},"preferences":{"avoidTolls":true,"avoidHighways":false}}}'::jsonb);
  select jsonb_agg(point||jsonb_build_object('label','Delivery '||n,'lat',25.67+n*0.00001) order by n) into stops from generate_series(1,48)n;
  route_id:=public.save_route_with_stops(gen_random_uuid(),route,stops);
  share:=public.create_route_share_link(route_id,24);
