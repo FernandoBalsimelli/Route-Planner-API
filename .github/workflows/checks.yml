@@ -46,4 +46,5 @@ jobs:
           done
           psql "$ROUTE_PLANNER_TEST_DB_URL" -v ON_ERROR_STOP=1 -f test/sql/verify.sql
           psql "$ROUTE_PLANNER_TEST_DB_URL" -v ON_ERROR_STOP=1 -f test/sql/route-sharing.sql
+          psql "$ROUTE_PLANNER_TEST_DB_URL" -v ON_ERROR_STOP=1 -f test/sql/delivery-progress.sql
       - run: npm audit --omit=dev
