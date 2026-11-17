@@ -358,3 +358,12 @@ del snapshot del PDF y se vigilan las cuatro páginas en el monitor ya existente
 No cambia ninguna geometría, permiso o exclusión de ruteo; continúan 15 municipios
 parciales y cero con validación legal completa. Véase
 [PUEBLA-PUBLICATION-HISTORY.md](PUEBLA-PUBLICATION-HISTORY.md).
+
+
+## Juárez · aviso operativo vinculado de 2026 · 16-11-2026
+
+Se incorpora a vigilancia el aviso oficial del 08-09-2026 sobre obras en Valle
+del Sol. La consulta municipal lo señala para revisión; no se convierte en
+reglamento permanente, horario general, desvío autorizado o geometría de ruteo.
+Detalle, fuente, huella y límites: [JUAREZ-OPERATIONS-MONITOR.md](JUAREZ-OPERATIONS-MONITOR.md).
+Continúan 15 municipios con referencia parcial y cero validaciones legales completas.
