@@ -21,7 +21,7 @@ de dar su consentimiento. Cambiar el recorrido original no actualiza los enlaces
 
 ## Persistencia y permisos
 
-Migración aditiva `supabase/migrations/20261117101117_route_share_links.sql`:
+Migración aditiva `supabase/migrations/20261117102944_route_share_links.sql`:
 
 - `public.route_share_links`: RLS; sólo el dueño puede consultar columnas de
   administración. `snapshot` y `token_hash` no tienen SELECT para clientes.
@@ -69,3 +69,27 @@ Los tokens ya importados o copiados por receptores no son recuperables remotamen
 
 Fuentes técnicas: https://supabase.com/docs/guides/database/functions y
 https://www.postgresql.org/docs/17/functions-binarystring.html.
+
+La migración se creó con CLI y su nombre se alineó después con la versión
+20261117102944 registrada por apply_migration en el proyecto autorizado.
+El contenido SQL es idéntico al probado en 080d707; se evita una migración
+duplicada en futuros despliegues. No se editaron las filas del historial alojado.
+
+
+## Avisos del asesor después de aplicar
+
+El asesor señala deliberadamente un RPC SECURITY DEFINER para anon (lector por
+posesión del token) y tres para authenticated (crear, leer y revocar). No se
+presentan como avisos resueltos: son la superficie pública intencional del contrato.
+Se revisaron grants, search_path, pertenencia de cada escritura, hash, whitelist,
+caducidad y revocación; cambiar a SECURITY INVOKER obligaría a dar a clientes
+acceso directo a los datos que se mantienen privados. No hay avisos nuevos de
+RLS desactivado ni de search_path mutable. Ante una incidencia se puede suspender
+el RPC lector con el rollback descrito, sin borrar filas.
+
+Referencias del asesor:
+https://supabase.com/docs/guides/database/database-linter?lint=0028_anon_security_definer_function_executable
+https://supabase.com/docs/guides/database/database-linter?lint=0029_authenticated_security_definer_function_executable
+
+La protección de contraseñas filtradas desactivada es un aviso previo independiente;
+no se habilitan servicios de pago ni se cambian ajustes Auth en este ciclo.
