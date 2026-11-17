@@ -46,7 +46,8 @@ begin
  if not failed then raise exception 'Anonymous direct ledger access'; end if;
  set local role authenticated;
  perform set_config('request.jwt.claims',jsonb_build_object('sub',a,'role','authenticated')::text,true);
- if not public.revoke_route_share_link((share->>'id')::uuid) or public.read_route_share_link(share->>'token') is not null then raise exception 'Revocation failed'; end if;
+ if not public.revoke_route_share_link((share->>'id')::uuid) then raise exception 'Owner revocation denied'; end if;
+ if public.read_route_share_link(share->>'token') is not null then raise exception 'Revocation failed'; end if;
  update public.saved_routes set status='archived' where id=route_id;
  if public.read_route_share_link(second_share->>'token') is not null then raise exception 'Archive did not revoke'; end if;
  update public.saved_routes set status='planned' where id=route_id;
