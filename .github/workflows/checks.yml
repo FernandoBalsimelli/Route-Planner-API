@@ -45,4 +45,5 @@ jobs:
             psql "$ROUTE_PLANNER_TEST_DB_URL" --single-transaction -v ON_ERROR_STOP=1 -f "$migration"
           done
           psql "$ROUTE_PLANNER_TEST_DB_URL" -v ON_ERROR_STOP=1 -f test/sql/verify.sql
+          psql "$ROUTE_PLANNER_TEST_DB_URL" -v ON_ERROR_STOP=1 -f test/sql/route-sharing.sql
       - run: npm audit --omit=dev
