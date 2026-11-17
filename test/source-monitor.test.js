@@ -115,3 +115,23 @@ test('Puebla watches the actual consolidated PDF and detects changes behind unch
  assert.equal(exposed.legalReview,'validity_requires_review');
  assert.equal(sourceStatus().legalRulesAutomaticallyUpdated,false);
 });
+
+
+test('Juárez watches its 2026 operational notice separately without approving or enforcing it',async()=>{
+ const {officialSources}=await import('../lib/source-monitor.js');
+ const {municipalReference,municipalCatalog}=await import('../lib/municipal-regulations.js');
+ const source=officialSources.find(row=>row.id==='juarez-carga');
+ const notice=source.relatedUrls.find(url=>url.includes('/noticia/34586/'));assert.ok(notice);
+ const before=await checkSource(source,{},async url=>new Response(String(url)===notice?'notice version one':'same source'));
+ assert.equal(before.documents.find(row=>row.url===notice).status,'unreviewed');
+ const after=await checkSource(source,before,async url=>new Response(String(url)===notice?'notice version two':'same source'));
+ const publicReport=sourceStatus({checkedAt:after.checkedAt,sources:[after]});const row=publicReport.sources.find(row=>row.id==='juarez-carga').documents.find(row=>row.url===notice);
+ assert.equal(row.changeDetected,true);assert.equal(publicReport.legalRulesAutomaticallyUpdated,false);
+ const reference=municipalReference('08037');assert.ok(reference.notices.some(text=>text.includes('08-09-2026')));assert.equal(reference.routingEnforced,false);assert.deepEqual(reference.timeRules,[]);assert.equal(municipalCatalog().municipalitiesWithPartialReference,15);assert.equal(municipalCatalog().fullyVerifiedMunicipalities,0);
+});
+
+test('Juárez notice evidence survives an unavailable historical primary document',async()=>{
+ const {officialSources}=await import('../lib/source-monitor.js');const source=officialSources.find(row=>row.id==='juarez-carga');const notice=source.relatedUrls.find(url=>url.includes('/noticia/34586/'));
+ const report=await checkSource(source,{},async url=>String(url)===source.url?new Response('unavailable',{status:503}):new Response('official linked document'));
+ assert.equal(report.availability,'partial');assert.equal(report.documents.find(row=>row.url===notice).status,'unreviewed');assert.ok(report.documents.find(row=>row.url===notice).sha256);assert.equal(report.documents[0].error,'HTTP_503');
+});
