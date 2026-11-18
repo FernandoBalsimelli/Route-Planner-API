@@ -20,6 +20,8 @@ const stop = { label: 'Parada de prueba', lat: 25.68, lng: -100.30 };
 const plan = (payload,remoteAddress='127.0.0.1') => app.inject({remoteAddress, method: 'POST', url: '/v1/routes/plan', headers: { authorization: 'Bearer test-session' }, payload: { origin, destination, stops: [stop], ...payload } });
 function encodePath(points){let lat=0,lng=0;const encode=n=>{let value=n<0?~(n<<1):n<<1,result='';while(value>=32){result+=String.fromCharCode((value&31|32)+63);value>>=5;}return result+String.fromCharCode(value+63);};return points.map(([nextLat,nextLng])=>{const y=Math.round(nextLat*1e5),x=Math.round(nextLng*1e5),chunk=encode(y-lat)+encode(x-lng);lat=y;lng=x;return chunk;}).join('');}
 
+function validRoute(coordinates, distance=1234, duration=500) { return {summary:{distance,duration},geometry:encodePath(coordinates.map(([lng,lat])=>[lat,lng])),way_points:coordinates.map((_,i)=>i),segments:[]}; }
+
 test('city suggestions exclude regional centroids and identify the city and state', async () => {
   provider = async url => {
     const layers = url.searchParams.get('layers').split(',');
@@ -84,7 +86,7 @@ test('truck routing preserves selected coordinates, order and vehicle restrictio
     assert.deepEqual(body.coordinates, [origin, stop, destination].map(p => [p.lng, p.lat]));
     assert.equal(body.options.profile_params.restrictions.height, 4);
     assert.equal(body.options.profile_params.restrictions.weight, 40);
-    return Response.json({ routes: [{ summary: { distance: 800000, duration: 36000 }, geometry: 'encoded-route', segments: [] }] });
+    return Response.json({ routes: [validRoute(body.coordinates,800000,36000)] });
   };
   const response = await plan({ mode: 'truck', vehicle: { heightM: 4, grossWeightT: 40 } });
   assert.equal(response.statusCode, 200);
@@ -131,7 +133,7 @@ test('unconfirmed house number does not silently route to the street centroid', 
 
 test('route response preserves maneuver geometry indexes and reports unverified municipal coverage',async()=>{
  const geometry=encodePath(Array.from({length:8},(_,index)=>[25.67,-100.35+index*(.15/7)]));
- provider=async()=>Response.json({routes:[{summary:{distance:100,duration:20},geometry,segments:[{steps:[{type:1,instruction:'Gira a la derecha',name:'Vía pública de prueba',distance:100,duration:20,way_points:[3,7]},{type:10,instruction:'Llegada',way_points:[-1,2]}]}]}]});
+ provider=async()=>Response.json({routes:[{summary:{distance:100,duration:20},geometry,way_points:[0,7],segments:[{steps:[{type:1,instruction:'Gira a la derecha',name:'Vía pública de prueba',distance:100,duration:20,way_points:[3,7]},{type:10,instruction:'Llegada',way_points:[-1,2]}]}]}]});
  const response=await plan({stops:[]});assert.equal(response.statusCode,200);
  const route=response.json().route;assert.equal(route.sections[0].actions[0].geometryStart,3);assert.equal(route.sections[0].actions[0].geometryEnd,7);assert.equal(route.sections[0].actions[1].geometryStart,undefined);
  assert.equal(route.regulatoryCoverage.status,'not_verified');assert.equal(route.regulatoryCoverage.requiresOperatorReview,true);assert.equal(route.regulatoryCoverage.municipalityIdentification,'identified_approximate');assert.ok(route.regulatoryCoverage.municipalitiesIdentified.some(item=>item.id==='19039'&&item.coverage==='reference_only'));assert.ok(route.regulatoryCoverage.municipalitiesIdentified.some(item=>item.id==='19026'&&item.coverage==='not_loaded'));
@@ -146,7 +148,7 @@ test('a route with 48 intermediate deliveries reaches Directions with all 50 poi
     assert.equal(body.coordinates.length,50);
     assert.deepEqual(body.coordinates,[origin,...stops,destination].map(p=>[p.lng,p.lat]));
     assert.equal(body.options.profile_params.restrictions.height,4);
-    return Response.json({routes:[{summary:{distance:1000,duration:300},geometry:'encoded-route',segments:[]}]});
+    return Response.json({routes:[validRoute(body.coordinates,1000,300)]});
   };
   const response = await plan({stops, mode:'truck', vehicle:{heightM:4}});
   assert.equal(response.statusCode,200);
@@ -159,14 +161,13 @@ test('the API rejects routes beyond the real provider limit before making any pr
   const response=await plan({stops:Array.from({length:49},()=>stop)});
   assert.equal(response.statusCode,400);
 });
-test('route waypoint geometry indexes are preserved only when the complete ordered provider mapping is valid',async()=>{
+test('incomplete or unordered waypoint mappings reject the entire provider result',async()=>{
  const geometry=encodePath([[25.67,-100.31],[25.68,-100.30],[28.66,-106.09]]);
- for(const indexes of [[0,1,2],[0,2,1],[0,1,9],[0,2],[-1,1,2]]){
+ for(const indexes of [[0,1,2],[0,2,1],[0,1,9],[0,2],[-1,1,2],[1,1,2],null]){
   provider=async()=>Response.json({routes:[{summary:{distance:100,duration:20},geometry,way_points:indexes,segments:[]}]});
-  const response=await plan({},'192.0.2.10');assert.equal(response.statusCode,200);
-  const waypoints=response.json().route.waypoints;
-  if(JSON.stringify(indexes)==='[0,1,2]')assert.deepEqual(waypoints.map(point=>point.geometryIndex),indexes);
-  else assert.ok(waypoints.every(point=>!Object.hasOwn(point,'geometryIndex')));
+  const response=await plan({},'192.0.2.10');
+  if(JSON.stringify(indexes)==='[0,1,2]'){assert.equal(response.statusCode,200);assert.deepEqual(response.json().route.waypoints.map(point=>point.geometryIndex),indexes);}
+  else {assert.equal(response.statusCode,502);assert.equal(response.json().code,'ORS_INVALID_ROUTE');assert.equal(response.json().reason,'INVALID_WAYPOINT_MAPPING');assert.equal(response.json().route,undefined);}
  }
 });
 
@@ -179,7 +180,7 @@ test('road preferences reach Directions alongside all HGV restrictions without c
     assert.deepEqual(body.options.avoid_features, ['tollways', 'highways']);
     assert.deepEqual(body.options.profile_params.restrictions, { height: 4, width: 2.5, length: 18, weight: 40, axleload: 9 });
     assert.equal(body.options.vehicle_type, 'hgv');
-    return Response.json({ routes: [{ summary: { distance: 1234, duration: 500 }, segments: [] }] });
+    return Response.json({ routes: [validRoute(body.coordinates)] });
   };
   const preferences = { avoidTolls: true, avoidHighways: true };
   const response = await plan({ mode: 'truck', preferences, vehicle: { heightM: 4, widthM: 2.5, lengthM: 18, grossWeightT: 40, axleWeightT: 9 } }, '127.4.0.1');
@@ -196,7 +197,7 @@ test('two-point delivery applies each road preference and defaults preserve exis
       assert.equal(body.coordinates.length, 2);
       assert.deepEqual(body.options?.avoid_features, expected);
       if (!expected) assert.equal(body.options, undefined);
-      return Response.json({ routes: [{ summary: { distance: 1234, duration: 500 }, segments: [] }] });
+      return Response.json({ routes: [validRoute(body.coordinates)] });
     };
     const response = await plan({ stops: [], preferences }, '127.4.0.2');
     assert.equal(response.statusCode, 200);
@@ -233,7 +234,7 @@ test('no route with road exclusions never retries silently without them', async 
 
 test('truck operating context is validated and retained without inventing ORS restrictions',async()=>{
  const context={heightM:4,widthM:2.5,lengthM:18,grossWeightT:38,axleWeightT:9,axleCount:5,configuration:'T3-S2',payloadCapacityT:30.125};
- provider=async(url,options)=>{const body=JSON.parse(options.body);assert.deepEqual(body.options.profile_params.restrictions,{height:4,width:2.5,length:18,weight:38,axleload:9});assert.equal(body.options.axleCount,undefined);return Response.json({routes:[{summary:{distance:2000,duration:300},segments:[]}]});};
+ provider=async(url,options)=>{const body=JSON.parse(options.body);assert.deepEqual(body.options.profile_params.restrictions,{height:4,width:2.5,length:18,weight:38,axleload:9});assert.equal(body.options.axleCount,undefined);return Response.json({routes:[validRoute(body.coordinates,2000,300)]});};
  const result=await plan({mode:'truck',vehicle:context},'127.5.0.1');assert.equal(result.statusCode,200);assert.deepEqual(result.json().route.vehicleContext,context);
  provider=async()=>{throw Error('Invalid operating data must not reach provider');};
  for(const vehicle of [{...context,axleCount:3},{...context,axleCount:undefined},{...context,configuration:'unknown'},{...context,payloadCapacityT:3.4999},{...context,axleCount:2.5}])assert.equal((await plan({mode:'truck',vehicle},'127.5.0.2')).statusCode,400);
@@ -262,4 +263,29 @@ test('alternatives discard incomplete and duplicate options, and explicitly repo
 test('alternative provider limits remain specific and never retry with weaker restrictions',async()=>{
  let calls=0;provider=async()=>{calls++;return Response.json({error:{code:2004,message:'The approximated route distance must not be greater than 100000 meters for use with the alternative Routes algorithm.'}},{status:400});};
  const response=await plan({destination:{...origin,lat:25.68},stops:[],alternatives:true},'127.6.0.4');assert.equal(response.statusCode,422);assert.match(response.json().message,/100 km/);assert.match(response.json().message,/conservando los puntos y las restricciones/);assert.equal(calls,1);
+});
+
+test('normal truck and delivery routing reject malformed provider success responses without weakening restrictions',async()=>{
+ const valid=validRoute([origin,stop,destination].map(p=>[p.lng,p.lat]));
+ const cases=[['INVALID_SUMMARY',r=>delete r.summary.distance],['INVALID_SUMMARY',r=>r.summary.duration=-1],['INVALID_SUMMARY',r=>r.summary.distance='100'],['INVALID_GEOMETRY',r=>delete r.geometry],['INVALID_GEOMETRY',r=>r.geometry='invalid'],['INVALID_INSTRUCTIONS',r=>r.segments='wrong'],['INVALID_INSTRUCTIONS',r=>r.segments=[null]],['INVALID_INSTRUCTIONS',r=>r.segments=[{steps:'wrong'}]],['INVALID_INSTRUCTIONS',r=>r.segments=[{steps:[null]}]],['INVALID_INSTRUCTIONS',r=>r.segments=[{steps:[{instruction:{bad:true}}]}]],['INVALID_INSTRUCTIONS',r=>r.segments=[{steps:[{name:['bad']}]}]],['INVALID_INSTRUCTIONS',r=>r.segments=[{duration:-1}]],['INVALID_INSTRUCTIONS',r=>r.segments=[{steps:[{duration:'100'}]}]]];
+ for(const [i,[reason,mutate]] of cases.entries()){
+  let calls=0;const route=structuredClone(valid);mutate(route);
+  provider=async(url,options)=>{calls++;const b=JSON.parse(options.body);assert.deepEqual(b.coordinates,[origin,stop,destination].map(p=>[p.lng,p.lat]));if(i%2){assert.deepEqual(b.options.avoid_features,['tollways']);assert.equal(b.options.profile_params.restrictions.height,4);}return Response.json({routes:[route]});};
+  const response=await plan(i%2?{mode:'truck',vehicle:{heightM:4},preferences:{avoidTolls:true}}:{},'192.0.2.'+(30+i));
+  assert.equal(response.statusCode,502);assert.equal(response.json().code,'ORS_INVALID_ROUTE');assert.equal(response.json().reason,reason);assert.equal(response.json().route,undefined);assert.equal(calls,1);
+ }
+});
+test('provider JSON/container failures, no route and body timeouts remain distinct',async()=>{
+ for(const [i,payload] of [null,{}, {routes:{}}, {routes:[null]}].entries()){
+  provider=async()=>Response.json(payload);const r=await plan({},'192.0.2.'+(50+i));assert.equal(r.statusCode,502);assert.equal(r.json().code,'ORS_INVALID_ROUTE');
+ }
+ provider=async()=>new Response('{broken',{status:200});let r=await plan({},'192.0.2.55');assert.equal(r.statusCode,502);assert.equal(r.json().reason,'INVALID_JSON');
+ provider=async()=>Response.json({routes:[]});r=await plan({},'192.0.2.56');assert.equal(r.statusCode,422);assert.equal(r.json().code,'ORS_NO_ROUTE');
+ provider=async()=>({ok:true,json:async()=>{throw new DOMException('Synthetic body timeout','TimeoutError');}});r=await plan({},'192.0.2.57');assert.equal(r.statusCode,504);assert.equal(r.json().code,'ORS_TIMEOUT');
+});
+test('all 50 point occurrences may share ordered geometry indexes without dropping deliveries or replacing genuine zero estimates',async()=>{
+ const stops=Array.from({length:48},()=>({...stop}));const geometry=encodePath([origin,stop,destination].map(p=>[p.lat,p.lng]));const indexes=[0,...Array(48).fill(1),2];
+ provider=async()=>Response.json({routes:[{geometry,way_points:indexes,summary:{distance:0,duration:0},segments:[]}]});
+ const r=await plan({stops},'192.0.2.58');assert.equal(r.statusCode,200);const route=r.json().route;
+ assert.equal(route.waypoints.length,50);assert.deepEqual(route.waypoints.map(p=>p.geometryIndex),indexes);assert.equal(route.distanceMeters,0);assert.equal(route.durationSeconds,0);
 });

@@ -9,7 +9,7 @@ import { providerError, routingFailure } from './lib/routing-errors.js';
 import { distanceMeters, searchFocus, namesLocality, prioritizeLocations, searchBounds, retailSearchIntent, providerSearchText } from './lib/nearby.js';
 import { requestedHouseNumber, rankAddressMatches } from './lib/address-match.js';
 import { getSourceStatus } from './lib/source-monitor.js';
-import { decodePolyline } from './lib/municipal-boundaries.js';
+import { inspectDirectionsRoute } from './lib/directions-integrity.js';
 import { municipalCatalog, municipalReference, routeRegulatoryCoverage } from './lib/municipal-regulations.js';
 
 const app = Fastify({ logger: { serializers: { req: request => ({ method: request.method, url: request.url?.split('?')[0], host: request.host, remoteAddress: request.ip }) } }, bodyLimit: 64 * 1024, trustProxy: true });
@@ -372,36 +372,39 @@ app.post('/v1/routes/plan', { config: { rateLimit: { max: 10, timeWindow: '1 min
       if (input.alternatives && ['ORS_ROUTE_TOO_LONG', 'ORS_LIMIT_EXCEEDED'].includes(problem.code)) problem.message += ' Las alternativas tienen un límite publicado de 100 km. Desactiva la búsqueda de alternativas para calcular un recorrido normal, conservando los puntos y las restricciones.';
       return reply.code(status).send(problem);
     }
-    const data = await response.json(), route = data.routes?.[0];
-    if (!route) return reply.code(422).send({ ok: false, message: 'OpenRouteService no encontró una ruta para esos puntos y ese vehículo.' });
-    const validAlternative = item => {
-      const points = decodePolyline(item?.geometry), indexes = item?.way_points;
-      return Number.isFinite(item?.summary?.distance) && item.summary.distance >= 0 && Number.isFinite(item?.summary?.duration) && item.summary.duration >= 0 && points?.length >= 2 && Array.isArray(indexes) && indexes.length === 2 && indexes[0] === 0 && indexes[1] === points.length - 1;
+    const invalidRoute = reason => {
+      request.log.warn({ reason, pointCount: routeLocations.length }, 'OpenRouteService returned an incomplete route');
+      return reply.code(502).send({ ok: false, code: 'ORS_INVALID_ROUTE', reason, message: 'OpenRouteService devolvió un recorrido incompleto o inconsistente: faltan un trazado válido, estimaciones o la correspondencia de todas las paradas. No se mostrará ni guardará como ruta calculada. Conserva tus puntos y vuelve a intentar.' });
     };
-    if (input.alternatives && !validAlternative(route)) return reply.code(502).send({ ok: false, code: 'ORS_INVALID_ROUTE', message: 'El proveedor devolvió una ruta sin trazado, distancia o tiempo válidos. No se mostrarán alternativas incompletas.' });
-    const serializeRoute = route => {
+    let data;
+    try { data = await response.json(); } catch (error) { if (error instanceof SyntaxError) return invalidRoute('INVALID_JSON'); throw error; }
+    if (!Array.isArray(data?.routes)) return invalidRoute('INVALID_ROUTES');
+    const route = data.routes[0];
+    if (!data.routes.length) return reply.code(422).send({ ok: false, code: 'ORS_NO_ROUTE', message: 'OpenRouteService no encontró una ruta para esos puntos y ese vehículo.' });
+    const inspected = inspectDirectionsRoute(route, routeLocations.length);
+    if (inspected.reason) return invalidRoute(inspected.reason);
+    const serializeRoute = (route, verified) => {
       const sections = (route.segments || []).map(segment => ({
         summary: { length: segment.distance, duration: segment.duration },
-        actions: (segment.steps || []).map(step => ({ action: String(step.type ?? ''), instruction: step.instruction, duration: step.duration, length: step.distance, roadName: step.name, ...(Array.isArray(step.way_points) && step.way_points.length === 2 && step.way_points.every(Number.isInteger) && step.way_points[0] >= 0 && step.way_points[1] >= step.way_points[0] ? { geometryStart: step.way_points[0], geometryEnd: step.way_points[1] } : {}) })),
+        actions: (segment.steps || []).map(step => ({ action: String(step.type ?? ''), instruction: step.instruction, duration: step.duration, length: step.distance, roadName: step.name, ...(Array.isArray(step.way_points) && step.way_points.length === 2 && step.way_points.every(Number.isInteger) && step.way_points[0] >= 0 && step.way_points[1] >= step.way_points[0] && step.way_points[1] < verified.geometryPointCount ? { geometryStart: step.way_points[0], geometryEnd: step.way_points[1] } : {}) })),
       }));
       const summary = route.summary || {};
-      const geometryPoints = decodePolyline(route.geometry);
-      const waypointIndexes = Array.isArray(route.way_points) && route.way_points.length === routeLocations.length
-        && geometryPoints && route.way_points.every((value,index,all) => Number.isSafeInteger(value) && value >= 0 && value < geometryPoints.length && (!index || value >= all[index-1]))
-        ? route.way_points : null;
       return {
-        distanceMeters: summary.distance || 0, durationSeconds: summary.duration || 0, polyline: route.geometry, sections, notices: [], optimized, preferences: input.preferences, ...(input.mode==='truck'?{vehicleContext:input.vehicle||{}}:{}),
+        distanceMeters: summary.distance, durationSeconds: summary.duration, polyline: route.geometry, sections, notices: [], optimized, preferences: input.preferences, ...(input.mode==='truck'?{vehicleContext:input.vehicle||{}}:{}),
         regulatoryCoverage: routeRegulatoryCoverage(route.geometry),
-        waypoints: routeLocations.map((point, index) => ({ ...point, ...(waypointIndexes ? {geometryIndex:waypointIndexes[index]} : {}), type: index === 0 ? 'origin' : index === routeLocations.length - 1 ? 'destination' : 'stop' })),
+        waypoints: routeLocations.map((point, index) => ({ ...point, geometryIndex: verified.indexes[index], type: index === 0 ? 'origin' : index === routeLocations.length - 1 ? 'destination' : 'stop' })),
       };
     };
-    const primary = serializeRoute(route);
+    const primary = serializeRoute(route, inspected);
     if (!input.alternatives) return { ok: true, route: primary, provider: 'openrouteservice' };
     const seen = new Set([route.geometry]);
-    const alternatives = (data.routes || []).slice(1).filter(item => {
-      if (!validAlternative(item) || seen.has(item.geometry)) return false;
-      seen.add(item.geometry); return true;
-    }).slice(0, 2).map(serializeRoute);
+    const alternatives = [];
+    for (const item of data.routes.slice(1)) {
+      const checked = inspectDirectionsRoute(item, routeLocations.length);
+      if (checked.reason || seen.has(item.geometry)) continue;
+      seen.add(item.geometry); alternatives.push(serializeRoute(item, checked));
+      if (alternatives.length === 2) break;
+    }
     return { ok: true, route: primary, alternatives, alternativeSummary: { requested: true, routeCount: 1 + alternatives.length, maximumRoutes: 3, omittedRoutes: data.routes.length - 1 - alternatives.length }, provider: 'openrouteservice' };
   } catch (error) {
     if (error?.message === 'ADDRESS_NUMBER_UNCONFIRMED') return reply.code(422).send({ ok: false, code: 'ADDRESS_NUMBER_UNCONFIRMED', message: 'No se encontró el número exterior de una dirección. Confirma el acceso en el mapa o usa su Plus Code antes de calcular; no elegiremos el centro de la calle automáticamente.' });
