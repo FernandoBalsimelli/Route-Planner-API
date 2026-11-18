@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "municipalityId": "21114",
+  "checkedAt": "2026-11-18T01:03:52.757945+00:00",
+  "parentResolution": "RES. 2025/148",
+  "parentUrl": "https://gaceta.pueblacapital.gob.mx/publicaciones/minutas/item/2067-res-2025-148-dictamen-por-virtud-del-cual-se-reforman-los-articulos-2-14-fraccion-i-19-parrafo-primero-y-el-anexo-unico-de-las-reglas-de-operacion-del-estacionamiento-rotativo-para-la-administracion-2024-2027-a-fin-de-incorporar-el",
+  "purpose": "Vigilar los dos PDF enlazados por la publicación, separados del acta y del snapshot de corredores. No certifica vigencia ni aplica reglas al cálculo.",
+  "legalReview": "not_verified",
+  "routingEnforced": false,
+  "documents": [
+    {
+      "name": "anexo",
+      "url": "https://gaceta.pueblacapital.gob.mx/publicaciones/minutas/item/download/1010_de64725dc771e51346629bf7150420d4",
+      "status": 200,
+      "bytes": 339465,
+      "sha256": "1244f0f66db366f8b0f4612c32b64a6a857bc5d9f41c5117843448e95088a8a8",
+      "pages": 7,
+      "relation": "linked_attachment",
+      "legalValidityVerified": false
+    },
+    {
+      "name": "reglas",
+      "url": "https://gaceta.pueblacapital.gob.mx/publicaciones/minutas/item/download/1011_6e30ca00b3bfbe8310ef2f0b1afc1954",
+      "status": 200,
+      "bytes": 340080,
+      "sha256": "49da56a082baac634fd004f9a24e224dc0eab4d2a532d7ac2d6bc1949532006f",
+      "pages": 18,
+      "relation": "linked_attachment",
+      "legalValidityVerified": false
+    }
+  ]
+}
