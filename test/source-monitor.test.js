@@ -147,3 +147,14 @@ test('Juárez follow-up notices remain separate monitored evidence without infer
  assert.ok(urls.every(url=>reference.relatedLinks.some(link=>link.url===url)));assert.equal(reference.routingEnforced,false);assert.deepEqual(reference.timeRules,[]);assert.equal(reference.rules.length,4);
  assert.equal(municipalCatalog().municipalitiesWithPartialReference,15);assert.equal(municipalCatalog().fullyVerifiedMunicipalities,0);
 });
+
+test('Puebla watches both published PDF attachments separately without replacing corridor evidence or approving legal coverage',async()=>{
+ const {officialSources}=await import('../lib/source-monitor.js');const {default:evidence}=await import('../data/mx/21114-parking-attachments.json',{with:{type:'json'}});const {municipalReference,municipalCatalog}=await import('../lib/municipal-regulations.js');
+ const source=officialSources.find(row=>row.id==='puebla-carga');assert.equal(evidence.municipalityId,'21114');assert.equal(evidence.documents.length,2);assert.equal(evidence.legalReview,'not_verified');assert.equal(evidence.routingEnforced,false);
+ for(const doc of evidence.documents){assert.ok(source.relatedUrls.includes(doc.url));assert.match(doc.sha256,/^[a-f0-9]{64}$/);assert.equal(doc.status,200);assert.ok(doc.bytes>300000);assert.equal(doc.legalValidityVerified,false);}
+ const [annex,rules]=evidence.documents;assert.equal(annex.pages,7);assert.equal(rules.pages,18);
+ const first=await checkSource(source,{},async()=>new Response('same document'));assert.equal(first.documents.find(doc=>doc.url===annex.url).status,'unreviewed');
+ const next=await checkSource(source,first,async url=>new Response(String(url)===rules.url?'changed PDF':'same document'));
+ const exposed=sourceStatus({checkedAt:next.checkedAt,sources:[next]});const documents=exposed.sources.find(row=>row.id===source.id).documents;assert.equal(documents.find(doc=>doc.url===rules.url).changeDetected,true);assert.equal(documents.find(doc=>doc.url===annex.url).changeDetected,false);assert.equal(exposed.legalRulesAutomaticallyUpdated,false);
+ const reference=municipalReference('21114');assert.equal(reference.routingEnforced,false);assert.equal(reference.parkingCorridorReference.rows.length,128);assert.equal(municipalCatalog().municipalitiesWithPartialReference,15);assert.equal(municipalCatalog().fullyVerifiedMunicipalities,0);
+});
