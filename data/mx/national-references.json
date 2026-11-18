@@ -52,7 +52,8 @@
       "legalReview": "validity_requires_review",
       "scope": "Sólo perímetro A del Centro Histórico. Folleto 2024 que cita Gaceta del 15 de diciembre de 2021; revisar vigencia y modificaciones.",
       "relatedUrls": [
-        "https://regulaciones.cdmx.gob.mx/mejora/public/regulacionPdf/1679"
+        "https://regulaciones.cdmx.gob.mx/mejora/public/regulacionPdf/1679",
+        "https://data.consejeria.cdmx.gob.mx/portal_old/uploads/gacetas/0830deebda0a6b9e7fb44d6d2cef2ab0.pdf"
       ]
     },
     {
@@ -400,7 +401,8 @@
       ],
       "notices": [
         "Folleto de 2024: no se ha comprobado la vigencia consolidada con todas las reformas y fichas posteriores.",
-        "El perímetro A no está cargado como geometría legal; la detección de la alcaldía sólo invita a consultar la fuente."
+        "El perímetro A no está cargado como geometría legal; la detección de la alcaldía sólo invita a consultar la fuente.",
+        "Se localizó la Gaceta histórica del 15-12-2021 citada por la guía. La descarga directa devolvió HTTP 503 el 18-11-2026: no se verificaron los bytes, el texto íntegro ni actos posteriores. Se conserva como fuente pendiente, sin sustituir horarios, resolver diferencias entre folletos o acreditar permisos y vigencia actual."
       ],
       "trunkSegments": [
         {
@@ -549,6 +551,12 @@
           "page": 1,
           "geometry": null,
           "geometryStatus": "not_validated"
+        }
+      ],
+      "relatedLinks": [
+        {
+          "title": "Gaceta 15-12-2021 · aviso histórico citado por la guía; cotejo íntegro y vigencia pendientes",
+          "url": "https://data.consejeria.cdmx.gob.mx/portal_old/uploads/gacetas/0830deebda0a6b9e7fb44d6d2cef2ab0.pdf"
         }
       ]
     },
