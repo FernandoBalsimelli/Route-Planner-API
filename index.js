@@ -374,7 +374,15 @@ app.post('/v1/routes/plan', { config: { rateLimit: { max: 10, timeWindow: '1 min
     }
     const invalidRoute = reason => {
       request.log.warn({ reason, pointCount: routeLocations.length }, 'OpenRouteService returned an incomplete route');
-      return reply.code(502).send({ ok: false, code: 'ORS_INVALID_ROUTE', reason, message: 'OpenRouteService devolvió un recorrido incompleto o inconsistente: faltan un trazado válido, estimaciones o la correspondencia de todas las paradas. No se mostrará ni guardará como ruta calculada. Conserva tus puntos y vuelve a intentar.' });
+      const details = {
+        INVALID_JSON: 'La respuesta no contiene JSON válido.',
+        INVALID_ROUTES: 'La respuesta no contiene una lista de rutas válida.',
+        INVALID_SUMMARY: 'La distancia o el tiempo faltan o tienen valores inválidos.',
+        INVALID_GEOMETRY: 'No incluye un trazado cartográfico válido.',
+        INVALID_WAYPOINT_MAPPING: `Falta una correspondencia válida y ordenada del trazado con los ${routeLocations.length} puntos del recorrido.`,
+        INVALID_INSTRUCTIONS: 'Las indicaciones de conducción contienen datos inválidos.',
+      };
+      return reply.code(502).send({ ok: false, code: 'ORS_INVALID_ROUTE', reason, message: `OpenRouteService devolvió un recorrido incompleto o inconsistente. ${details[reason]} No se mostrará ni guardará como ruta calculada. Conserva tus puntos y vuelve a intentar.` });
     };
     let data;
     try { data = await response.json(); } catch (error) { if (error instanceof SyntaxError) return invalidRoute('INVALID_JSON'); throw error; }
