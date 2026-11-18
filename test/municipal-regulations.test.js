@@ -151,3 +151,15 @@ test('Puebla publication history distinguishes official publication, superseded 
  assert.equal(municipalReference('19039').parkingCorridorReference,undefined);assert.equal(municipalCatalog().fullyVerifiedMunicipalities,0);
  const raw=(await import('../data/mx/21114-parking-corridors.json',{with:{type:'json'}})).default;assert.equal(raw.source.entryIntoForce.publicationDate,null,'the reproducible PDF extraction remains unchanged');
 });
+
+test('Puebla annex comparison preserves 128 source occurrences and links both versions without legal approval or changing the original snapshot',async()=>{
+ const {default:baseline}=await import('../data/mx/21114-parking-corridors.json',{with:{type:'json'}});const {default:comparison}=await import('../data/mx/21114-parking-comparison.json',{with:{type:'json'}});
+ assert.equal(comparison.status,'selected_fields_match_after_normalization');assert.equal(comparison.routingEnforced,false);assert.equal(comparison.legalValidityVerified,false);assert.equal(comparison.matchedRows,128);assert.equal(comparison.extractedTextDifferenceCount,29);assert.equal(comparison.extractedTextDifferences.length,29);
+ assert.deepEqual(comparison.extractedTextDifferences.map(r=>r.sourceRow),[38,41,...Array.from({length:27},(_,i)=>i+42)]);
+ assert.equal(comparison.documents[0].sha256,baseline.source.sha256);assert.deepEqual(comparison.documents[0].pages,baseline.source.pages);assert.equal(comparison.documents[1].sha256,'1244f0f66db366f8b0f4612c32b64a6a857bc5d9f41c5117843448e95088a8a8');
+ assert.deepEqual(comparison.rows.map(r=>r.sourceRow),baseline.rows.map(r=>r.sourceRow));assert.deepEqual(comparison.duplicateGroups,baseline.duplicateGroups);
+ const response=await app.inject('/v1/regulations/municipalities/21114');assert.equal(response.statusCode,200);const annex=response.json().parkingCorridorReference;
+ assert.equal(annex.annexComparison.rows,undefined);assert.equal(annex.annexComparison.extractedTextDifferences,undefined,'extracted differences stay in versioned evidence, not every response');
+ for(const row of annex.rows){const original=baseline.rows.find(r=>r.sourceRow===row.sourceRow),map=comparison.rows.find(r=>r.sourceRow===row.sourceRow);assert.deepEqual(row.sourcePages,original.sourcePages);assert.deepEqual(row.publishedSourcePages,map.publishedPages);assert.ok(row.publishedSourcePages.every(n=>n>=1&&n<=7));assert.equal(row.polygon,original.polygon);assert.equal(row.corridor,original.corridor);assert.deepEqual(row.schedules,original.schedules);assert.equal(row.geometry,null);assert.equal(row.routingEnforced,false);}
+ const split=annex.rows.find(r=>r.sourceRow===124);assert.deepEqual(split.sourcePages,[87,88]);assert.deepEqual(split.publishedSourcePages,[7]);assert.deepEqual(comparison.polygonCounts.map(r=>r.count),[41,27,19,29,8,4]);assert.equal(baseline.source.entryIntoForce.publicationDate,null);assert.equal(municipalReference('19039').parkingCorridorReference,undefined);assert.equal(municipalCatalog().fullyVerifiedMunicipalities,0);
+});
