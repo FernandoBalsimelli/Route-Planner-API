@@ -1,0 +1,1542 @@
+{
+  "schemaVersion": 1,
+  "municipalityId": "21114",
+  "reviewedAt": "2026-11-18",
+  "status": "selected_fields_match_after_normalization",
+  "routingEnforced": false,
+  "legalValidityVerified": false,
+  "scope": "Contraste documental de 128 registros: número, etiqueta de polígono, corredor, extremos y horarios citados. No comprueba permisos, vigencia, sentidos o geometrías.",
+  "normalization": [
+    "Espacios repetidos y palabras partidas según el importador revisado del acta.",
+    "Espacios alrededor del guion ASCII; se conservan números, sufijos, acentos y las demás palabras.",
+    "Horarios comparados por días, estado y horas, sin contadores flotantes de página del acta."
+  ],
+  "documents": [
+    {
+      "id": "acta",
+      "title": "Acta C26/11 · anexo",
+      "url": "https://gaceta.pueblacapital.gob.mx/publicaciones/actas/cabildo/item/download/1132_565ca888d94782ae1c7b763eb389da28",
+      "sha256": "0917dc30ac70594a6e954243800bc5219d7ea3f2bc8017f7ea532b8ec510555c",
+      "bytes": 2395402,
+      "pages": [
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88
+      ]
+    },
+    {
+      "id": "published",
+      "title": "Adjunto de RES. 2025/148 · anexo",
+      "url": "https://gaceta.pueblacapital.gob.mx/publicaciones/minutas/item/download/1010_de64725dc771e51346629bf7150420d4",
+      "sha256": "1244f0f66db366f8b0f4612c32b64a6a857bc5d9f41c5117843448e95088a8a8",
+      "bytes": 339465,
+      "pages": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    }
+  ],
+  "matchedRows": 128,
+  "extractedTextDifferenceCount": 29,
+  "extractedTextDifferences": [
+    {
+      "sourceRow": 38,
+      "fields": [
+        {
+          "field": "corridor",
+          "acta": "14 Norte- Sur",
+          "published": "14 Norte-Sur"
+        }
+      ]
+    },
+    {
+      "sourceRow": 41,
+      "fields": [
+        {
+          "field": "corridor",
+          "acta": "13 Norte- Sur",
+          "published": "13 Norte-Sur"
+        }
+      ]
+    },
+    {
+      "sourceRow": 42,
+      "fields": [
+        {
+          "field": "polygon",
+          "acta": "Polígono 2 Carmen- Huexotitla",
+          "published": "Polígono 2 Carmen-Huexotitla"
+        }
+      ]
+    },
+    {
+      "sourceRow": 43,
+      "fields": [
+        {
+          "field": "polygon",
+          "acta": "Polígono 2 Carmen- Huexotitla",
+          "published": "Polígono 2 Carmen-Huexotitla"
+        }
+      ]
+    },
+    {
+      "sourceRow": 44,
+      "fields": [
+        {
+          "field": "polygon",
+          "acta": "Polígono 2 Carmen- Huexotitla",
+          "published": "Polígono 2 Carmen-Huexotitla"
+        }
+      ]
+    },
+    {
+      "sourceRow": 45,
+      "fields": [
+        {
+          "field": "polygon",
+          "acta": "Polígono 2 Carmen- Huexotitla",
+          "published": "Polígono 2 Carmen-Huexotitla"
+        }
+      ]
+    },
+    {
+      "sourceRow": 46,
+      "fields": [
+        {
+          "field": "polygon",
+          "acta": "Polígono 2 Carmen- Huexotitla",
+          "published": "Polígono 2 Carmen-Huexotitla"
+        }
+      ]
+    },
+    {
+      "sourceRow": 47,
+      "fields": [
+        {
+          "field": "polygon",
+          "acta": "Polígono 2 Carmen- Huexotitla",
+          "published": "Polígono 2 Carmen-Huexotitla"
+        }
+      ]
+    },
+    {
+      "sourceRow": 48,
+      "fields": [
+        {
+          "field": "polygon",
+          "acta": "Polígono 2 Carmen- Huexotitla",
+          "published": "Polígono 2 Carmen-Huexotitla"
+        }
+      ]
+    },
+    {
+      "sourceRow": 49,
+      "fields": [
+        {
+          "field": "polygon",
+          "acta": "Polígono 2 Carmen- Huexotitla",
+          "published": "Polígono 2 Carmen-Huexotitla"
+        }
+      ]
+    },
+    {
+      "sourceRow": 50,
+      "fields": [
+        {
+          "field": "polygon",
+          "acta": "Polígono 2 Carmen- Huexotitla",
+          "published": "Polígono 2 Carmen-Huexotitla"
+        }
+      ]
+    },
+    {
+      "sourceRow": 51,
+      "fields": [
+        {
+          "field": "polygon",
+          "acta": "Polígono 2 Carmen- Huexotitla",
+          "published": "Polígono 2 Carmen-Huexotitla"
+        }
+      ]
+    },
+    {
+      "sourceRow": 52,
+      "fields": [
+        {
+          "field": "polygon",
+          "acta": "Polígono 2 Carmen- Huexotitla",
+          "published": "Polígono 2 Carmen-Huexotitla"
+        }
+      ]
+    },
+    {
+      "sourceRow": 53,
+      "fields": [
+        {
+          "field": "polygon",
+          "acta": "Polígono 2 Carmen- Huexotitla",
+          "published": "Polígono 2 Carmen-Huexotitla"
+        }
+      ]
+    },
+    {
+      "sourceRow": 54,
+      "fields": [
+        {
+          "field": "polygon",
+          "acta": "Polígono 2 Carmen- Huexotitla",
+          "published": "Polígono 2 Carmen-Huexotitla"
+        }
+      ]
+    },
+    {
+      "sourceRow": 55,
+      "fields": [
+        {
+          "field": "polygon",
+          "acta": "Polígono 2 Carmen- Huexotitla",
+          "published": "Polígono 2 Carmen-Huexotitla"
+        }
+      ]
+    },
+    {
+      "sourceRow": 56,
+      "fields": [
+        {
+          "field": "polygon",
+          "acta": "Polígono 2 Carmen- Huexotitla",
+          "published": "Polígono 2 Carmen-Huexotitla"
+        }
+      ]
+    },
+    {
+      "sourceRow": 57,
+      "fields": [
+        {
+          "field": "polygon",
+          "acta": "Polígono 2 Carmen- Huexotitla",
+          "published": "Polígono 2 Carmen-Huexotitla"
+        }
+      ]
+    },
+    {
+      "sourceRow": 58,
+      "fields": [
+        {
+          "field": "polygon",
+          "acta": "Polígono 2 Carmen- Huexotitla",
+          "published": "Polígono 2 Carmen-Huexotitla"
+        }
+      ]
+    },
+    {
+      "sourceRow": 59,
+      "fields": [
+        {
+          "field": "polygon",
+          "acta": "Polígono 2 Carmen- Huexotitla",
+          "published": "Polígono 2 Carmen-Huexotitla"
+        }
+      ]
+    },
+    {
+      "sourceRow": 60,
+      "fields": [
+        {
+          "field": "polygon",
+          "acta": "Polígono 2 Carmen- Huexotitla",
+          "published": "Polígono 2 Carmen-Huexotitla"
+        }
+      ]
+    },
+    {
+      "sourceRow": 61,
+      "fields": [
+        {
+          "field": "polygon",
+          "acta": "Polígono 2 Carmen- Huexotitla",
+          "published": "Polígono 2 Carmen-Huexotitla"
+        }
+      ]
+    },
+    {
+      "sourceRow": 62,
+      "fields": [
+        {
+          "field": "polygon",
+          "acta": "Polígono 2 Carmen- Huexotitla",
+          "published": "Polígono 2 Carmen-Huexotitla"
+        }
+      ]
+    },
+    {
+      "sourceRow": 63,
+      "fields": [
+        {
+          "field": "polygon",
+          "acta": "Polígono 2 Carmen- Huexotitla",
+          "published": "Polígono 2 Carmen-Huexotitla"
+        }
+      ]
+    },
+    {
+      "sourceRow": 64,
+      "fields": [
+        {
+          "field": "polygon",
+          "acta": "Polígono 2 Carmen- Huexotitla",
+          "published": "Polígono 2 Carmen-Huexotitla"
+        }
+      ]
+    },
+    {
+      "sourceRow": 65,
+      "fields": [
+        {
+          "field": "polygon",
+          "acta": "Polígono 2 Carmen- Huexotitla",
+          "published": "Polígono 2 Carmen-Huexotitla"
+        }
+      ]
+    },
+    {
+      "sourceRow": 66,
+      "fields": [
+        {
+          "field": "polygon",
+          "acta": "Polígono 2 Carmen- Huexotitla",
+          "published": "Polígono 2 Carmen-Huexotitla"
+        }
+      ]
+    },
+    {
+      "sourceRow": 67,
+      "fields": [
+        {
+          "field": "polygon",
+          "acta": "Polígono 2 Carmen- Huexotitla",
+          "published": "Polígono 2 Carmen-Huexotitla"
+        }
+      ]
+    },
+    {
+      "sourceRow": 68,
+      "fields": [
+        {
+          "field": "polygon",
+          "acta": "Polígono 2 Carmen- Huexotitla",
+          "published": "Polígono 2 Carmen-Huexotitla"
+        }
+      ]
+    }
+  ],
+  "duplicateGroups": [
+    [
+      10,
+      15
+    ],
+    [
+      126,
+      128
+    ]
+  ],
+  "polygonCounts": [
+    {
+      "label": "Polígono 1 Centro Histórico",
+      "count": 41
+    },
+    {
+      "label": "Polígono 2 Carmen-Huexotitla",
+      "count": 27
+    },
+    {
+      "label": "Polígono 3 Chulavista – Volcanes",
+      "count": 19
+    },
+    {
+      "label": "Polígono 4 Juárez – Santiago",
+      "count": 29
+    },
+    {
+      "label": "Polígono 5 San Alejandro - Ortopedia",
+      "count": 8
+    },
+    {
+      "label": "Polígono 6 San Alejandro - Ortopedia",
+      "count": 4
+    }
+  ],
+  "rows": [
+    {
+      "sourceRow": 1,
+      "actaPages": [
+        80
+      ],
+      "publishedPages": [
+        1
+      ]
+    },
+    {
+      "sourceRow": 2,
+      "actaPages": [
+        80
+      ],
+      "publishedPages": [
+        1
+      ]
+    },
+    {
+      "sourceRow": 3,
+      "actaPages": [
+        80
+      ],
+      "publishedPages": [
+        1
+      ]
+    },
+    {
+      "sourceRow": 4,
+      "actaPages": [
+        80
+      ],
+      "publishedPages": [
+        1
+      ]
+    },
+    {
+      "sourceRow": 5,
+      "actaPages": [
+        80
+      ],
+      "publishedPages": [
+        1
+      ]
+    },
+    {
+      "sourceRow": 6,
+      "actaPages": [
+        80
+      ],
+      "publishedPages": [
+        1
+      ]
+    },
+    {
+      "sourceRow": 7,
+      "actaPages": [
+        80
+      ],
+      "publishedPages": [
+        1
+      ]
+    },
+    {
+      "sourceRow": 8,
+      "actaPages": [
+        80
+      ],
+      "publishedPages": [
+        1
+      ]
+    },
+    {
+      "sourceRow": 9,
+      "actaPages": [
+        80
+      ],
+      "publishedPages": [
+        1
+      ]
+    },
+    {
+      "sourceRow": 10,
+      "actaPages": [
+        80
+      ],
+      "publishedPages": [
+        1
+      ]
+    },
+    {
+      "sourceRow": 11,
+      "actaPages": [
+        81
+      ],
+      "publishedPages": [
+        1
+      ]
+    },
+    {
+      "sourceRow": 12,
+      "actaPages": [
+        81
+      ],
+      "publishedPages": [
+        1
+      ]
+    },
+    {
+      "sourceRow": 13,
+      "actaPages": [
+        81
+      ],
+      "publishedPages": [
+        1
+      ]
+    },
+    {
+      "sourceRow": 14,
+      "actaPages": [
+        81
+      ],
+      "publishedPages": [
+        1
+      ]
+    },
+    {
+      "sourceRow": 15,
+      "actaPages": [
+        81
+      ],
+      "publishedPages": [
+        1
+      ]
+    },
+    {
+      "sourceRow": 16,
+      "actaPages": [
+        81
+      ],
+      "publishedPages": [
+        1
+      ]
+    },
+    {
+      "sourceRow": 17,
+      "actaPages": [
+        81
+      ],
+      "publishedPages": [
+        1
+      ]
+    },
+    {
+      "sourceRow": 18,
+      "actaPages": [
+        81
+      ],
+      "publishedPages": [
+        1
+      ]
+    },
+    {
+      "sourceRow": 19,
+      "actaPages": [
+        81
+      ],
+      "publishedPages": [
+        1
+      ]
+    },
+    {
+      "sourceRow": 20,
+      "actaPages": [
+        81
+      ],
+      "publishedPages": [
+        2
+      ]
+    },
+    {
+      "sourceRow": 21,
+      "actaPages": [
+        81
+      ],
+      "publishedPages": [
+        2
+      ]
+    },
+    {
+      "sourceRow": 22,
+      "actaPages": [
+        81
+      ],
+      "publishedPages": [
+        2
+      ]
+    },
+    {
+      "sourceRow": 23,
+      "actaPages": [
+        81
+      ],
+      "publishedPages": [
+        2
+      ]
+    },
+    {
+      "sourceRow": 24,
+      "actaPages": [
+        81
+      ],
+      "publishedPages": [
+        2
+      ]
+    },
+    {
+      "sourceRow": 25,
+      "actaPages": [
+        81
+      ],
+      "publishedPages": [
+        2
+      ]
+    },
+    {
+      "sourceRow": 26,
+      "actaPages": [
+        81
+      ],
+      "publishedPages": [
+        2
+      ]
+    },
+    {
+      "sourceRow": 27,
+      "actaPages": [
+        81
+      ],
+      "publishedPages": [
+        2
+      ]
+    },
+    {
+      "sourceRow": 28,
+      "actaPages": [
+        82
+      ],
+      "publishedPages": [
+        2
+      ]
+    },
+    {
+      "sourceRow": 29,
+      "actaPages": [
+        82
+      ],
+      "publishedPages": [
+        2
+      ]
+    },
+    {
+      "sourceRow": 30,
+      "actaPages": [
+        82
+      ],
+      "publishedPages": [
+        2
+      ]
+    },
+    {
+      "sourceRow": 31,
+      "actaPages": [
+        82
+      ],
+      "publishedPages": [
+        2
+      ]
+    },
+    {
+      "sourceRow": 32,
+      "actaPages": [
+        82
+      ],
+      "publishedPages": [
+        2
+      ]
+    },
+    {
+      "sourceRow": 33,
+      "actaPages": [
+        82
+      ],
+      "publishedPages": [
+        2
+      ]
+    },
+    {
+      "sourceRow": 34,
+      "actaPages": [
+        82
+      ],
+      "publishedPages": [
+        2
+      ]
+    },
+    {
+      "sourceRow": 35,
+      "actaPages": [
+        82
+      ],
+      "publishedPages": [
+        2
+      ]
+    },
+    {
+      "sourceRow": 36,
+      "actaPages": [
+        82
+      ],
+      "publishedPages": [
+        2
+      ]
+    },
+    {
+      "sourceRow": 37,
+      "actaPages": [
+        82
+      ],
+      "publishedPages": [
+        2
+      ]
+    },
+    {
+      "sourceRow": 38,
+      "actaPages": [
+        82
+      ],
+      "publishedPages": [
+        2
+      ]
+    },
+    {
+      "sourceRow": 39,
+      "actaPages": [
+        82
+      ],
+      "publishedPages": [
+        3
+      ]
+    },
+    {
+      "sourceRow": 40,
+      "actaPages": [
+        82
+      ],
+      "publishedPages": [
+        3
+      ]
+    },
+    {
+      "sourceRow": 41,
+      "actaPages": [
+        82
+      ],
+      "publishedPages": [
+        3
+      ]
+    },
+    {
+      "sourceRow": 42,
+      "actaPages": [
+        82
+      ],
+      "publishedPages": [
+        3
+      ]
+    },
+    {
+      "sourceRow": 43,
+      "actaPages": [
+        82
+      ],
+      "publishedPages": [
+        3
+      ]
+    },
+    {
+      "sourceRow": 44,
+      "actaPages": [
+        82
+      ],
+      "publishedPages": [
+        3
+      ]
+    },
+    {
+      "sourceRow": 45,
+      "actaPages": [
+        83
+      ],
+      "publishedPages": [
+        3
+      ]
+    },
+    {
+      "sourceRow": 46,
+      "actaPages": [
+        83
+      ],
+      "publishedPages": [
+        3
+      ]
+    },
+    {
+      "sourceRow": 47,
+      "actaPages": [
+        83
+      ],
+      "publishedPages": [
+        3
+      ]
+    },
+    {
+      "sourceRow": 48,
+      "actaPages": [
+        83
+      ],
+      "publishedPages": [
+        3
+      ]
+    },
+    {
+      "sourceRow": 49,
+      "actaPages": [
+        83
+      ],
+      "publishedPages": [
+        3
+      ]
+    },
+    {
+      "sourceRow": 50,
+      "actaPages": [
+        83
+      ],
+      "publishedPages": [
+        3
+      ]
+    },
+    {
+      "sourceRow": 51,
+      "actaPages": [
+        83
+      ],
+      "publishedPages": [
+        3
+      ]
+    },
+    {
+      "sourceRow": 52,
+      "actaPages": [
+        83
+      ],
+      "publishedPages": [
+        3
+      ]
+    },
+    {
+      "sourceRow": 53,
+      "actaPages": [
+        83
+      ],
+      "publishedPages": [
+        3
+      ]
+    },
+    {
+      "sourceRow": 54,
+      "actaPages": [
+        83
+      ],
+      "publishedPages": [
+        3
+      ]
+    },
+    {
+      "sourceRow": 55,
+      "actaPages": [
+        83
+      ],
+      "publishedPages": [
+        3
+      ]
+    },
+    {
+      "sourceRow": 56,
+      "actaPages": [
+        83
+      ],
+      "publishedPages": [
+        3
+      ]
+    },
+    {
+      "sourceRow": 57,
+      "actaPages": [
+        83
+      ],
+      "publishedPages": [
+        3
+      ]
+    },
+    {
+      "sourceRow": 58,
+      "actaPages": [
+        83
+      ],
+      "publishedPages": [
+        4
+      ]
+    },
+    {
+      "sourceRow": 59,
+      "actaPages": [
+        83
+      ],
+      "publishedPages": [
+        4
+      ]
+    },
+    {
+      "sourceRow": 60,
+      "actaPages": [
+        84
+      ],
+      "publishedPages": [
+        4
+      ]
+    },
+    {
+      "sourceRow": 61,
+      "actaPages": [
+        84
+      ],
+      "publishedPages": [
+        4
+      ]
+    },
+    {
+      "sourceRow": 62,
+      "actaPages": [
+        84
+      ],
+      "publishedPages": [
+        4
+      ]
+    },
+    {
+      "sourceRow": 63,
+      "actaPages": [
+        84
+      ],
+      "publishedPages": [
+        4
+      ]
+    },
+    {
+      "sourceRow": 64,
+      "actaPages": [
+        84
+      ],
+      "publishedPages": [
+        4
+      ]
+    },
+    {
+      "sourceRow": 65,
+      "actaPages": [
+        84
+      ],
+      "publishedPages": [
+        4
+      ]
+    },
+    {
+      "sourceRow": 66,
+      "actaPages": [
+        84
+      ],
+      "publishedPages": [
+        4
+      ]
+    },
+    {
+      "sourceRow": 67,
+      "actaPages": [
+        84
+      ],
+      "publishedPages": [
+        4
+      ]
+    },
+    {
+      "sourceRow": 68,
+      "actaPages": [
+        84
+      ],
+      "publishedPages": [
+        4
+      ]
+    },
+    {
+      "sourceRow": 69,
+      "actaPages": [
+        84
+      ],
+      "publishedPages": [
+        4
+      ]
+    },
+    {
+      "sourceRow": 70,
+      "actaPages": [
+        84
+      ],
+      "publishedPages": [
+        4
+      ]
+    },
+    {
+      "sourceRow": 71,
+      "actaPages": [
+        84
+      ],
+      "publishedPages": [
+        4
+      ]
+    },
+    {
+      "sourceRow": 72,
+      "actaPages": [
+        84
+      ],
+      "publishedPages": [
+        4
+      ]
+    },
+    {
+      "sourceRow": 73,
+      "actaPages": [
+        84
+      ],
+      "publishedPages": [
+        4
+      ]
+    },
+    {
+      "sourceRow": 74,
+      "actaPages": [
+        84
+      ],
+      "publishedPages": [
+        4
+      ]
+    },
+    {
+      "sourceRow": 75,
+      "actaPages": [
+        84
+      ],
+      "publishedPages": [
+        4
+      ]
+    },
+    {
+      "sourceRow": 76,
+      "actaPages": [
+        84
+      ],
+      "publishedPages": [
+        4
+      ]
+    },
+    {
+      "sourceRow": 77,
+      "actaPages": [
+        85
+      ],
+      "publishedPages": [
+        5
+      ]
+    },
+    {
+      "sourceRow": 78,
+      "actaPages": [
+        85
+      ],
+      "publishedPages": [
+        5
+      ]
+    },
+    {
+      "sourceRow": 79,
+      "actaPages": [
+        85
+      ],
+      "publishedPages": [
+        5
+      ]
+    },
+    {
+      "sourceRow": 80,
+      "actaPages": [
+        85
+      ],
+      "publishedPages": [
+        5
+      ]
+    },
+    {
+      "sourceRow": 81,
+      "actaPages": [
+        85
+      ],
+      "publishedPages": [
+        5
+      ]
+    },
+    {
+      "sourceRow": 82,
+      "actaPages": [
+        85
+      ],
+      "publishedPages": [
+        5
+      ]
+    },
+    {
+      "sourceRow": 83,
+      "actaPages": [
+        85
+      ],
+      "publishedPages": [
+        5
+      ]
+    },
+    {
+      "sourceRow": 84,
+      "actaPages": [
+        85
+      ],
+      "publishedPages": [
+        5
+      ]
+    },
+    {
+      "sourceRow": 85,
+      "actaPages": [
+        85
+      ],
+      "publishedPages": [
+        5
+      ]
+    },
+    {
+      "sourceRow": 86,
+      "actaPages": [
+        85
+      ],
+      "publishedPages": [
+        5
+      ]
+    },
+    {
+      "sourceRow": 87,
+      "actaPages": [
+        85
+      ],
+      "publishedPages": [
+        5
+      ]
+    },
+    {
+      "sourceRow": 88,
+      "actaPages": [
+        85
+      ],
+      "publishedPages": [
+        5
+      ]
+    },
+    {
+      "sourceRow": 89,
+      "actaPages": [
+        85
+      ],
+      "publishedPages": [
+        5
+      ]
+    },
+    {
+      "sourceRow": 90,
+      "actaPages": [
+        85
+      ],
+      "publishedPages": [
+        5
+      ]
+    },
+    {
+      "sourceRow": 91,
+      "actaPages": [
+        85
+      ],
+      "publishedPages": [
+        5
+      ]
+    },
+    {
+      "sourceRow": 92,
+      "actaPages": [
+        85
+      ],
+      "publishedPages": [
+        5
+      ]
+    },
+    {
+      "sourceRow": 93,
+      "actaPages": [
+        86
+      ],
+      "publishedPages": [
+        5
+      ]
+    },
+    {
+      "sourceRow": 94,
+      "actaPages": [
+        86
+      ],
+      "publishedPages": [
+        5
+      ]
+    },
+    {
+      "sourceRow": 95,
+      "actaPages": [
+        86
+      ],
+      "publishedPages": [
+        5
+      ]
+    },
+    {
+      "sourceRow": 96,
+      "actaPages": [
+        86
+      ],
+      "publishedPages": [
+        6
+      ]
+    },
+    {
+      "sourceRow": 97,
+      "actaPages": [
+        86
+      ],
+      "publishedPages": [
+        6
+      ]
+    },
+    {
+      "sourceRow": 98,
+      "actaPages": [
+        86
+      ],
+      "publishedPages": [
+        6
+      ]
+    },
+    {
+      "sourceRow": 99,
+      "actaPages": [
+        86
+      ],
+      "publishedPages": [
+        6
+      ]
+    },
+    {
+      "sourceRow": 100,
+      "actaPages": [
+        86
+      ],
+      "publishedPages": [
+        6
+      ]
+    },
+    {
+      "sourceRow": 101,
+      "actaPages": [
+        86
+      ],
+      "publishedPages": [
+        6
+      ]
+    },
+    {
+      "sourceRow": 102,
+      "actaPages": [
+        86
+      ],
+      "publishedPages": [
+        6
+      ]
+    },
+    {
+      "sourceRow": 103,
+      "actaPages": [
+        86
+      ],
+      "publishedPages": [
+        6
+      ]
+    },
+    {
+      "sourceRow": 104,
+      "actaPages": [
+        86
+      ],
+      "publishedPages": [
+        6
+      ]
+    },
+    {
+      "sourceRow": 105,
+      "actaPages": [
+        86
+      ],
+      "publishedPages": [
+        6
+      ]
+    },
+    {
+      "sourceRow": 106,
+      "actaPages": [
+        86
+      ],
+      "publishedPages": [
+        6
+      ]
+    },
+    {
+      "sourceRow": 107,
+      "actaPages": [
+        86
+      ],
+      "publishedPages": [
+        6
+      ]
+    },
+    {
+      "sourceRow": 108,
+      "actaPages": [
+        86
+      ],
+      "publishedPages": [
+        6
+      ]
+    },
+    {
+      "sourceRow": 109,
+      "actaPages": [
+        86
+      ],
+      "publishedPages": [
+        6
+      ]
+    },
+    {
+      "sourceRow": 110,
+      "actaPages": [
+        87
+      ],
+      "publishedPages": [
+        6
+      ]
+    },
+    {
+      "sourceRow": 111,
+      "actaPages": [
+        87
+      ],
+      "publishedPages": [
+        6
+      ]
+    },
+    {
+      "sourceRow": 112,
+      "actaPages": [
+        87
+      ],
+      "publishedPages": [
+        6
+      ]
+    },
+    {
+      "sourceRow": 113,
+      "actaPages": [
+        87
+      ],
+      "publishedPages": [
+        6
+      ]
+    },
+    {
+      "sourceRow": 114,
+      "actaPages": [
+        87
+      ],
+      "publishedPages": [
+        6
+      ]
+    },
+    {
+      "sourceRow": 115,
+      "actaPages": [
+        87
+      ],
+      "publishedPages": [
+        7
+      ]
+    },
+    {
+      "sourceRow": 116,
+      "actaPages": [
+        87
+      ],
+      "publishedPages": [
+        7
+      ]
+    },
+    {
+      "sourceRow": 117,
+      "actaPages": [
+        87
+      ],
+      "publishedPages": [
+        7
+      ]
+    },
+    {
+      "sourceRow": 118,
+      "actaPages": [
+        87
+      ],
+      "publishedPages": [
+        7
+      ]
+    },
+    {
+      "sourceRow": 119,
+      "actaPages": [
+        87
+      ],
+      "publishedPages": [
+        7
+      ]
+    },
+    {
+      "sourceRow": 120,
+      "actaPages": [
+        87
+      ],
+      "publishedPages": [
+        7
+      ]
+    },
+    {
+      "sourceRow": 121,
+      "actaPages": [
+        87
+      ],
+      "publishedPages": [
+        7
+      ]
+    },
+    {
+      "sourceRow": 122,
+      "actaPages": [
+        87
+      ],
+      "publishedPages": [
+        7
+      ]
+    },
+    {
+      "sourceRow": 123,
+      "actaPages": [
+        87
+      ],
+      "publishedPages": [
+        7
+      ]
+    },
+    {
+      "sourceRow": 124,
+      "actaPages": [
+        87,
+        88
+      ],
+      "publishedPages": [
+        7
+      ]
+    },
+    {
+      "sourceRow": 125,
+      "actaPages": [
+        88
+      ],
+      "publishedPages": [
+        7
+      ]
+    },
+    {
+      "sourceRow": 126,
+      "actaPages": [
+        88
+      ],
+      "publishedPages": [
+        7
+      ]
+    },
+    {
+      "sourceRow": 127,
+      "actaPages": [
+        88
+      ],
+      "publishedPages": [
+        7
+      ]
+    },
+    {
+      "sourceRow": 128,
+      "actaPages": [
+        88
+      ],
+      "publishedPages": [
+        7
+      ]
+    }
+  ],
+  "notices": [
+    "Los campos citados coinciden tras la normalización descrita; no se afirma identidad literal de los PDF.",
+    "Ambos anexos conservan ocho registros con etiqueta 5 y cuatro con etiqueta 6 para San Alejandro–Ortopedia. La ambigüedad no queda resuelta.",
+    "Se conservan los 128 registros y sus duplicados; el registro 124 ocupa páginas 87/88 del acta y 7 del adjunto.",
+    "Los horarios son de operación del estacionamiento, no ventanas de maniobras ni permisos de circulación.",
+    "Publicación íntegra/consolidación, reformas posteriores, vigencia, permisos, sentidos y geometrías siguen pendientes; no se aplica al motor."
+  ]
+}
