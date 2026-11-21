@@ -174,3 +174,20 @@ test('the CDMX historical URL receives independent technical evidence and an out
  const publicRow=sourceStatus({checkedAt:next.checkedAt,sources:[next]}).sources.find(x=>x.id===source.id);const failed=publicRow.documents.find(x=>x.url===url);assert.equal(failed.status,'unavailable');assert.equal(failed.sha256,evidence.sha256);assert.equal(failed.error,'HTTP_503');assert.equal(source.legalReview,'validity_requires_review');
  const {municipalReference,municipalCatalog}=await import('../lib/municipal-regulations.js');const ref=municipalReference('09015');assert.ok(ref.relatedLinks.some(x=>x.url===url));assert.equal(ref.rules.length,5);assert.ok(ref.rules.every(x=>x.citation==='Guía 2024 · página 1'&&x.routingEnforced===false));assert.deepEqual(ref.timeRules,[]);assert.equal(ref.routingEnforced,false);assert.equal(municipalCatalog().municipalitiesWithPartialReference,15);assert.equal(municipalCatalog().fullyVerifiedMunicipalities,0);
 });
+
+test('missed six-hour intervals are visible before the eighteen-hour stale threshold without inventing a cause',()=>{
+ const now=Date.parse('2026-11-19T07:00:00Z'),id=sourceStatus().sources[0].id;
+ for(const [hours,overdue,stale] of [[0,false,false],[5.999,false,false],[6,true,false],[10,true,false],[18,true,true]]){
+  const checkedAt=new Date(now-hours*3600000).toISOString(),r=sourceStatus({checkedAt,sources:[{id,checkedAt,status:'unavailable',lastSuccessAt:'2020-01-01T00:00:00Z'}]},now);
+  assert.equal(r.overdue,overdue);assert.equal(r.stale,stale);assert.equal(r.sources[0].overdue,overdue);assert.equal(r.sources[0].status,'unavailable');assert.equal(r.legalRulesAutomaticallyUpdated,false);
+ }
+ for(const checkedAt of [null,'invalid','2099-01-01T00:00:00Z']){const r=sourceStatus({checkedAt,sources:[]},now);assert.equal(r.overdue,true);assert.equal(r.stale,true);assert.equal(r.sources[0].overdue,true);}
+});
+
+test('a fresh aggregate cannot hide a missed selected-source attempt, while a recent failed attempt remains on time',()=>{
+ const now=Date.parse('2026-11-19T07:00:00Z'),checkedAt=new Date(now).toISOString(),id=sourceStatus().sources[0].id;
+ const old=sourceStatus({checkedAt,sources:[{id,checkedAt:'2026-11-18T21:00:00Z',status:'unchanged'}]},now);
+ assert.equal(old.overdue,false);assert.equal(old.sources[0].overdue,true);assert.equal(old.sources[0].stale,false);
+ const recent=sourceStatus({checkedAt,sources:[{id,checkedAt,status:'unavailable',error:'HTTP_503',lastSuccessAt:'2020-01-01T00:00:00Z'}]},now);
+ assert.equal(recent.overdue,false);assert.equal(recent.sources[0].overdue,false);assert.equal(recent.sources[0].status,'unavailable');assert.equal(recent.sources[0].error,'HTTP_503');
+});
