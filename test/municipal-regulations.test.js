@@ -80,6 +80,15 @@ test('Chihuahua capital keeps the state framework separate from planning example
  assert.equal(municipalCatalog().fullyVerifiedMunicipalities,0);
 });
 
+test('Chihuahua preserves the historical consolidation and separately identifies the November amendment without inventing schedules',async()=>{
+ const entry=municipalReference('08019'),old=entry.rules.find(r=>r.id==='chih-art66'),amendment=entry.rules.find(r=>r.id==='chih-art66-20261121');
+ assert.equal(entry.source.consolidatedThrough,'2026-08-08');assert.equal(old.interpretation,'historical_text_superseded_in_part');assert.equal(old.supersededFrom,'2026-11-22');assert.match(old.description,/histórico/);
+ assert.equal(amendment.page,32);assert.equal(amendment.publishedAt,'2026-11-21');assert.equal(amendment.effectiveFrom,'2026-11-22');assert.equal(amendment.reviewStatus,'selected_provisions_only');assert.equal(amendment.interpretation,'requires_regulatory_implementation_review');
+ assert.ok(entry.source.relatedUrls.includes(amendment.sourceUrl));const doc=entry.source.relatedDocuments.find(d=>d.url===amendment.sourceUrl);assert.deepEqual(doc.pages,[3,4,32,42]);assert.equal(doc.reviewedSha256,undefined);assert.match(doc.observedSha256,/^[a-f0-9]{64}$/);
+ assert.equal(amendment.window,undefined);assert.equal(amendment.geometry,null);assert.equal(amendment.routingEnforced,false);assert.equal(amendment.limits,undefined);assert.equal(amendment.scheduleStatus,'authority_regulation_not_verified');assert.deepEqual(entry.timeRules,[]);assert.equal(municipalCatalog().fullyVerifiedMunicipalities,0);
+ const response=await app.inject('/v1/regulations/municipalities/08019');assert.equal(response.statusCode,200);assert.ok(response.json().rules.some(r=>r.id===amendment.id));
+});
+
 
 test('Puebla keeps consolidated loading and parking references separate from permissions, vehicle limits and routing',async()=>{
  const entry=municipalReference('21114'),rows=entry.rules.filter(rule=>rule.id.startsWith('pue-coremun-'));
