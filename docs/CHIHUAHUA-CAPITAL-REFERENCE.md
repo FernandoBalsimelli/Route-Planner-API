@@ -1,7 +1,30 @@
 # Chihuahua capital: marco de carga y evidencia de planeación
 
-Revisión: 11 de noviembre de 2026. Municipio INEGI **08019**. Referencia parcial,
+Revisión: 23 de noviembre de 2026. Municipio INEGI **08019**. Referencia parcial,
 sin aplicación automática al cálculo y sin validación de autorización de rutas.
+
+## Reforma posterior localizada · 23 de noviembre
+
+El [decreto LXVIII/RFLEY/0596/2026 I P.O.](https://chihuahua.gob.mx/sites/default/atach2/periodico-oficial/anexos/2026-11/ANEXO%2093-2026%20DECRETO%20N%C2%BA%20LXVIII-RFLEY-0596-2026%20I%20P.O.pdf#page=32),
+publicado en el anexo al POE 93 de 21-11-2026, reforma el primer párrafo del
+artículo 66 y deroga el segundo. La redacción nueva remite los horarios a la
+Subsecretaría mediante el reglamento respectivo. El transitorio dispone entrada
+en vigor al día siguiente de publicarse: 22-11-2026. No enumera horas ni tramos.
+
+Descarga directa HTTP 200: 2,801,294 bytes, 44 páginas, SHA-256
+`b3deb0d1531ccb5d0e922103d120e41dc77a5cf19f6b2fdcaa5796cb0631cbda`.
+Se cotejaron portada, artículo único (pp. 3–4), artículo 66 (p. 32) y transitorio
+(p. 42), con lectura visual de las dos últimas páginas seleccionadas. Revisión
+seleccionada, no integral de todas las reformas ni de actos posteriores.
+
+La consolidación de agosto y su huella se conservan como evidencia histórica;
+no se presenta su artículo 66 como redacción vigente. El nuevo decreto se vigila
+como documento independiente, sin aprobar automáticamente su contenido. Faltan
+reglamento, horarios, permisos, excepciones y geometrías verificadas. Ninguna
+regla nueva se aplica a Directions ni aumenta el número de municipios cubiertos.
+
+Los apartados siguientes documentan la revisión anterior; deben leerse junto
+con esta reforma posterior.
 
 ## Fuentes primarias y procedencia
 
