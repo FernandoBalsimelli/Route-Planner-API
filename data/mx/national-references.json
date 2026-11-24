@@ -53,7 +53,25 @@
       "scope": "Sólo perímetro A del Centro Histórico. Folleto 2024 que cita Gaceta del 15 de diciembre de 2021; revisar vigencia y modificaciones.",
       "relatedUrls": [
         "https://regulaciones.cdmx.gob.mx/mejora/public/regulacionPdf/1679",
-        "https://data.consejeria.cdmx.gob.mx/portal_old/uploads/gacetas/0830deebda0a6b9e7fb44d6d2cef2ab0.pdf"
+        "https://data.consejeria.cdmx.gob.mx/portal_old/uploads/gacetas/0830deebda0a6b9e7fb44d6d2cef2ab0.pdf",
+        "https://transparenciac5.cdmx.gob.mx/TC5/uploads/GOFCDMX_15-_12-21.pdf"
+      ],
+      "relatedDocuments": [
+        {
+          "url": "https://transparenciac5.cdmx.gob.mx/TC5/uploads/GOFCDMX_15-_12-21.pdf",
+          "title": "Gaceta Oficial CDMX 747, 15-12-2021 · copia oficial C5",
+          "publishedAt": "2021-12-15",
+          "consultedAt": "2026-11-24",
+          "observedSha256": "ec3c36bad93ae7ab05f8a272e121981085ea71e3636da105cbb8fa910ace976a",
+          "bytes": 4518924,
+          "pageCount": 180,
+          "pages": [
+            6,
+            7
+          ],
+          "reviewStatus": "selected_provisions_only",
+          "legalValidityVerified": false
+        }
       ]
     },
     {
@@ -361,20 +379,20 @@
           "title": "Vehículos menores de 3.8 t y hasta 7.5 m",
           "description": "El folleto describe circulación a cualquier hora para esta categoría, excepto vías con señalización restrictiva. Deben revisarse condiciones, acceso y permisos del punto de descarga.",
           "kind": "vehicle_class",
-          "citation": "Guía 2024 · página 1",
+          "citation": "Guía 2024 · página 2",
           "geometry": null,
           "routingEnforced": false,
-          "page": 1
+          "page": 2
         },
         {
           "id": "cdmx-unitarios",
           "title": "Unitarios de 3.8 a 20 t y hasta 14 m",
           "description": "La guía describe circulación permitida entre 20:00 y 10:00 del día siguiente para esta categoría dentro del perímetro A. No aplicar a toda la ciudad ni inferir excepciones por cuenta propia.",
           "kind": "time_window",
-          "citation": "Guía 2024 · página 1",
+          "citation": "Guía 2024 · página 2",
           "geometry": null,
           "routingEnforced": false,
-          "page": 1,
+          "page": 2,
           "window": {
             "start": "20:00",
             "end": "10:00",
@@ -389,182 +407,234 @@
           "title": "Articulados y unidades que exceden la categoría",
           "description": "La guía establece prohibición para vehículos con remolque o semirremolque y para la categoría de unidades de mayor peso y longitud que describe. Se necesita clasificación exacta y verificación de excepciones autorizadas.",
           "kind": "access",
-          "citation": "Guía 2024 · página 1",
+          "citation": "Guía 2024 · página 2",
           "geometry": null,
           "routingEnforced": false,
-          "page": 1
+          "page": 2
         },
         {
           "id": "cdmx-maniobras",
           "title": "Carga y descarga por tipo de vía",
           "description": "La guía distingue maniobras generales de 20:00 a 10:00 y en vías principales de 20:00 a 07:00, con seis ejes de prohibición permanente. El peso, longitud, señalización y permisos siguen condicionando la operación.",
           "kind": "loading",
-          "citation": "Guía 2024 · página 1",
+          "citation": "Guía 2024 · página 3",
           "geometry": null,
           "routingEnforced": false,
-          "page": 1
+          "page": 3
         },
         {
           "id": "cdmx-excepciones",
           "title": "Excepciones con autorización",
           "description": "La guía exceptúa del horario de circulación al traslado de valores y contempla unidades de construcción y casos especiales con solicitud y autorización de SEMOVI y, según corresponda, SSC. Una entrega comercial ordinaria no obtiene por sí sola esa excepción.",
           "kind": "permit",
-          "citation": "Guía 2024 · página 1",
-          "page": 1,
+          "citation": "Guía 2024 · página 2",
+          "page": 2,
           "geometry": null,
           "routingEnforced": false
+        },
+        {
+          "kind": "historical_amendment",
+          "geometry": null,
+          "routingEnforced": false,
+          "sourceUrl": "https://transparenciac5.cdmx.gob.mx/TC5/uploads/GOFCDMX_15-_12-21.pdf",
+          "publishedAt": "2021-12-15",
+          "effectiveFrom": "2021-12-15",
+          "reviewStatus": "selected_provisions_only",
+          "legalValidityVerified": false,
+          "interpretation": "requires_current_validity_and_boundary_review",
+          "timezone": "America/Mexico_City",
+          "actEvidence": {
+            "jurisdiction": "Ciudad de México · Secretaría de Movilidad",
+            "scope": "Sólo Perímetro A del Centro Histórico; no toda Cuauhtémoc ni toda CDMX. Revisión seleccionada del acto modificatorio, no del ordenamiento consolidado.",
+            "consultedAt": "2026-11-24",
+            "approvedAt": "2021-12-08",
+            "reviewStatus": "selected_provisions_only"
+          },
+          "id": "cdmx-gaceta2021-circulacion",
+          "title": "Circulación · aviso modificatorio de 2021",
+          "activity": "circulation",
+          "page": 6,
+          "citation": "Gaceta 747, 15-12-2021 · artículo 4-II, página 6; transitorios, página 7",
+          "description": "Referencia histórica: unitarios menores a 3.8 t y menores a 7.5 m, 24 h salvo señalamiento restrictivo. Vehículos mayores de 3.8 t y hasta 20 t, con longitud menor a 14 m, 20:00–10:00 del día siguiente. Los límites estrictos difieren del folleto; exactamente 3.8 t, 7.5 m o 14 m no se autorizan por inferencia."
+        },
+        {
+          "kind": "historical_amendment",
+          "geometry": null,
+          "routingEnforced": false,
+          "sourceUrl": "https://transparenciac5.cdmx.gob.mx/TC5/uploads/GOFCDMX_15-_12-21.pdf",
+          "publishedAt": "2021-12-15",
+          "effectiveFrom": "2021-12-15",
+          "reviewStatus": "selected_provisions_only",
+          "legalValidityVerified": false,
+          "interpretation": "requires_current_validity_and_boundary_review",
+          "timezone": "America/Mexico_City",
+          "actEvidence": {
+            "jurisdiction": "Ciudad de México · Secretaría de Movilidad",
+            "scope": "Sólo Perímetro A del Centro Histórico; no toda Cuauhtémoc ni toda CDMX. Revisión seleccionada del acto modificatorio, no del ordenamiento consolidado.",
+            "consultedAt": "2026-11-24",
+            "approvedAt": "2021-12-08",
+            "reviewStatus": "selected_provisions_only"
+          },
+          "id": "cdmx-gaceta2021-maniobras",
+          "title": "Carga y descarga · aviso modificatorio de 2021",
+          "activity": "loading",
+          "page": 7,
+          "citation": "Gaceta 747, 15-12-2021 · artículo 5-II/III y transitorios, página 7",
+          "description": "Referencia histórica: menores a 3.8 t con longitud no mayor a 7.5 m, y unitarios de 3.8 a 20 t con máximo 14 m. Maniobras 20:00–10:00; vialidades principales del Anexo 1, 20:00–07:00. Son condiciones de descarga, distintas de circulación. El acto no reproduce íntegros los artículos base ni resuelve por sí solo excepciones y permisos actuales."
         }
       ],
       "notices": [
         "Folleto de 2024: no se ha comprobado la vigencia consolidada con todas las reformas y fichas posteriores.",
         "El perímetro A no está cargado como geometría legal; la detección de la alcaldía sólo invita a consultar la fuente.",
-        "Se localizó la Gaceta histórica del 15-12-2021 citada por la guía. La descarga directa devolvió HTTP 503 el 18-11-2026: no se verificaron los bytes, el texto íntegro ni actos posteriores. Se conserva como fuente pendiente, sin sustituir horarios, resolver diferencias entre folletos o acreditar permisos y vigencia actual."
+        "El enlace de Consejería de la Gaceta del 15-12-2021 seguía en HTTP 503 el 24-11-2026. Se recuperó una copia oficial C5 y se revisaron las páginas 6–7, sin sustituir horarios del folleto por reglas automáticas. Actos base de 2019, modificaciones posteriores, excepciones y permisos pendientes.",
+        "Diferencias por resolver: el artículo 4-II de 2021 usa longitud menor a 7.5 m y menor a 14 m; el folleto 2024 usa no mayor/máximo. El artículo 5-II/III de maniobras admite no mayor a 7.5 m y máximo 14 m. No unificar circulación y descarga ni resolver las igualdades por inferencia; SEMOVI tiene la interpretación del aviso.",
+        "Las toneladas del aviso no se convierten automáticamente en peso bruto, carga útil o carga por eje. La zona horaria de referencia es America/Mexico_City; días, perímetro legal, sentidos y acceso concreto siguen por verificar."
       ],
       "trunkSegments": [
         {
           "road": "Eje 1 Oriente · Anillo de Circunvalación",
           "segment": "Prohibición permanente de carga y descarga señalada por la guía para este eje; no implica prohibición universal de circulación.",
-          "page": 1,
+          "page": 3,
           "geometry": null,
           "geometryStatus": "not_validated"
         },
         {
           "road": "San Pablo–José María Izazaga",
           "segment": "Prohibición permanente de carga y descarga señalada por la guía para este eje; no implica prohibición universal de circulación.",
-          "page": 1,
+          "page": 3,
           "geometry": null,
           "geometryStatus": "not_validated"
         },
         {
           "road": "Eje Central Lázaro Cárdenas",
           "segment": "Prohibición permanente de carga y descarga señalada por la guía para este eje; no implica prohibición universal de circulación.",
-          "page": 1,
+          "page": 3,
           "geometry": null,
           "geometryStatus": "not_validated"
         },
         {
           "road": "Avenida Hidalgo",
           "segment": "Prohibición permanente de carga y descarga señalada por la guía para este eje; no implica prohibición universal de circulación.",
-          "page": 1,
+          "page": 3,
           "geometry": null,
           "geometryStatus": "not_validated"
         },
         {
           "road": "Eje 1 Poniente · Guerrero",
           "segment": "Prohibición permanente de carga y descarga señalada por la guía para este eje; no implica prohibición universal de circulación.",
-          "page": 1,
+          "page": 3,
           "geometry": null,
           "geometryStatus": "not_validated"
         },
         {
           "road": "Avenida Juárez",
           "segment": "Prohibición permanente de carga y descarga señalada por la guía para este eje; no implica prohibición universal de circulación.",
-          "page": 1,
+          "page": 3,
           "geometry": null,
           "geometryStatus": "not_validated"
         },
         {
           "road": "Allende–Bolívar",
           "segment": "República de Perú–Av. José María Izazaga. Vía principal: carga y descarga 20:00–07:00 para las categorías de la guía, salvo prohibición de maniobras en los ejes expresamente excluidos. No acredita acceso ni vigencia actual.",
-          "page": 1,
+          "page": 3,
           "geometry": null,
           "geometryStatus": "not_validated"
         },
         {
           "road": "Isabel la Católica",
           "segment": "Av. José María Izazaga–República de Perú. Vía principal: carga y descarga 20:00–07:00 para las categorías de la guía, salvo prohibición de maniobras en los ejes expresamente excluidos. No acredita acceso ni vigencia actual.",
-          "page": 1,
+          "page": 3,
           "geometry": null,
           "geometryStatus": "not_validated"
         },
         {
           "road": "5 de Febrero",
           "segment": "Plaza de la Constitución–Av. José María Izazaga. Vía principal: carga y descarga 20:00–07:00 para las categorías de la guía, salvo prohibición de maniobras en los ejes expresamente excluidos. No acredita acceso ni vigencia actual.",
-          "page": 1,
+          "page": 3,
           "geometry": null,
           "geometryStatus": "not_validated"
         },
         {
           "road": "República de Brasil",
           "segment": "Plaza de la Constitución–República de Costa Rica. Vía principal: carga y descarga 20:00–07:00 para las categorías de la guía, salvo prohibición de maniobras en los ejes expresamente excluidos. No acredita acceso ni vigencia actual.",
-          "page": 1,
+          "page": 3,
           "geometry": null,
           "geometryStatus": "not_validated"
         },
         {
           "road": "20 de Noviembre",
           "segment": "Av. José María Izazaga–Plaza de la Constitución. Vía principal: carga y descarga 20:00–07:00 para las categorías de la guía, salvo prohibición de maniobras en los ejes expresamente excluidos. No acredita acceso ni vigencia actual.",
-          "page": 1,
+          "page": 3,
           "geometry": null,
           "geometryStatus": "not_validated"
         },
         {
           "road": "Av. José María Pino Suárez",
           "segment": "Plaza de la Constitución–Av. José María Izazaga. Vía principal: carga y descarga 20:00–07:00 para las categorías de la guía, salvo prohibición de maniobras en los ejes expresamente excluidos. No acredita acceso ni vigencia actual.",
-          "page": 1,
+          "page": 3,
           "geometry": null,
           "geometryStatus": "not_validated"
         },
         {
           "road": "Calle del Carmen–Correo Mayor",
           "segment": "Apartado–Av. San Pablo. Vía principal: carga y descarga 20:00–07:00 para las categorías de la guía, salvo prohibición de maniobras en los ejes expresamente excluidos. No acredita acceso ni vigencia actual.",
-          "page": 1,
+          "page": 3,
           "geometry": null,
           "geometryStatus": "not_validated"
         },
         {
           "road": "Jesús María–Loreto–Rodríguez Puebla",
           "segment": "Av. San Pablo–José Joaquín Herrera. Vía principal: carga y descarga 20:00–07:00 para las categorías de la guía, salvo prohibición de maniobras en los ejes expresamente excluidos. No acredita acceso ni vigencia actual.",
-          "page": 1,
+          "page": 3,
           "geometry": null,
           "geometryStatus": "not_validated"
         },
         {
           "road": "Plaza de la Constitución",
           "segment": "Plaza de la Constitución. Vía principal: carga y descarga 20:00–07:00 para las categorías de la guía, salvo prohibición de maniobras en los ejes expresamente excluidos. No acredita acceso ni vigencia actual.",
-          "page": 1,
+          "page": 3,
           "geometry": null,
           "geometryStatus": "not_validated"
         },
         {
           "road": "Belisario Domínguez–República de Venezuela",
           "segment": "Eje Central–Leona Vicario. Vía principal: carga y descarga 20:00–07:00 para las categorías de la guía, salvo prohibición de maniobras en los ejes expresamente excluidos. No acredita acceso ni vigencia actual.",
-          "page": 1,
+          "page": 3,
           "geometry": null,
           "geometryStatus": "not_validated"
         },
         {
           "road": "Donceles–Justo Sierra–Mixcalco",
           "segment": "Eje Central Lázaro Cárdenas–Leona Vicario. Vía principal: carga y descarga 20:00–07:00 para las categorías de la guía, salvo prohibición de maniobras en los ejes expresamente excluidos. No acredita acceso ni vigencia actual.",
-          "page": 1,
+          "page": 3,
           "geometry": null,
           "geometryStatus": "not_validated"
         },
         {
           "road": "Tacuba–Av. Hidalgo",
           "segment": "República de Brasil–Eje 1 Poniente. Vía principal: carga y descarga 20:00–07:00 para las categorías de la guía, salvo prohibición de maniobras en los ejes expresamente excluidos. No acredita acceso ni vigencia actual.",
-          "page": 1,
+          "page": 3,
           "geometry": null,
           "geometryStatus": "not_validated"
         },
         {
           "road": "5 de Mayo",
           "segment": "Eje Central Lázaro Cárdenas–Monte de Piedad. Vía principal: carga y descarga 20:00–07:00 para las categorías de la guía, salvo prohibición de maniobras en los ejes expresamente excluidos. No acredita acceso ni vigencia actual.",
-          "page": 1,
+          "page": 3,
           "geometry": null,
           "geometryStatus": "not_validated"
         },
         {
           "road": "República de Uruguay",
           "segment": "Eje 1 Oriente–Eje Central Lázaro Cárdenas. Vía principal: carga y descarga 20:00–07:00 para las categorías de la guía, salvo prohibición de maniobras en los ejes expresamente excluidos. No acredita acceso ni vigencia actual.",
-          "page": 1,
+          "page": 3,
           "geometry": null,
           "geometryStatus": "not_validated"
         },
         {
           "road": "Ayuntamiento–República del Salvador",
           "segment": "Eje Central Lázaro Cárdenas–Eje 1 Oriente. Vía principal: carga y descarga 20:00–07:00 para las categorías de la guía, salvo prohibición de maniobras en los ejes expresamente excluidos. No acredita acceso ni vigencia actual.",
-          "page": 1,
+          "page": 3,
           "geometry": null,
           "geometryStatus": "not_validated"
         }
@@ -573,6 +643,10 @@
         {
           "title": "Gaceta 15-12-2021 · aviso histórico citado por la guía; cotejo íntegro y vigencia pendientes",
           "url": "https://data.consejeria.cdmx.gob.mx/portal_old/uploads/gacetas/0830deebda0a6b9e7fb44d6d2cef2ab0.pdf"
+        },
+        {
+          "title": "Gaceta 747 · copia oficial C5, aviso histórico pp. 6–7 revisado; vigencia posterior pendiente",
+          "url": "https://transparenciac5.cdmx.gob.mx/TC5/uploads/GOFCDMX_15-_12-21.pdf"
         }
       ]
     },
