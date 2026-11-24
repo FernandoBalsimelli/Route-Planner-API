@@ -1,4 +1,9 @@
-# CDMX · fuente histórica de Gaceta pendiente de cotejo
+# CDMX · fuente histórica de Gaceta
+
+Actualización 24-11-2026: se recuperó una copia oficial C5 y se cotejaron las
+páginas 6–7, con correcciones de páginas de la guía. Vigencia y actos posteriores
+siguen pendientes. Ver [revisión nueva](CDMX-GACETA-2021-MIRROR-20261124.md).
+Lo que sigue conserva el registro histórico de localización del 18-11-2026.
 
 Localizada el 18-11-2026 en el dominio oficial de Consejería Jurídica:
 https://data.consejeria.cdmx.gob.mx/portal_old/uploads/gacetas/0830deebda0a6b9e7fb44d6d2cef2ab0.pdf
