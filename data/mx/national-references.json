@@ -150,16 +150,33 @@
       "url": "https://municipiodelicias.com/images/transparencia/gacetaMunicipal/Gaceta%20Municipal%202016/Gaceta-Municipal-de-Delicias-Diciembre.pdf",
       "reviewedSha256": null,
       "observedSha256": "31da346d9f92756cbf2aaea759f30915530d5cfcc15cbe1d927e9bf4c58efdea",
-      "reviewedAt": "2026-11-25T08:16:15.307508+00:00",
+      "reviewedAt": "2026-11-25T08:38:33.219012+00:00",
       "legalReview": "validity_requires_review",
       "documentTypeLabel": "Gaceta municipal 15-12-2016 · copia histórica",
       "jurisdictionLabel": "Municipio de Delicias, Chihuahua (08021); referencia parcial sin aplicación al trazado",
       "publicationDateStatus": "municipal_copy_only",
-      "scope": "Copia municipal: artículos 108–109 (p.29) y transitorios (p.44). La fecha de la Gaceta no prueba publicación estatal, entrada en vigor ni vigencia consolidada. Faltan acuerdos actuales, zonas y geometrías.",
+      "scope": "Copia municipal: artículos 108–109 (p. 29) y transitorios (p. 44). Se localizó el aviso estatal del Acuerdo 126 en PO 67 del 20-08-2011 (p. 1); falta cotejar el folleto íntegro y su identidad con la copia de 2016, reformas y acuerdos actuales. Sin aplicación al trazado.",
       "relatedUrls": [
-        "https://municipiodelicias.com/historico-informacion-publica/reglamentos-municipales.html"
+        "https://municipiodelicias.com/historico-informacion-publica/reglamentos-municipales.html",
+        "https://chihuahua.gob.mx/atach2/po067_2011_baja.pdf"
       ],
-      "copyPublishedAt": "2016-12-15"
+      "copyPublishedAt": "2016-12-15",
+      "relatedDocuments": [
+        {
+          "url": "https://chihuahua.gob.mx/atach2/po067_2011_baja.pdf",
+          "documentType": "official_gazette_notice",
+          "gazetteNumber": 67,
+          "publishedAt": "2011-08-20",
+          "pages": [
+            1
+          ],
+          "observedSha256": "a67c91838dfbc2e3374d89b72e9befe7d5882d802972c19c7c824c6b4f7c65e1",
+          "documentBytes": 18329182,
+          "documentPages": 60,
+          "reviewStatus": "notice_only_annex_not_verified",
+          "scope": "Sumario: Acuerdo 126 y folleto anexo de Vialidad y Tránsito de Delicias. No acredita cotejo del texto íntegro ni identidad con la copia municipal de 2016."
+        }
+      ]
     }
   ],
   "packages": [
@@ -1179,15 +1196,36 @@
             "scope": "Copia histórica seleccionada; publicación estatal, vigencia, operación y geometrías no verificadas."
           },
           "id": "delicias-publicacion-pendiente",
-          "title": "Vigencia pendiente de publicación estatal",
-          "description": "El transitorio primero condiciona la entrada en vigor a la publicación en el Periódico Oficial estatal. La Gaceta municipal no demuestra esa fecha ni reformas posteriores.",
+          "title": "Entrada en vigor y texto íntegro pendientes",
+          "description": "El transitorio copiado condiciona la entrada a la publicación estatal. El aviso del PO 67 localizado no demuestra por sí solo la identidad del folleto con la copia de 2016 ni su vigencia posterior.",
           "kind": "publication_reference",
           "citation": "Transitorios primero–tercero · página 44",
           "page": 44
+        },
+        {
+          "id": "delicias-aviso-po67-2011",
+          "title": "Aviso estatal localizado · PO 67 del 20-08-2011",
+          "description": "El sumario anuncia el Acuerdo 126 relativo al reglamento de Vialidad y Tránsito de Delicias y remite a un folleto anexo. No se ha cotejado ese texto íntegro ni su identidad con la copia de 2016; no se deduce entrada en vigor o vigencia actual.",
+          "kind": "publication_reference",
+          "citation": "Periódico Oficial n.º 67 · 20-08-2011 · sumario, página 1",
+          "page": 1,
+          "sourceUrl": "https://chihuahua.gob.mx/atach2/po067_2011_baja.pdf",
+          "geometry": null,
+          "routingEnforced": false,
+          "legalValidityVerified": false,
+          "reviewStatus": "notice_only_annex_not_verified",
+          "evidence": {
+            "sha256": "a67c91838dfbc2e3374d89b72e9befe7d5882d802972c19c7c824c6b4f7c65e1",
+            "consultedAt": "2026-11-25",
+            "jurisdiction": "Publicación estatal relativa al municipio de Delicias, Chihuahua (08021)",
+            "scope": "Aviso en sumario sobre Acuerdo 126 y folleto anexo; no cotejo del texto íntegro ni vigencia posterior.",
+            "documentBytes": 18329182,
+            "documentPages": 60
+          }
         }
       ],
       "notices": [
-        "Referencia histórica, no validación legal actual. Falta comprobar publicación estatal, reformas y acuerdos vigentes.",
+        "Referencia histórica, no validación legal actual. Aviso estatal localizado; faltan texto íntegro, cotejo con la copia de 2016, reformas y acuerdos vigentes.",
         "No hay zonas, carriles, sentidos, permisos o geometrías verificados; no se aplica al cálculo.",
         "El monitoreo de documentos detecta cambios técnicos; no mantiene automáticamente la normativa consolidada."
       ]

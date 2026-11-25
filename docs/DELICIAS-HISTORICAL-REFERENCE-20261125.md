@@ -33,3 +33,25 @@ No se aplicó un extracto de un agregador de terceros como fuente normativa.
 Próximo paso: localizar publicación estatal, reformas y acuerdos actuales de rutas,
 centro, horarios y permisos; georreferenciar sólo tramos identificados y cotejados.
 El catálogo pasa a 16 municipios con referencias parciales y cero completos.
+
+## Aviso estatal localizado: PO 67 de 20-08-2011
+
+Fuente primaria:
+https://chihuahua.gob.mx/atach2/po067_2011_baja.pdf
+
+Descarga real de 18,329,182 bytes, 60 páginas; SHA-256:
+a67c91838dfbc2e3374d89b72e9befe7d5882d802972c19c7c824c6b4f7c65e1
+La portada (página PDF 1) se cotejó en texto e imagen. El sumario anuncia el
+Acuerdo 126 del reglamento de Vialidad y Tránsito de Delicias y remite a un
+folleto anexo. Esto documenta el aviso histórico, no el cotejo del texto íntegro.
+
+No se afirma que el texto del folleto sea idéntico a la copia municipal de 2016,
+ni se deduce entrada en vigor al día siguiente o vigencia actual. Las fichas de
+artículos de la copia conservan su procedencia original; el aviso estatal es una
+cuarta ficha separada, sin ventanas, pesos, permisos ni geometrías ejecutables.
+La fecha de publicación del aviso sólo figura en metadata del documento estatal;
+publishedAt/effectiveFrom de la norma siguen sin inferirse.
+
+El PDF estatal se incorpora al seguimiento existente. Continúan pendientes el
+folleto íntegro, su cadena de publicación, reformas y acuerdos operativos actuales.
+No cambia el total de 16 referencias municipales parciales ni cero completas.
