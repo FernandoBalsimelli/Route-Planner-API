@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-11-24T22:40:06.459Z",
+  "checkedAt": "2026-11-25T03:00:50.241Z",
   "sources": [
     {
       "id": "cdmx-centro",
-      "checkedAt": "2026-11-24T22:40:06.459Z",
+      "checkedAt": "2026-11-25T03:00:50.241Z",
       "lastSuccessAt": null,
-      "primaryLastSuccessAt": "2026-11-24T22:02:18.392Z",
+      "primaryLastSuccessAt": "2026-11-25T03:00:50.241Z",
       "status": "unavailable",
-      "availability": "unavailable",
+      "availability": "partial",
       "changeDetected": true,
       "changeKinds": [
         "related"
@@ -17,7 +17,7 @@
       "sha256": "ce23f9fd52cacb2c8693aca7d6ce08857da323222023f9b2792ca65f33aa283d",
       "initialSha256": "ce23f9fd52cacb2c8693aca7d6ce08857da323222023f9b2792ca65f33aa283d",
       "relatedHashes": {
-        "https://regulaciones.cdmx.gob.mx/mejora/public/regulacionPdf/1679": "631e449d8b745a28e14e08b3582a6ae7ca076543ac23503bf3b6b8275789f782",
+        "https://regulaciones.cdmx.gob.mx/mejora/public/regulacionPdf/1679": "c77ef6b82812ff914fa9aa23803766a8fcd10d4dd6cb0632166406d118cbe8fb",
         "https://transparenciac5.cdmx.gob.mx/TC5/uploads/GOFCDMX_15-_12-21.pdf": "ec3c36bad93ae7ab05f8a272e121981085ea71e3636da105cbb8fa910ace976a"
       },
       "initialRelatedHashes": {
@@ -28,24 +28,24 @@
         {
           "url": "https://www.autoridadcentrohistorico.cdmx.gob.mx/storage/app/media/Que_Si_y_Que_NoCH_2024.pdf",
           "kind": "primary",
-          "checkedAt": "2026-11-24T22:40:06.459Z",
-          "lastSuccessAt": "2026-11-24T22:02:18.392Z",
-          "status": "unavailable",
+          "checkedAt": "2026-11-25T03:00:50.241Z",
+          "lastSuccessAt": "2026-11-25T03:00:50.241Z",
+          "status": "unreviewed",
           "changeDetected": false,
           "sha256": "ce23f9fd52cacb2c8693aca7d6ce08857da323222023f9b2792ca65f33aa283d",
           "initialSha256": "ce23f9fd52cacb2c8693aca7d6ce08857da323222023f9b2792ca65f33aa283d",
-          "error": "NETWORK_OR_TIMEOUT"
+          "error": null
         },
         {
           "url": "https://regulaciones.cdmx.gob.mx/mejora/public/regulacionPdf/1679",
           "kind": "related",
-          "checkedAt": "2026-11-24T22:40:06.459Z",
-          "lastSuccessAt": "2026-11-24T22:02:18.392Z",
-          "status": "unavailable",
+          "checkedAt": "2026-11-25T03:00:50.241Z",
+          "lastSuccessAt": "2026-11-25T03:00:50.241Z",
+          "status": "changed",
           "changeDetected": true,
-          "sha256": "631e449d8b745a28e14e08b3582a6ae7ca076543ac23503bf3b6b8275789f782",
+          "sha256": "c77ef6b82812ff914fa9aa23803766a8fcd10d4dd6cb0632166406d118cbe8fb",
           "initialSha256": "1042b243f0680cccac5d1e522a833e965efd162b6892e0c392ae8510dc64b945",
-          "error": "NETWORK_OR_TIMEOUT"
+          "error": null
         },
         {
           "url": "https://data.consejeria.cdmx.gob.mx/portal_old/uploads/gacetas/0830deebda0a6b9e7fb44d6d2cef2ab0.pdf",
@@ -53,29 +53,29 @@
           "sha256": null,
           "changeDetected": false,
           "lastSuccessAt": null,
-          "checkedAt": "2026-11-24T22:40:06.459Z",
+          "checkedAt": "2026-11-25T03:00:50.241Z",
           "status": "unavailable",
-          "error": "NETWORK_OR_TIMEOUT"
+          "error": "HTTP_503"
         },
         {
           "url": "https://transparenciac5.cdmx.gob.mx/TC5/uploads/GOFCDMX_15-_12-21.pdf",
           "kind": "related",
-          "checkedAt": "2026-11-24T22:40:06.459Z",
-          "lastSuccessAt": "2026-11-24T22:02:18.392Z",
-          "status": "unavailable",
+          "checkedAt": "2026-11-25T03:00:50.241Z",
+          "lastSuccessAt": "2026-11-25T03:00:50.241Z",
+          "status": "unreviewed",
           "changeDetected": false,
           "sha256": "ec3c36bad93ae7ab05f8a272e121981085ea71e3636da105cbb8fa910ace976a",
           "initialSha256": "ec3c36bad93ae7ab05f8a272e121981085ea71e3636da105cbb8fa910ace976a",
-          "error": "NETWORK_OR_TIMEOUT"
+          "error": null
         }
       ],
-      "error": "NETWORK_OR_TIMEOUT"
+      "error": "HTTP_503"
     },
     {
       "id": "chihuahua-capital-carga",
-      "checkedAt": "2026-11-24T22:40:06.459Z",
-      "lastSuccessAt": "2026-11-24T22:40:06.459Z",
-      "primaryLastSuccessAt": "2026-11-24T22:40:06.459Z",
+      "checkedAt": "2026-11-25T03:00:50.241Z",
+      "lastSuccessAt": "2026-11-25T03:00:50.241Z",
+      "primaryLastSuccessAt": "2026-11-25T03:00:50.241Z",
       "status": "unreviewed",
       "availability": "available",
       "changeDetected": false,
@@ -95,8 +95,8 @@
         {
           "url": "https://www.congresochihuahua2.gob.mx/biblioteca/leyes/archivosLeyes/117.pdf",
           "kind": "primary",
-          "checkedAt": "2026-11-24T22:40:06.459Z",
-          "lastSuccessAt": "2026-11-24T22:40:06.459Z",
+          "checkedAt": "2026-11-25T03:00:50.241Z",
+          "lastSuccessAt": "2026-11-25T03:00:50.241Z",
           "status": "unchanged",
           "changeDetected": false,
           "sha256": "d7ff847e53a398668d4b906d892af3313f214fc97bc0868abf4cdf9690d5d3bf",
@@ -106,8 +106,8 @@
         {
           "url": "https://chihuahua.gob.mx/sites/default/atach2/periodico-oficial/anexos/2025-07/ANEXO%2054-2025%20PSMAMS%20CREDITOS%20TOMO%20IV.pdf",
           "kind": "related",
-          "checkedAt": "2026-11-24T22:40:06.459Z",
-          "lastSuccessAt": "2026-11-24T22:40:06.459Z",
+          "checkedAt": "2026-11-25T03:00:50.241Z",
+          "lastSuccessAt": "2026-11-25T03:00:50.241Z",
           "status": "unreviewed",
           "changeDetected": false,
           "sha256": "4c8040f0fc719c828ae2e3e538a5148412810695581576baba14d800b5541f4b",
@@ -117,8 +117,8 @@
         {
           "url": "https://chihuahua.gob.mx/sites/default/atach2/periodico-oficial/anexos/2026-11/ANEXO%2093-2026%20DECRETO%20N%C2%BA%20LXVIII-RFLEY-0596-2026%20I%20P.O.pdf",
           "kind": "related",
-          "checkedAt": "2026-11-24T22:40:06.459Z",
-          "lastSuccessAt": "2026-11-24T22:40:06.459Z",
+          "checkedAt": "2026-11-25T03:00:50.241Z",
+          "lastSuccessAt": "2026-11-25T03:00:50.241Z",
           "status": "unreviewed",
           "changeDetected": false,
           "sha256": "b3deb0d1531ccb5d0e922103d120e41dc77a5cf19f6b2fdcaa5796cb0631cbda",
@@ -130,9 +130,9 @@
     },
     {
       "id": "guachochi-transito",
-      "checkedAt": "2026-11-24T22:40:06.459Z",
-      "lastSuccessAt": "2026-11-24T22:40:06.459Z",
-      "primaryLastSuccessAt": "2026-11-24T22:40:06.459Z",
+      "checkedAt": "2026-11-25T03:00:50.241Z",
+      "lastSuccessAt": "2026-11-25T03:00:50.241Z",
+      "primaryLastSuccessAt": "2026-11-25T03:00:50.241Z",
       "status": "unchanged",
       "availability": "available",
       "changeDetected": false,
@@ -146,8 +146,8 @@
         {
           "url": "https://chihuahua.gob.mx/sites/default/atach2/periodico-oficial/anexos/2023-10/ANEXO%2081-2023%20%20ACUERDO%20N%C2%B0%20184%20%20REGLAMENTO%20DE%20VIALIDAD%20Y%20TRANSITO%20GUACHOCHI-2023.pdf",
           "kind": "primary",
-          "checkedAt": "2026-11-24T22:40:06.459Z",
-          "lastSuccessAt": "2026-11-24T22:40:06.459Z",
+          "checkedAt": "2026-11-25T03:00:50.241Z",
+          "lastSuccessAt": "2026-11-25T03:00:50.241Z",
           "status": "unchanged",
           "changeDetected": false,
           "sha256": "b6a5ea63d8e27ce905a23947dd26d036bc82ea263b6e3735539f9e34251e23fa",
@@ -159,9 +159,9 @@
     },
     {
       "id": "jalisco-carga",
-      "checkedAt": "2026-11-24T22:40:06.459Z",
-      "lastSuccessAt": "2026-11-24T22:40:06.459Z",
-      "primaryLastSuccessAt": "2026-11-24T22:40:06.459Z",
+      "checkedAt": "2026-11-25T03:00:50.241Z",
+      "lastSuccessAt": "2026-11-25T03:00:50.241Z",
+      "primaryLastSuccessAt": "2026-11-25T03:00:50.241Z",
       "status": "unreviewed",
       "availability": "available",
       "changeDetected": false,
@@ -179,8 +179,8 @@
         {
           "url": "https://transportedecarga.jalisco.gob.mx/",
           "kind": "primary",
-          "checkedAt": "2026-11-24T22:40:06.459Z",
-          "lastSuccessAt": "2026-11-24T22:40:06.459Z",
+          "checkedAt": "2026-11-25T03:00:50.241Z",
+          "lastSuccessAt": "2026-11-25T03:00:50.241Z",
           "status": "unreviewed",
           "changeDetected": false,
           "sha256": "933aa2ae6cc3223992b9d9fc8ab050afd3922f556f5d80c50cd41d217c4c6a6c",
@@ -190,8 +190,8 @@
         {
           "url": "https://transportedecarga.jalisco.gob.mx/main.e031437b43e0350ea748.js",
           "kind": "script",
-          "checkedAt": "2026-11-24T22:40:06.459Z",
-          "lastSuccessAt": "2026-11-24T22:40:06.459Z",
+          "checkedAt": "2026-11-25T03:00:50.241Z",
+          "lastSuccessAt": "2026-11-25T03:00:50.241Z",
           "status": "unreviewed",
           "changeDetected": false,
           "sha256": "23a65fe8f742d86df193b133f3d85c63336213f2a2938c31d9c07018bbecaa8a",
@@ -203,11 +203,11 @@
     },
     {
       "id": "juarez-carga",
-      "checkedAt": "2026-11-24T22:40:06.459Z",
-      "lastSuccessAt": "2026-11-24T22:02:18.392Z",
-      "primaryLastSuccessAt": "2026-11-24T22:02:18.392Z",
-      "status": "unavailable",
-      "availability": "unavailable",
+      "checkedAt": "2026-11-25T03:00:50.241Z",
+      "lastSuccessAt": "2026-11-25T03:00:50.241Z",
+      "primaryLastSuccessAt": "2026-11-25T03:00:50.241Z",
+      "status": "changed",
+      "availability": "available",
       "changeDetected": true,
       "changeKinds": [
         "related"
@@ -216,10 +216,10 @@
       "sha256": "4f80a7a495c017fd8642525688f73919c110608dd5e64cff4cb5950d83eb92cd",
       "initialSha256": "4f80a7a495c017fd8642525688f73919c110608dd5e64cff4cb5950d83eb92cd",
       "relatedHashes": {
-        "https://www.juarez.gob.mx/gaceta-municipal/": "e48488a45b80b82b269efed3c0d664d20411d3595dbd836f5ba020641eb05674",
-        "https://www.juarez.gob.mx/noticia/34586/aclara-seguridad-vial-sobre-circulaciA3n-de-vehA-culos-de-carga-pesada-por-obras-de-valle-del-sol": "09a32cf25be7475b02129ffe4be917485398c8dac1893f6d299773f1b0618acb",
-        "https://www.juarez.gob.mx/noticia/34518/arranca-construccion-de-puente-superior-bulevar-juan-pablo-ii-y-valle-del-sol-": "316c7f8ce012c98213c299d36435e73dde366fa2ae8e894f0064b8f630995c1f",
-        "https://juarez.gob.mx/noticia/34811/Acuerdan-medidas-de-seguridad-vial-por-las-obras-del-puente-Juan-Pablo-II/": "356e407cb18525877dd452d1f1f2ad06895ad38e55a50a28f068974b3a4a0e7b"
+        "https://www.juarez.gob.mx/gaceta-municipal/": "4ef64cf66cc1ea34f63a3ed1ebb8f40c1f293262737b5241232a87990d514dd0",
+        "https://www.juarez.gob.mx/noticia/34586/aclara-seguridad-vial-sobre-circulaciA3n-de-vehA-culos-de-carga-pesada-por-obras-de-valle-del-sol": "164ccfe6ea6e478465aa8984c1e93b734b0aaa0bbafa200b4faeceeb6e53d2a8",
+        "https://www.juarez.gob.mx/noticia/34518/arranca-construccion-de-puente-superior-bulevar-juan-pablo-ii-y-valle-del-sol-": "56ef41e3476812f9f491393a3b237d41051197537adfe5614f558bcd65554e6d",
+        "https://juarez.gob.mx/noticia/34811/Acuerdan-medidas-de-seguridad-vial-por-las-obras-del-puente-Juan-Pablo-II/": "003b8dda407fe3f57ea6bf30edd5f57faa5f6a8dfcc4db0e56f9767a960b78bd"
       },
       "initialRelatedHashes": {
         "https://www.juarez.gob.mx/gaceta-municipal/": "07d594a78a731a5d9297154f12efef5ab40d9541164541d343e8628269f00f6b",
@@ -231,66 +231,66 @@
         {
           "url": "https://www.juarez.gob.mx/2015cf/transparencia/docs.php?file=155127",
           "kind": "primary",
-          "checkedAt": "2026-11-24T22:40:06.459Z",
-          "lastSuccessAt": "2026-11-24T22:02:18.392Z",
-          "status": "unavailable",
+          "checkedAt": "2026-11-25T03:00:50.241Z",
+          "lastSuccessAt": "2026-11-25T03:00:50.241Z",
+          "status": "unreviewed",
           "changeDetected": false,
           "sha256": "4f80a7a495c017fd8642525688f73919c110608dd5e64cff4cb5950d83eb92cd",
           "initialSha256": "4f80a7a495c017fd8642525688f73919c110608dd5e64cff4cb5950d83eb92cd",
-          "error": "HTTP_403"
+          "error": null
         },
         {
           "url": "https://www.juarez.gob.mx/gaceta-municipal/",
           "kind": "related",
-          "checkedAt": "2026-11-24T22:40:06.459Z",
-          "lastSuccessAt": "2026-11-24T22:02:18.392Z",
-          "status": "unavailable",
+          "checkedAt": "2026-11-25T03:00:50.241Z",
+          "lastSuccessAt": "2026-11-25T03:00:50.241Z",
+          "status": "changed",
           "changeDetected": true,
-          "sha256": "e48488a45b80b82b269efed3c0d664d20411d3595dbd836f5ba020641eb05674",
+          "sha256": "4ef64cf66cc1ea34f63a3ed1ebb8f40c1f293262737b5241232a87990d514dd0",
           "initialSha256": "07d594a78a731a5d9297154f12efef5ab40d9541164541d343e8628269f00f6b",
-          "error": "HTTP_403"
+          "error": null
         },
         {
           "url": "https://www.juarez.gob.mx/noticia/34586/aclara-seguridad-vial-sobre-circulaciA3n-de-vehA-culos-de-carga-pesada-por-obras-de-valle-del-sol",
           "kind": "related",
-          "checkedAt": "2026-11-24T22:40:06.459Z",
-          "lastSuccessAt": "2026-11-24T22:02:18.392Z",
-          "status": "unavailable",
+          "checkedAt": "2026-11-25T03:00:50.241Z",
+          "lastSuccessAt": "2026-11-25T03:00:50.241Z",
+          "status": "changed",
           "changeDetected": true,
-          "sha256": "09a32cf25be7475b02129ffe4be917485398c8dac1893f6d299773f1b0618acb",
+          "sha256": "164ccfe6ea6e478465aa8984c1e93b734b0aaa0bbafa200b4faeceeb6e53d2a8",
           "initialSha256": "dab8791e8fe9da58c2287c2f7023812d98244b27e8240b0c9c95e4963df83c35",
-          "error": "HTTP_403"
+          "error": null
         },
         {
           "url": "https://www.juarez.gob.mx/noticia/34518/arranca-construccion-de-puente-superior-bulevar-juan-pablo-ii-y-valle-del-sol-",
           "kind": "related",
-          "checkedAt": "2026-11-24T22:40:06.459Z",
-          "lastSuccessAt": "2026-11-24T22:02:18.392Z",
-          "status": "unavailable",
+          "checkedAt": "2026-11-25T03:00:50.241Z",
+          "lastSuccessAt": "2026-11-25T03:00:50.241Z",
+          "status": "changed",
           "changeDetected": true,
-          "sha256": "316c7f8ce012c98213c299d36435e73dde366fa2ae8e894f0064b8f630995c1f",
+          "sha256": "56ef41e3476812f9f491393a3b237d41051197537adfe5614f558bcd65554e6d",
           "initialSha256": "29f8a38a2a70c418140961ce57bff2424329937a79e6a40bf1583aa2d64ade87",
-          "error": "HTTP_403"
+          "error": null
         },
         {
           "url": "https://juarez.gob.mx/noticia/34811/Acuerdan-medidas-de-seguridad-vial-por-las-obras-del-puente-Juan-Pablo-II/",
           "kind": "related",
-          "checkedAt": "2026-11-24T22:40:06.459Z",
-          "lastSuccessAt": "2026-11-24T22:02:18.392Z",
-          "status": "unavailable",
+          "checkedAt": "2026-11-25T03:00:50.241Z",
+          "lastSuccessAt": "2026-11-25T03:00:50.241Z",
+          "status": "changed",
           "changeDetected": true,
-          "sha256": "356e407cb18525877dd452d1f1f2ad06895ad38e55a50a28f068974b3a4a0e7b",
+          "sha256": "003b8dda407fe3f57ea6bf30edd5f57faa5f6a8dfcc4db0e56f9767a960b78bd",
           "initialSha256": "9726e1c44ee9bdb8d125883beae5df2d71abdcaa0e4c23486176bf2c9a6aa859",
-          "error": "HTTP_403"
+          "error": null
         }
       ],
-      "error": "HTTP_403"
+      "error": null
     },
     {
       "id": "monterrey-transito",
-      "checkedAt": "2026-11-24T22:40:06.459Z",
-      "lastSuccessAt": "2026-11-24T22:40:06.459Z",
-      "primaryLastSuccessAt": "2026-11-24T22:40:06.459Z",
+      "checkedAt": "2026-11-25T03:00:50.241Z",
+      "lastSuccessAt": "2026-11-25T03:00:50.241Z",
+      "primaryLastSuccessAt": "2026-11-25T03:00:50.241Z",
       "status": "unchanged",
       "availability": "available",
       "changeDetected": false,
@@ -304,8 +304,8 @@
         {
           "url": "https://www.monterrey.gob.mx/pdf/portaln/reglamentos/Reglamento%20de%20Transito%20y%20Vialidad%20del%20Municipio%20de%20Monterrey.pdf",
           "kind": "primary",
-          "checkedAt": "2026-11-24T22:40:06.459Z",
-          "lastSuccessAt": "2026-11-24T22:40:06.459Z",
+          "checkedAt": "2026-11-25T03:00:50.241Z",
+          "lastSuccessAt": "2026-11-25T03:00:50.241Z",
           "status": "unchanged",
           "changeDetected": false,
           "sha256": "965778f0f966c39dc865f8d69492a4cc8b95c73e6aea56e50e4c071b8dfd3aff",
@@ -317,28 +317,28 @@
     },
     {
       "id": "puebla-carga",
-      "checkedAt": "2026-11-24T22:40:06.459Z",
+      "checkedAt": "2026-11-25T03:00:50.241Z",
       "lastSuccessAt": "2026-11-24T22:40:06.459Z",
-      "primaryLastSuccessAt": "2026-11-24T22:40:06.459Z",
-      "status": "changed",
-      "availability": "available",
+      "primaryLastSuccessAt": "2026-11-25T03:00:50.241Z",
+      "status": "unavailable",
+      "availability": "partial",
       "changeDetected": true,
       "changeKinds": [
         "primary",
         "related"
       ],
       "relatedSetChanged": false,
-      "sha256": "a89483c939feb9460bd8d0e95d9a0a0eaa223f7822fba4f0bd4390447b81dfb4",
+      "sha256": "e6ea80100a3139129bf4e38e9fa2c1da8fba2576a6e13bc0df7d3cef71a07141",
       "initialSha256": "565e7e635f9270f2523a5d6b13546615394148e217bc309a975723f498bd78c7",
       "relatedHashes": {
-        "https://gaceta.pueblacapital.gob.mx/coremun": "e4d931d57ad7a7ad7bbdc05fdc7d5a71795d2b5ea469009b0d32bb1ff39d82c1",
+        "https://gaceta.pueblacapital.gob.mx/coremun": "9d8403e33c200f338c06126addc3c4ba30aa41b2e845cd574e4f44286e9201b6",
         "https://ojp.puebla.gob.mx/normatividad-municipal/item/2396-lineamientos-para-la-operacion-del-transporte-de-carga-y-distribucion-de-mercancias-en-el-municipio-de-puebla": "bf6eb2fca5f5f0568852d417e27513bb3415c51cfef75bcbc590c9e40b8aaf95",
         "https://gaceta.pueblacapital.gob.mx/media/k2/attachments/COREMUN.pdf": "b8015929109522726f95e0d9278564592757bcd2a690abe0a326e898ae1c891f",
         "https://gaceta.pueblacapital.gob.mx/publicaciones/actas/cabildo/item/download/1132_565ca888d94782ae1c7b763eb389da28": "0917dc30ac70594a6e954243800bc5219d7ea3f2bc8017f7ea532b8ec510555c",
-        "https://gaceta.pueblacapital.gob.mx/publicaciones/minutas/item/2067-res-2025-148-dictamen-por-virtud-del-cual-se-reforman-los-articulos-2-14-fraccion-i-19-parrafo-primero-y-el-anexo-unico-de-las-reglas-de-operacion-del-estacionamiento-rotativo-para-la-administracion-2024-2027-a-fin-de-incorporar-el": "7d0407daa871e8a41b61384a9241d316ca5dcc431643ffa7cf85ae630d5b5c41",
-        "https://gaceta.pueblacapital.gob.mx/index.php/buscar/item/2070-tomo-lxxxiii-numero-1": "ce0b27c932b09a770ec5629509cc4b0dd4d9b584cfbfdba5c0a7d1af6f8a84a1",
-        "https://gaceta.pueblacapital.gob.mx/publicaciones/minutas/item/2087-res-2025-162-punto-de-acuerdo-por-el-que-se-aprueba-modificar-el-transitorio-unico-de-la-res-2025-148-a-fin-de-ampliar-hasta-el-1-de-noviembre-de-2025-el-periodo-durante-el-cual-no-se-aplicaran-infracciones-ni-sanciones-en-el-poligono-5-san": "9060bb224fd2df808efea11a63ce5e9f30a69e8a4b6fb433656926d1e1e8ca53",
-        "https://gaceta.pueblacapital.gob.mx/index.php/buscar/item/2086-tomo-lxxxiv-numero-1": "4ad92c72d21370227cf6b680ab50a31257b4581ae64d4db29d867a7c773a820a",
+        "https://gaceta.pueblacapital.gob.mx/publicaciones/minutas/item/2067-res-2025-148-dictamen-por-virtud-del-cual-se-reforman-los-articulos-2-14-fraccion-i-19-parrafo-primero-y-el-anexo-unico-de-las-reglas-de-operacion-del-estacionamiento-rotativo-para-la-administracion-2024-2027-a-fin-de-incorporar-el": "ca443a49f907373e02b98fcd90416b9a8b19cfad9185e04d963565d246e54d64",
+        "https://gaceta.pueblacapital.gob.mx/index.php/buscar/item/2070-tomo-lxxxiii-numero-1": "6eb4ea960c2a75f5e01bbbe7d543a4993e0cba64f41b097b937035246cd74941",
+        "https://gaceta.pueblacapital.gob.mx/publicaciones/minutas/item/2087-res-2025-162-punto-de-acuerdo-por-el-que-se-aprueba-modificar-el-transitorio-unico-de-la-res-2025-148-a-fin-de-ampliar-hasta-el-1-de-noviembre-de-2025-el-periodo-durante-el-cual-no-se-aplicaran-infracciones-ni-sanciones-en-el-poligono-5-san": "a63b3561775b760b759418cc1e432d538f0dfdee533b6580977b573bd6f23747",
+        "https://gaceta.pueblacapital.gob.mx/index.php/buscar/item/2086-tomo-lxxxiv-numero-1": "6ce10efdce424140917fd1e986659454784e40752f67c868ed80d2881caa8644",
         "https://gaceta.pueblacapital.gob.mx/publicaciones/minutas/item/download/1010_de64725dc771e51346629bf7150420d4": "1244f0f66db366f8b0f4612c32b64a6a857bc5d9f41c5117843448e95088a8a8",
         "https://gaceta.pueblacapital.gob.mx/publicaciones/minutas/item/download/1011_6e30ca00b3bfbe8310ef2f0b1afc1954": "49da56a082baac634fd004f9a24e224dc0eab4d2a532d7ac2d6bc1949532006f"
       },
@@ -358,41 +358,41 @@
         {
           "url": "https://gaceta.pueblacapital.gob.mx/publicaciones/minutas/item/847-res-2021-49-dictamen-por-virtud-del-cual-se-reforman-y-derogan-diversas-disposiciones-de-los-lineamientos-para-la-operacion-del-transporte-de-carga-y-distribucion-de-mercancias-en-el-municipio-de-puebla-publicado-en-el-periodico-oficial-del",
           "kind": "primary",
-          "checkedAt": "2026-11-24T22:40:06.459Z",
-          "lastSuccessAt": "2026-11-24T22:40:06.459Z",
+          "checkedAt": "2026-11-25T03:00:50.241Z",
+          "lastSuccessAt": "2026-11-25T03:00:50.241Z",
           "status": "changed",
           "changeDetected": true,
-          "sha256": "a89483c939feb9460bd8d0e95d9a0a0eaa223f7822fba4f0bd4390447b81dfb4",
+          "sha256": "e6ea80100a3139129bf4e38e9fa2c1da8fba2576a6e13bc0df7d3cef71a07141",
           "initialSha256": "565e7e635f9270f2523a5d6b13546615394148e217bc309a975723f498bd78c7",
           "error": null
         },
         {
           "url": "https://gaceta.pueblacapital.gob.mx/coremun",
           "kind": "related",
-          "checkedAt": "2026-11-24T22:40:06.459Z",
-          "lastSuccessAt": "2026-11-24T22:40:06.459Z",
+          "checkedAt": "2026-11-25T03:00:50.241Z",
+          "lastSuccessAt": "2026-11-25T03:00:50.241Z",
           "status": "changed",
           "changeDetected": true,
-          "sha256": "e4d931d57ad7a7ad7bbdc05fdc7d5a71795d2b5ea469009b0d32bb1ff39d82c1",
+          "sha256": "9d8403e33c200f338c06126addc3c4ba30aa41b2e845cd574e4f44286e9201b6",
           "initialSha256": "5d8132328de52220fcae90a8a68a073d3b1d03c35e7a513e8d4e3840e70db6a6",
           "error": null
         },
         {
           "url": "https://ojp.puebla.gob.mx/normatividad-municipal/item/2396-lineamientos-para-la-operacion-del-transporte-de-carga-y-distribucion-de-mercancias-en-el-municipio-de-puebla",
           "kind": "related",
-          "checkedAt": "2026-11-24T22:40:06.459Z",
+          "checkedAt": "2026-11-25T03:00:50.241Z",
           "lastSuccessAt": "2026-11-24T22:40:06.459Z",
-          "status": "unreviewed",
+          "status": "unavailable",
           "changeDetected": false,
           "sha256": "bf6eb2fca5f5f0568852d417e27513bb3415c51cfef75bcbc590c9e40b8aaf95",
           "initialSha256": "bf6eb2fca5f5f0568852d417e27513bb3415c51cfef75bcbc590c9e40b8aaf95",
-          "error": null
+          "error": "HTTP_503"
         },
         {
           "url": "https://gaceta.pueblacapital.gob.mx/media/k2/attachments/COREMUN.pdf",
           "kind": "related",
-          "checkedAt": "2026-11-24T22:40:06.459Z",
-          "lastSuccessAt": "2026-11-24T22:40:06.459Z",
+          "checkedAt": "2026-11-25T03:00:50.241Z",
+          "lastSuccessAt": "2026-11-25T03:00:50.241Z",
           "status": "unreviewed",
           "changeDetected": false,
           "sha256": "b8015929109522726f95e0d9278564592757bcd2a690abe0a326e898ae1c891f",
@@ -402,8 +402,8 @@
         {
           "url": "https://gaceta.pueblacapital.gob.mx/publicaciones/actas/cabildo/item/download/1132_565ca888d94782ae1c7b763eb389da28",
           "kind": "related",
-          "checkedAt": "2026-11-24T22:40:06.459Z",
-          "lastSuccessAt": "2026-11-24T22:40:06.459Z",
+          "checkedAt": "2026-11-25T03:00:50.241Z",
+          "lastSuccessAt": "2026-11-25T03:00:50.241Z",
           "status": "unreviewed",
           "changeDetected": false,
           "sha256": "0917dc30ac70594a6e954243800bc5219d7ea3f2bc8017f7ea532b8ec510555c",
@@ -413,52 +413,52 @@
         {
           "url": "https://gaceta.pueblacapital.gob.mx/publicaciones/minutas/item/2067-res-2025-148-dictamen-por-virtud-del-cual-se-reforman-los-articulos-2-14-fraccion-i-19-parrafo-primero-y-el-anexo-unico-de-las-reglas-de-operacion-del-estacionamiento-rotativo-para-la-administracion-2024-2027-a-fin-de-incorporar-el",
           "kind": "related",
-          "checkedAt": "2026-11-24T22:40:06.459Z",
-          "lastSuccessAt": "2026-11-24T22:40:06.459Z",
+          "checkedAt": "2026-11-25T03:00:50.241Z",
+          "lastSuccessAt": "2026-11-25T03:00:50.241Z",
           "status": "changed",
           "changeDetected": true,
-          "sha256": "7d0407daa871e8a41b61384a9241d316ca5dcc431643ffa7cf85ae630d5b5c41",
+          "sha256": "ca443a49f907373e02b98fcd90416b9a8b19cfad9185e04d963565d246e54d64",
           "initialSha256": "7fd239ad387113b80e6a2c139c722c03ba6321f03831d8875688db4d42c36cd9",
           "error": null
         },
         {
           "url": "https://gaceta.pueblacapital.gob.mx/index.php/buscar/item/2070-tomo-lxxxiii-numero-1",
           "kind": "related",
-          "checkedAt": "2026-11-24T22:40:06.459Z",
-          "lastSuccessAt": "2026-11-24T22:40:06.459Z",
+          "checkedAt": "2026-11-25T03:00:50.241Z",
+          "lastSuccessAt": "2026-11-25T03:00:50.241Z",
           "status": "changed",
           "changeDetected": true,
-          "sha256": "ce0b27c932b09a770ec5629509cc4b0dd4d9b584cfbfdba5c0a7d1af6f8a84a1",
+          "sha256": "6eb4ea960c2a75f5e01bbbe7d543a4993e0cba64f41b097b937035246cd74941",
           "initialSha256": "8833b64598ba5f4d51960d0114b6c836d67041751efc3ccdccf49e49981e3297",
           "error": null
         },
         {
           "url": "https://gaceta.pueblacapital.gob.mx/publicaciones/minutas/item/2087-res-2025-162-punto-de-acuerdo-por-el-que-se-aprueba-modificar-el-transitorio-unico-de-la-res-2025-148-a-fin-de-ampliar-hasta-el-1-de-noviembre-de-2025-el-periodo-durante-el-cual-no-se-aplicaran-infracciones-ni-sanciones-en-el-poligono-5-san",
           "kind": "related",
-          "checkedAt": "2026-11-24T22:40:06.459Z",
-          "lastSuccessAt": "2026-11-24T22:40:06.459Z",
+          "checkedAt": "2026-11-25T03:00:50.241Z",
+          "lastSuccessAt": "2026-11-25T03:00:50.241Z",
           "status": "changed",
           "changeDetected": true,
-          "sha256": "9060bb224fd2df808efea11a63ce5e9f30a69e8a4b6fb433656926d1e1e8ca53",
+          "sha256": "a63b3561775b760b759418cc1e432d538f0dfdee533b6580977b573bd6f23747",
           "initialSha256": "36d7a203e48954e22e7a7db7614805de0b4de8d1d59da4fa2a696b1723961540",
           "error": null
         },
         {
           "url": "https://gaceta.pueblacapital.gob.mx/index.php/buscar/item/2086-tomo-lxxxiv-numero-1",
           "kind": "related",
-          "checkedAt": "2026-11-24T22:40:06.459Z",
-          "lastSuccessAt": "2026-11-24T22:40:06.459Z",
+          "checkedAt": "2026-11-25T03:00:50.241Z",
+          "lastSuccessAt": "2026-11-25T03:00:50.241Z",
           "status": "changed",
           "changeDetected": true,
-          "sha256": "4ad92c72d21370227cf6b680ab50a31257b4581ae64d4db29d867a7c773a820a",
+          "sha256": "6ce10efdce424140917fd1e986659454784e40752f67c868ed80d2881caa8644",
           "initialSha256": "d29173ae7671a5fb83db1ed6b243df3b1aca42abb5c25e5a5931fb60c24fa744",
           "error": null
         },
         {
           "url": "https://gaceta.pueblacapital.gob.mx/publicaciones/minutas/item/download/1010_de64725dc771e51346629bf7150420d4",
           "kind": "related",
-          "checkedAt": "2026-11-24T22:40:06.459Z",
-          "lastSuccessAt": "2026-11-24T22:40:06.459Z",
+          "checkedAt": "2026-11-25T03:00:50.241Z",
+          "lastSuccessAt": "2026-11-25T03:00:50.241Z",
           "status": "unreviewed",
           "changeDetected": false,
           "sha256": "1244f0f66db366f8b0f4612c32b64a6a857bc5d9f41c5117843448e95088a8a8",
@@ -468,8 +468,8 @@
         {
           "url": "https://gaceta.pueblacapital.gob.mx/publicaciones/minutas/item/download/1011_6e30ca00b3bfbe8310ef2f0b1afc1954",
           "kind": "related",
-          "checkedAt": "2026-11-24T22:40:06.459Z",
-          "lastSuccessAt": "2026-11-24T22:40:06.459Z",
+          "checkedAt": "2026-11-25T03:00:50.241Z",
+          "lastSuccessAt": "2026-11-25T03:00:50.241Z",
           "status": "unreviewed",
           "changeDetected": false,
           "sha256": "49da56a082baac634fd004f9a24e224dc0eab4d2a532d7ac2d6bc1949532006f",
@@ -477,7 +477,7 @@
           "error": null
         }
       ],
-      "error": null
+      "error": "HTTP_503"
     }
   ]
 }
