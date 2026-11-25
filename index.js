@@ -6,7 +6,7 @@ import { z } from 'zod';
 import { createClient } from '@supabase/supabase-js';
 import { decode, encode, isFull, isShort, isValid, recoverNearest } from '@erikmichelson/open-location-code-ts';
 import { providerError, routingFailure } from './lib/routing-errors.js';
-import { distanceMeters, searchFocus, namesLocality, prioritizeLocations, searchBounds, retailSearchIntent, providerSearchText } from './lib/nearby.js';
+import { distanceMeters, searchFocus, namesLocality, prioritizeLocations, searchBounds, retailSearchIntent, providerSearchText, unverifiedRetailLocality } from './lib/nearby.js';
 import { requestedHouseNumber, rankAddressMatches } from './lib/address-match.js';
 import { getSourceStatus } from './lib/source-monitor.js';
 import { inspectDirectionsRoute } from './lib/directions-integrity.js';
@@ -252,7 +252,8 @@ app.get('/v1/locations/suggest', { config: { rateLimit: { max: 30, timeWindow: '
     if (plusCode) return { ok: true, suggestions: [{ ...plusCode, source: 'plus_code' }] };
     const suggestions = (await cachedSuggestions(query, apiKey, focus)).map(point => ({ ...point, source: point.source || 'address' }));
     const nearby = Boolean(focus && !suggestions.some(point => namesLocality(query, point)));
-    return { ok: true, suggestions, nearby, ...(nearby && (!suggestions.length || suggestions[0].distanceMeters > 50000) ? { warning: 'NO_NEARBY_MATCHES' } : {}) };
+    const warning = unverifiedRetailLocality(query,suggestions) ? 'LOCALITY_NOT_VERIFIED' : nearby && (!suggestions.length || suggestions[0].distanceMeters > 50000) ? 'NO_NEARBY_MATCHES' : null;
+    return { ok: true, suggestions, nearby, ...(warning ? { warning } : {}) };
   } catch (error) {
     if (error?.message === 'INVALID_SEARCH_FOCUS') return reply.code(400).send({ ok: false, code: 'INVALID_SEARCH_FOCUS', message: 'La ubicación de referencia no es válida.' });
     request.log.warn({ err: error?.message, providerStatus: error?.status }, 'Location suggestions failed');

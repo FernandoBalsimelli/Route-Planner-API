@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { after, test } from 'node:test';
-import { distanceMeters, nearbyResults, searchFocus, prioritizeLocations, searchBounds } from '../lib/nearby.js';
+import { distanceMeters, nearbyResults, searchFocus, prioritizeLocations, searchBounds, explicitRetailLocality, unverifiedRetailLocality } from '../lib/nearby.js';
 process.env.ORS_API_KEY = 'test-key';
 const { app } = await import('../index.js');
 const realFetch = globalThis.fetch;
@@ -130,4 +130,28 @@ test('plural brand searches use the canonical singular upstream without changing
   return url.hostname==='photon.komoot.io'?Response.json({features:[photonFeature('Bodega Aurrera Express',25.6801,-100.31)]}):Response.json({features:[]});
  };
  const response=await app.inject('/v1/locations/suggest?q=Bodegas%20Aurrer%C3%A1%20Express&lat=25.6801&lng=-100.31');assert.equal(response.statusCode,200);assert.match(response.json().suggestions[0].label,/Bodega Aurrera Express/);
+});
+
+test('separated retail localities require provider locality metadata, not a state or store name in the label',()=>{
+ for(const [query,expected] of [['Bodegas Aurrerá Express, Chihuahua','Chihuahua'],['Bodega Aurrera en Delicias',null],['Bodega Aurrera Express; Ciudad Juárez','Ciudad Juárez'],['Bodega Aurrera, estado de Chihuahua',null],['Bodega Aurrera, México',null],['Bodega Aurrera, Calle Pino',null],['Bodega Aurrera, Pino 123',null],['Calle Aurrera, Chihuahua',null]])assert.equal(explicitRetailLocality(query),expected);
+ const points=[{name:'Bodega Aurrera Express Chihuahua',label:'Bodega Aurrera Express Chihuahua, Jiménez, Chihuahua',locality:'Jiménez',lat:27,lng:-104},{name:'Bodega Aurrera Express',label:'Bodega Aurrera Express, Chihuahua',locality:'Chihuahua',lat:28.6,lng:-106}];
+ assert.equal(unverifiedRetailLocality('Bodega Aurrera Express, Chihuahua',[points[0]]),true);
+ assert.equal(unverifiedRetailLocality('Bodega Aurrera Express, Chihuahua',[{...points[1],locality:undefined}]),true);
+ assert.equal(unverifiedRetailLocality('Bodega Aurrera Express, Chihuahua',[]),false);
+ assert.deepEqual(prioritizeLocations('Bodega Aurrera Express Chihuahua, Jiménez',points,null).map(p=>p.locality),['Jiménez']);
+ assert.equal(unverifiedRetailLocality('Bodega Aurrera Express, Ciudad Juárez',[{locality:'Juárez'}]),false);
+ assert.equal(unverifiedRetailLocality('Bodega Aurrera Express, CDMX',[{locality:'Ciudad de México'}]),false);
+ assert.equal(unverifiedRetailLocality('Bodega Aurrera Express, Chihuahua',[{locality:'Nuevo Chihuahua'}]),true);
+});
+test('wrong-city retail results are explicitly unverified and cache repeats without an extra locality lookup',async()=>{
+ let calls=0;
+ globalThis.fetch=async url=>{calls++;assert.equal(url.searchParams.has('focus.point.lat'),false);return Response.json({features:[{...feature('Bodega Aurrera Express, Ciudad de México',19.4,-99.1),properties:{label:'Bodega Aurrera Express, Ciudad de México',name:'Bodega Aurrera Express',layer:'venue',locality:'Ciudad de México'}}]});};
+ const url='/v1/locations/suggest?q=Bodega%20Aurrera%20Express%2C%20Chihuahua&lat=28.6&lng=-106.1';
+ const first=await app.inject(url),second=await app.inject(url);assert.equal(first.statusCode,200);assert.equal(first.json().warning,'LOCALITY_NOT_VERIFIED');assert.equal(first.json().nearby,false);assert.equal(first.json().suggestions[0].locality,'Ciudad de México');assert.deepEqual(second.json(),first.json());assert.equal(calls,1);
+});
+test('a matching separated city filters other branches but missing metadata is never promoted by label text',async()=>{
+ globalThis.fetch=async()=>Response.json({features:[{...feature('Bodega Aurrera Express, Juárez',31.7,-106.4),properties:{name:'Bodega Aurrera Express',label:'Bodega Aurrera Express, Juárez',layer:'venue',locality:'Juárez'}},{...feature('Bodega Aurrera Express, Ciudad Juárez',19.4,-99.1),properties:{name:'Bodega Aurrera Express',label:'Bodega Aurrera Express, Ciudad Juárez',layer:'venue',locality:'Ciudad de México'}}]});
+ const response=await app.inject('/v1/locations/suggest?q=Bodega%20Aurrera%20Express%2C%20Ciudad%20Ju%C3%A1rez');assert.equal(response.statusCode,200);assert.equal(response.json().warning,undefined);assert.equal(response.json().suggestions.length,1);assert.equal(response.json().suggestions[0].locality,'Juárez');
+ globalThis.fetch=async()=>Response.json({features:[{...feature('Bodega Aurrera, Delicias',28.1,-105.4),properties:{name:'Bodega Aurrera',label:'Bodega Aurrera, Delicias',layer:'venue'}}]});
+ const missing=await app.inject('/v1/locations/suggest?q=Bodega%20Aurrera%2C%20Delicias');assert.equal(missing.statusCode,200);assert.equal(missing.json().warning,'LOCALITY_NOT_VERIFIED');
 });
