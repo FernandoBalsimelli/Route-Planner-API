@@ -10,7 +10,7 @@ test('CDMX separates selected 2021 circulation and loading evidence and corrects
  const doc=entry.source.relatedDocuments.find(d=>d.url===rules[0].sourceUrl);assert.equal(doc.observedSha256,'ec3c36bad93ae7ab05f8a272e121981085ea71e3636da105cbb8fa910ace976a');assert.equal(doc.bytes,4518924);assert.equal(doc.pageCount,180);assert.deepEqual(doc.pages,[6,7]);assert.equal(doc.legalValidityVerified,false);assert.equal(doc.reviewedSha256,undefined);
  for(const rule of rules){assert.equal(rule.sourceUrl,doc.url);assert.equal(rule.actEvidence.approvedAt,'2021-12-08');assert.equal(rule.publishedAt,'2021-12-15');assert.equal(rule.effectiveFrom,'2021-12-15');assert.equal(rule.actEvidence.consultedAt,'2026-11-24');assert.equal(rule.actEvidence.consolidatedThrough,undefined);assert.equal(rule.reviewStatus,'selected_provisions_only');assert.equal(rule.legalValidityVerified,false);assert.equal(rule.routingEnforced,false);assert.equal(rule.geometry,null);assert.equal(rule.window,undefined);assert.equal(rule.vehicleConditions,undefined);assert.equal(rule.limits,undefined);assert.equal(rule.timezone,'America/Mexico_City');}
  assert.match(rules[0].description,/menor a 14 m/);assert.match(rules[1].description,/máximo 14 m/);assert.match(entry.notices.join(' '),/igualdades.*inferencia/);assert.match(entry.notices.join(' '),/peso bruto, carga útil o carga por eje/);
- const guide=entry.rules.filter(r=>!r.id.startsWith('cdmx-gaceta2021-'));assert.equal(guide.length,5);for(const row of guide)assert.equal(row.page,row.id==='cdmx-maniobras'?3:2);assert.ok(entry.trunkSegments.every(r=>r.page===3));assert.equal(entry.trunkSegments.length,21);assert.deepEqual(entry.timeRules,[]);assert.equal(entry.routingEnforced,false);assert.equal(municipalCatalog().municipalitiesWithPartialReference,15);assert.equal(municipalCatalog().fullyVerifiedMunicipalities,0);
+ const guide=entry.rules.filter(r=>!r.id.startsWith('cdmx-gaceta2021-'));assert.equal(guide.length,5);for(const row of guide)assert.equal(row.page,row.id==='cdmx-maniobras'?3:2);assert.ok(entry.trunkSegments.every(r=>r.page===3));assert.equal(entry.trunkSegments.length,21);assert.deepEqual(entry.timeRules,[]);assert.equal(entry.routingEnforced,false);assert.equal(municipalCatalog().municipalitiesWithPartialReference,16);assert.equal(municipalCatalog().fullyVerifiedMunicipalities,0);
  assert.equal(municipalReference('09010').status,'not_loaded','the perimeter reference must not cover another demarcation');
 });
 test('official geographic catalog has 32 entities and unique municipality codes without claiming verified traffic rules',()=>{
@@ -49,7 +49,7 @@ test('public municipality endpoints validate identifiers and pagination and expo
 test('entities and municipalities sort alphabetically before pagination without featuring Nuevo León',()=>{
  const result=municipalCatalog({state:'19',limit:600});assert.equal(result.states[0].name,'Aguascalientes');assert.equal(result.municipalities[0].name,'Abasolo');
  assert.deepEqual(municipalCatalog({state:'19',limit:2,offset:2}).municipalities,result.municipalities.slice(2,4));
- assert.equal(result.municipalitiesWithPartialReference,15);
+ assert.equal(result.municipalitiesWithPartialReference,16);
 });
 test('new references preserve metropolitan scope, actual vehicle classes and unknown legal geometry',()=>{
  const jal=municipalReference('14039');assert.match(jal.scope,/Polígono/);assert.equal(jal.rules.find(rule=>rule.id==='jal-dobles').window.start,'06:00');assert.equal(jal.rules.find(rule=>rule.id==='jal-dobles').window.days,null);assert.deepEqual(jal.rules.find(rule=>rule.id==='jal-unitarios').vehicleConfigurations,['C2','C3']);
@@ -101,7 +101,7 @@ test('Chihuahua preserves the historical consolidation and separately identifies
 
 test('Puebla keeps consolidated loading and parking references separate from permissions, vehicle limits and routing',async()=>{
  const entry=municipalReference('21114'),rows=entry.rules.filter(rule=>rule.id.startsWith('pue-coremun-'));
- assert.equal(rows.length,4);assert.equal(municipalCatalog().municipalitiesWithPartialReference,15);
+ assert.equal(rows.length,4);assert.equal(municipalCatalog().municipalitiesWithPartialReference,16);
  for(const rule of rows){
   assert.equal(rule.geometry,null);assert.equal(rule.routingEnforced,false);assert.equal(rule.interpretation,'requires_review');
   assert.equal(rule.evidence.jurisdiction,'Municipio de Puebla · INEGI 21114');assert.equal(rule.evidence.consolidatedThrough,'2025-12-10');
@@ -149,7 +149,7 @@ test('Puebla parking annex preserves all source records, duplicate rows, split p
  assert.equal(annex.rows.filter(row=>row.schedules[2].status==='hours_cited').length,41);assert.equal(annex.rows.filter(row=>row.schedules[2].status==='not_applicable_in_source').length,87);
  for(const id of ['19039','08019','01001'])assert.equal(municipalReference(id).parkingCorridorReference,undefined);
  const response=await app.inject('/v1/regulations/municipalities/21114');assert.equal(response.statusCode,200);assert.equal(response.json().parkingCorridorReference.rows.length,128);assert.equal(response.json().timeRules.length,0,'parking schedules must not become routing or loading windows');
- assert.equal(municipalCatalog().fullyVerifiedMunicipalities,0);assert.equal(municipalCatalog().municipalitiesWithPartialReference,15);
+ assert.equal(municipalCatalog().fullyVerifiedMunicipalities,0);assert.equal(municipalCatalog().municipalitiesWithPartialReference,16);
 });
 
 test('Puebla publication history distinguishes official publication, superseded sanction dates and unverified present validity',async()=>{
@@ -188,4 +188,11 @@ test('Puebla loading article review adds counterpart evidence only to its three 
  assert.equal(review.status,'selected_text_matches_after_whitespace');assert.equal(review.routingEnforced,false);assert.equal(review.legalValidityVerified,false);assert.deepEqual(review.articles.map(a=>a.number),[11,12,13]);assert.deepEqual(review.documents.map(d=>d.pages),[[70],[7]]);assert.ok(review.articles.every(a=>/^[a-f0-9]{64}$/.test(a.normalizedSha256)&&a.characters>250));
  for(const rule of puebla.rules){const {documentReview,...rest}=rule;assert.deepEqual(rest,source.rules.find(r=>r.id===rule.id));if(review.ruleArticles[rule.id]){assert.deepEqual(documentReview.articles.map(a=>a.number),review.ruleArticles[rule.id]);assert.equal(documentReview.municipalityId,'21114');assert.equal(documentReview.legalValidityVerified,false);assert.equal(documentReview.ruleArticles,undefined);}else assert.equal(documentReview,undefined);}
  const response=await app.inject('/v1/regulations/municipalities/21114');assert.equal(response.statusCode,200);const rules=response.json().rules;assert.equal(rules.filter(r=>r.documentReview).length,3);assert.deepEqual(rules.find(r=>r.id==='pue-rotativo-2025-hasta').vehicleConditions,{payloadCapacityT:{lte:3.5}});assert.deepEqual(rules.find(r=>r.id==='pue-capacidad-menor').vehicleConditions,{payloadCapacityT:{lt:3.5}});assert.equal(rules.find(r=>r.id==='pue-rotativo-2025-permiso').operationMinutes,20);assert.equal(response.json().timeRules.length,0);assert.equal(municipalReference('08019').rules.some(r=>r.documentReview),false);assert.equal(municipalCatalog().fullyVerifiedMunicipalities,0);
+});
+
+test('Delicias historical copy distinguishes document date from legal validity and never enforces a schedule or lane',async()=>{
+ const r=await app.inject('/v1/regulations/municipalities/08021');assert.equal(r.statusCode,200);const entry=r.json();
+ assert.equal(entry.name,'Delicias');assert.equal(entry.status,'reference_only');assert.equal(entry.routingEnforced,false);assert.equal(entry.source.id,'delicias-transito-historico');assert.equal(entry.source.copyPublishedAt,'2016-12-15');assert.equal(entry.source.publishedAt,undefined);assert.equal(entry.source.effectiveFrom,undefined);assert.equal(entry.source.consolidatedThrough,undefined);assert.equal(entry.source.legalReview,'validity_requires_review');assert.equal(entry.source.publicationDateStatus,'municipal_copy_only');assert.equal(entry.rules.length,3);assert.deepEqual(entry.timeRules,[]);assert.deepEqual(entry.trunkSegments,[]);
+ for(const row of entry.rules){assert.equal(row.geometry,null);assert.equal(row.routingEnforced,false);assert.equal(row.legalValidityVerified,false);assert.equal(row.reviewStatus,'historical_selected_provisions_only');assert.equal(row.evidence.sha256,'31da346d9f92756cbf2aaea759f30915530d5cfcc15cbe1d927e9bf4c58efdea');assert.equal(row.evidence.jurisdiction,'Municipio de Delicias, Chihuahua (08021)');assert.match(row.evidence.scope,/histórica/);assert.equal(row.evidence.documentPages,52);assert.equal(row.evidence.documentBytes,1567327);for(const key of ['window','limits','vehicleConditions','vehicleConfigurations','effectiveFrom'])assert.equal(row[key],undefined,key);}
+ const loading=entry.rules.find(r=>r.activity==='loading');assert.equal(loading.page,29);assert.equal(loading.timezone,'America/Chihuahua');assert.equal(loading.scheduleStatus,'current_authority_schedule_not_verified');assert.match(loading.description,/22:00–07:00/);assert.equal(entry.rules.find(r=>r.kind==='publication_reference').page,44);assert.match(entry.notices.join(' '),/histórica/);assert.equal(municipalCatalog().municipalitiesWithPartialReference,16);assert.equal(municipalCatalog().fullyVerifiedMunicipalities,0);
 });

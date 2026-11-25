@@ -143,6 +143,23 @@
           "scope": "Decreto estatal; revisión seleccionada del artículo único, artículo 66 y transitorio. No constituye revisión integral de la ley ni horarios operativos verificados."
         }
       ]
+    },
+    {
+      "id": "delicias-transito-historico",
+      "title": "Delicias · copia histórica (Gaceta 15-12-2016)",
+      "url": "https://municipiodelicias.com/images/transparencia/gacetaMunicipal/Gaceta%20Municipal%202016/Gaceta-Municipal-de-Delicias-Diciembre.pdf",
+      "reviewedSha256": null,
+      "observedSha256": "31da346d9f92756cbf2aaea759f30915530d5cfcc15cbe1d927e9bf4c58efdea",
+      "reviewedAt": "2026-11-25T08:16:15.307508+00:00",
+      "legalReview": "validity_requires_review",
+      "documentTypeLabel": "Gaceta municipal 15-12-2016 · copia histórica",
+      "jurisdictionLabel": "Municipio de Delicias, Chihuahua (08021); referencia parcial sin aplicación al trazado",
+      "publicationDateStatus": "municipal_copy_only",
+      "scope": "Copia municipal: artículos 108–109 (p.29) y transitorios (p.44). La fecha de la Gaceta no prueba publicación estatal, entrada en vigor ni vigencia consolidada. Faltan acuerdos actuales, zonas y geometrías.",
+      "relatedUrls": [
+        "https://municipiodelicias.com/historico-informacion-publica/reglamentos-municipales.html"
+      ],
+      "copyPublishedAt": "2016-12-15"
     }
   ],
   "packages": [
@@ -1093,6 +1110,86 @@
           "title": "Decreto estatal publicado el 21-11-2026 · artículo 66 y transitorio",
           "url": "https://chihuahua.gob.mx/sites/default/atach2/periodico-oficial/anexos/2026-11/ANEXO%2093-2026%20DECRETO%20N%C2%BA%20LXVIII-RFLEY-0596-2026%20I%20P.O.pdf#page=32"
         }
+      ]
+    },
+    {
+      "municipalityIds": [
+        "08021"
+      ],
+      "sourceId": "delicias-transito-historico",
+      "scope": "Referencia histórica de Delicias; no valida el centro urbano, carriles ni rutas actuales.",
+      "rules": [
+        {
+          "geometry": null,
+          "routingEnforced": false,
+          "legalValidityVerified": false,
+          "reviewStatus": "historical_selected_provisions_only",
+          "sourceUrl": "https://municipiodelicias.com/images/transparencia/gacetaMunicipal/Gaceta%20Municipal%202016/Gaceta-Municipal-de-Delicias-Diciembre.pdf",
+          "evidence": {
+            "sha256": "31da346d9f92756cbf2aaea759f30915530d5cfcc15cbe1d927e9bf4c58efdea",
+            "consultedAt": "2026-11-25",
+            "documentBytes": 1567327,
+            "documentPages": 52,
+            "jurisdiction": "Municipio de Delicias, Chihuahua (08021)",
+            "scope": "Copia histórica seleccionada; publicación estatal, vigencia, operación y geometrías no verificadas."
+          },
+          "id": "delicias-descarga-historica",
+          "title": "Carga y descarga · horario en copia histórica",
+          "description": "El artículo 108 recoge 22:00–07:00 para el supuesto de vía pública/zona centro y permite cambios de horarios y rutas por la autoridad. Falta cotejar vigencia y acuerdos actuales; no es un horario municipal autorizado automáticamente.",
+          "kind": "schedule_reference",
+          "citation": "Artículo 108 · Gaceta municipal 15-12-2016 · página 29",
+          "page": 29,
+          "activity": "loading",
+          "timezone": "America/Chihuahua",
+          "scheduleStatus": "current_authority_schedule_not_verified"
+        },
+        {
+          "geometry": null,
+          "routingEnforced": false,
+          "legalValidityVerified": false,
+          "reviewStatus": "historical_selected_provisions_only",
+          "sourceUrl": "https://municipiodelicias.com/images/transparencia/gacetaMunicipal/Gaceta%20Municipal%202016/Gaceta-Municipal-de-Delicias-Diciembre.pdf",
+          "evidence": {
+            "sha256": "31da346d9f92756cbf2aaea759f30915530d5cfcc15cbe1d927e9bf4c58efdea",
+            "consultedAt": "2026-11-25",
+            "documentBytes": 1567327,
+            "documentPages": 52,
+            "jurisdiction": "Municipio de Delicias, Chihuahua (08021)",
+            "scope": "Copia histórica seleccionada; publicación estatal, vigencia, operación y geometrías no verificadas."
+          },
+          "id": "delicias-carriles-historico",
+          "title": "Carriles y carga · condiciones por revisar",
+          "description": "El artículo 109 contiene condiciones de vía/carril, capacidad máxima y abanderamiento de maquinaria. Su interpretación y segmentación están pendientes; no se convierte en prohibición general ni en un umbral de peso.",
+          "kind": "lane_reference",
+          "citation": "Artículo 109 · copia histórica · página 29",
+          "page": 29
+        },
+        {
+          "geometry": null,
+          "routingEnforced": false,
+          "legalValidityVerified": false,
+          "reviewStatus": "historical_selected_provisions_only",
+          "sourceUrl": "https://municipiodelicias.com/images/transparencia/gacetaMunicipal/Gaceta%20Municipal%202016/Gaceta-Municipal-de-Delicias-Diciembre.pdf",
+          "evidence": {
+            "sha256": "31da346d9f92756cbf2aaea759f30915530d5cfcc15cbe1d927e9bf4c58efdea",
+            "consultedAt": "2026-11-25",
+            "documentBytes": 1567327,
+            "documentPages": 52,
+            "jurisdiction": "Municipio de Delicias, Chihuahua (08021)",
+            "scope": "Copia histórica seleccionada; publicación estatal, vigencia, operación y geometrías no verificadas."
+          },
+          "id": "delicias-publicacion-pendiente",
+          "title": "Vigencia pendiente de publicación estatal",
+          "description": "El transitorio primero condiciona la entrada en vigor a la publicación en el Periódico Oficial estatal. La Gaceta municipal no demuestra esa fecha ni reformas posteriores.",
+          "kind": "publication_reference",
+          "citation": "Transitorios primero–tercero · página 44",
+          "page": 44
+        }
+      ],
+      "notices": [
+        "Referencia histórica, no validación legal actual. Falta comprobar publicación estatal, reformas y acuerdos vigentes.",
+        "No hay zonas, carriles, sentidos, permisos o geometrías verificados; no se aplica al cálculo.",
+        "El monitoreo de documentos detecta cambios técnicos; no mantiene automáticamente la normativa consolidada."
       ]
     }
   ]

@@ -127,7 +127,7 @@ test('Juárez watches its 2026 operational notice separately without approving o
  const after=await checkSource(source,before,async url=>new Response(String(url)===notice?'notice version two':'same source'));
  const publicReport=sourceStatus({checkedAt:after.checkedAt,sources:[after]});const row=publicReport.sources.find(row=>row.id==='juarez-carga').documents.find(row=>row.url===notice);
  assert.equal(row.changeDetected,true);assert.equal(publicReport.legalRulesAutomaticallyUpdated,false);
- const reference=municipalReference('08037');assert.ok(reference.notices.some(text=>text.includes('08-09-2026')));assert.equal(reference.routingEnforced,false);assert.deepEqual(reference.timeRules,[]);assert.equal(municipalCatalog().municipalitiesWithPartialReference,15);assert.equal(municipalCatalog().fullyVerifiedMunicipalities,0);
+ const reference=municipalReference('08037');assert.ok(reference.notices.some(text=>text.includes('08-09-2026')));assert.equal(reference.routingEnforced,false);assert.deepEqual(reference.timeRules,[]);assert.equal(municipalCatalog().municipalitiesWithPartialReference,16);assert.equal(municipalCatalog().fullyVerifiedMunicipalities,0);
 });
 
 test('Juárez notice evidence survives an unavailable historical primary document',async()=>{
@@ -145,7 +145,7 @@ test('Juárez follow-up notices remain separate monitored evidence without infer
  assert.equal(publicRow.documents.find(row=>row.url===urls[0]).changeDetected,true);assert.equal(publicRow.documents.find(row=>row.url===urls[1]).changeDetected,false);
  const reference=municipalReference('08037');assert.ok(reference.notices.some(text=>text.includes('siete meses')&&text.includes('enero')&&text.includes('No se deduce')));
  assert.ok(urls.every(url=>reference.relatedLinks.some(link=>link.url===url)));assert.equal(reference.routingEnforced,false);assert.deepEqual(reference.timeRules,[]);assert.equal(reference.rules.length,4);
- assert.equal(municipalCatalog().municipalitiesWithPartialReference,15);assert.equal(municipalCatalog().fullyVerifiedMunicipalities,0);
+ assert.equal(municipalCatalog().municipalitiesWithPartialReference,16);assert.equal(municipalCatalog().fullyVerifiedMunicipalities,0);
 });
 
 test('Puebla watches both published PDF attachments separately without replacing corridor evidence or approving legal coverage',async()=>{
@@ -156,7 +156,7 @@ test('Puebla watches both published PDF attachments separately without replacing
  const first=await checkSource(source,{},async()=>new Response('same document'));assert.equal(first.documents.find(doc=>doc.url===annex.url).status,'unreviewed');
  const next=await checkSource(source,first,async url=>new Response(String(url)===rules.url?'changed PDF':'same document'));
  const exposed=sourceStatus({checkedAt:next.checkedAt,sources:[next]});const documents=exposed.sources.find(row=>row.id===source.id).documents;assert.equal(documents.find(doc=>doc.url===rules.url).changeDetected,true);assert.equal(documents.find(doc=>doc.url===annex.url).changeDetected,false);assert.equal(exposed.legalRulesAutomaticallyUpdated,false);
- const reference=municipalReference('21114');assert.equal(reference.routingEnforced,false);assert.equal(reference.parkingCorridorReference.rows.length,128);assert.equal(municipalCatalog().municipalitiesWithPartialReference,15);assert.equal(municipalCatalog().fullyVerifiedMunicipalities,0);
+ const reference=municipalReference('21114');assert.equal(reference.routingEnforced,false);assert.equal(reference.parkingCorridorReference.rows.length,128);assert.equal(municipalCatalog().municipalitiesWithPartialReference,16);assert.equal(municipalCatalog().fullyVerifiedMunicipalities,0);
 });
 
 test('CDMX watches the located historical Gaceta without replacing guide rules or approving validity',async()=>{
@@ -164,7 +164,7 @@ test('CDMX watches the located historical Gaceta without replacing guide rules o
  const url='https://data.consejeria.cdmx.gob.mx/portal_old/uploads/gacetas/0830deebda0a6b9e7fb44d6d2cef2ab0.pdf',source=officialSources.find(x=>x.id==='cdmx-centro');assert.ok(source.relatedUrls.includes(url));assert.equal(source.reviewedSha256,null);assert.equal(source.legalReview,'validity_requires_review');
  const first=await checkSource(source,{},async()=>new Response('synthetic document, not actual gazette evidence'));const document=first.documents.find(x=>x.url===url);assert.equal(document.status,'unreviewed');
  const failed=await checkSource(source,first,async()=>new Response('',{status:503}));const exposed=sourceStatus({checkedAt:failed.checkedAt,sources:[failed]});const actual=exposed.sources.find(x=>x.id==='cdmx-centro').documents.find(x=>x.url===url);assert.equal(actual.status,'unavailable');assert.equal(actual.error,'HTTP_503');assert.equal(actual.sha256,document.sha256);assert.equal(exposed.legalRulesAutomaticallyUpdated,false);
- const ref=municipalReference('09015'),guide=ref.rules.filter(x=>!x.id.startsWith('cdmx-gaceta2021-'));assert.equal(ref.routingEnforced,false);assert.equal(guide.length,5);assert.ok(guide.every(x=>x.citation===`Guía 2024 · página ${x.id==='cdmx-maniobras'?3:2}`));assert.equal(ref.rules.find(x=>x.id==='cdmx-unitarios').window.start,'20:00');assert.ok(ref.relatedLinks.some(x=>x.url===url&&x.title.includes('histórico')));assert.ok(ref.notices.some(x=>x.includes('503')&&x.includes('sin sustituir horarios')));assert.equal(municipalCatalog().fullyVerifiedMunicipalities,0);assert.equal(municipalCatalog().municipalitiesWithPartialReference,15);
+ const ref=municipalReference('09015'),guide=ref.rules.filter(x=>!x.id.startsWith('cdmx-gaceta2021-'));assert.equal(ref.routingEnforced,false);assert.equal(guide.length,5);assert.ok(guide.every(x=>x.citation===`Guía 2024 · página ${x.id==='cdmx-maniobras'?3:2}`));assert.equal(ref.rules.find(x=>x.id==='cdmx-unitarios').window.start,'20:00');assert.ok(ref.relatedLinks.some(x=>x.url===url&&x.title.includes('histórico')));assert.ok(ref.notices.some(x=>x.includes('503')&&x.includes('sin sustituir horarios')));assert.equal(municipalCatalog().fullyVerifiedMunicipalities,0);assert.equal(municipalCatalog().municipalitiesWithPartialReference,16);
 });
 
 test('the CDMX historical URL receives independent technical evidence and an outage never becomes legal approval',async()=>{
@@ -172,7 +172,7 @@ test('the CDMX historical URL receives independent technical evidence and an out
  const first=await checkSource(source,{},async input=>{seen.push(String(input));return String(input)===source.url?new Response('',{status:503}):new Response('synthetic historical document');});assert.ok(seen.includes(url));const evidence=first.documents.find(x=>x.url===url);assert.equal(evidence.status,'unreviewed');
  const next=await checkSource(source,first,async input=>String(input)===url?new Response('',{status:503}):new Response('synthetic historical document'));
  const publicRow=sourceStatus({checkedAt:next.checkedAt,sources:[next]}).sources.find(x=>x.id===source.id);const failed=publicRow.documents.find(x=>x.url===url);assert.equal(failed.status,'unavailable');assert.equal(failed.sha256,evidence.sha256);assert.equal(failed.error,'HTTP_503');assert.equal(source.legalReview,'validity_requires_review');
- const {municipalReference,municipalCatalog}=await import('../lib/municipal-regulations.js');const ref=municipalReference('09015');assert.ok(ref.relatedLinks.some(x=>x.url===url));assert.equal(ref.rules.filter(x=>!x.id.startsWith('cdmx-gaceta2021-')).length,5);assert.ok(ref.rules.every(x=>x.routingEnforced===false));assert.deepEqual(ref.timeRules,[]);assert.equal(ref.routingEnforced,false);assert.equal(municipalCatalog().municipalitiesWithPartialReference,15);assert.equal(municipalCatalog().fullyVerifiedMunicipalities,0);
+ const {municipalReference,municipalCatalog}=await import('../lib/municipal-regulations.js');const ref=municipalReference('09015');assert.ok(ref.relatedLinks.some(x=>x.url===url));assert.equal(ref.rules.filter(x=>!x.id.startsWith('cdmx-gaceta2021-')).length,5);assert.ok(ref.rules.every(x=>x.routingEnforced===false));assert.deepEqual(ref.timeRules,[]);assert.equal(ref.routingEnforced,false);assert.equal(municipalCatalog().municipalitiesWithPartialReference,16);assert.equal(municipalCatalog().fullyVerifiedMunicipalities,0);
 });
 
 test('the official CDMX mirror is monitored independently while an original outage retains its evidence',async()=>{
