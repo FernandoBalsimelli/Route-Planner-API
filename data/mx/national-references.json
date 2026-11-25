@@ -146,20 +146,20 @@
     },
     {
       "id": "delicias-transito-historico",
-      "title": "Delicias · copia histórica del reglamento de vialidad (Gaceta 2016)",
+      "title": "Delicias · copia histórica (Gaceta 15-12-2016)",
       "url": "https://municipiodelicias.com/images/transparencia/gacetaMunicipal/Gaceta%20Municipal%202016/Gaceta-Municipal-de-Delicias-Diciembre.pdf",
       "reviewedSha256": null,
       "observedSha256": "31da346d9f92756cbf2aaea759f30915530d5cfcc15cbe1d927e9bf4c58efdea",
-      "reviewedAt": "2026-11-25",
+      "reviewedAt": "2026-11-25T08:16:15.307508+00:00",
       "legalReview": "validity_requires_review",
-      "documentTypeLabel": "Gaceta municipal · copia histórica",
+      "documentTypeLabel": "Gaceta municipal 15-12-2016 · copia histórica",
       "jurisdictionLabel": "Municipio de Delicias, Chihuahua (08021); referencia parcial sin aplicación al trazado",
-      "publishedAt": "2016-12-15",
       "publicationDateStatus": "municipal_copy_only",
       "scope": "Copia municipal: artículos 108–109 (p.29) y transitorios (p.44). La fecha de la Gaceta no prueba publicación estatal, entrada en vigor ni vigencia consolidada. Faltan acuerdos actuales, zonas y geometrías.",
       "relatedUrls": [
         "https://municipiodelicias.com/historico-informacion-publica/reglamentos-municipales.html"
-      ]
+      ],
+      "copyPublishedAt": "2016-12-15"
     }
   ],
   "packages": [
@@ -1129,7 +1129,9 @@
             "sha256": "31da346d9f92756cbf2aaea759f30915530d5cfcc15cbe1d927e9bf4c58efdea",
             "consultedAt": "2026-11-25",
             "documentBytes": 1567327,
-            "documentPages": 52
+            "documentPages": 52,
+            "jurisdiction": "Municipio de Delicias, Chihuahua (08021)",
+            "scope": "Copia histórica seleccionada; publicación estatal, vigencia, operación y geometrías no verificadas."
           },
           "id": "delicias-descarga-historica",
           "title": "Carga y descarga · horario en copia histórica",
@@ -1151,7 +1153,9 @@
             "sha256": "31da346d9f92756cbf2aaea759f30915530d5cfcc15cbe1d927e9bf4c58efdea",
             "consultedAt": "2026-11-25",
             "documentBytes": 1567327,
-            "documentPages": 52
+            "documentPages": 52,
+            "jurisdiction": "Municipio de Delicias, Chihuahua (08021)",
+            "scope": "Copia histórica seleccionada; publicación estatal, vigencia, operación y geometrías no verificadas."
           },
           "id": "delicias-carriles-historico",
           "title": "Carriles y carga · condiciones por revisar",
@@ -1170,7 +1174,9 @@
             "sha256": "31da346d9f92756cbf2aaea759f30915530d5cfcc15cbe1d927e9bf4c58efdea",
             "consultedAt": "2026-11-25",
             "documentBytes": 1567327,
-            "documentPages": 52
+            "documentPages": 52,
+            "jurisdiction": "Municipio de Delicias, Chihuahua (08021)",
+            "scope": "Copia histórica seleccionada; publicación estatal, vigencia, operación y geometrías no verificadas."
           },
           "id": "delicias-publicacion-pendiente",
           "title": "Vigencia pendiente de publicación estatal",
